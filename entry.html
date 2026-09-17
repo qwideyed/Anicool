@@ -168,12 +168,45 @@
       transform: translateY(0) scale(1);
     }
 
+    .search-presets-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 0 4px;
+      flex-wrap: wrap;
+    }
+
+    .presets-group {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .preset-pill {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--bubble-border);
+      color: var(--text-dim);
+      font-size: 0.82rem;
+      font-weight: 500;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s ease;
+    }
+
+    .preset-pill.active {
+      background: var(--accent-pink);
+      color: #fff;
+      border-color: var(--accent-pink);
+    }
+
     .search-box-popup {
       background: rgba(22, 24, 34, 0.95);
       border: 1px solid var(--bubble-border);
       border-radius: 24px;
       padding: 12px 20px;
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
       display: flex;
       align-items: center;
       gap: 12px;
@@ -425,28 +458,6 @@
       flex-wrap: wrap;
     }
 
-    .bubble-btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
-      color: #fff;
-      text-decoration: none;
-      padding: 12px 28px;
-      border-radius: 9999px;
-      font-size: 0.95rem;
-      font-weight: 600;
-      box-shadow: 0 8px 24px rgba(255, 42, 116, 0.35);
-      transition: all 0.25s ease;
-      cursor: pointer;
-      border: none;
-    }
-
-    .bubble-btn-primary:hover {
-      transform: translateY(-2px) scale(1.02);
-      box-shadow: 0 12px 30px rgba(255, 42, 116, 0.5);
-    }
-
     .bubble-btn-secondary {
       display: inline-flex;
       align-items: center;
@@ -455,18 +466,12 @@
       border: 1px solid var(--bubble-border);
       color: #fff;
       text-decoration: none;
-      padding: 12px 22px;
+      padding: 10px 20px;
       border-radius: 9999px;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       font-weight: 500;
       backdrop-filter: blur(10px);
-      transition: all 0.25s ease;
-      cursor: pointer;
-    }
-
-    .bubble-btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.15);
-      transform: translateY(-2px);
+      cursor: default;
     }
 
     .entry-synopsis {
@@ -507,6 +512,53 @@
       gap: 10px;
     }
 
+    .ep-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .ep-pagination {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--bubble-border);
+      border-radius: 9999px;
+      padding: 3px 8px;
+    }
+
+    .ep-page-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-dim);
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 4px 8px;
+      border-radius: 9999px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      transition: color 0.2s;
+    }
+
+    .ep-page-btn:hover:not(:disabled) {
+      color: #fff;
+    }
+
+    .ep-page-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .ep-page-indicator {
+      font-size: 0.75rem;
+      color: #fff;
+      font-weight: 600;
+      padding: 0 4px;
+    }
+
     .ep-search-bubble {
       display: flex;
       align-items: center;
@@ -523,12 +575,12 @@
       outline: none;
       color: #fff;
       font-size: 0.82rem;
-      width: 120px;
+      width: 100px;
     }
 
     .episodes-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(75px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
       gap: 10px;
       max-height: 280px;
       overflow-y: auto;
@@ -544,67 +596,64 @@
       border-radius: 4px;
     }
 
-    .ep-pill {
+    .ep-chip {
       background: rgba(255, 255, 255, 0.04);
       border: 1px solid var(--bubble-border);
       border-radius: 12px;
-      padding: 12px 6px;
+      padding: 10px 4px;
       text-align: center;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       font-weight: 600;
       color: #cbd5e1;
-      text-decoration: none;
-      transition: all 0.2s ease;
-      cursor: pointer;
-    }
-
-    .ep-pill:hover,
-    .ep-pill.active {
-      background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
-      color: #fff;
-      border-color: transparent;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 14px rgba(255, 42, 116, 0.4);
+      user-select: none;
+      cursor: default;
     }
 
     .characters-voice-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
       gap: 16px;
     }
 
     .char-va-card {
-      display: flex;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       align-items: center;
-      justify-content: space-between;
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid var(--bubble-border);
       border-radius: 18px;
-      padding: 10px 14px;
-      gap: 10px;
-      transition: all 0.2s ease;
+      padding: 10px 12px;
+      gap: 12px;
+      overflow: hidden;
+      width: 100%;
     }
 
-    .char-va-card:hover {
-      background: rgba(255, 255, 255, 0.06);
-      transform: translateY(-2px);
-    }
-
-    .char-side, .va-side {
+    .char-side {
       display: flex;
       align-items: center;
       gap: 10px;
-      flex: 1;
+      min-width: 0;
     }
 
     .va-side {
+      display: flex;
+      align-items: center;
       justify-content: flex-end;
       text-align: right;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .person-info {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      overflow: hidden;
     }
 
     .char-avatar-mini, .va-avatar-mini {
-      width: 48px;
-      height: 48px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
       object-fit: cover;
       border: 1px solid var(--bubble-border);
@@ -613,18 +662,20 @@
     }
 
     .person-name {
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       font-weight: 600;
       color: #fff;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      max-width: 90px;
     }
 
     .person-sub {
       font-size: 0.7rem;
       color: var(--text-dim);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .relations-grid {
@@ -714,7 +765,7 @@
       }
       .sidebar-col {
         position: static;
-        width: 220px;
+        width: 240px;
         margin: 0 auto;
       }
       .content-col {
@@ -722,6 +773,9 @@
       }
       .entry-title {
         font-size: 2rem;
+      }
+      .characters-voice-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -837,12 +891,9 @@
         <div class="entry-alt-title" id="entryAltTitle">...</div>
 
         <div class="entry-action-bar">
-          <a href="#player" class="bubble-btn-primary" id="watchStartBtn">
-            <span class="material-symbols-outlined">play_arrow</span> Start Watching
-          </a>
-          <button type="button" class="bubble-btn-secondary" id="bookmarkBtn">
-            <span class="material-symbols-outlined">bookmark_add</span> Add to List
-          </button>
+          <div class="bubble-btn-secondary" id="catalogBadge">
+            <span class="material-symbols-outlined" style="color: var(--accent-pink);">library_books</span> AniList Catalog Entry
+          </div>
           <a href="#" target="_blank" rel="noopener" class="bubble-btn-secondary" id="trailerBtn" style="display: none;">
             <span class="material-symbols-outlined">movie</span> Trailer
           </a>
@@ -857,11 +908,24 @@
         <div class="section-card-head">
           <div class="section-card-title">
             <span class="material-symbols-outlined" style="color: var(--accent-pink);">video_library</span>
-            Episodes
+            Episodes Catalog (<span id="episodesCountTitle">0</span>)
           </div>
-          <div class="ep-search-bubble">
-            <span class="material-symbols-outlined" style="font-size: 16px;">search</span>
-            <input type="text" id="epSearchInput" placeholder="Filter ep..." />
+          
+          <div class="ep-controls">
+            <div class="ep-pagination" id="epPagination" style="display: none;">
+              <button type="button" class="ep-page-btn" id="epPrevBtn" aria-label="Previous Page">
+                <span class="material-symbols-outlined" style="font-size: 16px;">chevron_left</span>
+              </button>
+              <span class="ep-page-indicator" id="epPageIndicator">1 - 100</span>
+              <button type="button" class="ep-page-btn" id="epNextBtn" aria-label="Next Page">
+                <span class="material-symbols-outlined" style="font-size: 16px;">chevron_right</span>
+              </button>
+            </div>
+
+            <div class="ep-search-bubble">
+              <span class="material-symbols-outlined" style="font-size: 16px;">search</span>
+              <input type="text" id="epSearchInput" placeholder="Find ep..." />
+            </div>
           </div>
         </div>
         <div class="episodes-grid" id="episodesGrid"></div>
@@ -913,6 +977,10 @@
     let currentLang = 'EN';
     let currentAnimeData = null;
     let debounceTimer;
+
+    let totalEpisodes = 0;
+    let currentEpPage = 1;
+    const epsPerPage = 100;
 
     openSearchBtn.addEventListener('click', () => {
       searchModal.classList.add('active');
@@ -974,6 +1042,7 @@
             seasonYear
             source
             genres
+            nextAiringEpisode { episode }
             trailer { id site }
             studios(isMain: true) {
               nodes { name }
@@ -1060,8 +1129,13 @@
 
       synopsis.innerHTML = media.description ? media.description : 'No synopsis available.';
 
+      let resolvedEpisodes = media.episodes;
+      if (!resolvedEpisodes && media.nextAiringEpisode?.episode) {
+        resolvedEpisodes = media.nextAiringEpisode.episode - 1;
+      }
+
       document.getElementById('statFormat').textContent = media.format || 'N/A';
-      document.getElementById('statEpisodes').textContent = media.episodes ? `${media.episodes} Eps` : (media.chapters ? `${media.chapters} Chs` : 'Unknown');
+      document.getElementById('statEpisodes').textContent = resolvedEpisodes ? `${resolvedEpisodes} Episodes` : (media.chapters ? `${media.chapters} Chapters` : 'Ongoing');
       document.getElementById('statStatus').textContent = media.status ? media.status.replace(/_/g, ' ') : 'N/A';
       document.getElementById('statSeason').textContent = (media.season && media.seasonYear) ? `${media.season} ${media.seasonYear}` : (media.seasonYear || 'N/A');
       document.getElementById('statStudio').textContent = media.studios?.nodes?.[0]?.name || (media.type === 'MANGA' ? 'Author / Magazine' : 'Unknown');
@@ -1079,9 +1153,10 @@
 
       if (media.type === 'MANGA') {
         document.getElementById('episodesSection').style.display = 'none';
-        document.getElementById('watchStartBtn').innerHTML = `<span class="material-symbols-outlined">menu_book</span> Start Reading`;
       } else {
-        buildEpisodesList(media.episodes || 12);
+        totalEpisodes = resolvedEpisodes || 1;
+        document.getElementById('episodesCountTitle').textContent = totalEpisodes;
+        setupEpisodesPagination(totalEpisodes);
       }
 
       buildCharactersWithVA(media.characters?.edges || []);
@@ -1103,26 +1178,78 @@
       }
     }
 
-    function buildEpisodesList(count) {
+    function setupEpisodesPagination(total) {
+      const paginationWrap = document.getElementById('epPagination');
+      const prevBtn = document.getElementById('epPrevBtn');
+      const nextBtn = document.getElementById('epNextBtn');
+      const searchInput = document.getElementById('epSearchInput');
+
+      currentEpPage = 1;
+      const totalPages = Math.ceil(total / epsPerPage);
+
+      if (totalPages > 1) {
+        paginationWrap.style.display = 'flex';
+      } else {
+        paginationWrap.style.display = 'none';
+      }
+
+      renderEpisodePage();
+
+      prevBtn.onclick = () => {
+        if (currentEpPage > 1) {
+          currentEpPage--;
+          renderEpisodePage();
+        }
+      };
+
+      nextBtn.onclick = () => {
+        if (currentEpPage < totalPages) {
+          currentEpPage++;
+          renderEpisodePage();
+        }
+      };
+
+      searchInput.oninput = (e) => {
+        const query = e.target.value.trim().toLowerCase();
+        const grid = document.getElementById('episodesGrid');
+
+        if (!query) {
+          renderEpisodePage();
+          if (totalPages > 1) paginationWrap.style.display = 'flex';
+          return;
+        }
+
+        paginationWrap.style.display = 'none';
+        let matchedHtml = '';
+        for (let i = 1; i <= total; i++) {
+          const label = `EP ${i}`;
+          if (label.toLowerCase().includes(query) || i.toString() === query) {
+            matchedHtml += `<div class="ep-chip">${label}</div>`;
+          }
+        }
+        grid.innerHTML = matchedHtml || '<p style="color:var(--text-dim);font-size:0.8rem;grid-column:1/-1;">No episode found.</p>';
+      };
+    }
+
+    function renderEpisodePage() {
       const grid = document.getElementById('episodesGrid');
+      const indicator = document.getElementById('epPageIndicator');
+      const prevBtn = document.getElementById('epPrevBtn');
+      const nextBtn = document.getElementById('epNextBtn');
+
+      const start = (currentEpPage - 1) * epsPerPage + 1;
+      const end = Math.min(currentEpPage * epsPerPage, totalEpisodes);
+      const totalPages = Math.ceil(totalEpisodes / epsPerPage);
+
+      indicator.textContent = `${start} - ${end}`;
+      prevBtn.disabled = currentEpPage === 1;
+      nextBtn.disabled = currentEpPage === totalPages;
+
       let html = '';
-      for (let i = 1; i <= count; i++) {
-        html += `<a href="#watch-ep-${i}" class="ep-pill ${i === 1 ? 'active' : ''}">EP ${i}</a>`;
+      for (let i = start; i <= end; i++) {
+        html += `<div class="ep-chip">EP ${i}</div>`;
       }
       grid.innerHTML = html;
-
-      const epSearch = document.getElementById('epSearchInput');
-      epSearch.addEventListener('input', (e) => {
-        const val = e.target.value.trim();
-        const pills = grid.querySelectorAll('.ep-pill');
-        pills.forEach(p => {
-          if (!val || p.textContent.toLowerCase().includes(val.toLowerCase())) {
-            p.style.display = 'block';
-          } else {
-            p.style.display = 'none';
-          }
-        });
-      });
     }
 
     function buildCharactersWithVA(charEdges) {
@@ -1143,13 +1270,13 @@
           <div class="char-va-card">
             <div class="char-side">
               <img src="${charImg}" alt="${charName}" class="char-avatar-mini" loading="lazy" />
-              <div>
+              <div class="person-info">
                 <div class="person-name" title="${charName}">${charName}</div>
                 <div class="person-sub">${edge.role || 'Main'}</div>
               </div>
             </div>
             <div class="va-side">
-              <div>
+              <div class="person-info">
                 <div class="person-name" title="${vaName}">${vaName}</div>
                 <div class="person-sub">${va ? 'Japanese' : 'No VA'}</div>
               </div>
