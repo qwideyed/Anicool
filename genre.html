@@ -134,7 +134,7 @@
       box-shadow: 0 0 16px rgba(255, 42, 116, 0.35);
     }
 
-    /* Search Modal */
+    /* Modal */
     .search-modal {
       position: fixed;
       inset: 0;
@@ -258,307 +258,171 @@
     .main-content {
       max-width: 1480px;
       margin: 0 auto;
-      padding: 30px 30px 80px;
+      padding: 24px 30px 80px;
       display: flex;
       flex-direction: column;
-      gap: 28px;
+      gap: 24px;
     }
 
-    /* Genre Banner Spotlight */
-    .genre-spotlight-banner {
+    /* Anikoto-Style Filter Bar Section */
+    .anikoto-filter-section {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .filter-main-heading {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.5px;
+    }
+
+    .filter-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+    }
+
+    .filter-input-wrap,
+    .filter-select-wrap {
       position: relative;
       width: 100%;
-      min-height: 250px;
-      border-radius: 28px;
-      overflow: hidden;
-      border: 1px solid var(--bubble-border);
-      background-size: cover;
-      background-position: center 30%;
-      display: flex;
-      align-items: flex-end;
-      padding: 30px 40px;
-      box-shadow: 0 16px 40px rgba(0,0,0,0.6);
-      transition: background-image 0.5s ease;
     }
 
-    .genre-spotlight-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(0deg, rgba(10,11,16,0.95) 0%, rgba(10,11,16,0.7) 45%, rgba(10,11,16,0.2) 100%),
-                  radial-gradient(circle at 10% 50%, rgba(255, 42, 116, 0.2) 0%, transparent 60%);
-    }
-
-    .genre-spotlight-content {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      max-width: 800px;
-    }
-
-    .spotlight-sub {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .spotlight-pill {
-      background: rgba(255, 42, 116, 0.2);
-      border: 1px solid rgba(255, 42, 116, 0.4);
-      color: var(--accent-pink);
-      padding: 3px 12px;
-      border-radius: 9999px;
-      font-size: 0.72rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .genre-spotlight-title {
-      font-size: 2rem;
-      font-weight: 700;
-      color: #fff;
-      line-height: 1.2;
-    }
-
-    .genre-spotlight-desc {
-      font-size: 0.88rem;
+    .filter-input {
+      width: 100%;
+      height: 42px;
+      background: #0f141f;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      padding: 0 14px;
       color: #cbd5e1;
-      line-height: 1.5;
-    }
-
-    /* Quick Jump Pills Carousel */
-    .quick-jump-bar {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      overflow-x: auto;
-      padding: 4px 2px 10px;
-      scrollbar-width: thin;
-    }
-
-    .quick-jump-bar::-webkit-scrollbar {
-      height: 4px;
-    }
-
-    .quick-jump-bar::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 4px;
-    }
-
-    .quick-jump-pill {
-      flex-shrink: 0;
-      background: rgba(20, 22, 32, 0.8);
-      border: 1px solid var(--bubble-border);
-      color: var(--text-dim);
-      font-size: 0.82rem;
-      font-weight: 600;
-      padding: 8px 18px;
-      border-radius: 9999px;
-      cursor: pointer;
+      font-size: 0.85rem;
       font-family: inherit;
-      backdrop-filter: blur(10px);
-      transition: all 0.2s ease;
+      outline: none;
+      transition: border-color 0.2s, background-color 0.2s;
     }
 
-    .quick-jump-pill:hover {
-      color: #fff;
-      background: rgba(255, 255, 255, 0.08);
-      transform: translateY(-2px);
+    .filter-input:focus {
+      border-color: var(--accent-blue);
+      background: #121826;
     }
 
-    .quick-jump-pill.active {
-      background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
-      color: #fff;
-      border-color: transparent;
-      box-shadow: 0 4px 16px rgba(255, 42, 116, 0.35);
+    .filter-input::placeholder {
+      color: #556277;
     }
 
-    /* Filter Hub Accordion Card */
-    .advanced-filter-card {
-      background: var(--bubble-bg);
-      border: 1px solid var(--bubble-border);
-      border-radius: 28px;
-      padding: 24px 28px;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(20px);
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .filter-header-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 16px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-      padding-bottom: 16px;
-    }
-
-    .filter-title {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .filter-actions-right {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .bubble-select {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--bubble-border);
+    .filter-select {
+      width: 100%;
+      height: 42px;
+      background: #0f141f;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      padding: 0 32px 0 14px;
       color: #cbd5e1;
-      padding: 7px 16px;
-      border-radius: 9999px;
-      font-size: 0.82rem;
-      font-weight: 600;
+      font-size: 0.85rem;
       font-family: inherit;
       outline: none;
       cursor: pointer;
-      transition: border-color 0.2s;
+      appearance: none;
+      -webkit-appearance: none;
+      transition: border-color 0.2s, background-color 0.2s;
     }
 
-    .bubble-select option {
-      background: #12141f;
+    .filter-select:focus,
+    .filter-select:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+      background: #121826;
+    }
+
+    .filter-select option {
+      background: #0d121c;
       color: #fff;
     }
 
-    .bubble-select:hover {
-      border-color: var(--accent-pink);
+    .select-arrow {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+      color: #556277;
+      font-size: 18px;
     }
 
-    .toggle-group {
+    .filter-bottom-bar {
       display: flex;
       align-items: center;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--bubble-border);
-      border-radius: 9999px;
-      padding: 3px;
-      gap: 4px;
+      gap: 12px;
+      margin-top: 2px;
     }
 
-    .toggle-btn {
+    .filter-bottom-bar .filter-select-wrap {
+      max-width: 220px;
+    }
+
+    .anikoto-submit-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      height: 40px;
+      padding: 0 22px;
+      background: #0ea5e9;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.15s;
+    }
+
+    .anikoto-submit-btn:hover {
+      background: #0284c7;
+      transform: translateY(-1px);
+    }
+
+    .reset-link-btn {
       background: transparent;
       border: none;
-      color: var(--text-dim);
-      font-size: 0.8rem;
+      color: #64748b;
+      font-size: 0.82rem;
       font-weight: 600;
-      padding: 6px 14px;
-      border-radius: 9999px;
-      cursor: pointer;
       font-family: inherit;
-      transition: all 0.2s ease;
-    }
-
-    .toggle-btn.active {
-      background: rgba(255, 255, 255, 0.15);
-      color: #fff;
-    }
-
-    .filter-section-block {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .filter-section-label {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.6px;
-      color: #71778e;
-      font-weight: 700;
+      cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 4px;
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: color 0.2s;
     }
 
-    .chips-flow {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
+    .reset-link-btn:hover {
+      color: #cbd5e1;
     }
 
-    .filter-chip {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--bubble-border);
-      color: var(--text-dim);
-      font-size: 0.78rem;
-      font-weight: 600;
-      padding: 5px 14px;
-      border-radius: 9999px;
-      cursor: pointer;
-      font-family: inherit;
-      transition: all 0.2s ease;
-    }
-
-    .filter-chip:hover {
-      background: rgba(255, 255, 255, 0.08);
-      color: #fff;
-    }
-
-    .filter-chip.active {
-      background: rgba(0, 210, 255, 0.15);
-      border-color: rgba(0, 210, 255, 0.4);
-      color: var(--accent-blue);
-    }
-
-    /* Active State Bar */
-    .active-state-row {
+    /* Active Heading Summary */
+    .catalog-summary-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
-      padding: 0 4px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 18px;
     }
 
-    .state-title-wrap {
-      display: flex;
-      align-items: baseline;
-      gap: 10px;
-    }
-
-    .state-title {
-      font-size: 1.4rem;
+    .summary-title {
+      font-size: 1.2rem;
       font-weight: 700;
       color: #fff;
     }
 
-    .state-count {
-      font-size: 0.85rem;
+    .summary-subtext {
+      font-size: 0.8rem;
       color: var(--text-dim);
-    }
-
-    .reset-filters-btn {
-      background: transparent;
-      border: 1px dashed rgba(255, 255, 255, 0.2);
-      color: var(--text-dim);
-      padding: 5px 14px;
-      border-radius: 9999px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      cursor: pointer;
-      font-family: inherit;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      transition: all 0.2s ease;
-    }
-
-    .reset-filters-btn:hover {
-      color: #fff;
-      border-color: var(--accent-pink);
-      background: rgba(255, 42, 116, 0.1);
     }
 
     /* Cards Grid */
@@ -769,19 +633,29 @@
       100% { background-position: -200% 0; }
     }
 
-    @media (max-width: 920px) {
+    @media (max-width: 1100px) {
+      .filter-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 720px) {
+      .filter-grid {
+        grid-template-columns: 1fr;
+      }
+      .filter-bottom-bar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .filter-bottom-bar .filter-select-wrap {
+        max-width: 100%;
+      }
       .anime-cards-grid {
         grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
         gap: 16px;
       }
       .card-hover-bubble {
         display: none;
-      }
-      .genre-spotlight-banner {
-        padding: 24px;
-      }
-      .genre-spotlight-title {
-        font-size: 1.5rem;
       }
     }
   </style>
@@ -817,7 +691,7 @@
     </header>
   </div>
 
-  <!-- Search Popup -->
+  <!-- Search Modal -->
   <div class="search-modal" id="searchModal">
     <div class="search-container">
       <div class="search-box-popup">
@@ -837,121 +711,192 @@
 
   <main class="main-content">
     
-    <!-- Genre Spotlight Hero Banner -->
-    <section class="genre-spotlight-banner" id="genreSpotlightBanner">
-      <div class="genre-spotlight-overlay"></div>
-      <div class="genre-spotlight-content">
-        <div class="spotlight-sub">
-          <span class="spotlight-pill">Featured Category</span>
-          <span id="genreSpotlightTag" style="font-size: 0.8rem; color: var(--accent-blue); font-weight: 600;">Genre Spotlight</span>
-        </div>
-        <h1 class="genre-spotlight-title" id="genreSpotlightTitle">Action Anime</h1>
-        <p class="genre-spotlight-desc" id="genreSpotlightDesc">High-octane battles, adrenaline-pumping sequences, and heart-racing confrontations.</p>
-      </div>
-    </section>
+    <!-- Anikoto-Style Filter Area -->
+    <section class="anikoto-filter-section">
+      <h1 class="filter-main-heading">Filter</h1>
 
-    <!-- Quick Jump Genre Bar -->
-    <div class="quick-jump-bar" id="quickJumpBar">
-      <!-- Generated by JS -->
-    </div>
-
-    <!-- Advanced Filter Bubble Card -->
-    <section class="advanced-filter-card">
-      <div class="filter-header-row">
-        <div class="filter-title">
-          <span class="material-symbols-outlined" style="color: var(--accent-pink);">tune</span>
-          Filter & Discovery Hub
+      <!-- 2 Rows x 5 Columns Grid -->
+      <div class="filter-grid">
+        <!-- Row 1: Search -->
+        <div class="filter-input-wrap">
+          <input type="text" class="filter-input" id="filterKeyword" placeholder="Search..." autocomplete="off" />
         </div>
 
-        <div class="filter-actions-right">
-          <!-- Format Toggle -->
-          <div class="toggle-group" id="formatToggleGroup">
-            <button type="button" class="toggle-btn active" data-type="ANIME">Anime</button>
-            <button type="button" class="toggle-btn" data-type="MANGA">Manga</button>
-          </div>
-
-          <!-- Sort Select -->
-          <select class="bubble-select" id="sortSelect">
-            <option value="POPULARITY_DESC">Most Popular</option>
-            <option value="TRENDING_DESC">Trending Now</option>
-            <option value="SCORE_DESC">Highest Rated</option>
-            <option value="FAVOURITES_DESC">Most Favorited</option>
-            <option value="START_DATE_DESC">Newest Added</option>
+        <!-- Row 1: Genre -->
+        <div class="filter-select-wrap">
+          <select class="filter-select" id="filterGenre">
+            <option value="">Select genre</option>
+            <option value="Action">Action</option>
+            <option value="Adventure">Adventure</option>
+            <option value="Comedy">Comedy</option>
+            <option value="Drama">Drama</option>
+            <option value="Ecchi">Ecchi</option>
+            <option value="Fantasy">Fantasy</option>
+            <option value="Horror">Horror</option>
+            <option value="Mahou Shoujo">Mahou Shoujo</option>
+            <option value="Mecha">Mecha</option>
+            <option value="Music">Music</option>
+            <option value="Mystery">Mystery</option>
+            <option value="Psychological">Psychological</option>
+            <option value="Romance">Romance</option>
+            <option value="Sci-Fi">Sci-Fi</option>
+            <option value="Slice of Life">Slice of Life</option>
+            <option value="Sports">Sports</option>
+            <option value="Supernatural">Supernatural</option>
+            <option value="Thriller">Thriller</option>
           </select>
+          <span class="material-symbols-outlined select-arrow">expand_more</span>
+        </div>
 
-          <!-- Year Select -->
-          <select class="bubble-select" id="yearSelect">
-            <option value="">Any Year</option>
+        <!-- Row 1: Season -->
+        <div class="filter-select-wrap">
+          <select class="filter-select" id="filterSeason">
+            <option value="">Select season</option>
+            <option value="WINTER">Winter</option>
+            <option value="SPRING">Spring</option>
+            <option value="SUMMER">Summer</option>
+            <option value="FALL">Fall</option>
+          </select>
+          <span class="material-symbols-outlined select-arrow">expand_more</span>
+        </div>
+
+        <!-- Row 1: Year -->
+        <div class="filter-select-wrap">
+          <select class="filter-select" id="filterYear">
+            <option value="">Select year</option>
+            <option value="2027">2027</option>
             <option value="2026">2026</option>
             <option value="2025">2025</option>
             <option value="2024">2024</option>
             <option value="2023">2023</option>
             <option value="2022">2022</option>
-            <option value="2020">2020s</option>
-            <option value="2010">2010s</option>
-            <option value="2000">2000s</option>
+            <option value="2021">2021</option>
+            <option value="2020">2020</option>
+            <option value="2019">2019</option>
+            <option value="2018">2018</option>
+            <option value="2017">2017</option>
+            <option value="2016">2016</option>
+            <option value="2015">2015</option>
+            <option value="2010">2010</option>
+            <option value="2005">2005</option>
+            <option value="2000">2000</option>
           </select>
+          <span class="material-symbols-outlined select-arrow">expand_more</span>
+        </div>
+
+        <!-- Row 1: Type (Anime / Manga) -->
+        <div class="filter-select-wrap">
+          <select class="filter-select" id="filterType">
+            <option value="ANIME">Anime</option>
+            <option value="MANGA">Manga</option>
+          </select>
+          <span class="material-symbols-outlined select-arrow">expand_more</span>
+        </div>
+
+        <!-- Row 2: Format -->
+        <div class="filter-select-wrap">
+          <select class="filter-select" id="filterFormat">
+            <option value="">Select format</option>
+            <option value="TV">TV</option>
+            <option value="MOVIE">Movie</option>
+            <option value="OVA">OVA</option>
+            <option value="ONA">ONA</option>
+            <option value="SPECIAL">Special</option>
+            <option value="TV_SHORT">TV Short</option>
+          </select>
+          <span class="material-symbols-outlined select-arrow">expand_more</span>
+        </div>
+
+        <!-- Row 2: Status -->
+        <div class="filter-select-wrap">
+          <select class="filter-select" id="filterStatus">
+            <option value="">Select status</option>
+            <option value="RELEASING">Currently Airing</option>
+            <option value="FINISHED">Finished</option>
+            <option value="NOT_YET_RELEASED">Not Yet Aired</option>
+            <option value="CANCELLED">Cancelled</option>
+          </select>
+          <span class="material-symbols-outlined select-arrow">expand_more</span>
+        </div>
+
+        <!-- Row 2: Country / Language Origin -->
+        <div class="filter-select-wrap">
+          <select class="filter-select" id="filterCountry">
+            <option value="">Select language</option>
+            <option value="JP">Japanese</option>
+            <option value="KR">Korean (Manhwa/Aeni)</option>
+            <option value="CN">Chinese (Manhua/Donghua)</option>
+          </select>
+          <span class="material-symbols-outlined select-arrow">expand_more</span>
+        </div>
+
+        <!-- Row 2: Rating / Score Threshold -->
+        <div class="filter-select-wrap">
+          <select class="filter-select" id="filterRating">
+            <option value="">Select rating</option>
+            <option value="90">90%+ Score</option>
+            <option value="80">80%+ Score</option>
+            <option value="70">70%+ Score</option>
+            <option value="60">60%+ Score</option>
+          </select>
+          <span class="material-symbols-outlined select-arrow">expand_more</span>
+        </div>
+
+        <!-- Row 2: Source -->
+        <div class="filter-select-wrap">
+          <select class="filter-select" id="filterSource">
+            <option value="">Select source</option>
+            <option value="MANGA">Manga</option>
+            <option value="LIGHT_NOVEL">Light Novel</option>
+            <option value="ORIGINAL">Original</option>
+            <option value="VISUAL_NOVEL">Visual Novel</option>
+            <option value="VIDEO_GAME">Video Game</option>
+            <option value="WEB_MANGA">Web Manga</option>
+          </select>
+          <span class="material-symbols-outlined select-arrow">expand_more</span>
         </div>
       </div>
 
-      <!-- Specific Sub-Format Chips -->
-      <div class="filter-section-block">
-        <span class="filter-section-label">
-          <span class="material-symbols-outlined" style="font-size: 14px;">category</span> Release Format
-        </span>
-        <div class="chips-flow" id="subFormatChips">
-          <button type="button" class="filter-chip active" data-format="">All Formats</button>
-          <button type="button" class="filter-chip" data-format="TV">TV Series</button>
-          <button type="button" class="filter-chip" data-format="MOVIE">Movie</button>
-          <button type="button" class="filter-chip" data-format="OVA">OVA</button>
-          <button type="button" class="filter-chip" data-format="ONA">ONA</button>
-          <button type="button" class="filter-chip" data-format="SPECIAL">Special</button>
+      <!-- Row 3: Exclude list, Sort & Action Button -->
+      <div class="filter-bottom-bar">
+        <div class="filter-select-wrap">
+          <select class="filter-select" id="filterExclude">
+            <option value="">Exclude genre</option>
+            <option value="Ecchi">Ecchi</option>
+            <option value="Horror">Horror</option>
+            <option value="Psychological">Psychological</option>
+            <option value="Mecha">Mecha</option>
+          </select>
+          <span class="material-symbols-outlined select-arrow">expand_more</span>
         </div>
-      </div>
 
-      <!-- Airing / Publishing Status Chips -->
-      <div class="filter-section-block">
-        <span class="filter-section-label">
-          <span class="material-symbols-outlined" style="font-size: 14px;">radio_button_checked</span> Release Status
-        </span>
-        <div class="chips-flow" id="statusChips">
-          <button type="button" class="filter-chip active" data-status="">All Status</button>
-          <button type="button" class="filter-chip" data-status="RELEASING">Airing / Ongoing</button>
-          <button type="button" class="filter-chip" data-status="FINISHED">Finished</button>
-          <button type="button" class="filter-chip" data-status="NOT_YET_RELEASED">Upcoming</button>
+        <div class="filter-select-wrap">
+          <select class="filter-select" id="filterSort">
+            <option value="POPULARITY_DESC">Default (Most Popular)</option>
+            <option value="TRENDING_DESC">Trending</option>
+            <option value="SCORE_DESC">Top Rated</option>
+            <option value="START_DATE_DESC">Recently Added</option>
+            <option value="FAVOURITES_DESC">Most Favorited</option>
+          </select>
+          <span class="material-symbols-outlined select-arrow">expand_more</span>
         </div>
-      </div>
 
-      <!-- Popular Theme / Subgenre Tags -->
-      <div class="filter-section-block">
-        <span class="filter-section-label">
-          <span class="material-symbols-outlined" style="font-size: 14px;">tag</span> Popular Themes & Tropes
-        </span>
-        <div class="chips-flow" id="themeChips">
-          <button type="button" class="filter-chip active" data-tag="">All Themes</button>
-          <button type="button" class="filter-chip" data-tag="Isekai">Isekai</button>
-          <button type="button" class="filter-chip" data-tag="Shounen">Shounen</button>
-          <button type="button" class="filter-chip" data-tag="Super Power">Super Power</button>
-          <button type="button" class="filter-chip" data-tag="School">School</button>
-          <button type="button" class="filter-chip" data-tag="Psychological">Psychological</button>
-          <button type="button" class="filter-chip" data-tag="Demons">Demons</button>
-          <button type="button" class="filter-chip" data-tag="Magic">Magic</button>
-          <button type="button" class="filter-chip" data-tag="Cyberpunk">Cyberpunk</button>
-          <button type="button" class="filter-chip" data-tag="Time Travel">Time Travel</button>
-        </div>
+        <button type="button" class="anikoto-submit-btn" id="applyFilterBtn">
+          <span class="material-symbols-outlined" style="font-size: 18px;">filter_alt</span> Filter
+        </button>
+
+        <button type="button" class="reset-link-btn" id="clearFilterBtn">
+          <span class="material-symbols-outlined" style="font-size: 16px;">restart_alt</span> Reset
+        </button>
       </div>
     </section>
 
-    <!-- Active State & Result Summary -->
-    <div class="active-state-row">
-      <div class="state-title-wrap">
-        <h2 class="state-title" id="resultsHeading">Action Anime</h2>
-        <span class="state-count" id="resultsSubtext">Showing latest releases</span>
+    <!-- Results Status -->
+    <div class="catalog-summary-row">
+      <div>
+        <h2 class="summary-title" id="summaryTitle">All Releases</h2>
+        <p class="summary-subtext" id="summarySubtext">Showing results sorted by popularity</p>
       </div>
-
-      <button type="button" class="reset-filters-btn" id="resetFiltersBtn">
-        <span class="material-symbols-outlined" style="font-size: 14px;">restart_alt</span> Reset Filters
-      </button>
     </div>
 
     <!-- Cards Grid -->
@@ -966,39 +911,27 @@
   </main>
 
   <script>
-    const GENRE_DATA = [
-      { name: "Action", desc: "High-octane battles, adrenaline-pumping sequences, and heart-racing confrontations.", bg: "https://images.unsplash.com/photo-1578632767115-351597cf2477?q=80&w=1400&auto=format&fit=crop" },
-      { name: "Adventure", desc: "Expansive voyages across unexplored realms, wild terrain, and grand epic quests.", bg: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1400&auto=format&fit=crop" },
-      { name: "Comedy", desc: "Laugh-out-loud antics, slapstick banter, misunderstandings, and witty punchlines.", bg: "https://images.unsplash.com/photo-1514306191717-452ec28c7814?q=80&w=1400&auto=format&fit=crop" },
-      { name: "Drama", desc: "Emotionally charged character journeys, heartfelt stories, and deep moral conflicts.", bg: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=1400&auto=format&fit=crop" },
-      { name: "Fantasy", desc: "Mystical kingdoms, ancient sorcery, legendary creatures, and mythical destinies.", bg: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1400&auto=format&fit=crop" },
-      { name: "Horror", desc: "Chilling dread, supernatural monsters, psychological nightmares, and eerie tension.", bg: "https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=1400&auto=format&fit=crop" },
-      { name: "Mecha", desc: "Towering mechanical titan suits, futuristic military robotics, and sci-fi dogfights.", bg: "https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=1400&auto=format&fit=crop" },
-      { name: "Music", desc: "Passion for performance, melodic battles, idols, rock bands, and symphonic unity.", bg: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=1400&auto=format&fit=crop" },
-      { name: "Mystery", desc: "Baffling detective enigmas, unsolved crime capers, and unraveling conspiracies.", bg: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=1400&auto=format&fit=crop" },
-      { name: "Psychological", desc: "Mind games, psychological warfare, complex morals, and cerebral tension.", bg: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1400&auto=format&fit=crop" },
-      { name: "Romance", desc: "Romantic blossoms, heartfelt love triangles, fluttering confessions, and sweet dates.", bg: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=1400&auto=format&fit=crop" },
-      { name: "Sci-Fi", desc: "Cybernetic worlds, artificial intelligence, interstellar fleets, and alternate futures.", bg: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1400&auto=format&fit=crop" },
-      { name: "Slice of Life", desc: "Cozy daily living, school yard friendships, culinary joys, and quiet comfort.", bg: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=1400&auto=format&fit=crop" },
-      { name: "Sports", desc: "Teamwork, sweat, grit, buzzer-beaters, and burning athletic championship dreams.", bg: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?q=80&w=1400&auto=format&fit=crop" },
-      { name: "Supernatural", desc: "Ghosts, spirits, exorcisms, occult deities, and realms beyond human comprehension.", bg: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1400&auto=format&fit=crop" },
-      { name: "Thriller", desc: "Relentless suspense, high stakes survival games, ticking clocks, and adrenaline.", bg: "https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=1400&auto=format&fit=crop" }
-    ];
-
-    let currentGenre = "Action";
-    let currentType = "ANIME";
-    let currentSort = "POPULARITY_DESC";
-    let currentFormat = "";
-    let currentStatus = "";
-    let currentTag = "";
-    let currentYear = "";
+    let activeFilters = {
+      search: "",
+      genre: "",
+      season: "",
+      year: "",
+      type: "ANIME",
+      format: "",
+      status: "",
+      country: "",
+      rating: "",
+      source: "",
+      exclude: "",
+      sort: "POPULARITY_DESC"
+    };
 
     let currentPage = 1;
     let hasNextPage = true;
     let isLoading = false;
     let currentLang = "EN";
 
-    // Setup Search Elements
+    // Setup Header Search Popup
     const searchModal = document.getElementById('searchModal');
     const openSearchBtn = document.getElementById('openSearchBtn');
     const closeSearchBtn = document.getElementById('closeSearchBtn');
@@ -1039,111 +972,72 @@
       refreshTitles();
     });
 
-    // Populate Quick Jump Genre Bar
-    function initQuickJumpBar() {
-      const container = document.getElementById('quickJumpBar');
-      container.innerHTML = GENRE_DATA.map(g => `
-        <button type="button" class="quick-jump-pill ${g.name === currentGenre ? 'active' : ''}" onclick="switchGenre('${g.name}', this)">
-          ${g.name}
-        </button>
-      `).join('');
+    // Read Filter Values and Trigger Search
+    function readInputs() {
+      activeFilters.search = document.getElementById('filterKeyword').value.trim();
+      activeFilters.genre = document.getElementById('filterGenre').value;
+      activeFilters.season = document.getElementById('filterSeason').value;
+      activeFilters.year = document.getElementById('filterYear').value;
+      activeFilters.type = document.getElementById('filterType').value;
+      activeFilters.format = document.getElementById('filterFormat').value;
+      activeFilters.status = document.getElementById('filterStatus').value;
+      activeFilters.country = document.getElementById('filterCountry').value;
+      activeFilters.rating = document.getElementById('filterRating').value;
+      activeFilters.source = document.getElementById('filterSource').value;
+      activeFilters.exclude = document.getElementById('filterExclude').value;
+      activeFilters.sort = document.getElementById('filterSort').value;
     }
 
-    function switchGenre(genreName, btn) {
-      document.querySelectorAll('.quick-jump-pill').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      currentGenre = genreName;
-      updateSpotlightBanner();
+    function resetFilters() {
+      document.getElementById('filterKeyword').value = "";
+      document.getElementById('filterGenre').value = "";
+      document.getElementById('filterSeason').value = "";
+      document.getElementById('filterYear').value = "";
+      document.getElementById('filterType').value = "ANIME";
+      document.getElementById('filterFormat').value = "";
+      document.getElementById('filterStatus').value = "";
+      document.getElementById('filterCountry').value = "";
+      document.getElementById('filterRating').value = "";
+      document.getElementById('filterSource').value = "";
+      document.getElementById('filterExclude').value = "";
+      document.getElementById('filterSort').value = "POPULARITY_DESC";
+
+      readInputs();
       resetAndFetch();
     }
 
-    function updateSpotlightBanner() {
-      const info = GENRE_DATA.find(g => g.name === currentGenre) || GENRE_DATA[0];
-      const banner = document.getElementById('genreSpotlightBanner');
-      const title = document.getElementById('genreSpotlightTitle');
-      const desc = document.getElementById('genreSpotlightDesc');
-      const tag = document.getElementById('genreSpotlightTag');
+    document.getElementById('applyFilterBtn').addEventListener('click', () => {
+      readInputs();
+      resetAndFetch();
+    });
 
-      banner.style.backgroundImage = `url('${info.bg}')`;
-      title.textContent = `${info.name} ${currentType === 'ANIME' ? 'Anime' : 'Manga'}`;
-      desc.textContent = info.desc;
-      tag.textContent = `${info.name} Collection`;
-    }
+    document.getElementById('clearFilterBtn').addEventListener('click', resetFilters);
 
-    // Filter Listeners
-    document.querySelectorAll('#formatToggleGroup .toggle-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('#formatToggleGroup .toggle-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        currentType = btn.dataset.type;
-        updateSpotlightBanner();
+    document.getElementById('filterKeyword').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        readInputs();
         resetAndFetch();
-      });
+      }
     });
 
-    document.getElementById('sortSelect').addEventListener('change', (e) => {
-      currentSort = e.target.value;
-      resetAndFetch();
-    });
-
-    document.getElementById('yearSelect').addEventListener('change', (e) => {
-      currentYear = e.target.value;
-      resetAndFetch();
-    });
-
-    // Chips Delegations
-    function setupChipGroup(containerId, callback) {
-      const container = document.getElementById(containerId);
-      container.querySelectorAll('.filter-chip').forEach(chip => {
-        chip.addEventListener('click', () => {
-          container.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
-          chip.classList.add('active');
-          callback(chip);
-          resetAndFetch();
-        });
-      });
-    }
-
-    setupChipGroup('subFormatChips', (chip) => { currentFormat = chip.dataset.format; });
-    setupChipGroup('statusChips', (chip) => { currentStatus = chip.dataset.status; });
-    setupChipGroup('themeChips', (chip) => { currentTag = chip.dataset.tag; });
-
-    // Reset Filters
-    document.getElementById('resetFiltersBtn').addEventListener('click', () => {
-      currentSort = "POPULARITY_DESC";
-      currentFormat = "";
-      currentStatus = "";
-      currentTag = "";
-      currentYear = "";
-      document.getElementById('sortSelect').value = "POPULARITY_DESC";
-      document.getElementById('yearSelect').value = "";
-
-      document.querySelectorAll('#subFormatChips .filter-chip').forEach((c, idx) => c.classList.toggle('active', idx === 0));
-      document.querySelectorAll('#statusChips .filter-chip').forEach((c, idx) => c.classList.toggle('active', idx === 0));
-      document.querySelectorAll('#themeChips .filter-chip').forEach((c, idx) => c.classList.toggle('active', idx === 0));
-
-      resetAndFetch();
-    });
-
-    function updateHeadingText() {
-      const typeLabel = currentType === 'ANIME' ? 'Anime' : 'Manga';
-      document.getElementById('resultsHeading').textContent = `${currentGenre} ${typeLabel}`;
-      
+    function updateSummary() {
       const parts = [];
-      if (currentFormat) parts.push(currentFormat);
-      if (currentStatus) parts.push(currentStatus.replace(/_/g, ' '));
-      if (currentTag) parts.push(currentTag);
-      if (currentYear) parts.push(currentYear);
+      if (activeFilters.genre) parts.push(activeFilters.genre);
+      if (activeFilters.season) parts.push(activeFilters.season);
+      if (activeFilters.year) parts.push(activeFilters.year);
+      if (activeFilters.format) parts.push(activeFilters.format);
+      if (activeFilters.status) parts.push(activeFilters.status.replace(/_/g, ' '));
+      if (activeFilters.source) parts.push(activeFilters.source.replace(/_/g, ' '));
 
-      document.getElementById('resultsSubtext').textContent = parts.length 
-        ? `Filtered by: ${parts.join(' • ')}` 
-        : 'Displaying top curated catalog results';
+      const title = activeFilters.search ? `Results for "${activeFilters.search}"` : (parts.length ? parts.join(' • ') : "All Releases");
+      document.getElementById('summaryTitle').textContent = `${title} (${activeFilters.type})`;
+      document.getElementById('summarySubtext').textContent = `Showing matched entries`;
     }
 
     function resetAndFetch() {
       currentPage = 1;
       hasNextPage = true;
-      updateHeadingText();
+      updateSummary();
       const grid = document.getElementById('genreGrid');
       grid.innerHTML = Array(12).fill(`
         <div class="card-wrap">
@@ -1151,51 +1045,80 @@
         </div>
       `).join('');
       document.getElementById('infiniteSentinel').style.display = 'flex';
-      fetchGenreMedia(false);
+      fetchMedia(false);
     }
 
-    async function fetchGenreMedia(append = false) {
+    async function fetchMedia(append = false) {
       if (isLoading || (!hasNextPage && append)) return;
       isLoading = true;
 
-      // Construct Dynamic GraphQL Variable Query
       let varDefs = '$page: Int, $type: MediaType,$sort: [MediaSort]';
       let mediaFilters = 'type: $type, sort:$sort, isAdult: false';
 
       const variables = {
         page: currentPage,
-        type: currentType,
-        sort: [currentSort]
+        type: activeFilters.type,
+        sort: [activeFilters.sort]
       };
 
-      if (currentGenre) {
+      if (activeFilters.search) {
+        varDefs += ', $search: String';
+        mediaFilters += ', search: $search';
+        variables.search = activeFilters.search;
+      }
+
+      if (activeFilters.genre) {
         varDefs += ', $genre: String';
         mediaFilters += ', genre: $genre';
-        variables.genre = currentGenre;
+        variables.genre = activeFilters.genre;
       }
 
-      if (currentFormat) {
-        varDefs += ', $format: MediaFormat';
-        mediaFilters += ', format: $format';
-        variables.format = currentFormat;
+      if (activeFilters.season) {
+        varDefs += ', $season: MediaSeason';
+        mediaFilters += ', season: $season';
+        variables.season = activeFilters.season;
       }
 
-      if (currentStatus) {
-        varDefs += ', $status: MediaStatus';
-        mediaFilters += ', status: $status';
-        variables.status = currentStatus;
-      }
-
-      if (currentTag) {
-        varDefs += ', $tag: String';
-        mediaFilters += ', tag: $tag';
-        variables.tag = currentTag;
-      }
-
-      if (currentYear) {
+      if (activeFilters.year) {
         varDefs += ', $seasonYear: Int';
         mediaFilters += ', seasonYear: $seasonYear';
-        variables.seasonYear = parseInt(currentYear, 10);
+        variables.seasonYear = parseInt(activeFilters.year, 10);
+      }
+
+      if (activeFilters.format) {
+        varDefs += ', $format: MediaFormat';
+        mediaFilters += ', format: $format';
+        variables.format = activeFilters.format;
+      }
+
+      if (activeFilters.status) {
+        varDefs += ', $status: MediaStatus';
+        mediaFilters += ', status: $status';
+        variables.status = activeFilters.status;
+      }
+
+      if (activeFilters.country) {
+        varDefs += ', $country: CountryCode';
+        mediaFilters += ', countryOfOrigin: $country';
+        variables.country = activeFilters.country;
+      }
+
+      if (activeFilters.source) {
+        varDefs += ', $source: MediaSource';
+        mediaFilters += ', source: $source';
+        variables.source = activeFilters.source;
+      }
+
+      if (activeFilters.exclude) {
+        varDefs += ', $genreNotIn: [String]';
+        mediaFilters += ', genre_not_in: $genreNotIn';
+        variables.genreNotIn = [activeFilters.exclude];
+      }
+
+      if (activeFilters.rating) {
+        varDefs += ', $averageScoreGreater: Int';
+        mediaFilters += ', averageScore_greater: $averageScoreGreater';
+        variables.averageScoreGreater = parseInt(activeFilters.rating, 10);
       }
 
       const query = `
@@ -1236,7 +1159,7 @@
         }
       } catch (err) {
         if (!append) {
-          document.getElementById('genreGrid').innerHTML = '<p style="color:var(--text-dim); text-align:center; padding:30px; grid-column:1/-1;">No results found with this combination of filters.</p>';
+          document.getElementById('genreGrid').innerHTML = '<p style="color:var(--text-dim); text-align:center; padding:30px; grid-column:1/-1;">Failed to fetch results.</p>';
         }
       } finally {
         isLoading = false;
@@ -1246,7 +1169,7 @@
     function renderCards(items, append) {
       const grid = document.getElementById('genreGrid');
       if (!append && items.length === 0) {
-        grid.innerHTML = '<p style="color:var(--text-dim); text-align:center; padding:30px; grid-column:1/-1;">No anime or manga found matching these filters.</p>';
+        grid.innerHTML = '<p style="color:var(--text-dim); text-align:center; padding:30px; grid-column:1/-1;">No anime or manga found matching these criteria.</p>';
         return;
       }
 
@@ -1395,19 +1318,18 @@
       }, 350);
     });
 
-    // Infinite Scroll Intersection Observer
+    // Infinite Scroll
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting && !isLoading && hasNextPage) {
         currentPage++;
-        fetchGenreMedia(true);
+        fetchMedia(true);
       }
     }, { rootMargin: '400px' });
 
     observer.observe(document.getElementById('infiniteSentinel'));
 
     window.addEventListener('DOMContentLoaded', () => {
-      initQuickJumpBar();
-      updateSpotlightBanner();
+      readInputs();
       resetAndFetch();
     });
   </script>
