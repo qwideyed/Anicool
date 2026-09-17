@@ -3,163 +3,364 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AniRealm - Watch & Discover Anime</title>
+  <title>AniRealm - Modern Bubble UI</title>
 
-  <!-- Google Font for modern styling -->
+  <!-- Google Font: Poppins -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Google Material Symbols (for Google Search Icon) -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
   <style>
-    /* ================= RESET & BASE ================= */
+    /* ================= RESET & VARIABLES ================= */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #0f1015; /* Dark anime-platform background */
-      color: #fff;
-      min-height: 100vh;
+    :root {
+      --bg-dark: #0b0c10;
+      --bubble-bg: rgba(255, 255, 255, 0.05);
+      --bubble-border: rgba(255, 255, 255, 0.12);
+      --accent-pink: #ff2a74;
+      --accent-purple: #8b5cf6;
+      --accent-cyan: #00f2fe;
+      --text-main: #f3f4f6;
+      --text-dim: #9ca3af;
     }
 
-    /* ================= HEADER / NAVBAR ================= */
-    .navbar {
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      min-height: 200vh; /* Extra scroll room to preview sticky floating effect */
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(255, 42, 116, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 85% 20%, rgba(139, 92, 246, 0.12) 0%, transparent 40%);
+    }
+
+    /* ================= FLOATING BUBBLE HEADER ================= */
+    .header-wrapper {
       position: sticky;
-      top: 0;
-      width: 100%;
+      top: 20px;
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      padding: 0 20px;
+    }
+
+    .bubble-nav {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 16px 5%;
-      background: rgba(18, 19, 26, 0.85);
-      backdrop-filter: blur(12px); /* Glass blur effect */
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      z-index: 1000;
+      width: 100%;
+      max-width: 1150px;
+      padding: 10px 22px;
+      background: var(--bubble-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--bubble-border);
+      border-radius: 9999px; /* Bubble pill shape */
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.45);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    /* Logo */
+    .bubble-nav:hover {
+      border-color: rgba(255, 255, 255, 0.22);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+    }
+
+    /* ================= LOGO ================= */
     .logo a {
-      font-size: 1.6rem;
+      font-size: 1.35rem;
       font-weight: 700;
-      color: #ffffff;
       text-decoration: none;
-      letter-spacing: 1px;
+      color: #fff;
+      display: inline-block;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .logo a:hover {
+      transform: scale(1.05);
     }
 
     .logo span {
-      color: #ff3366; /* Vibrant neon accent */
-      text-shadow: 0 0 10px rgba(255, 51, 102, 0.6);
+      background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    /* Navigation Menu */
-    .nav-menu ul {
+    /* ================= NAVIGATION LINKS ================= */
+    .nav-links {
       display: flex;
       list-style: none;
-      gap: 25px;
+      align-items: center;
+      gap: 8px;
     }
 
-    .nav-menu a {
-      text-decoration: none;
-      color: #a0a3bd;
-      font-size: 0.95rem;
-      font-weight: 500;
-      transition: color 0.25s ease, text-shadow 0.25s ease;
+    .nav-item {
+      position: relative;
     }
 
-    .nav-menu a:hover,
-    .nav-menu a.active {
-      color: #ffffff;
-      text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
-    }
-
-    /* Search Bar */
-    .nav-actions .search-box {
+    .nav-link {
       display: flex;
       align-items: center;
-      background: #1c1e29;
-      border: 1px solid #2d3042;
-      border-radius: 20px;
-      padding: 4px 12px;
-      transition: border-color 0.3s ease;
-    }
-
-    .nav-actions .search-box:focus-within {
-      border-color: #ff3366;
-    }
-
-    .search-box input {
+      gap: 4px;
+      padding: 8px 16px;
+      border-radius: 9999px;
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 500;
+      transition: all 0.25s ease;
       background: transparent;
       border: none;
-      outline: none;
+      cursor: pointer;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
       color: #fff;
-      font-size: 0.85rem;
-      padding: 6px;
-      width: 140px;
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-2px);
+    }
+
+    /* ================= BUBBLE DROPDOWNS ================= */
+    .dropdown-menu {
+      position: absolute;
+      top: calc(100% + 14px);
+      left: 0;
+      min-width: 190px;
+      background: rgba(20, 22, 30, 0.92);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid var(--bubble-border);
+      border-radius: 20px;
+      padding: 10px;
+      list-style: none;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+
+      /* Hidden by default */
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(12px) scale(0.96);
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Show dropdown on hover */
+    .dropdown:hover > .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+    }
+
+    .dropdown-menu li {
+      position: relative;
+    }
+
+    .dropdown-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 9px 14px;
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 0.88rem;
+      border-radius: 12px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .dropdown-item:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.08);
+      padding-left: 17px;
+    }
+
+    /* Sub-dropdown (Levels 2) */
+    .nested-menu {
+      top: 0;
+      left: calc(100% + 8px);
+    }
+
+    /* Dropdown Arrow Indicator */
+    .arrow-down {
+      font-size: 0.7rem;
+      transition: transform 0.25s ease;
+    }
+
+    .dropdown:hover > .nav-link .arrow-down {
+      transform: rotate(180deg);
+    }
+
+    .arrow-right {
+      font-size: 0.75rem;
+    }
+
+    /* ================= BUBBLE SEARCH & ACTIONS ================= */
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .search-bubble {
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--bubble-border);
+      border-radius: 9999px;
+      padding: 5px 12px 5px 8px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .search-bubble:focus-within {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--accent-pink);
+      box-shadow: 0 0 16px rgba(255, 42, 116, 0.35);
+      transform: scale(1.02);
+    }
+
+    .search-bubble .material-symbols-outlined {
+      color: var(--text-dim);
+      font-size: 20px;
+      margin-right: 6px;
+      transition: color 0.2s ease;
+      user-select: none;
+    }
+
+    .search-bubble:focus-within .material-symbols-outlined {
+      color: var(--accent-pink);
+    }
+
+    .search-bubble input {
+      border: none;
+      outline: none;
+      background: transparent;
+      color: #fff;
+      font-size: 0.88rem;
+      width: 110px;
+      font-family: inherit;
       transition: width 0.3s ease;
     }
 
-    .search-box input:focus {
-      width: 180px;
+    .search-bubble input:focus {
+      width: 170px;
     }
 
-    .search-box button {
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-size: 0.9rem;
+    .search-bubble input::placeholder {
+      color: #717686;
     }
 
-    /* Mobile / Tablet View */
-    @media (max-width: 768px) {
-      .navbar {
+    /* ================= RESPONSIVE ================= */
+    @media (max-width: 900px) {
+      .bubble-nav {
+        border-radius: 20px;
         flex-wrap: wrap;
-        gap: 15px;
+        gap: 12px;
+        padding: 14px;
       }
-
-      .nav-menu {
+      .nav-links {
         order: 3;
         width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
       }
-
-      .nav-menu ul {
-        justify-content: space-around;
-        gap: 10px;
+      .nested-menu {
+        left: 0;
+        top: 100%;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- ================= HEADER START ================= -->
-  <header class="navbar">
-    <!-- Logo -->
-    <div class="logo">
-      <a href="#">Ani<span>Realm</span></a>
-    </div>
-
-    <!-- Links -->
-    <nav class="nav-menu">
-      <ul>
-        <li><a href="#home" class="active">Home</a></li>
-        <li><a href="#popular">Popular</a></li>
-        <li><a href="#genres">Genres</a></li>
-        <li><a href="#schedule">Schedule</a></li>
-        <li><a href="#watchlist">My List</a></li>
-      </ul>
-    </nav>
-
-    <!-- Search -->
-    <div class="nav-actions">
-      <div class="search-box">
-        <input type="text" placeholder="Search anime..." />
-        <button type="button" aria-label="Search">🔍</button>
+  <!-- Floating Header Wrapper -->
+  <div class="header-wrapper">
+    <header class="bubble-nav">
+      <!-- Logo -->
+      <div class="logo">
+        <a href="#">Ani<span>Realm</span></a>
       </div>
-    </div>
-  </header>
-  <!-- ================= HEADER END ================= -->
+
+      <!-- Navigation Links -->
+      <nav>
+        <ul class="nav-links">
+          <li class="nav-item">
+            <a href="#home" class="nav-link active">Home</a>
+          </li>
+
+          <!-- HUB Dropdown -->
+          <li class="nav-item dropdown">
+            <a href="javascript:void(0)" class="nav-link">
+              Hub <span class="arrow-down">▼</span>
+            </a>
+            
+            <ul class="dropdown-menu">
+              <!-- Anime Category -->
+              <li class="dropdown">
+                <a href="#anime" class="dropdown-item">
+                  Anime <span class="arrow-right">▶</span>
+                </a>
+                <ul class="dropdown-menu nested-menu">
+                  <li><a href="#anime-popular" class="dropdown-item">Popular</a></li>
+                  <li><a href="#anime-genre" class="dropdown-item">Genre</a></li>
+                  <li><a href="#anime-newly-released" class="dropdown-item">Newly Released</a></li>
+                  <li><a href="#anime-coming-out" class="dropdown-item">Coming Out</a></li>
+                </ul>
+              </li>
+
+              <!-- Manga Category -->
+              <li class="dropdown">
+                <a href="#manga" class="dropdown-item">
+                  Manga <span class="arrow-right">▶</span>
+                </a>
+                <ul class="dropdown-menu nested-menu">
+                  <li><a href="#manga-popular" class="dropdown-item">Popular</a></li>
+                  <li><a href="#manga-genre" class="dropdown-item">Genre</a></li>
+                  <li><a href="#manga-newly-released" class="dropdown-item">Newly Released</a></li>
+                  <li><a href="#manga-coming-out" class="dropdown-item">Coming Out</a></li>
+                </ul>
+              </li>
+
+              <!-- Hentai Category -->
+              <li class="dropdown">
+                <a href="#hentai" class="dropdown-item">
+                  Hentai <span class="arrow-right">▶</span>
+                </a>
+                <ul class="dropdown-menu nested-menu">
+                  <li><a href="#hentai-popular" class="dropdown-item">Popular</a></li>
+                  <li><a href="#hentai-genre" class="dropdown-item">Genre</a></li>
+                  <li><a href="#hentai-newly-released" class="dropdown-item">Newly Released</a></li>
+                  <li><a href="#hentai-coming-out" class="dropdown-item">Coming Out</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="#mylist" class="nav-link">My List</a>
+          </li>
+          
+          <li class="nav-item">
+            <a href="#websites" class="nav-link">Websites</a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Google Material Symbols Search Box -->
+      <div class="actions">
+        <div class="search-bubble">
+          <span class="material-symbols-outlined">search</span>
+          <input type="text" placeholder="Search..." aria-label="Search" />
+        </div>
+      </div>
+    </header>
+  </div>
 
 </body>
 </html>
