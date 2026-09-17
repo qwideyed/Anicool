@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AniRealm - Modern Bubble UI</title>
+  <title>AniCool - Modern Bubble UI</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -139,21 +139,21 @@
       top: calc(100% + 14px);
       left: 50%;
       transform: translateX(-50%) translateY(10px) scale(0.97);
-      width: 900px;
       background: rgba(17, 19, 29, 0.97);
       backdrop-filter: blur(28px);
       -webkit-backdrop-filter: blur(28px);
       border: 1px solid var(--bubble-border);
-      border-radius: 26px;
-      padding: 22px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
+      border-radius: 9999px;
+      padding: 10px 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
       box-shadow: 0 25px 60px rgba(0, 0, 0, 0.75);
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
       transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s ease;
+      white-space: nowrap;
     }
 
     .hub-dropdown:hover .mega-menu {
@@ -163,127 +163,30 @@
       transform: translateX(-50%) translateY(0) scale(1);
     }
 
-    .hub-card {
-      background: var(--card-bg);
-      border: 1px solid rgba(255, 255, 255, 0.07);
-      border-radius: 20px;
-      padding: 18px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      transition: all 0.3s ease;
-    }
-
-    .hub-card:hover {
-      background: rgba(255, 255, 255, 0.06);
-      transform: translateY(-4px);
-    }
-
-    .card-anime:hover { border-color: rgba(0, 210, 255, 0.4); box-shadow: 0 0 20px rgba(0, 210, 255, 0.15); }
-    .card-manga:hover { border-color: rgba(157, 92, 246, 0.4); box-shadow: 0 0 20px rgba(157, 92, 246, 0.15); }
-    .card-hentai:hover { border-color: rgba(255, 42, 116, 0.4); box-shadow: 0 0 20px rgba(255, 42, 116, 0.15); }
-
-    .card-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-      padding-bottom: 10px;
-    }
-
-    .card-header-left {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .card-title {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: #fff;
-    }
-
-    .badge {
-      font-size: 0.65rem;
-      padding: 3px 8px;
-      border-radius: 9999px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .badge-anime { background: rgba(0, 210, 255, 0.15); color: var(--accent-blue); }
-    .badge-manga { background: rgba(157, 92, 246, 0.15); color: var(--accent-purple); }
-    .badge-hentai { background: rgba(255, 42, 116, 0.15); color: var(--accent-pink); }
-
-    .item-counter {
-      font-size: 0.72rem;
+    .category-pill {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--bubble-border);
       color: var(--text-dim);
-    }
-
-    .card-links {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .card-links a {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      color: var(--text-dim);
-      text-decoration: none;
       font-size: 0.88rem;
-      padding: 8px 10px;
-      border-radius: 10px;
-      transition: all 0.2s ease;
-    }
-
-    .card-links a:hover {
-      color: #fff;
-      background: rgba(255, 255, 255, 0.07);
-      padding-left: 14px;
-    }
-
-    .card-links .material-symbols-outlined {
-      font-size: 16px;
-      opacity: 0.5;
-    }
-
-    .card-spotlight {
-      background: rgba(0, 0, 0, 0.3);
-      border: 1px dashed rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      padding: 10px 12px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-      margin-top: auto;
-      transition: all 0.2s ease;
-    }
-
-    .card-spotlight:hover {
-      background: rgba(255, 255, 255, 0.05);
-      border-style: solid;
-      border-color: rgba(255, 255, 255, 0.25);
-    }
-
-    .spotlight-icon {
-      font-size: 20px;
-      color: #facc15;
-    }
-
-    .spotlight-info h5 {
-      font-size: 0.78rem;
       font-weight: 600;
-      color: #fff;
+      padding: 8px 20px;
+      border-radius: 9999px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.25s ease;
     }
 
-    .spotlight-info p {
-      font-size: 0.68rem;
-      color: var(--text-dim);
+    .category-pill:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .category-pill.active {
+      background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 6px 20px rgba(255, 42, 116, 0.4);
     }
 
     .search-btn {
@@ -735,50 +638,6 @@
       background: var(--accent-pink);
     }
 
-    .category-divider-bar {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 10px 16px;
-      background: var(--bubble-bg);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid var(--bubble-border);
-      border-radius: 9999px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-      flex-wrap: wrap;
-      margin: 4px auto 0;
-      width: fit-content;
-      max-width: 100%;
-    }
-
-    .category-pill {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--bubble-border);
-      color: var(--text-dim);
-      font-size: 0.88rem;
-      font-weight: 600;
-      padding: 8px 22px;
-      border-radius: 9999px;
-      cursor: pointer;
-      font-family: inherit;
-      transition: all 0.25s ease;
-    }
-
-    .category-pill:hover {
-      color: #fff;
-      background: rgba(255, 255, 255, 0.1);
-      transform: translateY(-2px);
-    }
-
-    .category-pill.active {
-      background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
-      color: #fff;
-      border-color: transparent;
-      box-shadow: 0 6px 20px rgba(255, 42, 116, 0.4);
-    }
-
     .section-head {
       display: flex;
       align-items: center;
@@ -1059,10 +918,10 @@
 
     @media (max-width: 920px) {
       .mega-menu {
+        border-radius: 20px;
+        flex-wrap: wrap;
         width: calc(100vw - 40px);
-        grid-template-columns: 1fr;
-        max-height: 80vh;
-        overflow-y: auto;
+        justify-content: center;
       }
       .hero-banner {
         min-height: 320px;
@@ -1078,9 +937,6 @@
       .card-hover-bubble {
         display: none;
       }
-      .category-divider-bar {
-        border-radius: 20px;
-      }
     }
   </style>
 </head>
@@ -1090,13 +946,13 @@
     <header class="bubble-nav">
       
       <div class="logo">
-        <a href="#">Ani<span>Realm</span></a>
+        <a href="index.html">Ani<span>Cool</span></a>
       </div>
 
       <nav>
         <ul class="nav-links">
           <li class="nav-item">
-            <a href="#home" class="nav-link active">Home</a>
+            <a href="index.html" class="nav-link active">Home</a>
           </li>
 
           <li class="nav-item hub-dropdown">
@@ -1105,85 +961,16 @@
             </a>
             
             <div class="mega-menu">
-              <div class="hub-card card-anime">
-                <div class="card-header">
-                  <div class="card-header-left">
-                    <span class="card-title">Anime</span>
-                    <span class="badge badge-anime">Series</span>
-                  </div>
-                  <span class="item-counter">AniList API</span>
-                </div>
-
-                <ul class="card-links">
-                  <li><a href="#anime-popular">Popular <span class="material-symbols-outlined">trending_up</span></a></li>
-                  <li><a href="#anime-genre">Genre <span class="material-symbols-outlined">grid_view</span></a></li>
-                  <li><a href="#anime-newly-released">Newly Released <span class="material-symbols-outlined">schedule</span></a></li>
-                  <li><a href="#anime-coming-out">Coming Out <span class="material-symbols-outlined">upcoming</span></a></li>
-                </ul>
-
-                <a href="#featured-anime" class="card-spotlight">
-                  <span class="material-symbols-outlined spotlight-icon">bolt</span>
-                  <div class="spotlight-info">
-                    <h5>Top Airing</h5>
-                    <p>Powered by AniList</p>
-                  </div>
-                </a>
-              </div>
-
-              <div class="hub-card card-manga">
-                <div class="card-header">
-                  <div class="card-header-left">
-                    <span class="card-title">Manga</span>
-                    <span class="badge badge-manga">Read</span>
-                  </div>
-                  <span class="item-counter">AniList API</span>
-                </div>
-
-                <ul class="card-links">
-                  <li><a href="#manga-popular">Popular <span class="material-symbols-outlined">trending_up</span></a></li>
-                  <li><a href="#manga-genre">Genre <span class="material-symbols-outlined">grid_view</span></a></li>
-                  <li><a href="#manga-newly-released">Newly Released <span class="material-symbols-outlined">schedule</span></a></li>
-                  <li><a href="#manga-coming-out">Coming Out <span class="material-symbols-outlined">upcoming</span></a></li>
-                </ul>
-
-                <a href="#featured-manga" class="card-spotlight">
-                  <span class="material-symbols-outlined spotlight-icon">local_fire_department</span>
-                  <div class="spotlight-info">
-                    <h5>Trending Read</h5>
-                    <p>Updated Weekly</p>
-                  </div>
-                </a>
-              </div>
-
-              <div class="hub-card card-hentai">
-                <div class="card-header">
-                  <div class="card-header-left">
-                    <span class="card-title">Hentai</span>
-                    <span class="badge badge-hentai">18+</span>
-                  </div>
-                  <span class="item-counter">Adult</span>
-                </div>
-
-                <ul class="card-links">
-                  <li><a href="#hentai-popular">Popular <span class="material-symbols-outlined">trending_up</span></a></li>
-                  <li><a href="#hentai-genre">Genre <span class="material-symbols-outlined">grid_view</span></a></li>
-                  <li><a href="#hentai-newly-released">Newly Released <span class="material-symbols-outlined">schedule</span></a></li>
-                  <li><a href="#hentai-coming-out">Coming Out <span class="material-symbols-outlined">upcoming</span></a></li>
-                </ul>
-
-                <a href="#featured-hentai" class="card-spotlight">
-                  <span class="material-symbols-outlined spotlight-icon">lock_open</span>
-                  <div class="spotlight-info">
-                    <h5>Adult Catalog</h5>
-                    <p>Filtered Releases</p>
-                  </div>
-                </a>
-              </div>
+              <button type="button" class="category-pill active" onclick="switchCategory('ANIME', this)">Anime</button>
+              <button type="button" class="category-pill" onclick="switchCategory('MANGA', this)">Manga</button>
+              <button type="button" class="category-pill" onclick="switchCategory('HENTAI', this)">Hentai</button>
+              <button type="button" class="category-pill" onclick="switchCategory('READ_HENTAI', this)">Read Hentai</button>
+              <button type="button" class="category-pill" onclick="switchCategory('MANHWA', this)">Manhwa</button>
             </div>
           </li>
 
           <li class="nav-item">
-            <a href="#mylist" class="nav-link">My List</a>
+            <a href="#genre" class="nav-link">Genre</a>
           </li>
           
           <li class="nav-item">
@@ -1250,10 +1037,10 @@
           </div>
           <h1 class="hero-title" id="heroTitle">Loading Spotlight...</h1>
           <div class="hero-genres" id="heroGenres"></div>
-          <div class="hero-desc-box" id="heroDesc">Fetching top 10 spotlight anime from AniList...</div>
+          <div class="hero-desc-box" id="heroDesc">Fetching top 10 spotlight releases from AniList...</div>
           <div class="hero-actions">
             <a href="#" class="bubble-btn-primary" id="heroWatchBtn">
-              <span class="material-symbols-outlined">play_arrow</span> Watch Now
+              <span class="material-symbols-outlined">info</span> View Details
             </a>
             <button type="button" class="bubble-btn-secondary" id="heroListBtn">
               <span class="material-symbols-outlined">bookmark_add</span> Add to List
@@ -1263,14 +1050,6 @@
       </section>
 
       <div class="carousel-dots" id="carouselDots"></div>
-    </div>
-
-    <div class="category-divider-bar">
-      <button type="button" class="category-pill active" onclick="switchCategory('ANIME', this)">Anime</button>
-      <button type="button" class="category-pill" onclick="switchCategory('MANGA', this)">Manga</button>
-      <button type="button" class="category-pill" onclick="switchCategory('HENTAI', this)">Hentai</button>
-      <button type="button" class="category-pill" onclick="switchCategory('READ_HENTAI', this)">Read Hentai</button>
-      <button type="button" class="category-pill" onclick="switchCategory('MANHWA', this)">Manhwa</button>
     </div>
 
     <section>
@@ -1493,11 +1272,51 @@
       }, 350);
     });
 
-    async function loadSpotlight() {
+    function getCategoryConfig(category) {
+      let mediaType = 'ANIME';
+      let isAdult = false;
+      let countryOfOrigin = undefined;
+
+      if (category === 'MANGA') {
+        mediaType = 'MANGA';
+      } else if (category === 'HENTAI') {
+        mediaType = 'ANIME';
+        isAdult = true;
+      } else if (category === 'READ_HENTAI') {
+        mediaType = 'MANGA';
+        isAdult = true;
+      } else if (category === 'MANHWA') {
+        mediaType = 'MANGA';
+        countryOfOrigin = 'KR';
+      }
+
+      return { mediaType, isAdult, countryOfOrigin };
+    }
+
+    async function loadSpotlight(category = 'ANIME') {
+      const hero = document.getElementById('heroBanner');
+      hero.classList.add('skeleton');
+
+      const { mediaType, isAdult, countryOfOrigin } = getCategoryConfig(category);
+
+      let variables = {
+        type: mediaType,
+        isAdult: isAdult
+      };
+
+      let varDefs = '$type: MediaType,$isAdult: Boolean';
+      let mediaFilters = 'type: $type, isAdult:$isAdult';
+
+      if (countryOfOrigin) {
+        varDefs += ', $country: CountryCode';
+        mediaFilters += ', countryOfOrigin: $country';
+        variables.country = countryOfOrigin;
+      }
+
       const query = `
-        query {
+        query (${varDefs}) {
           Page(page: 1, perPage: 10) {
-            media(type: ANIME, sort: TRENDING_DESC, isAdult: false) {
+            media(${mediaFilters}, sort: TRENDING_DESC) {
               id
               type
               title { english romaji native }
@@ -1508,6 +1327,7 @@
               format
               genres
               episodes
+              chapters
             }
           }
         }
@@ -1517,7 +1337,7 @@
         const res = await fetch('https://graphql.anilist.co', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ query })
+          body: JSON.stringify({ query, variables })
         });
         const json = await res.json();
         spotlightList = json?.data?.Page?.media || [];
@@ -1538,20 +1358,20 @@
       renderSpotlightSlide(0);
       startSpotlightAuto();
 
-      document.getElementById('spotlightPrev').addEventListener('click', () => {
+      document.getElementById('spotlightPrev').onclick = () => {
         prevSpotlight();
         resetSpotlightAuto();
-      });
+      };
 
-      document.getElementById('spotlightNext').addEventListener('click', () => {
+      document.getElementById('spotlightNext').onclick = () => {
         nextSpotlight();
         resetSpotlightAuto();
-      });
+      };
     }
 
     function renderSpotlightSlide(index) {
-      const anime = spotlightList[index];
-      if (!anime) return;
+      const item = spotlightList[index];
+      if (!item) return;
 
       spotlightIndex = index;
       const hero = document.getElementById('heroBanner');
@@ -1564,26 +1384,26 @@
       const watchBtn = document.getElementById('heroWatchBtn');
 
       hero.classList.remove('skeleton');
-      const bg = anime.bannerImage || anime.coverImage.extraLarge;
+      const bg = item.bannerImage || item.coverImage.extraLarge;
       hero.style.backgroundImage = `url('${bg}')`;
 
       const activeTitle = currentLang === 'JP' 
-        ? (anime.title.native || anime.title.romaji) 
-        : (anime.title.english || anime.title.romaji);
+        ? (item.title.native || item.title.romaji) 
+        : (item.title.english || item.title.romaji);
 
       title.textContent = activeTitle;
-      score.textContent = anime.averageScore ? `${anime.averageScore}%` : 'N/A';
+      score.textContent = item.averageScore ? `${item.averageScore}%` : 'N/A';
       rank.textContent = `Spotlight #${index + 1}`;
-      format.textContent = anime.format || 'TV';
+      format.textContent = item.format || (item.type === 'MANGA' ? 'MANGA' : 'TV');
 
-      const cleanedDesc = anime.description ? anime.description.replace(/<[^>]*>?/gm, '') : 'No synopsis available.';
+      const cleanedDesc = item.description ? item.description.replace(/<[^>]*>?/gm, '') : 'No synopsis available.';
       desc.textContent = cleanedDesc;
 
-      genresBox.innerHTML = (anime.genres || []).slice(0, 5).map(g => `
+      genresBox.innerHTML = (item.genres || []).slice(0, 5).map(g => `
         <span class="hero-genre-tag">${g}</span>
       `).join('');
 
-      watchBtn.href = `entry.html?id=${anime.id}`;
+      watchBtn.href = `entry.html?id=${item.id}`;
 
       document.querySelectorAll('.carousel-dots .dot').forEach((d, i) => {
         d.classList.toggle('active', i === index);
@@ -1606,33 +1426,13 @@
     }
 
     function startSpotlightAuto() {
+      clearInterval(spotlightTimer);
       spotlightTimer = setInterval(nextSpotlight, 5000);
     }
 
     function resetSpotlightAuto() {
       clearInterval(spotlightTimer);
       startSpotlightAuto();
-    }
-
-    function getCategoryConfig(category) {
-      let mediaType = 'ANIME';
-      let isAdult = false;
-      let countryOfOrigin = undefined;
-
-      if (category === 'MANGA') {
-        mediaType = 'MANGA';
-      } else if (category === 'HENTAI') {
-        mediaType = 'ANIME';
-        isAdult = true;
-      } else if (category === 'READ_HENTAI') {
-        mediaType = 'MANGA';
-        isAdult = true;
-      } else if (category === 'MANHWA') {
-        mediaType = 'MANGA';
-        countryOfOrigin = 'KR';
-      }
-
-      return { mediaType, isAdult, countryOfOrigin };
     }
 
     async function loadBodyContent(category = 'ANIME') {
@@ -1926,6 +1726,7 @@
       document.querySelectorAll('.category-pill').forEach(btn => btn.classList.remove('active'));
       element.classList.add('active');
       document.getElementById('infiniteSentinel').style.display = 'flex';
+      loadSpotlight(cat);
       loadBodyContent(cat);
     }
 
@@ -1938,7 +1739,7 @@
     observer.observe(document.getElementById('infiniteSentinel'));
 
     window.addEventListener('DOMContentLoaded', () => {
-      loadSpotlight();
+      loadSpotlight('ANIME');
       loadBodyContent('ANIME');
     });
   </script>
