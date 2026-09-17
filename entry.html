@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AniRealm - Anime Details</title>
+  <title>AniRealm - Media Details</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -168,45 +168,12 @@
       transform: translateY(0) scale(1);
     }
 
-    .search-presets-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      padding: 0 4px;
-      flex-wrap: wrap;
-    }
-
-    .presets-group {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .preset-pill {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--bubble-border);
-      color: var(--text-dim);
-      font-size: 0.82rem;
-      font-weight: 500;
-      padding: 6px 14px;
-      border-radius: 9999px;
-      cursor: pointer;
-      font-family: inherit;
-      transition: all 0.2s ease;
-    }
-
-    .preset-pill.active {
-      background: var(--accent-pink);
-      color: #fff;
-      border-color: var(--accent-pink);
-    }
-
     .search-box-popup {
       background: rgba(22, 24, 34, 0.95);
       border: 1px solid var(--bubble-border);
       border-radius: 24px;
       padding: 12px 20px;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
       display: flex;
       align-items: center;
       gap: 12px;
@@ -293,11 +260,10 @@
       object-fit: cover;
     }
 
-    /* ================= ENTRY HERO & BACKDROP ================= */
     .entry-backdrop-container {
       position: relative;
       width: 100%;
-      min-height: 480px;
+      min-height: 460px;
       background-size: cover;
       background-position: center 25%;
       margin-top: -85px;
@@ -309,31 +275,33 @@
       position: absolute;
       inset: 0;
       background: 
-        linear-gradient(0deg, var(--bg-dark) 10%, rgba(10, 11, 16, 0.85) 50%, rgba(10, 11, 16, 0.4) 100%),
+        linear-gradient(0deg, var(--bg-dark) 8%, rgba(10, 11, 16, 0.8) 50%, rgba(10, 11, 16, 0.4) 100%),
         radial-gradient(circle at 50% 30%, transparent 20%, var(--bg-dark) 90%);
     }
 
     .entry-main-wrapper {
       position: relative;
       z-index: 2;
-      max-width: 1280px;
+      max-width: 1360px;
       margin: 0 auto;
       padding: 0 30px 80px;
-      display: flex;
-      flex-direction: column;
-      gap: 40px;
-    }
-
-    .entry-top-card {
-      display: flex;
+      display: grid;
+      grid-template-columns: 290px 1fr;
       gap: 40px;
       align-items: flex-start;
-      margin-top: -120px;
+      margin-top: -140px;
+    }
+
+    .sidebar-col {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      position: sticky;
+      top: 100px;
     }
 
     .entry-poster-wrap {
-      width: 260px;
-      flex-shrink: 0;
+      width: 100%;
       border-radius: 24px;
       overflow: hidden;
       border: 1px solid var(--bubble-border);
@@ -349,11 +317,49 @@
       display: block;
     }
 
-    .entry-info {
-      flex: 1;
+    .sidebar-stats-card {
+      background: var(--card-bg);
+      border: 1px solid var(--bubble-border);
+      border-radius: 22px;
+      padding: 18px;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 12px;
+      backdrop-filter: blur(20px);
+    }
+
+    .sidebar-stat-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      padding-bottom: 8px;
+    }
+
+    .sidebar-stat-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .sidebar-stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #71778e;
+      font-weight: 600;
+    }
+
+    .sidebar-stat-value {
+      font-size: 0.88rem;
+      color: #fff;
+      font-weight: 600;
+      word-break: break-word;
+    }
+
+    .content-col {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
       padding-top: 40px;
     }
 
@@ -398,7 +404,7 @@
     }
 
     .entry-title {
-      font-size: 2.6rem;
+      font-size: 2.5rem;
       font-weight: 700;
       line-height: 1.2;
       color: #fff;
@@ -415,7 +421,7 @@
       display: flex;
       align-items: center;
       gap: 14px;
-      margin: 6px 0;
+      margin: 8px 0;
       flex-wrap: wrap;
     }
 
@@ -467,55 +473,20 @@
       font-size: 0.95rem;
       line-height: 1.7;
       color: #cbd5e1;
-      background: rgba(20, 22, 32, 0.4);
-      padding: 18px 22px;
+      background: rgba(20, 22, 32, 0.5);
+      padding: 20px 24px;
       border-radius: 20px;
       border: 1px solid var(--bubble-border);
     }
 
-    /* ================= STATS & DETAILS GRID ================= */
-    .details-stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 14px;
-    }
-
-    .stat-card {
-      background: var(--card-bg);
-      border: 1px solid var(--bubble-border);
-      border-radius: 18px;
-      padding: 14px 18px;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .stat-card-label {
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: #71778e;
-      font-weight: 600;
-    }
-
-    .stat-card-value {
-      font-size: 0.95rem;
-      color: #fff;
-      font-weight: 600;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    /* ================= EPISODES SECTION ================= */
     .section-card {
       background: var(--card-bg);
       border: 1px solid var(--bubble-border);
-      border-radius: 28px;
-      padding: 28px;
+      border-radius: 26px;
+      padding: 26px;
       display: flex;
       flex-direction: column;
-      gap: 22px;
+      gap: 20px;
       backdrop-filter: blur(20px);
     }
 
@@ -528,7 +499,7 @@
     }
 
     .section-card-title {
-      font-size: 1.35rem;
+      font-size: 1.3rem;
       font-weight: 700;
       color: #fff;
       display: flex;
@@ -596,51 +567,136 @@
       box-shadow: 0 4px 14px rgba(255, 42, 116, 0.4);
     }
 
-    /* ================= CHARACTERS ROW ================= */
-    .characters-row {
+    .characters-voice-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 16px;
     }
 
-    .char-card {
+    .char-va-card {
       display: flex;
-      flex-direction: column;
-      gap: 8px;
-      text-align: center;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--bubble-border);
+      border-radius: 18px;
+      padding: 10px 14px;
+      gap: 10px;
+      transition: all 0.2s ease;
     }
 
-    .char-avatar-wrap {
-      width: 100%;
-      aspect-ratio: 1 / 1.25;
-      border-radius: 16px;
-      overflow: hidden;
+    .char-va-card:hover {
+      background: rgba(255, 255, 255, 0.06);
+      transform: translateY(-2px);
+    }
+
+    .char-side, .va-side {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+    }
+
+    .va-side {
+      justify-content: flex-end;
+      text-align: right;
+    }
+
+    .char-avatar-mini, .va-avatar-mini {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
       border: 1px solid var(--bubble-border);
       background: #141624;
+      flex-shrink: 0;
     }
 
-    .char-avatar {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .char-name {
-      font-size: 0.82rem;
+    .person-name {
+      font-size: 0.85rem;
       font-weight: 600;
       color: #fff;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      max-width: 90px;
     }
 
-    .char-role {
+    .person-sub {
       font-size: 0.7rem;
       color: var(--text-dim);
-      margin-top: -4px;
     }
 
-    /* Skeleton */
+    .relations-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 16px;
+    }
+
+    .relation-card {
+      display: flex;
+      flex-direction: column;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--bubble-border);
+      border-radius: 16px;
+      overflow: hidden;
+      text-decoration: none;
+      color: #fff;
+      transition: all 0.25s ease;
+    }
+
+    .relation-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 42, 116, 0.4);
+    }
+
+    .relation-thumb-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 1.42;
+      background: #12141f;
+    }
+
+    .relation-thumb {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .relation-type-tag {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: rgba(10, 11, 16, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 2px 7px;
+      border-radius: 6px;
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: var(--accent-blue);
+      text-transform: uppercase;
+    }
+
+    .relation-info {
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .relation-title {
+      font-size: 0.82rem;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .relation-meta {
+      font-size: 0.72rem;
+      color: var(--text-dim);
+    }
+
     .skeleton {
       animation: skeleton-pulse 1.5s infinite ease-in-out;
       background: linear-gradient(90deg, rgba(255, 255, 255, 0.04) 25%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0.04) 75%);
@@ -652,34 +708,28 @@
       100% { background-position: -200% 0; }
     }
 
-    @media (max-width: 860px) {
-      .entry-top-card {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
+    @media (max-width: 960px) {
+      .entry-main-wrapper {
+        grid-template-columns: 1fr;
       }
-      .entry-poster-wrap {
-        width: 200px;
+      .sidebar-col {
+        position: static;
+        width: 220px;
+        margin: 0 auto;
       }
-      .entry-info {
+      .content-col {
         padding-top: 0;
-        align-items: center;
       }
       .entry-title {
-        font-size: 1.8rem;
-      }
-      .entry-action-bar {
-        justify-content: center;
+        font-size: 2rem;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Floating Header -->
   <div class="header-wrapper">
     <header class="bubble-nav">
-      
       <div class="logo">
         <a href="index.html">Ani<span>Realm</span></a>
       </div>
@@ -703,21 +753,11 @@
           <span class="material-symbols-outlined">search</span>
         </button>
       </div>
-
     </header>
   </div>
 
-  <!-- Search Modal -->
   <div class="search-modal" id="searchModal">
     <div class="search-container">
-      <div class="search-presets-bar">
-        <div class="presets-group">
-          <button type="button" class="preset-pill active" data-preset="all">All</button>
-          <button type="button" class="preset-pill" data-preset="anime">Anime</button>
-          <button type="button" class="preset-pill" data-preset="manga">Manga</button>
-        </div>
-      </div>
-
       <div class="search-box-popup">
         <span class="material-symbols-outlined">search</span>
         <input type="text" id="searchInput" placeholder="Search anime or manga..." autocomplete="off" />
@@ -729,39 +769,76 @@
           <span class="material-symbols-outlined">close</span>
         </button>
       </div>
-
       <div class="search-results" id="searchResults" style="display: none;"></div>
     </div>
   </div>
 
-  <!-- Backdrop Top Section -->
   <div class="entry-backdrop-container skeleton" id="entryBackdrop">
     <div class="backdrop-overlay"></div>
   </div>
 
-  <!-- Main Details Body -->
   <main class="entry-main-wrapper">
     
-    <!-- Top Details Card -->
-    <div class="entry-top-card">
+    <aside class="sidebar-col">
       <div class="entry-poster-wrap">
         <img src="" alt="Poster" class="entry-poster" id="entryPoster" />
       </div>
 
-      <div class="entry-info">
+      <div class="sidebar-stats-card">
+        <div class="sidebar-stat-item">
+          <span class="sidebar-stat-label">Format</span>
+          <span class="sidebar-stat-value" id="statFormat">--</span>
+        </div>
+        <div class="sidebar-stat-item">
+          <span class="sidebar-stat-label">Episodes / Ch</span>
+          <span class="sidebar-stat-value" id="statEpisodes">--</span>
+        </div>
+        <div class="sidebar-stat-item">
+          <span class="sidebar-stat-label">Status</span>
+          <span class="sidebar-stat-value" id="statStatus">--</span>
+        </div>
+        <div class="sidebar-stat-item">
+          <span class="sidebar-stat-label">Season</span>
+          <span class="sidebar-stat-value" id="statSeason">--</span>
+        </div>
+        <div class="sidebar-stat-item">
+          <span class="sidebar-stat-label">Studio / Producer</span>
+          <span class="sidebar-stat-value" id="statStudio">--</span>
+        </div>
+        <div class="sidebar-stat-item">
+          <span class="sidebar-stat-label">Source</span>
+          <span class="sidebar-stat-value" id="statSource">--</span>
+        </div>
+        <div class="sidebar-stat-item">
+          <span class="sidebar-stat-label">Duration</span>
+          <span class="sidebar-stat-value" id="statDuration">--</span>
+        </div>
+        <div class="sidebar-stat-item">
+          <span class="sidebar-stat-label">Genres</span>
+          <span class="sidebar-stat-value" id="statGenres">--</span>
+        </div>
+        <div class="sidebar-stat-item">
+          <span class="sidebar-stat-label">Popularity</span>
+          <span class="sidebar-stat-value" id="statPopularity">--</span>
+        </div>
+      </div>
+    </aside>
+
+    <div class="content-col">
+      
+      <div>
         <div class="entry-badge-row" id="entryBadges">
-          <span class="entry-pill" id="entryFormat">TV</span>
+          <span class="entry-pill" id="entryPill">Anime</span>
           <span class="entry-score-pill">★ <span id="entryScore">--</span></span>
-          <span class="entry-tag-pill" id="entryStatus">Releasing</span>
-          <span class="entry-tag-pill" id="entryEpisodes">24 Episodes</span>
+          <span class="entry-tag-pill" id="entryYear">--</span>
         </div>
 
-        <h1 class="entry-title" id="entryTitle">Loading Details...</h1>
+        <h1 class="entry-title" id="entryTitle">Loading Media...</h1>
         <div class="entry-alt-title" id="entryAltTitle">...</div>
 
         <div class="entry-action-bar">
           <a href="#player" class="bubble-btn-primary" id="watchStartBtn">
-            <span class="material-symbols-outlined">play_arrow</span> Watch Episode 1
+            <span class="material-symbols-outlined">play_arrow</span> Start Watching
           </a>
           <button type="button" class="bubble-btn-secondary" id="bookmarkBtn">
             <span class="material-symbols-outlined">bookmark_add</span> Add to List
@@ -775,64 +852,56 @@
           Connecting to AniList API...
         </div>
       </div>
+
+      <section class="section-card" id="episodesSection">
+        <div class="section-card-head">
+          <div class="section-card-title">
+            <span class="material-symbols-outlined" style="color: var(--accent-pink);">video_library</span>
+            Episodes
+          </div>
+          <div class="ep-search-bubble">
+            <span class="material-symbols-outlined" style="font-size: 16px;">search</span>
+            <input type="text" id="epSearchInput" placeholder="Filter ep..." />
+          </div>
+        </div>
+        <div class="episodes-grid" id="episodesGrid"></div>
+      </section>
+
+      <section class="section-card">
+        <div class="section-card-head">
+          <div class="section-card-title">
+            <span class="material-symbols-outlined" style="color: var(--accent-purple);">diversity_3</span>
+            Characters & Voice Actors
+          </div>
+        </div>
+        <div class="characters-voice-grid" id="charactersVoiceGrid"></div>
+      </section>
+
+      <section class="section-card">
+        <div class="section-card-head">
+          <div class="section-card-title">
+            <span class="material-symbols-outlined" style="color: var(--accent-blue);">device_hub</span>
+            Relations & Franchises (Seasons, Manga, Prequels)
+          </div>
+        </div>
+        <div class="relations-grid" id="relationsGrid"></div>
+      </section>
+
+      <section class="section-card">
+        <div class="section-card-head">
+          <div class="section-card-title">
+            <span class="material-symbols-outlined" style="color: #facc15;">recommend</span>
+            You Might Also Like
+          </div>
+        </div>
+        <div class="relations-grid" id="recommendationsGrid"></div>
+      </section>
+
     </div>
-
-    <!-- Quick Meta Information Grid -->
-    <div class="details-stats-grid">
-      <div class="stat-card">
-        <span class="stat-card-label">Studio</span>
-        <span class="stat-card-value" id="statStudio">--</span>
-      </div>
-      <div class="stat-card">
-        <span class="stat-card-label">Season / Year</span>
-        <span class="stat-card-value" id="statSeason">--</span>
-      </div>
-      <div class="stat-card">
-        <span class="stat-card-label">Genres</span>
-        <span class="stat-card-value" id="statGenres">--</span>
-      </div>
-      <div class="stat-card">
-        <span class="stat-card-label">Duration</span>
-        <span class="stat-card-value" id="statDuration">--</span>
-      </div>
-      <div class="stat-card">
-        <span class="stat-card-label">Source</span>
-        <span class="stat-card-value" id="statSource">--</span>
-      </div>
-    </div>
-
-    <!-- Episode Selection Section -->
-    <section class="section-card">
-      <div class="section-card-head">
-        <div class="section-card-title">
-          <span class="material-symbols-outlined" style="color: var(--accent-pink);">video_library</span>
-          Episodes
-        </div>
-        <div class="ep-search-bubble">
-          <span class="material-symbols-outlined" style="font-size: 16px;">search</span>
-          <input type="text" id="epSearchInput" placeholder="Filter ep..." />
-        </div>
-      </div>
-
-      <div class="episodes-grid" id="episodesGrid"></div>
-    </section>
-
-    <!-- Characters Section -->
-    <section class="section-card">
-      <div class="section-card-head">
-        <div class="section-card-title">
-          <span class="material-symbols-outlined" style="color: var(--accent-purple);">group</span>
-          Main Characters
-        </div>
-      </div>
-      <div class="characters-row" id="charactersRow"></div>
-    </section>
 
   </main>
 
-  <!-- AniList Fetch & Interactive Handler Script -->
   <script>
-    // Search Popup Elements
     const searchModal = document.getElementById('searchModal');
     const openSearchBtn = document.getElementById('openSearchBtn');
     const closeSearchBtn = document.getElementById('closeSearchBtn');
@@ -845,7 +914,6 @@
     let currentAnimeData = null;
     let debounceTimer;
 
-    // Search Open/Close
     openSearchBtn.addEventListener('click', () => {
       searchModal.classList.add('active');
       setTimeout(() => searchInput.focus(), 100);
@@ -864,7 +932,6 @@
       if (e.key === 'Escape' && searchModal.classList.contains('active')) closeSearch();
     });
 
-    // Language Toggle
     langEn.addEventListener('click', () => {
       currentLang = 'EN';
       langEn.classList.add('active');
@@ -879,7 +946,6 @@
       updateDisplayTitles();
     });
 
-    // Extract ID from Query String (or default to 151807 / Solo Leveling if opened standalone)
     function getQueryParam(param) {
       const urlParams = new URLSearchParams(window.location.search);
       return urlParams.get(param);
@@ -898,6 +964,7 @@
             bannerImage
             description
             averageScore
+            popularity
             episodes
             chapters
             duration
@@ -911,12 +978,42 @@
             studios(isMain: true) {
               nodes { name }
             }
-            characters(sort: ROLE, perPage: 7) {
+            characters(sort: ROLE, perPage: 12) {
               edges {
                 role
                 node {
                   name { full }
                   image { medium }
+                }
+                voiceActors(language: JAPANESE, sort: RELEVANCE) {
+                  name { full }
+                  image { medium }
+                  languageV2
+                }
+              }
+            }
+            relations {
+              edges {
+                relationType(version: 2)
+                node {
+                  id
+                  type
+                  format
+                  title { english romaji native }
+                  coverImage { large }
+                  status
+                }
+              }
+            }
+            recommendations(sort: RATING_DESC, perPage: 7) {
+              nodes {
+                mediaRecommendation {
+                  id
+                  type
+                  format
+                  title { english romaji native }
+                  coverImage { large }
+                  averageScore
                 }
               }
             }
@@ -947,9 +1044,8 @@
       const backdrop = document.getElementById('entryBackdrop');
       const poster = document.getElementById('entryPoster');
       const score = document.getElementById('entryScore');
-      const format = document.getElementById('entryFormat');
-      const status = document.getElementById('entryStatus');
-      const epCount = document.getElementById('entryEpisodes');
+      const year = document.getElementById('entryYear');
+      const pill = document.getElementById('entryPill');
       const synopsis = document.getElementById('entrySynopsis');
       const trailerBtn = document.getElementById('trailerBtn');
 
@@ -959,28 +1055,38 @@
       poster.src = media.coverImage.extraLarge || media.coverImage.large;
 
       score.textContent = media.averageScore ? `${media.averageScore}%` : 'N/A';
-      format.textContent = media.format || 'TV';
-      status.textContent = media.status || 'UNKNOWN';
-      epCount.textContent = media.episodes ? `${media.episodes} Episodes` : (media.chapters ? `${media.chapters} Chapters` : 'Ongoing');
+      year.textContent = media.seasonYear || (media.season ? media.season : 'Ongoing');
+      pill.textContent = media.type || 'ANIME';
 
       synopsis.innerHTML = media.description ? media.description : 'No synopsis available.';
 
-      // Stats
-      document.getElementById('statStudio').textContent = media.studios?.nodes?.[0]?.name || 'Unknown Studio';
+      document.getElementById('statFormat').textContent = media.format || 'N/A';
+      document.getElementById('statEpisodes').textContent = media.episodes ? `${media.episodes} Eps` : (media.chapters ? `${media.chapters} Chs` : 'Unknown');
+      document.getElementById('statStatus').textContent = media.status ? media.status.replace(/_/g, ' ') : 'N/A';
       document.getElementById('statSeason').textContent = (media.season && media.seasonYear) ? `${media.season} ${media.seasonYear}` : (media.seasonYear || 'N/A');
-      document.getElementById('statGenres').textContent = (media.genres || []).slice(0, 3).join(', ') || 'N/A';
-      document.getElementById('statDuration').textContent = media.duration ? `${media.duration} mins` : 'N/A';
+      document.getElementById('statStudio').textContent = media.studios?.nodes?.[0]?.name || (media.type === 'MANGA' ? 'Author / Magazine' : 'Unknown');
       document.getElementById('statSource').textContent = media.source ? media.source.replace(/_/g, ' ') : 'Original';
+      document.getElementById('statDuration').textContent = media.duration ? `${media.duration} mins/ep` : 'N/A';
+      document.getElementById('statGenres').textContent = (media.genres || []).join(', ') || 'N/A';
+      document.getElementById('statPopularity').textContent = media.popularity ? `#${media.popularity.toLocaleString()}` : 'N/A';
 
-      // Trailer Button
       if (media.trailer && media.trailer.site === 'youtube') {
         trailerBtn.href = `https://www.youtube.com/watch?v=${media.trailer.id}`;
         trailerBtn.style.display = 'inline-flex';
       }
 
       updateDisplayTitles();
-      buildEpisodesList(media.episodes || 12);
-      buildCharactersList(media.characters?.edges || []);
+
+      if (media.type === 'MANGA') {
+        document.getElementById('episodesSection').style.display = 'none';
+        document.getElementById('watchStartBtn').innerHTML = `<span class="material-symbols-outlined">menu_book</span> Start Reading`;
+      } else {
+        buildEpisodesList(media.episodes || 12);
+      }
+
+      buildCharactersWithVA(media.characters?.edges || []);
+      buildRelationsList(media.relations?.edges || []);
+      buildRecommendationsList(media.recommendations?.nodes || []);
     }
 
     function updateDisplayTitles() {
@@ -1005,7 +1111,6 @@
       }
       grid.innerHTML = html;
 
-      // Filter Episodes
       const epSearch = document.getElementById('epSearchInput');
       epSearch.addEventListener('input', (e) => {
         const val = e.target.value.trim();
@@ -1020,25 +1125,96 @@
       });
     }
 
-    function buildCharactersList(chars) {
-      const row = document.getElementById('charactersRow');
-      if (!chars.length) {
-        row.innerHTML = '<p style="color: var(--text-dim); font-size: 0.85rem;">No character information available.</p>';
+    function buildCharactersWithVA(charEdges) {
+      const container = document.getElementById('charactersVoiceGrid');
+      if (!charEdges.length) {
+        container.innerHTML = '<p style="color: var(--text-dim); font-size: 0.85rem;">No character and voice actor data available.</p>';
         return;
       }
 
-      row.innerHTML = chars.map(c => `
-        <div class="char-card">
-          <div class="char-avatar-wrap">
-            <img src="${c.node.image?.medium || ''}" alt="${c.node.name?.full}" class="char-avatar" loading="lazy" />
+      container.innerHTML = charEdges.map(edge => {
+        const charName = edge.node.name?.full || 'Unknown';
+        const charImg = edge.node.image?.medium || '';
+        const va = edge.voiceActors?.[0];
+        const vaName = va ? va.name?.full : 'N/A';
+        const vaImg = va ? va.image?.medium : '';
+
+        return `
+          <div class="char-va-card">
+            <div class="char-side">
+              <img src="${charImg}" alt="${charName}" class="char-avatar-mini" loading="lazy" />
+              <div>
+                <div class="person-name" title="${charName}">${charName}</div>
+                <div class="person-sub">${edge.role || 'Main'}</div>
+              </div>
+            </div>
+            <div class="va-side">
+              <div>
+                <div class="person-name" title="${vaName}">${vaName}</div>
+                <div class="person-sub">${va ? 'Japanese' : 'No VA'}</div>
+              </div>
+              ${vaImg ? `<img src="${vaImg}" alt="${vaName}" class="va-avatar-mini" loading="lazy" />` : ''}
+            </div>
           </div>
-          <div class="char-name" title="${c.node.name?.full}">${c.node.name?.full}</div>
-          <div class="char-role">${c.role || 'Main'}</div>
-        </div>
-      `).join('');
+        `;
+      }).join('');
     }
 
-    // Search Popup Fetching (Redirects right here on click)
+    function buildRelationsList(relationEdges) {
+      const container = document.getElementById('relationsGrid');
+      if (!relationEdges.length) {
+        container.innerHTML = '<p style="color: var(--text-dim); font-size: 0.85rem;">No related seasons or manga adaptations recorded.</p>';
+        return;
+      }
+
+      container.innerHTML = relationEdges.map(edge => {
+        const item = edge.node;
+        const title = currentLang === 'JP' ? (item.title?.native || item.title?.romaji) : (item.title?.english || item.title?.romaji);
+        const relType = edge.relationType ? edge.relationType.replace(/_/g, ' ') : 'Related';
+
+        return `
+          <a href="entry.html?id=${item.id}" class="relation-card">
+            <div class="relation-thumb-wrap">
+              <img src="${item.coverImage?.large || ''}" alt="${title}" class="relation-thumb" loading="lazy" />
+              <div class="relation-type-tag">${relType}</div>
+            </div>
+            <div class="relation-info">
+              <div class="relation-title" title="${title}">${title}</div>
+              <div class="relation-meta">${item.format || 'Media'} • ${item.status || ''}</div>
+            </div>
+          </a>
+        `;
+      }).join('');
+    }
+
+    function buildRecommendationsList(recNodes) {
+      const container = document.getElementById('recommendationsGrid');
+      const validNodes = recNodes.filter(n => n.mediaRecommendation);
+      if (!validNodes.length) {
+        container.innerHTML = '<p style="color: var(--text-dim); font-size: 0.85rem;">No recommendations found.</p>';
+        return;
+      }
+
+      container.innerHTML = validNodes.map(n => {
+        const item = n.mediaRecommendation;
+        const title = currentLang === 'JP' ? (item.title?.native || item.title?.romaji) : (item.title?.english || item.title?.romaji);
+        const score = item.averageScore ? `★ ${item.averageScore}%` : '';
+
+        return `
+          <a href="entry.html?id=${item.id}" class="relation-card">
+            <div class="relation-thumb-wrap">
+              <img src="${item.coverImage?.large || ''}" alt="${title}" class="relation-thumb" loading="lazy" />
+              <div class="relation-type-tag" style="color: #10b981;">${score || item.format}</div>
+            </div>
+            <div class="relation-info">
+              <div class="relation-title" title="${title}">${title}</div>
+              <div class="relation-meta">${item.format || 'Media'}</div>
+            </div>
+          </a>
+        `;
+      }).join('');
+    }
+
     searchInput.addEventListener('input', (e) => {
       clearTimeout(debounceTimer);
       debounceTimer = setTimeout(async () => {
