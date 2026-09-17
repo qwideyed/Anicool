@@ -1469,7 +1469,7 @@
         const cover = item.coverImage?.medium || '';
 
         return `
-          <a href="#details?type=${item.type ? item.type.toLowerCase() : 'anime'}&id=${item.id}" class="search-item">
+          <a href="entry.html?id=${item.id}" class="search-item">
             <img src="${cover}" alt="${title}" class="search-thumb" />
             <div class="search-details">
               <div class="search-title">${title}</div>
@@ -1583,7 +1583,7 @@
         <span class="hero-genre-tag">${g}</span>
       `).join('');
 
-      watchBtn.href = `#details?type=anime&id=${anime.id}`;
+      watchBtn.href = `entry.html?id=${anime.id}`;
 
       document.querySelectorAll('.carousel-dots .dot').forEach((d, i) => {
         d.classList.toggle('active', i === index);
@@ -1824,7 +1824,7 @@
 
         return `
           <div class="card-wrap" data-title-en="${escapeHtml(item.title.english || item.title.romaji)}" data-title-jp="${escapeHtml(item.title.native || item.title.romaji)}">
-            <a href="#details?type=${item.type ? item.type.toLowerCase() : 'anime'}&id=${item.id}" class="anime-card">
+            <a href="entry.html?id=${item.id}" class="anime-card">
               <div class="card-thumb-wrap">
                 <img src="${image}" alt="${title}" class="card-thumb" loading="lazy" />
                 <div class="card-badge-top">★ ${score}</div>
