@@ -542,7 +542,7 @@
     .hero-banner {
       position: relative;
       width: 100%;
-      min-height: 370px;
+      min-height: 340px;
       display: flex;
       align-items: center;
       padding: 30px 60px 30px 80px;
@@ -806,8 +806,8 @@
 
     .anime-cards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 24px;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 20px;
     }
 
     .card-wrap {
@@ -824,7 +824,6 @@
       position: relative;
       width: 100%;
       height: 100%;
-      min-height: 230px;
       background: var(--card-bg);
       border: 1px solid var(--bubble-border);
       border-radius: 20px;
@@ -839,8 +838,8 @@
     .card-thumb-wrap {
       position: relative;
       width: 100%;
-      aspect-ratio: 16 / 11;
-      height: 155px;
+      aspect-ratio: 1 / 1.42;
+      height: auto;
       overflow: hidden;
       background: #141622;
       flex-shrink: 0;
@@ -1073,11 +1072,8 @@
         font-size: 1.5rem;
       }
       .anime-cards-grid {
-        grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
         gap: 16px;
-      }
-      .card-thumb-wrap {
-        height: 125px;
       }
       .card-hover-bubble {
         display: none;
@@ -1817,7 +1813,7 @@
 
         const score = item.averageScore ? `${item.averageScore}%` : 'N/A';
         const count = item.episodes ? `${item.episodes} EP` : (item.chapters ? `${item.chapters} CH` : (item.format || 'Media'));
-        const image = item.bannerImage || item.coverImage?.extraLarge || item.coverImage?.large || '';
+        const image = item.coverImage?.extraLarge || item.coverImage?.large || '';
         const cleanedDesc = item.description ? item.description.replace(/<[^>]*>?/gm, '') : 'No synopsis provided.';
         const tags = (item.genres || []).slice(0, 4).map(g => `<span class="hover-tag">${g}</span>`).join('');
         const typeLabel = item.isAdult ? '18+' : (item.type || 'ANIME');
@@ -1921,7 +1917,7 @@
     function renderSkeletons(container, count) {
       container.innerHTML = Array(count).fill(`
         <div class="card-wrap">
-          <div class="anime-card skeleton" style="min-height: 230px;"></div>
+          <div class="anime-card skeleton" style="min-height: 280px;"></div>
         </div>
       `).join('');
     }
