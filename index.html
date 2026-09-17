@@ -4,12 +4,132 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AniRealm - Watch & Discover Anime</title>
-  <!-- Google Font for a modern anime look -->
+
+  <!-- Google Font for modern styling -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  
-  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* ================= RESET & BASE ================= */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #0f1015; /* Dark anime-platform background */
+      color: #fff;
+      min-height: 100vh;
+    }
+
+    /* ================= HEADER / NAVBAR ================= */
+    .navbar {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 5%;
+      background: rgba(18, 19, 26, 0.85);
+      backdrop-filter: blur(12px); /* Glass blur effect */
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      z-index: 1000;
+    }
+
+    /* Logo */
+    .logo a {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #ffffff;
+      text-decoration: none;
+      letter-spacing: 1px;
+    }
+
+    .logo span {
+      color: #ff3366; /* Vibrant neon accent */
+      text-shadow: 0 0 10px rgba(255, 51, 102, 0.6);
+    }
+
+    /* Navigation Menu */
+    .nav-menu ul {
+      display: flex;
+      list-style: none;
+      gap: 25px;
+    }
+
+    .nav-menu a {
+      text-decoration: none;
+      color: #a0a3bd;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.25s ease, text-shadow 0.25s ease;
+    }
+
+    .nav-menu a:hover,
+    .nav-menu a.active {
+      color: #ffffff;
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+    }
+
+    /* Search Bar */
+    .nav-actions .search-box {
+      display: flex;
+      align-items: center;
+      background: #1c1e29;
+      border: 1px solid #2d3042;
+      border-radius: 20px;
+      padding: 4px 12px;
+      transition: border-color 0.3s ease;
+    }
+
+    .nav-actions .search-box:focus-within {
+      border-color: #ff3366;
+    }
+
+    .search-box input {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #fff;
+      font-size: 0.85rem;
+      padding: 6px;
+      width: 140px;
+      transition: width 0.3s ease;
+    }
+
+    .search-box input:focus {
+      width: 180px;
+    }
+
+    .search-box button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    /* Mobile / Tablet View */
+    @media (max-width: 768px) {
+      .navbar {
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+
+      .nav-menu {
+        order: 3;
+        width: 100%;
+      }
+
+      .nav-menu ul {
+        justify-content: space-around;
+        gap: 10px;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -20,18 +140,18 @@
       <a href="#">Ani<span>Realm</span></a>
     </div>
 
-    <!-- Navigation Links -->
+    <!-- Links -->
     <nav class="nav-menu">
       <ul>
         <li><a href="#home" class="active">Home</a></li>
         <li><a href="#popular">Popular</a></li>
         <li><a href="#genres">Genres</a></li>
         <li><a href="#schedule">Schedule</a></li>
-        <li><a href="#bookmarks">My List</a></li>
+        <li><a href="#watchlist">My List</a></li>
       </ul>
     </nav>
 
-    <!-- Search & Actions -->
+    <!-- Search -->
     <div class="nav-actions">
       <div class="search-box">
         <input type="text" placeholder="Search anime..." />
