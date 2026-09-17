@@ -810,14 +810,10 @@
       gap: 24px;
     }
 
-    .trending-grid-10 {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 24px;
-    }
-
     .card-wrap {
       position: relative;
+      width: 100%;
+      height: 100%;
     }
 
     .card-wrap:hover {
@@ -826,6 +822,9 @@
 
     .anime-card {
       position: relative;
+      width: 100%;
+      height: 100%;
+      min-height: 230px;
       background: var(--card-bg);
       border: 1px solid var(--bubble-border);
       border-radius: 20px;
@@ -841,14 +840,17 @@
       position: relative;
       width: 100%;
       aspect-ratio: 16 / 11;
+      height: 155px;
       overflow: hidden;
       background: #141622;
+      flex-shrink: 0;
     }
 
     .card-thumb {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      display: block;
     }
 
     .card-badge-top {
@@ -886,6 +888,8 @@
       display: flex;
       flex-direction: column;
       gap: 4px;
+      flex: 1;
+      justify-content: space-between;
     }
 
     .card-item-title {
@@ -1054,12 +1058,6 @@
       100% { background-position: -200% 0; }
     }
 
-    @media (max-width: 1200px) {
-      .trending-grid-10 {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
     @media (max-width: 920px) {
       .mega-menu {
         width: calc(100vw - 40px);
@@ -1078,9 +1076,8 @@
         grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
         gap: 16px;
       }
-      .trending-grid-10 {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 16px;
+      .card-thumb-wrap {
+        height: 125px;
       }
       .card-hover-bubble {
         display: none;
@@ -1284,10 +1281,10 @@
       <div class="section-head">
         <div class="section-title-wrap">
           <span class="material-symbols-outlined section-icon">local_fire_department</span>
-          <h2 class="section-title">Trending Now</h2>
+          <h2 class="section-title">Trending This Week</h2>
         </div>
       </div>
-      <div class="trending-grid-10" id="trendingGrid"></div>
+      <div class="anime-cards-grid" id="trendingGrid"></div>
     </section>
 
     <section>
@@ -1924,7 +1921,7 @@
     function renderSkeletons(container, count) {
       container.innerHTML = Array(count).fill(`
         <div class="card-wrap">
-          <div class="anime-card skeleton" style="height: 230px;"></div>
+          <div class="anime-card skeleton" style="min-height: 230px;"></div>
         </div>
       `).join('');
     }
