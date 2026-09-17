@@ -627,17 +627,11 @@
       line-height: 1.55;
       color: #cbd5e1;
       max-height: 60px;
-      overflow-y: auto;
-      padding-right: 6px;
-    }
-
-    .hero-desc-box::-webkit-scrollbar {
-      width: 4px;
-    }
-
-    .hero-desc-box::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 4px;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      text-overflow: ellipsis;
     }
 
     .hero-actions {
@@ -816,6 +810,12 @@
       gap: 24px;
     }
 
+    .trending-grid-10 {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 24px;
+    }
+
     .card-wrap {
       position: relative;
     }
@@ -904,22 +904,11 @@
       justify-content: space-between;
     }
 
-    .card-hover-bubble::before {
-      content: "";
-      position: absolute;
-      top: -16px;
-      bottom: -16px;
-      left: -20px;
-      right: -20px;
-      z-index: -1;
-    }
-
     .card-hover-bubble {
       position: absolute;
       top: 0;
-      left: calc(100% + 8px);
+      left: calc(100% + 12px);
       width: 320px;
-      max-height: 380px;
       background: rgba(16, 18, 26, 0.98);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
@@ -931,6 +920,7 @@
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
+      user-select: none;
       transition: opacity 0.2s ease, transform 0.2s ease;
       transform: translateX(-6px) scale(0.97);
       display: flex;
@@ -941,13 +931,12 @@
     .card-wrap:hover .card-hover-bubble {
       opacity: 1;
       visibility: visible;
-      pointer-events: auto;
       transform: translateX(0) scale(1);
     }
 
     .card-wrap.align-left .card-hover-bubble {
       left: auto;
-      right: calc(100% + 8px);
+      right: calc(100% + 12px);
       transform: translateX(6px) scale(0.97);
     }
 
@@ -986,42 +975,48 @@
       color: #cbd5e1;
     }
 
-    .hover-bubble-desc {
-      font-size: 0.82rem;
-      line-height: 1.55;
-      color: #94a3b8;
-      max-height: 130px;
-      overflow-y: auto;
-      padding-right: 6px;
-    }
-
-    .hover-bubble-desc::-webkit-scrollbar {
-      width: 4px;
-    }
-
-    .hover-bubble-desc::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 4px;
-    }
-
-    .hover-watch-btn {
-      margin-top: 4px;
+    .hover-bubble-details {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      padding: 9px 16px;
-      border-radius: 9999px;
-      background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
-      color: #fff;
-      text-decoration: none;
-      font-size: 0.85rem;
-      font-weight: 600;
-      transition: transform 0.2s ease;
+      flex-direction: column;
+      gap: 5px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 14px;
+      padding: 10px 12px;
+      font-size: 0.76rem;
+      color: var(--text-dim);
     }
 
-    .hover-watch-btn:hover {
-      transform: scale(1.03);
+    .hover-detail-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hover-detail-label {
+      color: #7e859b;
+      font-weight: 500;
+    }
+
+    .hover-detail-val {
+      color: #f1f5f9;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 170px;
+    }
+
+    .hover-bubble-desc {
+      font-size: 0.8rem;
+      line-height: 1.5;
+      color: #94a3b8;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .infinite-scroll-sentinel {
@@ -1059,6 +1054,12 @@
       100% { background-position: -200% 0; }
     }
 
+    @media (max-width: 1200px) {
+      .trending-grid-10 {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
     @media (max-width: 920px) {
       .mega-menu {
         width: calc(100vw - 40px);
@@ -1075,6 +1076,10 @@
       }
       .anime-cards-grid {
         grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+        gap: 16px;
+      }
+      .trending-grid-10 {
+        grid-template-columns: repeat(2, 1fr);
         gap: 16px;
       }
       .card-hover-bubble {
@@ -1282,7 +1287,7 @@
           <h2 class="section-title">Trending Now</h2>
         </div>
       </div>
-      <div class="anime-cards-grid" id="trendingGrid"></div>
+      <div class="trending-grid-10" id="trendingGrid"></div>
     </section>
 
     <section>
@@ -1645,7 +1650,7 @@
       const trendingGrid = document.getElementById('trendingGrid');
       const popularGrid = document.getElementById('popularGrid');
       
-      renderSkeletons(trendingGrid, 6);
+      renderSkeletons(trendingGrid, 10);
       renderSkeletons(popularGrid, 12);
 
       const { mediaType, isAdult, countryOfOrigin } = getCategoryConfig(category);
@@ -1667,7 +1672,7 @@
 
       const bodyQuery = `
         query (${varDefs}) {
-          trending: Page(page: 1, perPage: 6) {
+          trending: Page(page: 1, perPage: 10) {
             media(${mediaFilters}, sort: TRENDING_DESC) {
               id
               type
@@ -1681,6 +1686,11 @@
               chapters
               format
               genres
+              season
+              seasonYear
+              studios(isMain: true) {
+                nodes { name }
+              }
             }
           }
           popular: Page(page: $page, perPage: 12) {
@@ -1698,6 +1708,11 @@
               chapters
               format
               genres
+              season
+              seasonYear
+              studios(isMain: true) {
+                nodes { name }
+              }
             }
           }
         }
@@ -1762,6 +1777,11 @@
               chapters
               format
               genres
+              season
+              seasonYear
+              studios(isMain: true) {
+                nodes { name }
+              }
             }
           }
         }
@@ -1805,6 +1825,10 @@
         const tags = (item.genres || []).slice(0, 4).map(g => `<span class="hover-tag">${g}</span>`).join('');
         const typeLabel = item.isAdult ? '18+' : (item.type || 'ANIME');
 
+        const studioName = item.studios?.nodes?.[0]?.name || (item.type === 'MANGA' ? 'Author/Artist' : 'Unknown Studio');
+        const seasonInfo = (item.season && item.seasonYear) ? `${item.season} ${item.seasonYear}` : (item.seasonYear ? `${item.seasonYear}` : 'N/A');
+        const epInfo = item.episodes ? `${item.episodes} Episodes` : (item.chapters ? `${item.chapters} Chapters` : 'Ongoing / Unknown');
+
         return `
           <div class="card-wrap" data-title-en="${escapeHtml(item.title.english || item.title.romaji)}" data-title-jp="${escapeHtml(item.title.native || item.title.romaji)}">
             <a href="#details?type=${item.type ? item.type.toLowerCase() : 'anime'}&id=${item.id}" class="anime-card">
@@ -1831,11 +1855,24 @@
                 <span>•</span>
                 <span>${count}</span>
               </div>
+              
+              <div class="hover-bubble-details">
+                <div class="hover-detail-row">
+                  <span class="hover-detail-label">Studio / Creator:</span>
+                  <span class="hover-detail-val" title="${studioName}">${studioName}</span>
+                </div>
+                <div class="hover-detail-row">
+                  <span class="hover-detail-label">Episodes:</span>
+                  <span class="hover-detail-val">${epInfo}</span>
+                </div>
+                <div class="hover-detail-row">
+                  <span class="hover-detail-label">Season / Year:</span>
+                  <span class="hover-detail-val">${seasonInfo}</span>
+                </div>
+              </div>
+
               <div class="hover-bubble-tags">${tags}</div>
               <div class="hover-bubble-desc">${cleanedDesc}</div>
-              <a href="#details?type=${item.type ? item.type.toLowerCase() : 'anime'}&id=${item.id}" class="hover-watch-btn">
-                <span class="material-symbols-outlined" style="font-size: 16px;">play_arrow</span> View Details
-              </a>
             </div>
           </div>
         `;
