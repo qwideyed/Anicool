@@ -1643,7 +1643,7 @@
       const trendingGrid = document.getElementById('trendingGrid');
       const popularGrid = document.getElementById('popularGrid');
       
-      renderSkeletons(trendingGrid, 10);
+      renderSkeletons(trendingGrid, 14);
       renderSkeletons(popularGrid, 12);
 
       const { mediaType, isAdult, countryOfOrigin } = getCategoryConfig(category);
@@ -1665,7 +1665,7 @@
 
       const bodyQuery = `
         query (${varDefs}) {
-          trending: Page(page: 1, perPage: 10) {
+          trending: Page(page: 1, perPage: 14) {
             media(${mediaFilters}, sort: TRENDING_DESC) {
               id
               type
