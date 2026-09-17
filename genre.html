@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AniCool</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-dark: #0a0b10;
+      --bubble-bg: rgba(20, 22, 32, 0.85);
+      --bubble-border: rgba(255, 255, 255, 0.1);
+      --card-bg: rgba(255, 255, 255, 0.035);
+      --accent-pink: #ff2a74;
+      --accent-purple: #9d5cf6;
+      --accent-blue: #00d2ff;
+      --text-main: #f8fafc;
+      --text-dim: #94a3b8;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      min-height: 100vh;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(255, 42, 116, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 85% 20%, rgba(157, 92, 246, 0.1) 0%, transparent 40%);
+    }
+
+    .header-wrapper {
+      position: sticky;
+      top: 20px;
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      padding: 0 20px;
+    }
+
+    .bubble-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 1280px;
+      padding: 8px 24px;
+      background: var(--bubble-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--bubble-border);
+      border-radius: 9999px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
+    }
+
+    .logo a {
+      font-size: 1.35rem;
+      font-weight: 700;
+      text-decoration: none;
+      color: #fff;
+      display: inline-block;
+      letter-spacing: 0.5px;
+      transition: transform 0.25s ease;
+    }
+
+    .logo a:hover {
+      transform: scale(1.05);
+    }
+
+    .logo span {
+      background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 18px;
+      border-radius: 9999px;
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 500;
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-2px);
+    }
+
+    .search-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid var(--bubble-border);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .search-btn:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: var(--accent-pink);
+      transform: scale(1.06);
+      box-shadow: 0 0 16px rgba(255, 42, 116, 0.35);
+    }
+
+    /* Modal */
+    .search-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(7, 8, 12, 0.85);
+      backdrop-filter: blur(16px);
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 8vh;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.25s ease;
+      z-index: 2000;
+    }
+
+    .search-modal.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .search-container {
+      width: 90%;
+      max-width: 720px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .search-box-popup {
+      background: rgba(22, 24, 34, 0.95);
+      border: 1px solid var(--bubble-border);
+      border-radius: 24px;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .search-box-popup input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #fff;
+      font-size: 1.05rem;
+      font-family: inherit;
+    }
+
+    .lang-toggle {
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 9999px;
+      padding: 2px;
+      gap: 2px;
+    }
+
+    .lang-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-dim);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      cursor: pointer;
+    }
+
+    .lang-btn.active {
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+    }
+
+    .close-search-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-dim);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-results {
+      max-height: 440px;
+      overflow-y: auto;
+      background: rgba(20, 22, 32, 0.95);
+      border: 1px solid var(--bubble-border);
+      border-radius: 20px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .search-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 10px;
+      border-radius: 14px;
+      text-decoration: none;
+      color: #fff;
+      background: rgba(255, 255, 255, 0.02);
+      transition: all 0.2s ease;
+    }
+
+    .search-item:hover {
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateX(4px);
+    }
+
+    .search-thumb {
+      width: 48px;
+      height: 64px;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+
+    /* Main Content */
+    .main-content {
+      max-width: 1480px;
+      margin: 0 auto;
+      padding: 40px 30px 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    /* Genre Selector Bubble Card */
+    .genre-filter-card {
+      background: var(--bubble-bg);
+      border: 1px solid var(--bubble-border);
+      border-radius: 28px;
+      padding: 24px 28px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(20px);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .filter-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      padding-bottom: 14px;
+    }
+
+    .filter-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .filter-toggles {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .toggle-group {
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--bubble-border);
+      border-radius: 9999px;
+      padding: 3px;
+      gap: 4px;
+    }
+
+    .toggle-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-dim);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s ease;
+    }
+
+    .toggle-btn.active {
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+    }
+
+    .genre-tag-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .genre-bubble-pill {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--bubble-border);
+      color: var(--text-dim);
+      font-size: 0.84rem;
+      font-weight: 600;
+      padding: 7px 18px;
+      border-radius: 9999px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s ease;
+    }
+
+    .genre-bubble-pill:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-2px);
+    }
+
+    .genre-bubble-pill.active {
+      background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 4px 16px rgba(255, 42, 116, 0.35);
+    }
+
+    /* Active Genre Status Row */
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Skinny Portrait Grid */
+    .anime-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 20px;
+    }
+
+    .card-wrap {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .card-wrap:hover {
+      z-index: 100;
+    }
+
+    .anime-card {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: var(--card-bg);
+      border: 1px solid var(--bubble-border);
+      border-radius: 20px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .card-thumb-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 1.42;
+      overflow: hidden;
+      background: #141622;
+      flex-shrink: 0;
+    }
+
+    .card-thumb {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-badge-top {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(15, 17, 24, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      padding: 3px 8px;
+      border-radius: 9999px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: #10b981;
+    }
+
+    .card-format-tag {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      background: rgba(255, 42, 116, 0.85);
+      padding: 2px 7px;
+      border-radius: 6px;
+      font-size: 0.68rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .card-info {
+      padding: 12px 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      flex: 1;
+      justify-content: space-between;
+    }
+
+    .card-item-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      line-height: 1.3;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .card-item-sub {
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* Hover Bubble */
+    .card-hover-bubble {
+      position: absolute;
+      top: 0;
+      left: calc(100% + 12px);
+      width: 320px;
+      background: rgba(16, 18, 26, 0.98);
+      backdrop-filter: blur(24px);
+      border: 1px solid var(--bubble-border);
+      border-radius: 22px;
+      padding: 18px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);
+      z-index: 200;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      user-select: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      transform: translateX(-6px) scale(0.97);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .card-wrap:hover .card-hover-bubble {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(0) scale(1);
+    }
+
+    .card-wrap.align-left .card-hover-bubble {
+      left: auto;
+      right: calc(100% + 12px);
+      transform: translateX(6px) scale(0.97);
+    }
+
+    .hover-bubble-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .hover-bubble-meta {
+      display: flex;
+      gap: 8px;
+      font-size: 0.78rem;
+      color: var(--text-dim);
+    }
+
+    .hover-bubble-desc {
+      font-size: 0.8rem;
+      line-height: 1.5;
+      color: #94a3b8;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .hover-bubble-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .hover-tag {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 3px 9px;
+      border-radius: 9999px;
+      font-size: 0.7rem;
+      color: #cbd5e1;
+    }
+
+    .infinite-scroll-sentinel {
+      width: 100%;
+      padding: 30px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-dim);
+    }
+
+    .loading-spinner {
+      display: inline-block;
+      width: 26px;
+      height: 26px;
+      border: 3px solid rgba(255, 255, 255, 0.1);
+      border-top-color: var(--accent-pink);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .skeleton {
+      animation: skeleton-pulse 1.5s infinite ease-in-out;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.04) 25%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0.04) 75%);
+      background-size: 200% 100%;
+    }
+
+    @keyframes skeleton-pulse {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    @media (max-width: 920px) {
+      .anime-cards-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 16px;
+      }
+      .card-hover-bubble {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Nav Header -->
+  <div class="header-wrapper">
+    <header class="bubble-nav">
+      <div class="logo">
+        <a href="index.html">Ani<span>Cool</span></a>
+      </div>
+
+      <nav>
+        <ul class="nav-links">
+          <li class="nav-item">
+            <a href="index.html" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="genre.html" class="nav-link active">Genre</a>
+          </li>
+          <li class="nav-item">
+            <a href="index.html#websites" class="nav-link">Websites</a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="actions">
+        <button type="button" class="search-btn" id="openSearchBtn" aria-label="Open Search">
+          <span class="material-symbols-outlined">search</span>
+        </button>
+      </div>
+    </header>
+  </div>
+
+  <!-- Search Popup -->
+  <div class="search-modal" id="searchModal">
+    <div class="search-container">
+      <div class="search-box-popup">
+        <span class="material-symbols-outlined">search</span>
+        <input type="text" id="searchInput" placeholder="Search anime or manga..." autocomplete="off" />
+        <div class="lang-toggle">
+          <button type="button" class="lang-btn active" id="langEn">EN</button>
+          <button type="button" class="lang-btn" id="langJp">JP</button>
+        </div>
+        <button type="button" class="close-search-btn" id="closeSearchBtn">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+      <div class="search-results" id="searchResults" style="display: none;"></div>
+    </div>
+  </div>
+
+  <main class="main-content">
+    
+    <!-- Genre & Filter Bubble Box -->
+    <section class="genre-filter-card">
+      <div class="filter-header-row">
+        <div class="filter-title">
+          <span class="material-symbols-outlined" style="color: var(--accent-pink);">grid_view</span>
+          Browse by Genre
+        </div>
+
+        <div class="filter-toggles">
+          <!-- Format Toggle -->
+          <div class="toggle-group" id="formatToggleGroup">
+            <button type="button" class="toggle-btn active" data-type="ANIME">Anime</button>
+            <button type="button" class="toggle-btn" data-type="MANGA">Manga</button>
+          </div>
+
+          <!-- Sort Toggle -->
+          <div class="toggle-group" id="sortToggleGroup">
+            <button type="button" class="toggle-btn active" data-sort="POPULARITY_DESC">Popular</button>
+            <button type="button" class="toggle-btn" data-sort="TRENDING_DESC">Trending</button>
+            <button type="button" class="toggle-btn" data-sort="SCORE_DESC">Top Rated</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="genre-tag-cloud" id="genreTagCloud">
+        <!-- Generates 18 genres via JavaScript -->
+      </div>
+    </section>
+
+    <!-- Results Section -->
+    <section>
+      <div class="section-head">
+        <h2 class="section-title" id="resultsHeading">
+          <span class="material-symbols-outlined" style="color: var(--accent-blue);">explore</span>
+          Action Anime
+        </h2>
+      </div>
+
+      <div class="anime-cards-grid" id="genreGrid"></div>
+
+      <div class="infinite-scroll-sentinel" id="infiniteSentinel">
+        <div class="loading-spinner"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    const GENRE_LIST = [
+      "Action", "Adventure", "Comedy", "Drama", "Ecchi", "Fantasy", 
+      "Horror", "Mahou Shoujo", "Mecha", "Music", "Mystery", 
+      "Psychological", "Romance", "Sci-Fi", "Slice of Life", "Sports", 
+      "Supernatural", "Thriller"
+    ];
+
+    let currentGenre = "Action";
+    let currentType = "ANIME";
+    let currentSort = "POPULARITY_DESC";
+    let currentPage = 1;
+    let hasNextPage = true;
+    let isLoading = false;
+    let currentLang = "EN";
+
+    // Setup Search Elements
+    const searchModal = document.getElementById('searchModal');
+    const openSearchBtn = document.getElementById('openSearchBtn');
+    const closeSearchBtn = document.getElementById('closeSearchBtn');
+    const searchInput = document.getElementById('searchInput');
+    const searchResults = document.getElementById('searchResults');
+    const langEn = document.getElementById('langEn');
+    const langJp = document.getElementById('langJp');
+
+    openSearchBtn.addEventListener('click', () => {
+      searchModal.classList.add('active');
+      setTimeout(() => searchInput.focus(), 100);
+    });
+
+    function closeSearch() {
+      searchModal.classList.remove('active');
+      searchInput.value = '';
+      searchResults.style.display = 'none';
+      searchResults.innerHTML = '';
+    }
+
+    closeSearchBtn.addEventListener('click', closeSearch);
+    searchModal.addEventListener('click', (e) => { if (e.target === searchModal) closeSearch(); });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && searchModal.classList.contains('active')) closeSearch();
+    });
+
+    langEn.addEventListener('click', () => {
+      currentLang = 'EN';
+      langEn.classList.add('active');
+      langJp.classList.remove('active');
+      refreshTitles();
+    });
+
+    langJp.addEventListener('click', () => {
+      currentLang = 'JP';
+      langJp.classList.add('active');
+      langEn.classList.remove('active');
+      refreshTitles();
+    });
+
+    // Populate Genre Tags
+    function initGenrePills() {
+      const container = document.getElementById('genreTagCloud');
+      container.innerHTML = GENRE_LIST.map(g => `
+        <button type="button" class="genre-bubble-pill ${g === currentGenre ? 'active' : ''}" onclick="selectGenre('${g}', this)">
+          ${g}
+        </button>
+      `).join('');
+    }
+
+    function selectGenre(genre, btn) {
+      document.querySelectorAll('.genre-bubble-pill').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentGenre = genre;
+      resetAndFetch();
+    }
+
+    // Format & Sort Handlers
+    document.querySelectorAll('#formatToggleGroup .toggle-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#formatToggleGroup .toggle-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentType = btn.dataset.type;
+        resetAndFetch();
+      });
+    });
+
+    document.querySelectorAll('#sortToggleGroup .toggle-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#sortToggleGroup .toggle-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentSort = btn.dataset.sort;
+        resetAndFetch();
+      });
+    });
+
+    function updateHeading() {
+      const typeLabel = currentType === 'ANIME' ? 'Anime' : 'Manga';
+      document.getElementById('resultsHeading').innerHTML = `
+        <span class="material-symbols-outlined" style="color: var(--accent-blue);">explore</span>
+        ${currentGenre} ${typeLabel}
+      `;
+    }
+
+    function resetAndFetch() {
+      currentPage = 1;
+      hasNextPage = true;
+      updateHeading();
+      const grid = document.getElementById('genreGrid');
+      grid.innerHTML = Array(12).fill(`
+        <div class="card-wrap">
+          <div class="anime-card skeleton" style="min-height: 280px;"></div>
+        </div>
+      `).join('');
+      document.getElementById('infiniteSentinel').style.display = 'flex';
+      fetchGenreMedia(false);
+    }
+
+    async function fetchGenreMedia(append = false) {
+      if (isLoading || (!hasNextPage && append)) return;
+      isLoading = true;
+
+      const query = `
+        query ($page: Int, $genre: String, $type: MediaType, $sort: [MediaSort]) {
+          Page(page: $page, perPage: 18) {
+            pageInfo { hasNextPage }
+            media(genre: $genre, type: $type, sort: $sort, isAdult: false) {
+              id
+              type
+              title { english romaji native }
+              coverImage { extraLarge large }
+              description
+              averageScore
+              episodes
+              chapters
+              format
+              genres
+            }
+          }
+        }
+      `;
+
+      try {
+        const res = await fetch('https://graphql.anilist.co', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            query,
+            variables: {
+              page: currentPage,
+              genre: currentGenre,
+              type: currentType,
+              sort: [currentSort]
+            }
+          })
+        });
+
+        const json = await res.json();
+        const items = json?.data?.Page?.media || [];
+        hasNextPage = json?.data?.Page?.pageInfo?.hasNextPage ?? false;
+
+        renderCards(items, append);
+
+        if (!hasNextPage) {
+          document.getElementById('infiniteSentinel').style.display = 'none';
+        }
+      } catch (err) {
+        if (!append) {
+          document.getElementById('genreGrid').innerHTML = '<p style="color:var(--text-dim); text-align:center; padding:30px; grid-column:1/-1;">Could not load items.</p>';
+        }
+      } finally {
+        isLoading = false;
+      }
+    }
+
+    function renderCards(items, append) {
+      const grid = document.getElementById('genreGrid');
+      const html = items.map(item => {
+        const title = currentLang === 'JP' 
+          ? (item.title.native || item.title.romaji) 
+          : (item.title.english || item.title.romaji);
+
+        const score = item.averageScore ? `${item.averageScore}%` : 'N/A';
+        const count = item.episodes ? `${item.episodes} EP` : (item.chapters ? `${item.chapters} CH` : (item.format || 'Media'));
+        const image = item.coverImage?.extraLarge || item.coverImage?.large || '';
+        const cleanedDesc = item.description ? item.description.replace(/<[^>]*>?/gm, '') : 'No synopsis provided.';
+        const tags = (item.genres || []).slice(0, 3).map(g => `<span class="hover-tag">${g}</span>`).join('');
+
+        return `
+          <div class="card-wrap" data-title-en="${escapeHtml(item.title.english || item.title.romaji)}" data-title-jp="${escapeHtml(item.title.native || item.title.romaji)}">
+            <a href="entry.html?id=${item.id}" class="anime-card">
+              <div class="card-thumb-wrap">
+                <img src="${image}" alt="${title}" class="card-thumb" loading="lazy" />
+                <div class="card-badge-top">★ ${score}</div>
+                <div class="card-format-tag">${item.format || 'TV'}</div>
+              </div>
+              <div class="card-info">
+                <h3 class="card-item-title" title="${title}">${title}</h3>
+                <div class="card-item-sub">
+                  <span>${count}</span>
+                  <span>${item.format || 'MEDIA'}</span>
+                </div>
+              </div>
+            </a>
+
+            <div class="card-hover-bubble">
+              <div class="hover-bubble-title">${title}</div>
+              <div class="hover-bubble-meta">
+                <span style="color: #10b981; font-weight: 600;">★ ${score}</span>
+                <span>•</span>
+                <span>${item.format || 'TV'}</span>
+                <span>•</span>
+                <span>${count}</span>
+              </div>
+              <div class="hover-bubble-tags">${tags}</div>
+              <div class="hover-bubble-desc">${cleanedDesc}</div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      if (append) {
+        grid.insertAdjacentHTML('beforeend', html);
+      } else {
+        grid.innerHTML = html;
+      }
+
+      setupCardBubbleRepositioning(grid);
+    }
+
+    function setupCardBubbleRepositioning(container) {
+      container.querySelectorAll('.card-wrap').forEach(wrap => {
+        wrap.addEventListener('mouseenter', () => {
+          const rect = wrap.getBoundingClientRect();
+          if (window.innerWidth - rect.right < 340) {
+            wrap.classList.add('align-left');
+          } else {
+            wrap.classList.remove('align-left');
+          }
+        });
+      });
+    }
+
+    function escapeHtml(text) {
+      return text ? text.replace(/"/g, '&quot;').replace(/'/g, '&#39;') : '';
+    }
+
+    function refreshTitles() {
+      document.querySelectorAll('.card-wrap').forEach(wrap => {
+        const titleEl = wrap.querySelector('.card-item-title');
+        const bubbleTitleEl = wrap.querySelector('.hover-bubble-title');
+        const title = currentLang === 'JP' ? wrap.dataset.titleJp : wrap.dataset.titleEn;
+        if (titleEl && title) {
+          titleEl.textContent = title;
+          titleEl.title = title;
+        }
+        if (bubbleTitleEl && title) {
+          bubbleTitleEl.textContent = title;
+        }
+      });
+    }
+
+    // Modal Search Query
+    let debounceTimer;
+    searchInput.addEventListener('input', (e) => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(async () => {
+        const keyword = e.target.value.trim();
+        if (!keyword) {
+          searchResults.style.display = 'none';
+          return;
+        }
+
+        searchResults.style.display = 'flex';
+        searchResults.innerHTML = '<div style="padding:15px; text-align:center; font-size:0.85rem; color:var(--text-dim);">Searching...</div>';
+
+        const q = `
+          query ($search: String) {
+            Page(page: 1, perPage: 6) {
+              media(search: $search, sort: POPULARITY_DESC) {
+                id
+                title { english romaji native }
+                coverImage { medium }
+                format
+                averageScore
+              }
+            }
+          }
+        `;
+
+        try {
+          const res = await fetch('https://graphql.anilist.co', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ query: q, variables: { search: keyword } })
+          });
+          const data = await res.json();
+          const items = data?.data?.Page?.media || [];
+
+          if (!items.length) {
+            searchResults.innerHTML = '<div style="padding:15px; text-align:center; font-size:0.85rem; color:var(--text-dim);">No results found.</div>';
+            return;
+          }
+
+          searchResults.innerHTML = items.map(it => {
+            const title = currentLang === 'JP' ? (it.title.native || it.title.romaji) : (it.title.english || it.title.romaji);
+            return `
+              <a href="entry.html?id=${it.id}" class="search-item">
+                <img src="${it.coverImage.medium}" alt="${title}" class="search-thumb" />
+                <div>
+                  <div style="font-weight:600; font-size:0.9rem;">${title}</div>
+                  <div style="font-size:0.75rem; color:var(--text-dim); margin-top:2px;">
+                    <span>${it.format || 'ANIME'}</span> • <span style="color:#10b981;">★ ${it.averageScore ? it.averageScore + '%' : 'N/A'}</span>
+                  </div>
+                </div>
+              </a>
+            `;
+          }).join('');
+        } catch(err) {}
+      }, 350);
+    });
+
+    // Infinite Scroll Intersection Observer
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting && !isLoading && hasNextPage) {
+        currentPage++;
+        fetchGenreMedia(true);
+      }
+    }, { rootMargin: '400px' });
+
+    observer.observe(document.getElementById('infiniteSentinel'));
+
+    window.addEventListener('DOMContentLoaded', () => {
+      initGenrePills();
+      resetAndFetch();
+    });
+  </script>
+
+</body>
+</html>
