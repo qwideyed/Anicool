@@ -5,16 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AniRealm - Modern Bubble UI</title>
 
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <!-- Google Material Symbols -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
   <style>
-    /* ================= RESET & VARIABLES ================= */
     * {
       margin: 0;
       padding: 0;
@@ -43,7 +39,6 @@
         radial-gradient(circle at 85% 20%, rgba(157, 92, 246, 0.1) 0%, transparent 40%);
     }
 
-    /* ================= FLOATING NAV WRAPPER ================= */
     .header-wrapper {
       position: sticky;
       top: 20px;
@@ -68,7 +63,6 @@
       box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
     }
 
-    /* Logo */
     .logo a {
       font-size: 1.35rem;
       font-weight: 700;
@@ -89,7 +83,6 @@
       -webkit-text-fill-color: transparent;
     }
 
-    /* Navigation Links */
     .nav-links {
       display: flex;
       list-style: none;
@@ -127,7 +120,6 @@
       transform: rotate(180deg);
     }
 
-    /* ================= MEGA MENU ================= */
     .hub-dropdown {
       position: relative;
     }
@@ -170,7 +162,6 @@
       transform: translateX(-50%) translateY(0) scale(1);
     }
 
-    /* Cards */
     .hub-card {
       background: var(--card-bg);
       border: 1px solid rgba(255, 255, 255, 0.07);
@@ -294,7 +285,6 @@
       color: var(--text-dim);
     }
 
-    /* ================= SEARCH BUTTON & MODAL ================= */
     .search-btn {
       width: 42px;
       height: 42px;
@@ -351,7 +341,6 @@
       transform: translateY(0) scale(1);
     }
 
-    /* Preset Filters Bar */
     .search-presets-bar {
       display: flex;
       align-items: center;
@@ -392,46 +381,6 @@
       box-shadow: 0 0 14px rgba(255, 42, 116, 0.4);
     }
 
-    /* Custom 3 Multi-Checkboxes */
-    .search-checkboxes-bar {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 4px 8px;
-      background: rgba(255, 255, 255, 0.02);
-      border-radius: 12px;
-      font-size: 0.82rem;
-      color: var(--text-dim);
-    }
-
-    .search-checkboxes-bar span.box-label {
-      font-size: 0.76rem;
-      text-transform: uppercase;
-      letter-spacing: 0.6px;
-      opacity: 0.6;
-    }
-
-    .bubble-checkbox {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      cursor: pointer;
-      user-select: none;
-      transition: color 0.2s ease;
-    }
-
-    .bubble-checkbox input {
-      accent-color: var(--accent-pink);
-      width: 15px;
-      height: 15px;
-      cursor: pointer;
-    }
-
-    .bubble-checkbox:hover {
-      color: #fff;
-    }
-
-    /* Main Search Box */
     .search-box-popup {
       background: rgba(22, 24, 34, 0.95);
       border: 1px solid var(--bubble-border);
@@ -458,7 +407,6 @@
       font-family: inherit;
     }
 
-    /* EN / JP Switcher Pill */
     .lang-toggle {
       display: flex;
       align-items: center;
@@ -503,7 +451,6 @@
       color: #fff;
     }
 
-    /* AniList API Search Results */
     .search-results {
       max-height: 440px;
       overflow-y: auto;
@@ -572,7 +519,6 @@
       color: var(--text-dim);
     }
 
-    /* Responsive */
     @media (max-width: 920px) {
       .mega-menu {
         width: calc(100vw - 40px);
@@ -580,40 +526,30 @@
         max-height: 80vh;
         overflow-y: auto;
       }
-      .search-checkboxes-bar {
-        flex-wrap: wrap;
-      }
     }
   </style>
 </head>
 <body>
 
-  <!-- Floating Header Wrapper -->
   <div class="header-wrapper">
     <header class="bubble-nav">
       
-      <!-- Logo -->
       <div class="logo">
         <a href="#">Ani<span>Realm</span></a>
       </div>
 
-      <!-- Navigation Links -->
       <nav>
         <ul class="nav-links">
           <li class="nav-item">
             <a href="#home" class="nav-link active">Home</a>
           </li>
 
-          <!-- HUB Dropdown -->
           <li class="nav-item hub-dropdown">
             <a href="javascript:void(0)" class="nav-link">
               Hub <span class="arrow-down">▼</span>
             </a>
             
-            <!-- Horizontal Mega Menu -->
             <div class="mega-menu">
-              
-              <!-- Anime Card -->
               <div class="hub-card card-anime">
                 <div class="card-header">
                   <div class="card-header-left">
@@ -639,7 +575,6 @@
                 </a>
               </div>
 
-              <!-- Manga Card -->
               <div class="hub-card card-manga">
                 <div class="card-header">
                   <div class="card-header-left">
@@ -665,7 +600,6 @@
                 </a>
               </div>
 
-              <!-- Hentai Card -->
               <div class="hub-card card-hentai">
                 <div class="card-header">
                   <div class="card-header-left">
@@ -690,7 +624,6 @@
                   </div>
                 </a>
               </div>
-
             </div>
           </li>
 
@@ -704,7 +637,6 @@
         </ul>
       </nav>
 
-      <!-- Google Material Symbols Search Button -->
       <div class="actions">
         <button type="button" class="search-btn" id="openSearchBtn" aria-label="Open Search">
           <span class="material-symbols-outlined">search</span>
@@ -714,11 +646,8 @@
     </header>
   </div>
 
-  <!-- Search Modal with Presets, Checkboxes, & AniList Engine -->
   <div class="search-modal" id="searchModal">
     <div class="search-container">
-      
-      <!-- Quick Presets Row -->
       <div class="search-presets-bar">
         <div class="presets-group">
           <button type="button" class="preset-pill active" data-preset="all">All</button>
@@ -728,26 +657,10 @@
         </div>
       </div>
 
-      <!-- 3 Specific Checkboxes -->
-      <div class="search-checkboxes-bar">
-        <span class="box-label">Search In:</span>
-        <label class="bubble-checkbox">
-          <input type="checkbox" id="checkAnime" checked /> Anime
-        </label>
-        <label class="bubble-checkbox">
-          <input type="checkbox" id="checkManga" checked /> Manga
-        </label>
-        <label class="bubble-checkbox">
-          <input type="checkbox" id="checkHentai" checked /> Hentai (18+)
-        </label>
-      </div>
-
-      <!-- Main Search Input Bar with EN/JP toggle -->
       <div class="search-box-popup">
         <span class="material-symbols-outlined">search</span>
         <input type="text" id="searchInput" placeholder="Search anime, manga, titles..." autocomplete="off" />
         
-        <!-- EN / JP Language Toggle -->
         <div class="lang-toggle">
           <button type="button" class="lang-btn active" id="langEn">EN</button>
           <button type="button" class="lang-btn" id="langJp">JP</button>
@@ -758,34 +671,25 @@
         </button>
       </div>
 
-      <!-- Live Search Results Container -->
       <div class="search-results" id="searchResults" style="display: none;"></div>
     </div>
   </div>
 
-  <!-- Live AniList API & Filter Script -->
   <script>
     const searchModal = document.getElementById('searchModal');
     const openSearchBtn = document.getElementById('openSearchBtn');
     const closeSearchBtn = document.getElementById('closeSearchBtn');
     const searchInput = document.getElementById('searchInput');
     const searchResults = document.getElementById('searchResults');
-
-    // Filter controls
     const presetPills = document.querySelectorAll('.preset-pill');
-    const checkAnime = document.getElementById('checkAnime');
-    const checkManga = document.getElementById('checkManga');
-    const checkHentai = document.getElementById('checkHentai');
-
-    // Language Toggle
     const langEn = document.getElementById('langEn');
     const langJp = document.getElementById('langJp');
-    let currentLang = 'EN'; // 'EN' or 'JP'
 
+    let currentLang = 'EN';
+    let currentPreset = 'all';
     let debounceTimer;
     let currentCachedData = [];
 
-    // Modal Visibility
     openSearchBtn.addEventListener('click', () => {
       searchModal.classList.add('active');
       setTimeout(() => searchInput.focus(), 100);
@@ -807,7 +711,6 @@
       if (e.key === 'Escape' && searchModal.classList.contains('active')) closeModal();
     });
 
-    // Language Toggle Logic
     langEn.addEventListener('click', () => {
       if (currentLang === 'EN') return;
       currentLang = 'EN';
@@ -824,60 +727,17 @@
       renderResults(currentCachedData);
     });
 
-    // Preset Pill Click Handlers (Updates Checkboxes)
     presetPills.forEach(pill => {
       pill.addEventListener('click', () => {
         presetPills.forEach(p => p.classList.remove('active'));
         pill.classList.add('active');
-
-        const preset = pill.dataset.preset;
-        if (preset === 'all') {
-          checkAnime.checked = true;
-          checkManga.checked = true;
-          checkHentai.checked = true;
-        } else if (preset === 'anime') {
-          checkAnime.checked = true;
-          checkManga.checked = false;
-          checkHentai.checked = false;
-        } else if (preset === 'manga') {
-          checkAnime.checked = false;
-          checkManga.checked = true;
-          checkHentai.checked = false;
-        } else if (preset === 'hentai') {
-          checkAnime.checked = false;
-          checkManga.checked = false;
-          checkHentai.checked = true;
+        currentPreset = pill.dataset.preset;
+        if (searchInput.value.trim()) {
+          fetchFromAniList(searchInput.value.trim());
         }
-
-        triggerSearch();
       });
     });
 
-    // Checkbox changes refresh preset state
-    [checkAnime, checkManga, checkHentai].forEach(box => {
-      box.addEventListener('change', () => {
-        presetPills.forEach(p => p.classList.remove('active'));
-        if (checkAnime.checked && checkManga.checked && checkHentai.checked) {
-          document.querySelector('[data-preset="all"]').classList.add('active');
-        } else if (checkAnime.checked && !checkManga.checked && !checkHentai.checked) {
-          document.querySelector('[data-preset="anime"]').classList.add('active');
-        } else if (!checkAnime.checked && checkManga.checked && !checkHentai.checked) {
-          document.querySelector('[data-preset="manga"]').classList.add('active');
-        } else if (!checkAnime.checked && !checkManga.checked && checkHentai.checked) {
-          document.querySelector('[data-preset="hentai"]').classList.add('active');
-        }
-        triggerSearch();
-      });
-    });
-
-    // Trigger Search Helper
-    function triggerSearch() {
-      if (searchInput.value.trim()) {
-        fetchFromAniList(searchInput.value.trim());
-      }
-    }
-
-    // AniList GraphQL Fetcher with Multi-Category Support
     async function fetchFromAniList(keyword) {
       if (!keyword) {
         searchResults.style.display = 'none';
@@ -886,30 +746,33 @@
         return;
       }
 
-      // Check if user has turned everything off
-      if (!checkAnime.checked && !checkManga.checked && !checkHentai.checked) {
-        searchResults.style.display = 'flex';
-        searchResults.innerHTML = '<div class="search-state-text">Please check at least one box (Anime, Manga, or Hentai).</div>';
-        return;
-      }
-
       searchResults.style.display = 'flex';
       searchResults.innerHTML = '<div class="search-state-text">Searching AniList...</div>';
 
-      // Determine AniList types to query
-      let types = [];
-      if (checkAnime.checked || checkHentai.checked) types.push('ANIME');
-      if (checkManga.checked) types.push('MANGA');
+      let graphVariables = { search: keyword };
+      let querySignature = '$search: String';
+      let mediaParams = 'search: $search, sort: POPULARITY_DESC';
 
-      // Check whether adult/hentai content is included or excluded
-      const isAdultParam = checkHentai.checked && !checkAnime.checked && !checkManga.checked
-        ? true 
-        : undefined; // undefined allows all, handled by client filter if mixed
+      if (currentPreset === 'anime') {
+        querySignature += ', $type: MediaType,$isAdult: Boolean';
+        mediaParams += ', type: $type, isAdult:$isAdult';
+        graphVariables.type = 'ANIME';
+        graphVariables.isAdult = false;
+      } else if (currentPreset === 'manga') {
+        querySignature += ', $type: MediaType,$isAdult: Boolean';
+        mediaParams += ', type: $type, isAdult:$isAdult';
+        graphVariables.type = 'MANGA';
+        graphVariables.isAdult = false;
+      } else if (currentPreset === 'hentai') {
+        querySignature += ', $isAdult: Boolean';
+        mediaParams += ', isAdult: $isAdult';
+        graphVariables.isAdult = true;
+      }
 
       const query = `
-        query ($search: String, $type: [MediaType], $isAdult: Boolean) {
-          Page(page: 1, perPage: 12) {
-            media(search: $search, type_in: $type, isAdult: $isAdult, sort: POPULARITY_DESC) {
+        query (${querySignature}) {
+          Page(page: 1, perPage: 8) {
+            media(${mediaParams}) {
               id
               type
               isAdult
@@ -939,25 +802,12 @@
           },
           body: JSON.stringify({
             query: query,
-            variables: { 
-              search: keyword,
-              type: types,
-              isAdult: isAdultParam
-            }
+            variables: graphVariables
           })
         });
 
         const data = await response.json();
-        let items = data?.data?.Page?.media || [];
-
-        // Client-side filtration for precise checkbox matches
-        items = items.filter(item => {
-          if (item.isAdult && !checkHentai.checked) return false;
-          if (!item.isAdult && item.type === 'ANIME' && !checkAnime.checked) return false;
-          if (!item.isAdult && item.type === 'MANGA' && !checkManga.checked) return false;
-          return true;
-        });
-
+        const items = data?.data?.Page?.media || [];
         currentCachedData = items;
         renderResults(items);
       } catch (err) {
@@ -965,15 +815,13 @@
       }
     }
 
-    // Render Search Results into HTML
     function renderResults(items) {
       if (!items || items.length === 0) {
-        searchResults.innerHTML = '<div class="search-state-text">No results found for this selection.</div>';
+        searchResults.innerHTML = '<div class="search-state-text">No results found.</div>';
         return;
       }
 
       searchResults.innerHTML = items.map(item => {
-        // Handle EN vs JP title switch
         const title = currentLang === 'JP' 
           ? (item.title.native || item.title.romaji) 
           : (item.title.english || item.title.romaji);
@@ -981,11 +829,11 @@
         const score = item.averageScore ? `${item.averageScore}%` : 'N/A';
         const typeLabel = item.isAdult ? 'HENTAI' : (item.type || 'ANIME');
         const count = item.episodes ? `${item.episodes} eps` : (item.chapters ? `${item.chapters} chs` : (item.format || 'Media'));
+        const cover = item.coverImage?.medium || '';
 
-        // Internal link placeholder for later site pages (e.g., #details?id=123)
         return `
-          <a href="#details?type=${item.type.toLowerCase()}&id=${item.id}" class="search-item" onclick="console.log('Selected item id:', ${item.id})">
-            <img src="${item.coverImage.medium}" alt="${title}" class="search-thumb" />
+          <a href="#details?type=${item.type ? item.type.toLowerCase() : 'anime'}&id=${item.id}" class="search-item">
+            <img src="${cover}" alt="${title}" class="search-thumb" />
             <div class="search-details">
               <div class="search-title">${title}</div>
               <div class="search-meta">
@@ -1001,7 +849,6 @@
       }).join('');
     }
 
-    // Debounced Search Input
     searchInput.addEventListener('input', (e) => {
       clearTimeout(debounceTimer);
       debounceTimer = setTimeout(() => {
