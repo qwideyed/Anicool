@@ -127,12 +127,12 @@
       transform: rotate(180deg);
     }
 
-    /* ================= MEGA MENU FIX & STYLES ================= */
+    /* ================= MEGA MENU ================= */
     .hub-dropdown {
       position: relative;
     }
 
-    /* Invisible hover-bridge preventing premature close */
+    /* Invisible hover bridge */
     .mega-menu::before {
       content: "";
       position: absolute;
@@ -147,19 +147,18 @@
       top: calc(100% + 14px);
       left: 50%;
       transform: translateX(-50%) translateY(10px) scale(0.97);
-      width: 920px;
+      width: 900px;
       background: rgba(17, 19, 29, 0.97);
       backdrop-filter: blur(28px);
       -webkit-backdrop-filter: blur(28px);
       border: 1px solid var(--bubble-border);
       border-radius: 26px;
-      padding: 24px;
+      padding: 22px;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+      gap: 18px;
       box-shadow: 0 25px 60px rgba(0, 0, 0, 0.75);
       
-      /* Smooth Hover Exit Animation */
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
@@ -173,7 +172,7 @@
       transform: translateX(-50%) translateY(0) scale(1);
     }
 
-    /* ================= HUB CARDS ================= */
+    /* Cards */
     .hub-card {
       background: var(--card-bg);
       border: 1px solid rgba(255, 255, 255, 0.07);
@@ -190,12 +189,10 @@
       transform: translateY(-4px);
     }
 
-    /* Card Themes */
     .card-anime:hover { border-color: rgba(0, 210, 255, 0.4); box-shadow: 0 0 20px rgba(0, 210, 255, 0.15); }
     .card-manga:hover { border-color: rgba(157, 92, 246, 0.4); box-shadow: 0 0 20px rgba(157, 92, 246, 0.15); }
     .card-hentai:hover { border-color: rgba(255, 42, 116, 0.4); box-shadow: 0 0 20px rgba(255, 42, 116, 0.15); }
 
-    /* Card Top Bar */
     .card-header {
       display: flex;
       align-items: center;
@@ -234,7 +231,6 @@
       color: var(--text-dim);
     }
 
-    /* Navigation Links */
     .card-links {
       list-style: none;
       display: flex;
@@ -249,7 +245,7 @@
       color: var(--text-dim);
       text-decoration: none;
       font-size: 0.88rem;
-      padding: 6px 10px;
+      padding: 8px 10px;
       border-radius: 10px;
       transition: all 0.2s ease;
     }
@@ -265,41 +261,16 @@
       opacity: 0.5;
     }
 
-    /* Micro Genre Tags */
-    .quick-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 2px;
-    }
-
-    .tag-bubble {
-      font-size: 0.72rem;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      padding: 3px 8px;
-      border-radius: 9999px;
-      color: #cbd5e1;
-      text-decoration: none;
-      transition: all 0.2s ease;
-    }
-
-    .tag-bubble:hover {
-      background: rgba(255, 255, 255, 0.15);
-      color: #fff;
-      transform: scale(1.04);
-    }
-
-    /* Featured Spotlight Banner in Cards */
     .card-spotlight {
       background: rgba(0, 0, 0, 0.3);
       border: 1px dashed rgba(255, 255, 255, 0.1);
       border-radius: 12px;
-      padding: 8px 12px;
+      padding: 10px 12px;
       display: flex;
       align-items: center;
       gap: 10px;
       text-decoration: none;
+      margin-top: auto;
       transition: all 0.2s ease;
     }
 
@@ -325,7 +296,7 @@
       color: var(--text-dim);
     }
 
-    /* ================= SEARCH BUTTON & MODAL ================= */
+    /* ================= SEARCH BUTTON & OVERLAY ================= */
     .search-btn {
       width: 42px;
       height: 42px;
@@ -356,7 +327,7 @@
       display: flex;
       align-items: flex-start;
       justify-content: center;
-      padding-top: 15vh;
+      padding-top: 10vh;
       opacity: 0;
       visibility: hidden;
       transition: all 0.25s ease;
@@ -368,29 +339,34 @@
       visibility: visible;
     }
 
-    .search-box-popup {
-      position: relative;
+    .search-container {
       width: 90%;
-      max-width: 620px;
+      max-width: 680px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transform: translateY(-20px) scale(0.95);
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .search-modal.active .search-container {
+      transform: translateY(0) scale(1);
+    }
+
+    .search-box-popup {
       background: rgba(22, 24, 34, 0.95);
       border: 1px solid var(--bubble-border);
       border-radius: 24px;
-      padding: 16px 22px;
+      padding: 14px 20px;
       box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
-      transform: translateY(-20px) scale(0.95);
-      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
       display: flex;
       align-items: center;
       gap: 14px;
     }
 
-    .search-modal.active .search-box-popup {
-      transform: translateY(0) scale(1);
-    }
-
     .search-box-popup .material-symbols-outlined {
       color: var(--accent-pink);
-      font-size: 26px;
+      font-size: 24px;
     }
 
     .search-box-popup input {
@@ -399,7 +375,7 @@
       border: none;
       outline: none;
       color: #fff;
-      font-size: 1.15rem;
+      font-size: 1.05rem;
       font-family: inherit;
     }
 
@@ -407,23 +383,87 @@
       background: transparent;
       border: none;
       color: var(--text-dim);
-      font-size: 20px;
       cursor: pointer;
       display: flex;
       align-items: center;
-      justify-content: center;
       padding: 4px;
       border-radius: 50%;
-      transition: all 0.2s ease;
     }
 
     .close-search-btn:hover {
       color: #fff;
-      background: rgba(255, 255, 255, 0.1);
     }
 
-    /* Responsive */
-    @media (max-width: 960px) {
+    /* AniList API Search Results Container */
+    .search-results {
+      max-height: 480px;
+      overflow-y: auto;
+      background: rgba(20, 22, 32, 0.95);
+      border: 1px solid var(--bubble-border);
+      border-radius: 20px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .search-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 10px;
+      border-radius: 14px;
+      text-decoration: none;
+      color: #fff;
+      background: rgba(255, 255, 255, 0.02);
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .search-item:hover {
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateX(4px);
+    }
+
+    .search-thumb {
+      width: 48px;
+      height: 64px;
+      border-radius: 8px;
+      object-fit: cover;
+      background: #1a1c26;
+    }
+
+    .search-details {
+      flex: 1;
+    }
+
+    .search-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      line-height: 1.3;
+      margin-bottom: 4px;
+    }
+
+    .search-meta {
+      display: flex;
+      gap: 10px;
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+
+    .search-score {
+      color: #10b981;
+      font-weight: 600;
+    }
+
+    .search-state-text {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.88rem;
+      color: var(--text-dim);
+    }
+
+    /* Mobile */
+    @media (max-width: 920px) {
       .mega-menu {
         width: calc(100vw - 40px);
         grid-template-columns: 1fr;
@@ -451,7 +491,7 @@
             <a href="#home" class="nav-link active">Home</a>
           </li>
 
-          <!-- HUB Dropdown With Expanded Rich Cards -->
+          <!-- HUB Dropdown -->
           <li class="nav-item hub-dropdown">
             <a href="javascript:void(0)" class="nav-link">
               Hub <span class="arrow-down">▼</span>
@@ -467,7 +507,7 @@
                     <span class="card-title">Anime</span>
                     <span class="badge badge-anime">Series</span>
                   </div>
-                  <span class="item-counter">14,200+</span>
+                  <span class="item-counter">AniList API</span>
                 </div>
 
                 <ul class="card-links">
@@ -477,20 +517,11 @@
                   <li><a href="#anime-coming-out">Coming Out <span class="material-symbols-outlined">upcoming</span></a></li>
                 </ul>
 
-                <!-- Quick Genre Tags -->
-                <div class="quick-tags">
-                  <a href="#anime-action" class="tag-bubble">Action</a>
-                  <a href="#anime-isekai" class="tag-bubble">Isekai</a>
-                  <a href="#anime-romance" class="tag-bubble">Romance</a>
-                  <a href="#anime-fantasy" class="tag-bubble">Fantasy</a>
-                </div>
-
-                <!-- Spotlight Item -->
                 <a href="#featured-anime" class="card-spotlight">
                   <span class="material-symbols-outlined spotlight-icon">bolt</span>
                   <div class="spotlight-info">
-                    <h5>Top Airing Today</h5>
-                    <p>Solo Leveling S2</p>
+                    <h5>Top Airing</h5>
+                    <p>Powered by AniList</p>
                   </div>
                 </a>
               </div>
@@ -502,7 +533,7 @@
                     <span class="card-title">Manga</span>
                     <span class="badge badge-manga">Read</span>
                   </div>
-                  <span class="item-counter">38,500+</span>
+                  <span class="item-counter">AniList API</span>
                 </div>
 
                 <ul class="card-links">
@@ -512,20 +543,11 @@
                   <li><a href="#manga-coming-out">Coming Out <span class="material-symbols-outlined">upcoming</span></a></li>
                 </ul>
 
-                <!-- Quick Genre Tags -->
-                <div class="quick-tags">
-                  <a href="#manga-manhwa" class="tag-bubble">Manhwa</a>
-                  <a href="#manga-shonen" class="tag-bubble">Shonen</a>
-                  <a href="#manga-seinen" class="tag-bubble">Seinen</a>
-                  <a href="#manga-color" class="tag-bubble">Full Color</a>
-                </div>
-
-                <!-- Spotlight Item -->
                 <a href="#featured-manga" class="card-spotlight">
                   <span class="material-symbols-outlined spotlight-icon">local_fire_department</span>
                   <div class="spotlight-info">
-                    <h5>#1 Read Weekly</h5>
-                    <p>Chainsaw Man</p>
+                    <h5>Trending Read</h5>
+                    <p>Updated Weekly</p>
                   </div>
                 </a>
               </div>
@@ -537,7 +559,7 @@
                     <span class="card-title">Hentai</span>
                     <span class="badge badge-hentai">18+</span>
                   </div>
-                  <span class="item-counter">Uncensored</span>
+                  <span class="item-counter">Adult</span>
                 </div>
 
                 <ul class="card-links">
@@ -547,20 +569,11 @@
                   <li><a href="#hentai-coming-out">Coming Out <span class="material-symbols-outlined">upcoming</span></a></li>
                 </ul>
 
-                <!-- Quick Genre Tags -->
-                <div class="quick-tags">
-                  <a href="#hentai-3d" class="tag-bubble">3D</a>
-                  <a href="#hentai-doujin" class="tag-bubble">Doujinshi</a>
-                  <a href="#hentai-vanilla" class="tag-bubble">Vanilla</a>
-                  <a href="#hentai-sub" class="tag-bubble">English Sub</a>
-                </div>
-
-                <!-- Spotlight Item -->
                 <a href="#featured-hentai" class="card-spotlight">
                   <span class="material-symbols-outlined spotlight-icon">lock_open</span>
                   <div class="spotlight-info">
-                    <h5>Trending Release</h5>
-                    <p>HD & 4K Remasters</p>
+                    <h5>Adult Catalog</h5>
+                    <p>Filtered Releases</p>
                   </div>
                 </a>
               </div>
@@ -588,47 +601,141 @@
     </header>
   </div>
 
-  <!-- Fullscreen Glass Search Popup Modal -->
+  <!-- Search Modal with AniList Query Engine -->
   <div class="search-modal" id="searchModal">
-    <div class="search-box-popup">
-      <span class="material-symbols-outlined">search</span>
-      <input type="text" id="searchInput" placeholder="Search anime, manga, studios, genres..." autocomplete="off" />
-      <button type="button" class="close-search-btn" id="closeSearchBtn" aria-label="Close Search">
-        <span class="material-symbols-outlined">close</span>
-      </button>
+    <div class="search-container">
+      <div class="search-box-popup">
+        <span class="material-symbols-outlined">search</span>
+        <input type="text" id="searchInput" placeholder="Search anime or manga with AniList..." autocomplete="off" />
+        <button type="button" class="close-search-btn" id="closeSearchBtn" aria-label="Close Search">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+
+      <!-- Results list container -->
+      <div class="search-results" id="searchResults" style="display: none;"></div>
     </div>
   </div>
 
-  <!-- Search Modal Script -->
+  <!-- Live AniList API Handler -->
   <script>
     const searchModal = document.getElementById('searchModal');
     const openSearchBtn = document.getElementById('openSearchBtn');
     const closeSearchBtn = document.getElementById('closeSearchBtn');
     const searchInput = document.getElementById('searchInput');
+    const searchResults = document.getElementById('searchResults');
 
-    // Open Search Popup
+    let debounceTimer;
+
+    // Toggle Modal
     openSearchBtn.addEventListener('click', () => {
       searchModal.classList.add('active');
       setTimeout(() => searchInput.focus(), 100);
     });
 
-    // Close on Click Button
-    closeSearchBtn.addEventListener('click', () => {
+    function closeModal() {
       searchModal.classList.remove('active');
-    });
+      searchInput.value = '';
+      searchResults.style.display = 'none';
+      searchResults.innerHTML = '';
+    }
 
-    // Close on Outside Click
+    closeSearchBtn.addEventListener('click', closeModal);
     searchModal.addEventListener('click', (e) => {
-      if (e.target === searchModal) {
-        searchModal.classList.remove('active');
-      }
+      if (e.target === searchModal) closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && searchModal.classList.contains('active')) closeModal();
     });
 
-    // Close on Escape Key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && searchModal.classList.contains('active')) {
-        searchModal.classList.remove('active');
+    // AniList GraphQL Fetcher
+    async function fetchFromAniList(keyword) {
+      if (!keyword.trim()) {
+        searchResults.style.display = 'none';
+        searchResults.innerHTML = '';
+        return;
       }
+
+      searchResults.style.display = 'flex';
+      searchResults.innerHTML = '<div class="search-state-text">Searching AniList...</div>';
+
+      const query = `
+        query ($search: String) {
+          Page(page: 1, perPage: 6) {
+            media(search: $search, sort: POPULARITY_DESC) {
+              id
+              title {
+                romaji
+                english
+              }
+              coverImage {
+                medium
+              }
+              format
+              averageScore
+              episodes
+              chapters
+            }
+          }
+        }
+      `;
+
+      try {
+        const response = await fetch('https://graphql.anilist.co', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          },
+          body: JSON.stringify({
+            query: query,
+            variables: { search: keyword }
+          })
+        });
+
+        const data = await response.json();
+        renderResults(data?.data?.Page?.media || []);
+      } catch (err) {
+        searchResults.innerHTML = '<div class="search-state-text">Failed to fetch data from AniList.</div>';
+      }
+    }
+
+    // Render results into HTML
+    function renderResults(items) {
+      if (items.length === 0) {
+        searchResults.innerHTML = '<div class="search-state-text">No results found.</div>';
+        return;
+      }
+
+      searchResults.innerHTML = items.map(item => {
+        const title = item.title.english || item.title.romaji;
+        const score = item.averageScore ? `${item.averageScore}%` : 'N/A';
+        const count = item.episodes ? `${item.episodes} eps` : (item.chapters ? `${item.chapters} chs` : item.format);
+
+        return `
+          <a href="https://anilist.co/${item.format === 'MANGA' ? 'manga' : 'anime'}/${item.id}" target="_blank" rel="noopener" class="search-item">
+            <img src="${item.coverImage.medium}" alt="${title}" class="search-thumb" />
+            <div class="search-details">
+              <div class="search-title">${title}</div>
+              <div class="search-meta">
+                <span>${item.format || 'ANIME'}</span>
+                <span>•</span>
+                <span>${count}</span>
+                <span>•</span>
+                <span class="search-score">★ ${score}</span>
+              </div>
+            </div>
+          </a>
+        `;
+      }).join('');
+    }
+
+    // Debounce search typing
+    searchInput.addEventListener('input', (e) => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => {
+        fetchFromAniList(e.target.value);
+      }, 350);
     });
   </script>
 
