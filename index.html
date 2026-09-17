@@ -526,36 +526,42 @@
       padding: 30px 24px 80px;
       display: flex;
       flex-direction: column;
-      gap: 46px;
+      gap: 36px;
+    }
+
+    .spotlight-carousel-wrap {
+      position: relative;
+      width: 100%;
+      border-radius: 32px;
+      overflow: hidden;
+      border: 1px solid var(--bubble-border);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+      background: #0f1118;
     }
 
     .hero-banner {
       position: relative;
       width: 100%;
-      min-height: 440px;
-      border-radius: 32px;
-      overflow: hidden;
+      min-height: 460px;
       display: flex;
       align-items: flex-end;
-      padding: 40px;
-      border: 1px solid var(--bubble-border);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+      padding: 44px 50px;
       background-size: cover;
       background-position: center 25%;
-      transition: background 0.5s ease;
+      transition: background-image 0.6s ease-in-out;
     }
 
     .hero-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(0deg, rgba(10, 11, 16, 0.96) 12%, rgba(10, 11, 16, 0.45) 60%, rgba(10, 11, 16, 0.1) 100%),
-                  linear-gradient(90deg, rgba(10, 11, 16, 0.85) 0%, transparent 60%);
+      background: linear-gradient(0deg, rgba(10, 11, 16, 0.98) 12%, rgba(10, 11, 16, 0.5) 60%, rgba(10, 11, 16, 0.2) 100%),
+                  linear-gradient(90deg, rgba(10, 11, 16, 0.9) 0%, rgba(10, 11, 16, 0.4) 50%, transparent 80%);
     }
 
     .hero-content {
       position: relative;
       z-index: 1;
-      max-width: 650px;
+      max-width: 660px;
       display: flex;
       flex-direction: column;
       gap: 14px;
@@ -565,6 +571,7 @@
       display: flex;
       align-items: center;
       gap: 10px;
+      flex-wrap: wrap;
     }
 
     .hero-pill {
@@ -593,22 +600,44 @@
     }
 
     .hero-title {
-      font-size: 2.2rem;
+      font-size: 2.3rem;
       font-weight: 700;
       line-height: 1.2;
       color: #fff;
       text-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
     }
 
-    .hero-desc {
-      font-size: 0.9rem;
+    .hero-genres {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .hero-genre-tag {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 3px 10px;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      color: #cbd5e1;
+    }
+
+    .hero-desc-box {
+      font-size: 0.88rem;
       line-height: 1.6;
       color: #cbd5e1;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      max-height: 80px;
+      overflow-y: auto;
+      padding-right: 6px;
+    }
+
+    .hero-desc-box::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .hero-desc-box::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 4px;
     }
 
     .hero-actions {
@@ -662,6 +691,103 @@
       transform: translateY(-3px);
     }
 
+    .carousel-nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(18, 20, 30, 0.7);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--bubble-border);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .carousel-nav-btn:hover {
+      background: rgba(255, 42, 116, 0.8);
+      transform: translateY(-50%) scale(1.08);
+    }
+
+    .carousel-prev { left: 16px; }
+    .carousel-next { right: 16px; }
+
+    .carousel-dots {
+      position: absolute;
+      bottom: 16px;
+      right: 30px;
+      z-index: 2;
+      display: flex;
+      gap: 8px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.25);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .dot.active {
+      width: 24px;
+      background: var(--accent-pink);
+    }
+
+    .category-divider-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 12px 18px;
+      background: var(--bubble-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--bubble-border);
+      border-radius: 9999px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      flex-wrap: wrap;
+      margin: 4px auto 0;
+      width: fit-content;
+      max-width: 100%;
+    }
+
+    .category-pill {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--bubble-border);
+      color: var(--text-dim);
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 9px 20px;
+      border-radius: 9999px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .category-pill:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .category-pill.active {
+      background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 6px 20px rgba(255, 42, 116, 0.4);
+    }
+
     .section-head {
       display: flex;
       align-items: center;
@@ -687,37 +813,14 @@
       letter-spacing: 0.4px;
     }
 
-    .section-nav-pills {
-      display: flex;
-      gap: 6px;
-      background: rgba(255, 255, 255, 0.04);
-      padding: 4px;
-      border-radius: 9999px;
-      border: 1px solid var(--bubble-border);
-    }
-
-    .sub-pill {
-      background: transparent;
-      border: none;
-      color: var(--text-dim);
-      font-size: 0.8rem;
-      font-weight: 600;
-      padding: 6px 14px;
-      border-radius: 9999px;
-      cursor: pointer;
-      font-family: inherit;
-      transition: all 0.2s ease;
-    }
-
-    .sub-pill.active {
-      background: rgba(255, 255, 255, 0.12);
-      color: #fff;
-    }
-
     .anime-cards-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-      gap: 20px;
+      gap: 22px;
+    }
+
+    .card-wrap {
+      position: relative;
     }
 
     .anime-card {
@@ -730,13 +833,7 @@
       flex-direction: column;
       text-decoration: none;
       color: #fff;
-      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .anime-card:hover {
-      transform: translateY(-8px) scale(1.02);
-      border-color: rgba(255, 42, 116, 0.4);
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6);
+      cursor: pointer;
     }
 
     .card-thumb-wrap {
@@ -751,11 +848,6 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.4s ease;
-    }
-
-    .anime-card:hover .card-thumb {
-      transform: scale(1.08);
     }
 
     .card-badge-top {
@@ -811,6 +903,119 @@
       justify-content: space-between;
     }
 
+    .card-hover-bubble {
+      position: absolute;
+      top: -10px;
+      left: 105%;
+      width: 290px;
+      background: rgba(18, 20, 28, 0.96);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid var(--bubble-border);
+      border-radius: 22px;
+      padding: 18px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+      z-index: 50;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      transform: translateX(-10px) scale(0.96);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .card-wrap:hover .card-hover-bubble {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateX(0) scale(1);
+    }
+
+    .card-wrap:nth-child(6n) .card-hover-bubble,
+    .card-wrap:nth-child(6n - 1) .card-hover-bubble,
+    .card-wrap:nth-child(5n) .card-hover-bubble {
+      left: auto;
+      right: 105%;
+      transform: translateX(10px) scale(0.96);
+    }
+
+    .card-wrap:nth-child(6n):hover .card-hover-bubble,
+    .card-wrap:nth-child(6n - 1):hover .card-hover-bubble,
+    .card-wrap:nth-child(5n):hover .card-hover-bubble {
+      transform: translateX(0) scale(1);
+    }
+
+    .hover-bubble-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.3;
+    }
+
+    .hover-bubble-meta {
+      display: flex;
+      gap: 8px;
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .hover-bubble-tags {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+    }
+
+    .hover-tag {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 2px 8px;
+      border-radius: 9999px;
+      font-size: 0.68rem;
+      color: #cbd5e1;
+    }
+
+    .hover-bubble-desc {
+      font-size: 0.78rem;
+      line-height: 1.55;
+      color: #94a3b8;
+      max-height: 110px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .hover-bubble-desc::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .hover-bubble-desc::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 4px;
+    }
+
+    .hover-watch-btn {
+      margin-top: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 9999px;
+      background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 600;
+      transition: transform 0.2s ease;
+    }
+
+    .hover-watch-btn:hover {
+      transform: scale(1.03);
+    }
+
     .skeleton {
       animation: skeleton-pulse 1.5s infinite ease-in-out;
       background: linear-gradient(90deg, rgba(255, 255, 255, 0.04) 25%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0.04) 75%);
@@ -839,6 +1044,12 @@
       .anime-cards-grid {
         grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
         gap: 14px;
+      }
+      .card-hover-bubble {
+        display: none;
+      }
+      .category-divider-bar {
+        border-radius: 20px;
       }
     }
   </style>
@@ -991,36 +1202,62 @@
 
   <main class="main-content">
 
-    <section class="hero-banner skeleton" id="heroBanner">
-      <div class="hero-overlay"></div>
-      <div class="hero-content" id="heroContent">
-        <div class="hero-badge-row">
-          <span class="hero-pill">Spotlight</span>
-          <span class="hero-score-pill">★ <span id="heroScore">--</span></span>
+    <div class="spotlight-carousel-wrap">
+      <button type="button" class="carousel-nav-btn carousel-prev" id="spotlightPrev" aria-label="Previous">
+        <span class="material-symbols-outlined">chevron_left</span>
+      </button>
+      <button type="button" class="carousel-nav-btn carousel-next" id="spotlightNext" aria-label="Next">
+        <span class="material-symbols-outlined">chevron_right</span>
+      </button>
+
+      <section class="hero-banner skeleton" id="heroBanner">
+        <div class="hero-overlay"></div>
+        <div class="hero-content" id="heroContent">
+          <div class="hero-badge-row">
+            <span class="hero-pill" id="heroRank">Spotlight #1</span>
+            <span class="hero-score-pill">★ <span id="heroScore">--</span></span>
+            <span id="heroFormat" class="hero-genre-tag">TV</span>
+          </div>
+          <h1 class="hero-title" id="heroTitle">Loading Spotlight...</h1>
+          <div class="hero-genres" id="heroGenres"></div>
+          <div class="hero-desc-box" id="heroDesc">Fetching top 10 spotlight anime from AniList...</div>
+          <div class="hero-actions">
+            <a href="#" class="bubble-btn-primary" id="heroWatchBtn">
+              <span class="material-symbols-outlined">play_arrow</span> Watch Now
+            </a>
+            <button type="button" class="bubble-btn-secondary" id="heroListBtn">
+              <span class="material-symbols-outlined">bookmark_add</span> Add to List
+            </button>
+          </div>
         </div>
-        <h1 class="hero-title" id="heroTitle">Loading Spotlight...</h1>
-        <p class="hero-desc" id="heroDesc">Fetching live trending anime data directly from AniList...</p>
-        <div class="hero-actions">
-          <a href="#" class="bubble-btn-primary" id="heroWatchBtn">
-            <span class="material-symbols-outlined">play_arrow</span> Watch Now
-          </a>
-          <button type="button" class="bubble-btn-secondary" id="heroListBtn">
-            <span class="material-symbols-outlined">bookmark_add</span> Add to List
-          </button>
-        </div>
-      </div>
-    </section>
+      </section>
+
+      <div class="carousel-dots" id="carouselDots"></div>
+    </div>
+
+    <div class="category-divider-bar">
+      <button type="button" class="category-pill active" onclick="switchCategory('ANIME', this)">
+        <span class="material-symbols-outlined">movie</span> Anime
+      </button>
+      <button type="button" class="category-pill" onclick="switchCategory('MANGA', this)">
+        <span class="material-symbols-outlined">menu_book</span> Manga
+      </button>
+      <button type="button" class="category-pill" onclick="switchCategory('HENTAI', this)">
+        <span class="material-symbols-outlined">lock_open</span> Hentai
+      </button>
+      <button type="button" class="category-pill" onclick="switchCategory('READ_HENTAI', this)">
+        <span class="material-symbols-outlined">auto_stories</span> Read Hentai
+      </button>
+      <button type="button" class="category-pill" onclick="switchCategory('MANHWA', this)">
+        <span class="material-symbols-outlined">burst_mode</span> Manhwa
+      </button>
+    </div>
 
     <section>
       <div class="section-head">
         <div class="section-title-wrap">
           <span class="material-symbols-outlined section-icon">local_fire_department</span>
           <h2 class="section-title">Trending Now</h2>
-        </div>
-        <div class="section-nav-pills">
-          <button type="button" class="sub-pill active" onclick="switchCategory('ANIME', this)">Anime</button>
-          <button type="button" class="sub-pill" onclick="switchCategory('MANGA', this)">Manga</button>
-          <button type="button" class="sub-pill" onclick="switchCategory('HENTAI', this)">Hentai</button>
         </div>
       </div>
       <div class="anime-cards-grid" id="trendingGrid"></div>
@@ -1053,6 +1290,10 @@
     let debounceTimer;
     let currentCachedData = [];
 
+    let spotlightList = [];
+    let spotlightIndex = 0;
+    let spotlightTimer = null;
+
     openSearchBtn.addEventListener('click', () => {
       searchModal.classList.add('active');
       setTimeout(() => searchInput.focus(), 100);
@@ -1080,6 +1321,7 @@
       langEn.classList.add('active');
       langJp.classList.remove('active');
       renderResults(currentCachedData);
+      if (spotlightList.length > 0) renderSpotlightSlide(spotlightIndex);
     });
 
     langJp.addEventListener('click', () => {
@@ -1088,6 +1330,7 @@
       langJp.classList.add('active');
       langEn.classList.remove('active');
       renderResults(currentCachedData);
+      if (spotlightList.length > 0) renderSpotlightSlide(spotlightIndex);
     });
 
     presetPills.forEach(pill => {
@@ -1219,42 +1462,195 @@
       }, 350);
     });
 
+    async function loadSpotlight() {
+      const query = `
+        query {
+          Page(page: 1, perPage: 10) {
+            media(type: ANIME, sort: TRENDING_DESC, isAdult: false) {
+              id
+              type
+              title { english romaji native }
+              bannerImage
+              coverImage { extraLarge large }
+              description
+              averageScore
+              format
+              genres
+              episodes
+            }
+          }
+        }
+      `;
+
+      try {
+        const res = await fetch('https://graphql.anilist.co', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ query })
+        });
+        const json = await res.json();
+        spotlightList = json?.data?.Page?.media || [];
+        if (spotlightList.length > 0) {
+          initSpotlightCarousel();
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    function initSpotlightCarousel() {
+      const dotsContainer = document.getElementById('carouselDots');
+      dotsContainer.innerHTML = spotlightList.map((_, idx) => `
+        <div class="dot ${idx === 0 ? 'active' : ''}" onclick="goToSpotlight(${idx})"></div>
+      `).join('');
+
+      renderSpotlightSlide(0);
+      startSpotlightAuto();
+
+      document.getElementById('spotlightPrev').addEventListener('click', () => {
+        prevSpotlight();
+        resetSpotlightAuto();
+      });
+
+      document.getElementById('spotlightNext').addEventListener('click', () => {
+        nextSpotlight();
+        resetSpotlightAuto();
+      });
+    }
+
+    function renderSpotlightSlide(index) {
+      const anime = spotlightList[index];
+      if (!anime) return;
+
+      spotlightIndex = index;
+      const hero = document.getElementById('heroBanner');
+      const title = document.getElementById('heroTitle');
+      const desc = document.getElementById('heroDesc');
+      const score = document.getElementById('heroScore');
+      const rank = document.getElementById('heroRank');
+      const format = document.getElementById('heroFormat');
+      const genresBox = document.getElementById('heroGenres');
+      const watchBtn = document.getElementById('heroWatchBtn');
+
+      hero.classList.remove('skeleton');
+      const bg = anime.bannerImage || anime.coverImage.extraLarge;
+      hero.style.backgroundImage = `url('${bg}')`;
+
+      const activeTitle = currentLang === 'JP' 
+        ? (anime.title.native || anime.title.romaji) 
+        : (anime.title.english || anime.title.romaji);
+
+      title.textContent = activeTitle;
+      score.textContent = anime.averageScore ? `${anime.averageScore}%` : 'N/A';
+      rank.textContent = `Spotlight #${index + 1}`;
+      format.textContent = anime.format || 'TV';
+
+      const cleanedDesc = anime.description ? anime.description.replace(/<[^>]*>?/gm, '') : 'No synopsis available.';
+      desc.textContent = cleanedDesc;
+
+      genresBox.innerHTML = (anime.genres || []).slice(0, 4).map(g => `
+        <span class="hero-genre-tag">${g}</span>
+      `).join('');
+
+      watchBtn.href = `#details?type=anime&id=${anime.id}`;
+
+      document.querySelectorAll('.carousel-dots .dot').forEach((d, i) => {
+        d.classList.toggle('active', i === index);
+      });
+    }
+
+    function nextSpotlight() {
+      spotlightIndex = (spotlightIndex + 1) % spotlightList.length;
+      renderSpotlightSlide(spotlightIndex);
+    }
+
+    function prevSpotlight() {
+      spotlightIndex = (spotlightIndex - 1 + spotlightList.length) % spotlightList.length;
+      renderSpotlightSlide(spotlightIndex);
+    }
+
+    function goToSpotlight(i) {
+      renderSpotlightSlide(i);
+      resetSpotlightAuto();
+    }
+
+    function startSpotlightAuto() {
+      spotlightTimer = setInterval(nextSpotlight, 5000);
+    }
+
+    function resetSpotlightAuto() {
+      clearInterval(spotlightTimer);
+      startSpotlightAuto();
+    }
+
     async function loadBodyContent(category = 'ANIME') {
       const trendingGrid = document.getElementById('trendingGrid');
       const popularGrid = document.getElementById('popularGrid');
       
-      renderSkeletons(trendingGrid, 6);
-      renderSkeletons(popularGrid, 6);
+      renderSkeletons(trendingGrid, 12);
+      renderSkeletons(popularGrid, 12);
 
-      let mediaType = category === 'MANGA' ? 'MANGA' : 'ANIME';
-      let isAdult = category === 'HENTAI' ? true : false;
+      let mediaType = 'ANIME';
+      let isAdult = false;
+      let countryOfOrigin = undefined;
+
+      if (category === 'MANGA') {
+        mediaType = 'MANGA';
+      } else if (category === 'HENTAI') {
+        mediaType = 'ANIME';
+        isAdult = true;
+      } else if (category === 'READ_HENTAI') {
+        mediaType = 'MANGA';
+        isAdult = true;
+      } else if (category === 'MANHWA') {
+        mediaType = 'MANGA';
+        countryOfOrigin = 'KR';
+      }
+
+      let variables = {
+        type: mediaType,
+        isAdult: isAdult
+      };
+
+      let varDefs = '$type: MediaType,$isAdult: Boolean';
+      let mediaFilters = 'type: $type, isAdult:$isAdult';
+
+      if (countryOfOrigin) {
+        varDefs += ', $country: CountryCode';
+        mediaFilters += ', countryOfOrigin: $country';
+        variables.country = countryOfOrigin;
+      }
 
       const bodyQuery = `
-        query ($type: MediaType, $isAdult: Boolean) {
-          trending: Page(page: 1, perPage: 6) {
-            media(type: $type, isAdult: $isAdult, sort: TRENDING_DESC) {
+        query (${varDefs}) {
+          trending: Page(page: 1, perPage: 12) {
+            media(${mediaFilters}, sort: TRENDING_DESC) {
               id
               type
-              title { english romaji }
-              bannerImage
-              coverImage { large extraLarge }
+              isAdult
+              title { english romaji native }
+              coverImage { large }
               description
               averageScore
               episodes
               chapters
               format
+              genres
             }
           }
-          popular: Page(page: 1, perPage: 6) {
-            media(type: $type, isAdult: $isAdult, sort: POPULARITY_DESC) {
+          popular: Page(page: 1, perPage: 12) {
+            media(${mediaFilters}, sort: POPULARITY_DESC) {
               id
               type
-              title { english romaji }
+              isAdult
+              title { english romaji native }
               coverImage { large }
+              description
               averageScore
               episodes
               chapters
               format
+              genres
             }
           }
         }
@@ -1266,17 +1662,13 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             query: bodyQuery,
-            variables: { type: mediaType, isAdult: isAdult }
+            variables: variables
           })
         });
 
         const resData = await response.json();
         const trendingList = resData?.data?.trending?.media || [];
         const popularList = resData?.data?.popular?.media || [];
-
-        if (category === 'ANIME' && trendingList.length > 0) {
-          setupHero(trendingList[0]);
-        }
 
         renderGrid(trendingGrid, trendingList);
         renderGrid(popularGrid, popularList);
@@ -1285,61 +1677,72 @@
       }
     }
 
-    function setupHero(anime) {
-      const hero = document.getElementById('heroBanner');
-      const title = document.getElementById('heroTitle');
-      const desc = document.getElementById('heroDesc');
-      const score = document.getElementById('heroScore');
-      const watchBtn = document.getElementById('heroWatchBtn');
-
-      hero.classList.remove('skeleton');
-      const banner = anime.bannerImage || anime.coverImage.extraLarge;
-      hero.style.backgroundImage = `url('${banner}')`;
-      title.textContent = anime.title.english || anime.title.romaji;
-      desc.innerHTML = anime.description ? anime.description.replace(/<[^>]*>?/gm, '') : 'No synopsis available.';
-      score.textContent = anime.averageScore ? `${anime.averageScore}%` : 'N/A';
-      watchBtn.href = `#details?type=anime&id=${anime.id}`;
-    }
-
     function renderGrid(container, items) {
       container.innerHTML = items.map(item => {
-        const title = item.title.english || item.title.romaji;
+        const title = currentLang === 'JP' 
+          ? (item.title.native || item.title.romaji) 
+          : (item.title.english || item.title.romaji);
+
         const score = item.averageScore ? `${item.averageScore}%` : 'N/A';
         const count = item.episodes ? `${item.episodes} EP` : (item.chapters ? `${item.chapters} CH` : (item.format || 'Media'));
         const image = item.coverImage?.large || '';
+        const cleanedDesc = item.description ? item.description.replace(/<[^>]*>?/gm, '') : 'No synopsis provided.';
+        const tags = (item.genres || []).slice(0, 3).map(g => `<span class="hover-tag">${g}</span>`).join('');
+        const typeLabel = item.isAdult ? '18+' : (item.type || 'ANIME');
 
         return `
-          <a href="#details?type=${item.type ? item.type.toLowerCase() : 'anime'}&id=${item.id}" class="anime-card">
-            <div class="card-thumb-wrap">
-              <img src="${image}" alt="${title}" class="card-thumb" loading="lazy" />
-              <div class="card-badge-top">★ ${score}</div>
-              <div class="card-format-tag">${item.format || 'TV'}</div>
-            </div>
-            <div class="card-info">
-              <h3 class="card-item-title" title="${title}">${title}</h3>
-              <div class="card-item-sub">
-                <span>${count}</span>
-                <span>${item.type || 'ANIME'}</span>
+          <div class="card-wrap">
+            <a href="#details?type=${item.type ? item.type.toLowerCase() : 'anime'}&id=${item.id}" class="anime-card">
+              <div class="card-thumb-wrap">
+                <img src="${image}" alt="${title}" class="card-thumb" loading="lazy" />
+                <div class="card-badge-top">★ ${score}</div>
+                <div class="card-format-tag">${item.format || 'TV'}</div>
               </div>
+              <div class="card-info">
+                <h3 class="card-item-title" title="${title}">${title}</h3>
+                <div class="card-item-sub">
+                  <span>${count}</span>
+                  <span>${typeLabel}</span>
+                </div>
+              </div>
+            </a>
+
+            <div class="card-hover-bubble">
+              <div class="hover-bubble-title">${title}</div>
+              <div class="hover-bubble-meta">
+                <span style="color: #10b981; font-weight: 600;">★ ${score}</span>
+                <span>•</span>
+                <span>${item.format || 'TV'}</span>
+                <span>•</span>
+                <span>${count}</span>
+              </div>
+              <div class="hover-bubble-tags">${tags}</div>
+              <div class="hover-bubble-desc">${cleanedDesc}</div>
+              <a href="#details?type=${item.type ? item.type.toLowerCase() : 'anime'}&id=${item.id}" class="hover-watch-btn">
+                <span class="material-symbols-outlined" style="font-size: 16px;">play_arrow</span> View Details
+              </a>
             </div>
-          </a>
+          </div>
         `;
       }).join('');
     }
 
     function renderSkeletons(container, count) {
       container.innerHTML = Array(count).fill(`
-        <div class="anime-card skeleton" style="height: 290px;"></div>
+        <div class="card-wrap">
+          <div class="anime-card skeleton" style="height: 280px;"></div>
+        </div>
       `).join('');
     }
 
     function switchCategory(cat, element) {
-      document.querySelectorAll('.sub-pill').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.category-pill').forEach(btn => btn.classList.remove('active'));
       element.classList.add('active');
       loadBodyContent(cat);
     }
 
     window.addEventListener('DOMContentLoaded', () => {
+      loadSpotlight();
       loadBodyContent('ANIME');
     });
   </script>
