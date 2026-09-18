@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Support AniCool - Donate</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-dark: #0a0b10;
+      --bubble-bg: rgba(20, 22, 32, 0.85);
+      --bubble-border: rgba(255, 255, 255, 0.1);
+      --card-bg: rgba(255, 255, 255, 0.035);
+      --accent-pink: #ff2a74;
+      --accent-purple: #9d5cf6;
+      --accent-blue: #00d2ff;
+      --discord-color: #5865F2;
+      --paypal-color: #0070ba;
+      --bmac-color: #FFDD00;
+      --chime-color: #25C974;
+      --text-main: #f8fafc;
+      --text-dim: #94a3b8;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      min-height: 100vh;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(255, 42, 116, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 85% 20%, rgba(157, 92, 246, 0.1) 0%, transparent 40%);
+    }
+
+    /* Header Nav */
+    .header-wrapper {
+      position: sticky;
+      top: 16px;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 0 16px;
+    }
+
+    .bubble-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      width: fit-content;
+      min-width: 580px;
+      padding: 5px 18px;
+      background: var(--bubble-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--bubble-border);
+      border-radius: 9999px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
+    }
+
+    .logo a {
+      font-size: 1.25rem;
+      font-weight: 700;
+      text-decoration: none;
+      color: #fff;
+      display: inline-block;
+      letter-spacing: 0.5px;
+      transition: transform 0.25s ease;
+    }
+
+    .logo a:hover {
+      transform: scale(1.05);
+    }
+
+    .logo span {
+      background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      transition: all 0.25s ease;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-1px);
+    }
+
+    .outside-btn-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .outside-bubble-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      height: 44px;
+      padding: 0 16px;
+      background: var(--bubble-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--bubble-border);
+      border-radius: 9999px;
+      color: var(--text-main);
+      text-decoration: none;
+      font-size: 0.84rem;
+      font-weight: 600;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+      transition: all 0.25s ease;
+    }
+
+    .outside-bubble-btn svg {
+      width: 19px;
+      height: 19px;
+      fill: currentColor;
+    }
+
+    .outside-bubble-btn:hover {
+      background: rgba(88, 101, 242, 0.2);
+      border-color: var(--discord-color);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    /* Main Container */
+    .main-content {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 36px 20px 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    /* Hero Banner */
+    .donate-hero {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      padding: 20px 10px 10px;
+    }
+
+    .donate-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 42, 116, 0.15);
+      border: 1px solid rgba(255, 42, 116, 0.35);
+      color: var(--accent-pink);
+      padding: 5px 16px;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .donate-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      line-height: 1.2;
+      color: #fff;
+    }
+
+    .donate-title span {
+      background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .donate-subtext {
+      max-width: 640px;
+      font-size: 0.95rem;
+      color: var(--text-dim);
+      line-height: 1.6;
+    }
+
+    /* Critical Donor Instruction Alert Box */
+    .instruction-alert {
+      background: linear-gradient(135deg, rgba(88, 101, 242, 0.12), rgba(255, 42, 116, 0.12));
+      border: 1px solid rgba(88, 101, 242, 0.35);
+      border-radius: 20px;
+      padding: 22px 26px;
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(16px);
+    }
+
+    .alert-icon-wrap {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: rgba(88, 101, 242, 0.2);
+      border: 1px solid rgba(88, 101, 242, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .alert-body {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .alert-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .alert-text {
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: #cbd5e1;
+    }
+
+    .alert-text strong {
+      color: #fff;
+    }
+
+    .alert-badges-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 6px;
+      flex-wrap: wrap;
+    }
+
+    .req-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 4px 12px;
+      border-radius: 9999px;
+      font-size: 0.76rem;
+      color: #f1f5f9;
+      font-weight: 600;
+    }
+
+    /* Preset Amount Selector */
+    .amount-card {
+      background: var(--card-bg);
+      border: 1px solid var(--bubble-border);
+      border-radius: 22px;
+      padding: 22px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      backdrop-filter: blur(20px);
+    }
+
+    .amount-label {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .amount-options {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .amt-btn {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--bubble-border);
+      color: var(--text-dim);
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 8px 18px;
+      border-radius: 9999px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s ease;
+    }
+
+    .amt-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+
+    .amt-btn.active {
+      background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 4px 16px rgba(255, 42, 116, 0.35);
+    }
+
+    /* Payment Methods Grid */
+    .payment-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 20px;
+    }
+
+    .pay-card {
+      background: var(--card-bg);
+      border: 1px solid var(--bubble-border);
+      border-radius: 24px;
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      backdrop-filter: blur(20px);
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+      position: relative;
+    }
+
+    .pay-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .card-paypal:hover {
+      border-color: rgba(0, 112, 186, 0.5);
+      box-shadow: 0 16px 36px rgba(0, 112, 186, 0.18);
+    }
+
+    .card-bmac:hover {
+      border-color: rgba(255, 221, 0, 0.4);
+      box-shadow: 0 16px 36px rgba(255, 221, 0, 0.15);
+    }
+
+    .card-chime:hover {
+      border-color: rgba(37, 201, 116, 0.4);
+      box-shadow: 0 16px 36px rgba(37, 201, 116, 0.15);
+    }
+
+    .pay-card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .pay-logo-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .pay-icon-circle {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    .icon-paypal {
+      background: rgba(0, 112, 186, 0.15);
+      border: 1px solid rgba(0, 112, 186, 0.35);
+      color: #38bdf8;
+    }
+
+    .icon-bmac {
+      background: rgba(255, 221, 0, 0.15);
+      border: 1px solid rgba(255, 221, 0, 0.35);
+      color: #facc15;
+    }
+
+    .icon-chime {
+      background: rgba(37, 201, 116, 0.15);
+      border: 1px solid rgba(37, 201, 116, 0.35);
+      color: #4ade80;
+    }
+
+    .pay-brand-name {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .pay-tagline {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+
+    .pay-desc {
+      font-size: 0.86rem;
+      color: #cbd5e1;
+      line-height: 1.6;
+      flex: 1;
+    }
+
+    /* Chime Handle Box with Copy Button */
+    .chime-handle-box {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 4px 0;
+    }
+
+    .chime-handle-text {
+      font-family: monospace;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #4ade80;
+    }
+
+    .copy-handle-btn {
+      background: rgba(37, 201, 116, 0.15);
+      border: 1px solid rgba(37, 201, 116, 0.3);
+      color: #4ade80;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s;
+    }
+
+    .copy-handle-btn:hover {
+      background: rgba(37, 201, 116, 0.25);
+    }
+
+    .pay-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 20px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      font-family: inherit;
+      transition: all 0.2s ease;
+      width: 100%;
+    }
+
+    .pay-btn-paypal {
+      background: #0070ba;
+      color: #fff;
+    }
+    .pay-btn-paypal:hover {
+      background: #005ea6;
+      box-shadow: 0 6px 20px rgba(0, 112, 186, 0.4);
+    }
+
+    .pay-btn-bmac {
+      background: #FFDD00;
+      color: #000;
+    }
+    .pay-btn-bmac:hover {
+      background: #e6c700;
+      box-shadow: 0 6px 20px rgba(255, 221, 0, 0.35);
+    }
+
+    .pay-btn-chime {
+      background: #25C974;
+      color: #fff;
+    }
+    .pay-btn-chime:hover {
+      background: #1eb365;
+      box-shadow: 0 6px 20px rgba(37, 201, 116, 0.4);
+    }
+
+    /* Donor Perks Card */
+    .perks-card {
+      background: var(--card-bg);
+      border: 1px solid var(--bubble-border);
+      border-radius: 24px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      backdrop-filter: blur(20px);
+    }
+
+    .perks-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .perks-icon {
+      font-size: 26px;
+      color: #facc15;
+    }
+
+    .perks-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .perks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .perk-item {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--bubble-border);
+      border-radius: 16px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .perk-item-head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .perk-item-desc {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+
+    @media (max-width: 860px) {
+      .header-wrapper {
+        flex-wrap: wrap;
+      }
+      .bubble-nav {
+        min-width: 0;
+        width: 100%;
+      }
+      .donate-title {
+        font-size: 2rem;
+      }
+      .instruction-alert {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Nav Header -->
+  <div class="header-wrapper">
+    <header class="bubble-nav">
+      <div class="logo">
+        <a href="index.html">Ani<span>Cool</span></a>
+      </div>
+
+      <nav>
+        <ul class="nav-links">
+          <li class="nav-item">
+            <a href="index.html" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="genre.html" class="nav-link">Genre</a>
+          </li>
+          <li class="nav-item">
+            <a href="donate.html" class="nav-link active">Donate</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="outside-btn-group">
+      <a href="https://discord.gg" target="_blank" rel="noopener" class="outside-bubble-btn" title="Join our Discord">
+        <svg viewBox="0 0 127.14 96.36">
+          <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.86,53,48.81,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/>
+        </svg>
+        <span>Discord</span>
+      </a>
+    </div>
+  </div>
+
+  <main class="main-content">
+
+    <!-- Hero Header -->
+    <section class="donate-hero">
+      <div class="donate-badge">
+        <span class="material-symbols-outlined" style="font-size: 16px;">favorite</span>
+        Support Our Project
+      </div>
+      <h1 class="donate-title">Help Keep <span>AniCool</span> Free & Fast</h1>
+      <p class="donate-subtext">
+        AniCool is a community-first anime and manga catalog completely free of ads. Every donation directly funds fast servers, domain maintenance, and new features.
+      </p>
+    </section>
+
+    <!-- CRITICAL DONATION INSTRUCTION NOTICE -->
+    <div class="instruction-alert">
+      <div class="alert-icon-wrap">
+        <span class="material-symbols-outlined" style="font-size: 24px;">verified_user</span>
+      </div>
+      <div class="alert-body">
+        <h2 class="alert-title">Important Step for Discord Roles!</h2>
+        <p class="alert-text">
+          When sending your donation, please <strong>write your Discord username in the note or message</strong> so we can grant your special donor role in our server.
+        </p>
+        <p class="alert-text">
+          Please also <strong>take a screenshot (SS) of the donation confirmation screen</strong>. Our team will ask for it to verify your payment and grant your badge immediately!
+        </p>
+        <div class="alert-badges-row">
+          <span class="req-badge">
+            <span class="material-symbols-outlined" style="font-size: 14px; color: var(--accent-pink);">check_circle</span>
+            Step 1: Put Discord handle in message
+          </span>
+          <span class="req-badge">
+            <span class="material-symbols-outlined" style="font-size: 14px; color: var(--accent-blue);">screenshot</span>
+            Step 2: Save confirmation screenshot
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Suggested Amounts Bar -->
+    <section class="amount-card">
+      <div class="amount-label">
+        <span class="material-symbols-outlined" style="color: var(--accent-pink);">savings</span>
+        Choose an amount:
+      </div>
+      <div class="amount-options">
+        <button type="button" class="amt-btn active" onclick="setAmount(5, this)">$5</button>
+        <button type="button" class="amt-btn" onclick="setAmount(10, this)">$10</button>
+        <button type="button" class="amt-btn" onclick="setAmount(25, this)">$25</button>
+        <button type="button" class="amt-btn" onclick="setAmount(50, this)">$50</button>
+        <button type="button" class="amt-btn" onclick="setAmount('custom', this)">Custom</button>
+      </div>
+    </section>
+
+    <!-- Payment Methods Grid -->
+    <section class="payment-grid">
+      
+      <!-- PayPal -->
+      <div class="pay-card card-paypal">
+        <div class="pay-card-head">
+          <div class="pay-logo-title">
+            <div class="pay-icon-circle icon-paypal">
+              <span class="material-symbols-outlined">payments</span>
+            </div>
+            <div>
+              <h3 class="pay-brand-name">PayPal</h3>
+              <p class="pay-tagline">Instant & Secure</p>
+            </div>
+          </div>
+        </div>
+
+        <p class="pay-desc">
+          Quickly donate with your PayPal balance, debit, or credit card. Remember to enter your Discord username in the note.
+        </p>
+
+        <!-- Update the href to your PayPal username or paypal.me link -->
+        <a href="https://paypal.me/yourusername" target="_blank" rel="noopener" class="pay-btn pay-btn-paypal" id="paypalBtn">
+          <span>Donate with PayPal</span>
+          <span class="material-symbols-outlined" style="font-size: 18px;">arrow_forward</span>
+        </a>
+      </div>
+
+      <!-- Buy Me a Coffee -->
+      <div class="pay-card card-bmac">
+        <div class="pay-card-head">
+          <div class="pay-logo-title">
+            <div class="pay-icon-circle icon-bmac">
+              <span class="material-symbols-outlined">coffee</span>
+            </div>
+            <div>
+              <h3 class="pay-brand-name">Buy Me a Coffee</h3>
+              <p class="pay-tagline">Credit, Apple Pay, Google Pay</p>
+            </div>
+          </div>
+        </div>
+
+        <p class="pay-desc">
+          Support us with a coffee! You can easily leave a public or private message with your Discord tag on the checkout form.
+        </p>
+
+        <!-- Update the href to your BuyMeACoffee page -->
+        <a href="https://buymeacoffee.com/yourusername" target="_blank" rel="noopener" class="pay-btn pay-btn-bmac" id="bmacBtn">
+          <span>Buy Me a Coffee</span>
+          <span class="material-symbols-outlined" style="font-size: 18px;">arrow_forward</span>
+        </a>
+      </div>
+
+      <!-- Chime -->
+      <div class="pay-card card-chime">
+        <div class="pay-card-head">
+          <div class="pay-logo-title">
+            <div class="pay-icon-circle icon-chime">
+              <span class="material-symbols-outlined">account_balance_wallet</span>
+            </div>
+            <div>
+              <h3 class="pay-brand-name">Chime</h3>
+              <p class="pay-tagline">Send via $ChimeSign</p>
+            </div>
+          </div>
+        </div>
+
+        <p class="pay-desc">
+          Send directly via Chime to member without any processing fees. Include your Discord name in the send memo.
+        </p>
+
+        <div class="chime-handle-box">
+          <!-- Change this to your actual $ChimeSign handle -->
+          <span class="chime-handle-text" id="chimeHandleText">$YourChimeSign</span>
+          <button type="button" class="copy-handle-btn" onclick="copyChimeHandle()">
+            <span class="material-symbols-outlined" style="font-size: 14px;">content_copy</span>
+            <span id="copyBtnText">Copy</span>
+          </button>
+        </div>
+
+        <button type="button" class="pay-btn pay-btn-chime" onclick="copyChimeHandle()">
+          <span>Copy ChimeSign</span>
+          <span class="material-symbols-outlined" style="font-size: 18px;">check</span>
+        </button>
+      </div>
+
+    </section>
+
+    <!-- Discord Perks Breakdown -->
+    <section class="perks-card">
+      <div class="perks-head">
+        <span class="material-symbols-outlined perks-icon">workspace_premium</span>
+        <h2 class="perks-title">What You Get as an AniCool Supporter</h2>
+      </div>
+
+      <div class="perks-grid">
+        <div class="perk-item">
+          <div class="perk-item-head">
+            <span class="material-symbols-outlined" style="color: var(--accent-pink);">shield</span>
+            Exclusive Discord Role
+          </div>
+          <p class="perk-item-desc">
+            A prominent, custom-colored Donator role and icon displayed on your Discord profile.
+          </p>
+        </div>
+
+        <div class="perk-item">
+          <div class="perk-item-head">
+            <span class="material-symbols-outlined" style="color: var(--accent-blue);">lock_open</span>
+            Private Lounge Access
+          </div>
+          <p class="perk-item-desc">
+            Hang out in the private VIP chat channel with the creator and fellow supporters.
+          </p>
+        </div>
+
+        <div class="perk-item">
+          <div class="perk-item-head">
+            <span class="material-symbols-outlined" style="color: #facc15;">star</span>
+            Priority Feature Votes
+          </div>
+          <p class="perk-item-desc">
+            Have a direct say in what features, tabs, and catalogs get added to AniCool next.
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    let chosenAmount = 5;
+
+    function setAmount(amount, btn) {
+      document.querySelectorAll('.amt-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      chosenAmount = amount;
+    }
+
+    function copyChimeHandle() {
+      const text = document.getElementById('chimeHandleText').textContent.trim();
+      navigator.clipboard.writeText(text).then(() => {
+        const copyBtnText = document.getElementById('copyBtnText');
+        copyBtnText.textContent = "Copied!";
+        setTimeout(() => {
+          copyBtnText.textContent = "Copy";
+        }, 2000);
+      });
+    }
+  </script>
+
+</body>
+</html>
