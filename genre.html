@@ -28,6 +28,13 @@
       --accent-blue: #00d2ff;
       --text-main: #f8fafc;
       --text-dim: #94a3b8;
+      
+      /* Anikoto Filter Color Scheme */
+      --filter-btn-bg: #111b2b;
+      --filter-menu-bg: #0d1726;
+      --filter-border: #1a273b;
+      --filter-check-border: #2c3e59;
+      --filter-text: #9ab0d1;
     }
 
     body {
@@ -278,7 +285,7 @@
       letter-spacing: -0.5px;
     }
 
-    /* 5-Column Grid */
+    /* 5-Column Filter Bar */
     .filter-grid {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
@@ -288,20 +295,19 @@
     .filter-input {
       width: 100%;
       height: 42px;
-      background: #0f141f;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 8px;
+      background: var(--filter-btn-bg);
+      border: 1px solid var(--filter-border);
+      border-radius: 6px;
       padding: 0 14px;
       color: #cbd5e1;
       font-size: 0.85rem;
       font-family: inherit;
       outline: none;
-      transition: border-color 0.2s, background-color 0.2s;
+      transition: border-color 0.2s;
     }
 
     .filter-input:focus {
-      border-color: var(--accent-blue);
-      background: #121826;
+      border-color: #0284c7;
     }
 
     .filter-input::placeholder {
@@ -317,12 +323,12 @@
     .cb-dropdown-btn {
       width: 100%;
       height: 42px;
-      background: #0f141f;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 8px;
+      background: var(--filter-btn-bg);
+      border: 1px solid var(--filter-border);
+      border-radius: 6px;
       padding: 0 14px;
       color: #cbd5e1;
-      font-size: 0.85rem;
+      font-size: 0.84rem;
       font-family: inherit;
       display: flex;
       align-items: center;
@@ -334,12 +340,12 @@
     }
 
     .cb-dropdown-btn:hover {
-      background: #131927;
-      border-color: rgba(255, 255, 255, 0.2);
+      background: #152236;
+      border-color: #283a54;
     }
 
     .cb-dropdown.active .cb-dropdown-btn {
-      border-color: var(--accent-blue);
+      border-color: #0284c7;
       color: #fff;
     }
 
@@ -354,23 +360,28 @@
       margin-left: auto;
     }
 
-    /* Wide Horizontal Floating Menu */
+    /* Anikoto-Style 4-Column Horizontal Dropdown Menu */
     .cb-menu {
       position: absolute;
-      top: calc(100% + 8px);
+      top: calc(100% + 6px);
       left: 0;
-      width: 480px;
-      max-height: 290px;
+      width: 720px;
+      max-height: 380px;
       overflow-y: auto;
-      background: #0d121c;
-      border: 1px solid var(--bubble-border);
-      border-radius: 14px;
-      padding: 12px;
-      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.85);
+      background: var(--filter-menu-bg);
+      border: 1px solid var(--filter-border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      box-shadow: 0 24px 50px rgba(0, 0, 0, 0.85);
       z-index: 600;
       display: none;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px 14px;
+    }
+
+    .cb-menu.compact-menu {
+      width: 440px;
       grid-template-columns: repeat(2, 1fr);
-      gap: 8px;
     }
 
     .cb-dropdown.align-right .cb-menu {
@@ -382,42 +393,50 @@
       display: grid;
     }
 
+    .cb-menu::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    .cb-menu::-webkit-scrollbar-thumb {
+      background: #1f3047;
+      border-radius: 4px;
+    }
+
+    /* Clean Checkbox Item row */
     .cb-item {
       display: flex;
       align-items: center;
-      gap: 10px;
-      padding: 8px 12px;
-      border-radius: 8px;
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(255, 255, 255, 0.04);
-      color: var(--text-dim);
-      font-size: 0.82rem;
+      gap: 8px;
+      padding: 2px 0;
+      color: var(--filter-text);
+      font-size: 0.8rem;
       cursor: pointer;
       user-select: none;
-      transition: all 0.15s ease;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      transition: color 0.15s;
     }
 
     .cb-item:hover {
-      background: rgba(255, 255, 255, 0.06);
       color: #fff;
-      border-color: rgba(255, 255, 255, 0.1);
     }
 
     .cb-item input[type="checkbox"],
     .cb-item input[type="radio"] {
       appearance: none;
       -webkit-appearance: none;
-      width: 16px;
-      height: 16px;
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      border-radius: 4px;
-      background: rgba(255, 255, 255, 0.03);
+      width: 15px;
+      height: 15px;
+      border-radius: 3px;
+      background: #152236;
+      border: 1px solid var(--filter-check-border);
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      transition: all 0.2s;
+      transition: all 0.15s;
     }
 
     .cb-item input[type="radio"] {
@@ -426,26 +445,26 @@
 
     .cb-item input[type="checkbox"]:checked,
     .cb-item input[type="radio"]:checked {
-      background: var(--accent-blue);
-      border-color: var(--accent-blue);
+      background: #0284c7;
+      border-color: #0284c7;
     }
 
     .cb-item input[type="checkbox"]:checked::after {
       content: '✓';
       color: #fff;
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 700;
     }
 
     .cb-item input[type="radio"]:checked::after {
       content: '';
-      width: 6px;
-      height: 6px;
+      width: 5px;
+      height: 5px;
       border-radius: 50%;
       background: #fff;
     }
 
-    /* Bottom Filter Bar */
+    /* Bottom Action Bar */
     .filter-bottom-bar {
       display: flex;
       align-items: center;
@@ -467,7 +486,7 @@
       background: #0ea5e9;
       color: #fff;
       border: none;
-      border-radius: 8px;
+      border-radius: 6px;
       font-size: 0.9rem;
       font-weight: 600;
       font-family: inherit;
@@ -733,7 +752,8 @@
         grid-template-columns: repeat(3, 1fr);
       }
       .cb-menu {
-        width: 360px;
+        width: 580px;
+        grid-template-columns: repeat(3, 1fr);
       }
     }
 
@@ -743,7 +763,7 @@
       }
       .cb-menu {
         width: 100%;
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
       }
       .filter-bottom-bar {
         flex-direction: column;
@@ -813,7 +833,7 @@
 
   <main class="main-content">
     
-    <!-- Anikoto-Style 5-Column Grid with Horizontal Dropdown Menus -->
+    <!-- Anikoto-Style 5-Column Grid with 4-Column Horizontal Dropdown Panels -->
     <section class="filter-section">
       <div class="filter-header-wrap">
         <h1 class="filter-main-heading">Filter</h1>
@@ -823,23 +843,7 @@
         <!-- Search Field -->
         <input type="text" class="filter-input" id="filterKeyword" placeholder="Search..." autocomplete="off" />
 
-        <!-- Category Dropdown -->
-        <div class="cb-dropdown" data-filter="category">
-          <button type="button" class="cb-dropdown-btn">
-            Select category <span class="badge-counter">0</span>
-            <span class="material-symbols-outlined" style="font-size: 16px;">expand_more</span>
-          </button>
-          <div class="cb-menu">
-            <label class="cb-item"><input type="checkbox" value="ANIME" checked> Anime</label>
-            <label class="cb-item"><input type="checkbox" value="MANGA"> Manga</label>
-            <label class="cb-item"><input type="checkbox" value="HENTAI"> Hentai (18+)</label>
-            <label class="cb-item"><input type="checkbox" value="READ_HENTAI"> Read Hentai (18+)</label>
-            <label class="cb-item"><input type="checkbox" value="MANHWA"> Manhwa (Korean)</label>
-            <label class="cb-item"><input type="checkbox" value="MANHUA"> Manhua (Chinese)</label>
-          </div>
-        </div>
-
-        <!-- Genres Dropdown -->
+        <!-- 4-Column Mega Genres Dropdown -->
         <div class="cb-dropdown" data-filter="genres">
           <button type="button" class="cb-dropdown-btn">
             Select genre <span class="badge-counter">0</span>
@@ -847,23 +851,56 @@
           </button>
           <div class="cb-menu">
             <label class="cb-item"><input type="checkbox" value="Action"> Action</label>
+            <label class="cb-item"><input type="checkbox" value="Adventure"> Action &amp; Adv...</label>
             <label class="cb-item"><input type="checkbox" value="Adventure"> Adventure</label>
+            <label class="cb-item"><input type="checkbox" value="Animation"> Animation</label>
+            <label class="cb-item"><input type="checkbox" value="Award Winning"> Award Winni...</label>
+            <label class="cb-item"><input type="checkbox" value="Boys Love"> Boys Love</label>
+            <label class="cb-item"><input type="checkbox" value="Cars"> Cars</label>
             <label class="cb-item"><input type="checkbox" value="Comedy"> Comedy</label>
+            <label class="cb-item"><input type="checkbox" value="Dementia"> Dementia</label>
+            <label class="cb-item"><input type="checkbox" value="Demons"> Demons</label>
             <label class="cb-item"><input type="checkbox" value="Drama"> Drama</label>
             <label class="cb-item"><input type="checkbox" value="Ecchi"> Ecchi</label>
+            <label class="cb-item"><input type="checkbox" value="Erotica"> Erotica</label>
             <label class="cb-item"><input type="checkbox" value="Fantasy"> Fantasy</label>
+            <label class="cb-item"><input type="checkbox" value="Game"> Game</label>
+            <label class="cb-item"><input type="checkbox" value="Girls Love"> Girls Love</label>
+            <label class="cb-item"><input type="checkbox" value="Gourmet"> Gourmet</label>
+            <label class="cb-item"><input type="checkbox" value="Harem"> Harem</label>
+            <label class="cb-item"><input type="checkbox" value="Historical"> Historical</label>
             <label class="cb-item"><input type="checkbox" value="Horror"> Horror</label>
+            <label class="cb-item"><input type="checkbox" value="Isekai"> Isekai</label>
+            <label class="cb-item"><input type="checkbox" value="Josei"> Josei</label>
+            <label class="cb-item"><input type="checkbox" value="Kids"> Kids</label>
+            <label class="cb-item"><input type="checkbox" value="Magic"> Magic</label>
             <label class="cb-item"><input type="checkbox" value="Mahou Shoujo"> Mahou Shoujo</label>
+            <label class="cb-item"><input type="checkbox" value="Martial Arts"> Martial Arts</label>
             <label class="cb-item"><input type="checkbox" value="Mecha"> Mecha</label>
+            <label class="cb-item"><input type="checkbox" value="Military"> Military</label>
             <label class="cb-item"><input type="checkbox" value="Music"> Music</label>
             <label class="cb-item"><input type="checkbox" value="Mystery"> Mystery</label>
+            <label class="cb-item"><input type="checkbox" value="Parody"> Parody</label>
+            <label class="cb-item"><input type="checkbox" value="Police"> Police</label>
             <label class="cb-item"><input type="checkbox" value="Psychological"> Psychological</label>
             <label class="cb-item"><input type="checkbox" value="Romance"> Romance</label>
+            <label class="cb-item"><input type="checkbox" value="Samurai"> Samurai</label>
+            <label class="cb-item"><input type="checkbox" value="School"> School</label>
             <label class="cb-item"><input type="checkbox" value="Sci-Fi"> Sci-Fi</label>
+            <label class="cb-item"><input type="checkbox" value="Sci-Fi"> Sci-Fi &amp; Fanta...</label>
+            <label class="cb-item"><input type="checkbox" value="Seinen"> Seinen</label>
+            <label class="cb-item"><input type="checkbox" value="Shoujo"> Shoujo</label>
+            <label class="cb-item"><input type="checkbox" value="Shoujo Ai"> Shoujo Ai</label>
+            <label class="cb-item"><input type="checkbox" value="Shounen"> Shounen</label>
+            <label class="cb-item"><input type="checkbox" value="Shounen Ai"> Shounen Ai</label>
             <label class="cb-item"><input type="checkbox" value="Slice of Life"> Slice of Life</label>
+            <label class="cb-item"><input type="checkbox" value="Space"> Space</label>
             <label class="cb-item"><input type="checkbox" value="Sports"> Sports</label>
+            <label class="cb-item"><input type="checkbox" value="Super Power"> Super Power</label>
             <label class="cb-item"><input type="checkbox" value="Supernatural"> Supernatural</label>
+            <label class="cb-item"><input type="checkbox" value="Suspense"> Suspense</label>
             <label class="cb-item"><input type="checkbox" value="Thriller"> Thriller</label>
+            <label class="cb-item"><input type="checkbox" value="Vampire"> Vampire</label>
           </div>
         </div>
 
@@ -873,7 +910,7 @@
             Select season <span class="badge-counter">0</span>
             <span class="material-symbols-outlined" style="font-size: 16px;">expand_more</span>
           </button>
-          <div class="cb-menu">
+          <div class="cb-menu compact-menu">
             <label class="cb-item"><input type="checkbox" value="WINTER"> Winter</label>
             <label class="cb-item"><input type="checkbox" value="SPRING"> Spring</label>
             <label class="cb-item"><input type="checkbox" value="SUMMER"> Summer</label>
@@ -881,13 +918,13 @@
           </div>
         </div>
 
-        <!-- Year Dropdown (Aligned Right so it doesn't overflow screen) -->
+        <!-- Year Dropdown -->
         <div class="cb-dropdown align-right" data-filter="years">
           <button type="button" class="cb-dropdown-btn">
             Select year <span class="badge-counter">0</span>
             <span class="material-symbols-outlined" style="font-size: 16px;">expand_more</span>
           </button>
-          <div class="cb-menu">
+          <div class="cb-menu compact-menu">
             <label class="cb-item"><input type="checkbox" value="2027"> 2027</label>
             <label class="cb-item"><input type="checkbox" value="2026"> 2026</label>
             <label class="cb-item"><input type="checkbox" value="2025"> 2025</label>
@@ -903,13 +940,29 @@
           </div>
         </div>
 
+        <!-- Category Dropdown -->
+        <div class="cb-dropdown align-right" data-filter="category">
+          <button type="button" class="cb-dropdown-btn">
+            Select type <span class="badge-counter">0</span>
+            <span class="material-symbols-outlined" style="font-size: 16px;">expand_more</span>
+          </button>
+          <div class="cb-menu compact-menu">
+            <label class="cb-item"><input type="checkbox" value="ANIME" checked> Anime</label>
+            <label class="cb-item"><input type="checkbox" value="MANGA"> Manga</label>
+            <label class="cb-item"><input type="checkbox" value="HENTAI"> Hentai (18+)</label>
+            <label class="cb-item"><input type="checkbox" value="READ_HENTAI"> Read Hentai (18+)</label>
+            <label class="cb-item"><input type="checkbox" value="MANHWA"> Manhwa (Korean)</label>
+            <label class="cb-item"><input type="checkbox" value="MANHUA"> Manhua (Chinese)</label>
+          </div>
+        </div>
+
         <!-- Format Dropdown -->
         <div class="cb-dropdown" data-filter="formats">
           <button type="button" class="cb-dropdown-btn">
             Select format <span class="badge-counter">0</span>
             <span class="material-symbols-outlined" style="font-size: 16px;">expand_more</span>
           </button>
-          <div class="cb-menu">
+          <div class="cb-menu compact-menu">
             <label class="cb-item"><input type="checkbox" value="TV"> TV Series</label>
             <label class="cb-item"><input type="checkbox" value="MOVIE"> Movie</label>
             <label class="cb-item"><input type="checkbox" value="TV_SHORT"> TV Short</label>
@@ -925,21 +978,21 @@
             Select status <span class="badge-counter">0</span>
             <span class="material-symbols-outlined" style="font-size: 16px;">expand_more</span>
           </button>
-          <div class="cb-menu">
-            <label class="cb-item"><input type="checkbox" value="RELEASING"> Currently Releasing</label>
+          <div class="cb-menu compact-menu">
+            <label class="cb-item"><input type="checkbox" value="RELEASING"> Currently Airing</label>
             <label class="cb-item"><input type="checkbox" value="FINISHED"> Finished</label>
             <label class="cb-item"><input type="checkbox" value="NOT_YET_RELEASED"> Not Yet Aired</label>
             <label class="cb-item"><input type="checkbox" value="CANCELLED"> Cancelled</label>
           </div>
         </div>
 
-        <!-- Language / Country Origin Dropdown -->
+        <!-- Language Dropdown -->
         <div class="cb-dropdown" data-filter="countries">
           <button type="button" class="cb-dropdown-btn">
             Select language <span class="badge-counter">0</span>
             <span class="material-symbols-outlined" style="font-size: 16px;">expand_more</span>
           </button>
-          <div class="cb-menu">
+          <div class="cb-menu compact-menu">
             <label class="cb-item"><input type="checkbox" value="JP"> Japanese</label>
             <label class="cb-item"><input type="checkbox" value="KR"> Korean</label>
             <label class="cb-item"><input type="checkbox" value="CN"> Chinese</label>
@@ -948,12 +1001,12 @@
         </div>
 
         <!-- Rating Dropdown -->
-        <div class="cb-dropdown" data-filter="ratings">
+        <div class="cb-dropdown align-right" data-filter="ratings">
           <button type="button" class="cb-dropdown-btn">
             Select rating <span class="badge-counter">0</span>
             <span class="material-symbols-outlined" style="font-size: 16px;">expand_more</span>
           </button>
-          <div class="cb-menu">
+          <div class="cb-menu compact-menu">
             <label class="cb-item"><input type="checkbox" value="90"> 90%+ Score</label>
             <label class="cb-item"><input type="checkbox" value="80"> 80%+ Score</label>
             <label class="cb-item"><input type="checkbox" value="70"> 70%+ Score</label>
@@ -961,13 +1014,13 @@
           </div>
         </div>
 
-        <!-- Source Dropdown (Aligned Right) -->
+        <!-- Source Dropdown -->
         <div class="cb-dropdown align-right" data-filter="sources">
           <button type="button" class="cb-dropdown-btn">
             Select source <span class="badge-counter">0</span>
             <span class="material-symbols-outlined" style="font-size: 16px;">expand_more</span>
           </button>
-          <div class="cb-menu">
+          <div class="cb-menu compact-menu">
             <label class="cb-item"><input type="checkbox" value="MANGA"> Manga</label>
             <label class="cb-item"><input type="checkbox" value="LIGHT_NOVEL"> Light Novel</label>
             <label class="cb-item"><input type="checkbox" value="ORIGINAL"> Original</label>
@@ -986,7 +1039,7 @@
             Exclude list <span class="badge-counter">0</span>
             <span class="material-symbols-outlined" style="font-size: 16px;">expand_more</span>
           </button>
-          <div class="cb-menu">
+          <div class="cb-menu compact-menu">
             <label class="cb-item"><input type="checkbox" value="Ecchi"> Ecchi</label>
             <label class="cb-item"><input type="checkbox" value="Horror"> Horror</label>
             <label class="cb-item"><input type="checkbox" value="Psychological"> Psychological</label>
@@ -1001,7 +1054,7 @@
             <span id="sortLabel">Default (Most Popular)</span>
             <span class="material-symbols-outlined" style="font-size: 16px;">expand_more</span>
           </button>
-          <div class="cb-menu">
+          <div class="cb-menu compact-menu">
             <label class="cb-item"><input type="radio" name="sortGroup" value="POPULARITY_DESC" checked> Default (Most Popular)</label>
             <label class="cb-item"><input type="radio" name="sortGroup" value="TRENDING_DESC"> Trending</label>
             <label class="cb-item"><input type="radio" name="sortGroup" value="SCORE_DESC"> Top Rated</label>
@@ -1216,7 +1269,7 @@
     function updateSummary() {
       const parts = [];
       if (activeFilters.category.length) parts.push(activeFilters.category.join(', '));
-      if (activeFilters.genres.length) parts.push(activeFilters.genres.join(', '));
+      if (activeFilters.genres.length) parts.push(activeFilters.genres.slice(0, 3).join(', ') + (activeFilters.genres.length > 3 ? ` +${activeFilters.genres.length - 3}` : ''));
       if (activeFilters.years.length) parts.push(activeFilters.years.join(', '));
       if (activeFilters.seasons.length) parts.push(activeFilters.seasons.join(', '));
       if (activeFilters.formats.length) parts.push(activeFilters.formats.join(', '));
@@ -1289,10 +1342,27 @@
         variables.search = activeFilters.search;
       }
 
-      if (activeFilters.genres.length > 0) {
+      // Check for Genres vs Tags
+      const standardGenres = [
+        "Action", "Adventure", "Comedy", "Drama", "Ecchi", "Fantasy",
+        "Horror", "Mahou Shoujo", "Mecha", "Music", "Mystery",
+        "Psychological", "Romance", "Sci-Fi", "Slice of Life", "Sports",
+        "Supernatural", "Thriller"
+      ];
+
+      const chosenGenres = activeFilters.genres.filter(g => standardGenres.includes(g));
+      const chosenTags = activeFilters.genres.filter(g => !standardGenres.includes(g));
+
+      if (chosenGenres.length > 0) {
         varDefs += ', $genres: [String]';
         mediaFilters += ', genre_in: $genres';
-        variables.genres = activeFilters.genres;
+        variables.genres = chosenGenres;
+      }
+
+      if (chosenTags.length > 0) {
+        varDefs += ', $tagIn: [String]';
+        mediaFilters += ', tag_in: $tagIn';
+        variables.tagIn = chosenTags;
       }
 
       if (activeFilters.seasons.length > 0) {
