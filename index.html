@@ -887,7 +887,7 @@
       background: var(--accent-pink);
     }
 
-    /* Single Tabbed Switcher Area: TTW - ATFF - AUA (Cards stay identical to your design) */
+    /* Tabbed Switcher Area: TTW - ATFF - AUA */
     .switcher-section {
       display: flex;
       flex-direction: column;
@@ -949,12 +949,12 @@
       box-shadow: 0 4px 14px rgba(255, 42, 116, 0.35);
     }
 
-    /* Horizontal Card Slider Row (Restored exact cards from screenshots) */
+    /* Unified Card Dimensions for Horizontal Sliders */
     .horizontal-slider-row {
       display: flex;
       gap: 16px;
       overflow-x: auto;
-      padding-bottom: 12px;
+      padding: 4px 2px 14px 2px;
       scrollbar-width: thin;
     }
 
@@ -968,7 +968,8 @@
     }
 
     .slider-card-wrap {
-      flex: 0 0 180px;
+      width: 172px;
+      flex: 0 0 172px;
       position: relative;
     }
 
@@ -976,7 +977,7 @@
       z-index: 100;
     }
 
-    /* Horizontal Top 10 Leaderboard (Restored Full Card Design, Placed Right Underneath) */
+    /* Horizontal Top 10 Leaderboard */
     .top10-horizontal-section {
       background: var(--card-bg);
       border: 1px solid var(--bubble-border);
@@ -1015,7 +1016,7 @@
       display: flex;
       gap: 16px;
       overflow-x: auto;
-      padding-bottom: 12px;
+      padding: 4px 2px 14px 2px;
       scrollbar-width: thin;
     }
 
@@ -1029,7 +1030,8 @@
     }
 
     .top10-card-wrap {
-      flex: 0 0 180px;
+      width: 172px;
+      flex: 0 0 172px;
       position: relative;
     }
 
@@ -1085,10 +1087,10 @@
       letter-spacing: 0.4px;
     }
 
-    /* Standard Cards Grid */
+    /* Standard Explore Cards Grid */
     .anime-cards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(172px, 1fr));
       gap: 20px;
     }
 
@@ -1106,9 +1108,9 @@
       position: relative;
       width: 100%;
       height: 100%;
-      background: var(--card-bg);
+      background: #10131e;
       border: 1px solid var(--bubble-border);
-      border-radius: 20px;
+      border-radius: 18px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
@@ -1120,8 +1122,7 @@
     .card-thumb-wrap {
       position: relative;
       width: 100%;
-      aspect-ratio: 1 / 1.42;
-      height: auto;
+      height: 245px;
       overflow: hidden;
       background: #141622;
       flex-shrink: 0;
@@ -1136,8 +1137,8 @@
 
     .card-badge-top {
       position: absolute;
-      top: 10px;
-      right: 10px;
+      top: 8px;
+      right: 8px;
       background: rgba(15, 17, 24, 0.85);
       border: 1px solid rgba(255, 255, 255, 0.1);
       backdrop-filter: blur(8px);
@@ -1153,8 +1154,8 @@
 
     .card-format-tag {
       position: absolute;
-      bottom: 10px;
-      left: 10px;
+      bottom: 8px;
+      left: 8px;
       background: rgba(255, 42, 116, 0.85);
       backdrop-filter: blur(6px);
       padding: 2px 7px;
@@ -1165,7 +1166,7 @@
     }
 
     .card-info {
-      padding: 12px 14px 16px;
+      padding: 10px 12px 14px;
       display: flex;
       flex-direction: column;
       gap: 4px;
@@ -1174,7 +1175,7 @@
     }
 
     .card-item-title {
-      font-size: 0.95rem;
+      font-size: 0.88rem;
       font-weight: 600;
       line-height: 1.3;
       white-space: nowrap;
@@ -1183,7 +1184,7 @@
     }
 
     .card-item-sub {
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       color: var(--text-dim);
       display: flex;
       justify-content: space-between;
@@ -1370,6 +1371,14 @@
         grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
         gap: 16px;
       }
+      .card-thumb-wrap {
+        height: 200px;
+      }
+      .slider-card-wrap,
+      .top10-card-wrap {
+        width: 140px;
+        flex: 0 0 140px;
+      }
       .card-hover-bubble {
         display: none;
       }
@@ -1538,7 +1547,7 @@
       <div class="carousel-dots" id="carouselDots"></div>
     </div>
 
-    <!-- Tabbed Switcher Area: TTW - ATFF - AUA (Restored your exact horizontal card slider format) -->
+    <!-- Tabbed Switcher Area: TTW - ATFF - AUA (Exact Cards from your Screenshot) -->
     <section class="switcher-section">
       <div class="switcher-header">
         <div class="switcher-title-wrap">
@@ -1556,7 +1565,7 @@
       <div class="horizontal-slider-row" id="tabbedSliderRow"></div>
     </section>
 
-    <!-- Horizontal Top 10 Leaderboard (Placed Directly Underneath, Same Card Visuals) -->
+    <!-- Horizontal Top 10 Leaderboard (Clean 172px Cards with Rank Overlay) -->
     <section class="top10-horizontal-section">
       <div class="top10-header">
         <div class="top10-title-wrap">
@@ -1997,9 +2006,9 @@
       startSpotlightAuto();
     }
 
-    // Tab Switcher (TTW, ATFF, AUA) using the exact same card aesthetics
+    // Tab Switcher (TTW, ATFF, AUA)
     function switchCategoryTab(tab, btn) {
-      document.querySelectorAll('.tab-pills-bar .tab-pill-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.switcher-header .tab-pill-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       currentTab = tab;
 
@@ -2025,9 +2034,9 @@
 
     async function loadTabContent(tab) {
       const container = document.getElementById('tabbedSliderRow');
-      container.innerHTML = Array(12).fill(`
+      container.innerHTML = Array(10).fill(`
         <div class="slider-card-wrap">
-          <div class="anime-card skeleton" style="min-height: 280px;"></div>
+          <div class="anime-card skeleton" style="min-height: 290px;"></div>
         </div>
       `).join('');
 
@@ -2073,7 +2082,7 @@
       }
     }
 
-    // Top 10 Leaderboard in identical horizontal card format
+    // Top 10 Leaderboard
     function switchTop10Range(range, btn) {
       document.querySelectorAll('.top10-header .tab-pill-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
@@ -2084,7 +2093,7 @@
       const container = document.getElementById('top10SliderRow');
       container.innerHTML = Array(10).fill(`
         <div class="top10-card-wrap">
-          <div class="anime-card skeleton" style="min-height: 280px;"></div>
+          <div class="anime-card skeleton" style="min-height: 290px;"></div>
         </div>
       `).join('');
 
@@ -2374,7 +2383,7 @@
     function renderSkeletons(container, count) {
       container.innerHTML = Array(count).fill(`
         <div class="card-wrap">
-          <div class="anime-card skeleton" style="min-height: 280px;"></div>
+          <div class="anime-card skeleton" style="min-height: 290px;"></div>
         </div>
       `).join('');
     }
