@@ -1281,9 +1281,10 @@
         gap: 16px;
       }
       .slider-card-wrap {
-        flex: 0 0 145px;
-        width: 145px;
-      }
+      flex: 0 0 190px;
+      width: 190px;
+      position: relative;
+    }
       .card-hover-bubble {
         display: none;
       }
@@ -1928,7 +1929,8 @@
     async function loadTabContent(tab) {
       const container = document.getElementById('tabbedSliderRow');
       container.scrollTo({ left: 0, behavior: 'smooth' });
-      container.innerHTML = Array(10).fill(`
+      
+      container.innerHTML = Array(16).fill(`
         <div class="slider-card-wrap">
           <div class="anime-card skeleton" style="min-height: 290px;"></div>
         </div>
@@ -1941,6 +1943,7 @@
 
       let sortFilter = 'TRENDING_DESC';
       let statusFilter = '';
+      let perPageCount = 24;
 
       if (tab === 'ATFF') {
         sortFilter = 'FAVOURITES_DESC';
@@ -1949,11 +1952,12 @@
         statusFilter = ', status: NOT_YET_RELEASED';
       } else if (tab === 'T10R') {
         sortFilter = 'SCORE_DESC';
+        perPageCount = 10;
       }
 
       const query = `
         query {
-          Page(page: 1, perPage: 10) {
+          Page(page: 1, perPage: ${perPageCount}) {
             media(type: ANIME, sort: ${sortFilter} ${statusFilter}, isAdult: false) {
               id type isAdult title { english romaji native } coverImage { extraLarge large }
               description averageScore episodes chapters format genres season seasonYear
