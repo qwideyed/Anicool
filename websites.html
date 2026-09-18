@@ -43,7 +43,6 @@
         radial-gradient(circle at 85% 20%, rgba(157, 92, 246, 0.1) 0%, transparent 40%);
     }
 
-    /* Header Nav */
     .header-wrapper {
       position: sticky;
       top: 16px;
@@ -163,9 +162,8 @@
       transform: translateY(-2px);
     }
 
-    /* Main Content */
     .main-content {
-      max-width: 1240px;
+      max-width: 1320px;
       margin: 0 auto;
       padding: 30px 20px 80px;
       display: flex;
@@ -173,7 +171,6 @@
       gap: 32px;
     }
 
-    /* Hero */
     .websites-hero {
       text-align: center;
       display: flex;
@@ -210,13 +207,12 @@
     }
 
     .hero-subtext {
-      max-width: 680px;
+      max-width: 700px;
       font-size: 0.95rem;
       color: var(--text-dim);
       line-height: 1.6;
     }
 
-    /* Controls Bar */
     .controls-bar {
       display: flex;
       align-items: center;
@@ -262,6 +258,11 @@
       box-shadow: 0 4px 14px rgba(255, 42, 116, 0.35);
     }
 
+    .cat-btn.cat-archive.active {
+      background: linear-gradient(135deg, #e11d48, #475569);
+      box-shadow: 0 4px 14px rgba(225, 29, 72, 0.35);
+    }
+
     .site-search-box {
       display: flex;
       align-items: center;
@@ -287,10 +288,9 @@
       color: #64748b;
     }
 
-    /* Website Cards Grid */
     .websites-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
       gap: 20px;
     }
 
@@ -311,6 +311,16 @@
       transform: translateY(-4px);
       border-color: rgba(255, 255, 255, 0.18);
       box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6);
+    }
+
+    .site-card.is-archived {
+      opacity: 0.8;
+      border-color: rgba(239, 68, 68, 0.2);
+    }
+
+    .site-card.is-archived:hover {
+      opacity: 1;
+      border-color: rgba(239, 68, 68, 0.45);
     }
 
     .site-card-top {
@@ -342,7 +352,7 @@
     }
 
     .site-name-wrap h3 {
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       font-weight: 700;
       color: #fff;
     }
@@ -359,6 +369,13 @@
       border-radius: 9999px;
       text-transform: uppercase;
       letter-spacing: 0.4px;
+      white-space: nowrap;
+    }
+
+    .badge-official {
+      background: rgba(234, 179, 8, 0.15);
+      border: 1px solid rgba(234, 179, 8, 0.35);
+      color: #facc15;
     }
 
     .badge-anime {
@@ -379,10 +396,16 @@
       color: #10b981;
     }
 
-    .badge-adult {
+    .badge-hentai {
       background: rgba(255, 42, 116, 0.15);
       border: 1px solid rgba(255, 42, 116, 0.35);
       color: var(--accent-pink);
+    }
+
+    .badge-archive {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.35);
+      color: #f87171;
     }
 
     .site-desc {
@@ -431,6 +454,19 @@
       transform: translateY(-1px);
     }
 
+    .site-btn.btn-archived {
+      background: rgba(239, 68, 68, 0.08);
+      border-color: rgba(239, 68, 68, 0.25);
+      color: #fca5a5;
+      cursor: not-allowed;
+    }
+
+    .site-btn.btn-archived:hover {
+      background: rgba(239, 68, 68, 0.15);
+      box-shadow: none;
+      transform: none;
+    }
+
     @media (max-width: 860px) {
       .header-wrapper {
         flex-wrap: wrap;
@@ -454,7 +490,6 @@
 </head>
 <body>
 
-  <!-- Floating Nav Header -->
   <div class="header-wrapper">
     <header class="bubble-nav">
       <div class="logo">
@@ -493,7 +528,6 @@
 
   <main class="main-content">
 
-    <!-- Hero Header -->
     <section class="websites-hero">
       <div class="hero-badge">
         <span class="material-symbols-outlined" style="font-size: 16px;">explore</span>
@@ -501,18 +535,19 @@
       </div>
       <h1 class="hero-title">Curated <span>Websites</span> Index</h1>
       <p class="hero-subtext">
-        Top community-vetted platforms for watching anime, reading manga &amp; manhwa, tracking watchlists, and community tools.
+        Directory of official providers, free community hubs, manga readers, tracking software, adult portals, and memorial archives.
       </p>
     </section>
 
-    <!-- Filters & Search Bar -->
     <section class="controls-bar">
       <div class="category-filter-pills" id="categoryPills">
         <button type="button" class="cat-btn active" data-cat="all">All Sites</button>
+        <button type="button" class="cat-btn" data-cat="official">Official</button>
         <button type="button" class="cat-btn" data-cat="anime">Anime</button>
         <button type="button" class="cat-btn" data-cat="manga">Manga / Manhwa</button>
         <button type="button" class="cat-btn" data-cat="tools">Trackers &amp; Tools</button>
-        <button type="button" class="cat-btn" data-cat="adult">Adult (18+)</button>
+        <button type="button" class="cat-btn" data-cat="hentai">Hentai</button>
+        <button type="button" class="cat-btn cat-archive" data-cat="archive">Archive (Defunct)</button>
       </div>
 
       <div class="site-search-box">
@@ -521,15 +556,55 @@
       </div>
     </section>
 
-    <!-- Websites Grid -->
-    <section class="websites-grid" id="websitesGrid">
-      <!-- Populated by JavaScript -->
-    </section>
+    <section class="websites-grid" id="websitesGrid"></section>
 
   </main>
 
   <script>
     const SITES_DATA = [
+      // Official
+      {
+        name: "Crunchyroll",
+        category: "official",
+        badge: "Official",
+        badgeClass: "badge-official",
+        domain: "crunchyroll.com",
+        url: "https://www.crunchyroll.com",
+        desc: "Largest licensed anime streaming catalogue worldwide with simulcasts directly from Japan, official dubs, and store.",
+        tags: ["Simulcast", "Legal", "Sub / Dub"]
+      },
+      {
+        name: "HIDIVE",
+        category: "official",
+        badge: "Official",
+        badgeClass: "badge-official",
+        domain: "hidive.com",
+        url: "https://www.hidive.com",
+        desc: "Official home for Sentai Filmworks exclusives, uncut dubs, classic releases, and seasonal simulcasts.",
+        tags: ["Legal", "Uncut", "Exclusives"]
+      },
+      {
+        name: "MANGA Plus",
+        category: "official",
+        badge: "Official",
+        badgeClass: "badge-official",
+        domain: "mangaplus.shueisha.co.jp",
+        url: "https://mangaplus.shueisha.co.jp",
+        desc: "Official online reader by Shueisha publishing latest Weekly Shonen Jump chapters simultaneously with Japan for free.",
+        tags: ["Official Jump", "Free Chapters", "Simulpub"]
+      },
+      {
+        name: "Webtoons",
+        category: "official",
+        badge: "Official",
+        badgeClass: "badge-official",
+        domain: "webtoons.com",
+        url: "https://www.webtoons.com",
+        desc: "Global hub for serialized digital manhwa, indie creators, weekly scroll releases, and original comic IPs.",
+        tags: ["Official Manhwa", "Free Daily", "Mobile App"]
+      },
+
+      // Anime Streaming
       {
         name: "Anikoto",
         category: "anime",
@@ -538,7 +613,7 @@
         domain: "anikoto.me",
         url: "https://anikoto.me",
         desc: "Modern, streamlined interface featuring comprehensive catalog filters, multi-source video playback, and schedule tabs.",
-        tags: ["No Forced Ads", "HD Streams", "Sub / Dub"]
+        tags: ["Filter Bar", "HD Streams", "Sub / Dub"]
       },
       {
         name: "AniWatch",
@@ -551,15 +626,37 @@
         tags: ["Fast Servers", "Watch2Gether", "Community"]
       },
       {
-        name: "HiAnime",
+        name: "AnimePahe",
         category: "anime",
         badge: "Anime",
         badgeClass: "badge-anime",
-        domain: "hianime.to",
-        url: "https://hianime.to",
-        desc: "Extensive anime library covering seasonal series, specials, and movies with dual audio tracks and auto-skip intros.",
-        tags: ["Dual Audio", "Skip Intro", "Huge Catalog"]
+        domain: "animepahe.ru",
+        url: "https://animepahe.ru",
+        desc: "Minimalist, lightweight anime platform specialized in small encoded files and super-fast load speeds for slow connections.",
+        tags: ["Lightweight", "Fast Load", "Encoded HD"]
       },
+      {
+        name: "YugenAnime",
+        category: "anime",
+        badge: "Anime",
+        badgeClass: "badge-anime",
+        domain: "yugenanime.tv",
+        url: "https://yugenanime.tv",
+        desc: "Clean anime interface with built-in episode bookmarks, schedule lists, and responsive design.",
+        tags: ["Schedule", "Bookmarks", "Ad Clean"]
+      },
+      {
+        name: "Gogoanime",
+        category: "anime",
+        badge: "Anime",
+        badgeClass: "badge-anime",
+        domain: "anitaku.to",
+        url: "https://anitaku.to",
+        desc: "Longstanding anime streaming mirror network carrying one of the deepest retro and niche OVA libraries online.",
+        tags: ["Retro Anime", "Multi-Host", "Deep Library"]
+      },
+
+      // Manga & Manhwa
       {
         name: "MangaDex",
         category: "manga",
@@ -577,7 +674,7 @@
         badgeClass: "badge-manga",
         domain: "asuracomic.net",
         url: "https://asuracomic.net",
-        desc: "Premier scanlation group and reader specialized in high-definition Korean webtoons, action manhwa, and system leveling series.",
+        desc: "Premier scanlation group and reader specialized in high-definition Korean webtoons, action manhwa, and system series.",
         tags: ["Action Manhwa", "Fast Releases", "High Res"]
       },
       {
@@ -587,9 +684,31 @@
         badgeClass: "badge-manga",
         domain: "flamecomics.xyz",
         url: "https://flamecomics.xyz",
-        desc: "Dedicated comic reader focused on martial arts, fantasy reincarnation, and popular webtoon translations with clean typography.",
+        desc: "Dedicated comic reader focused on martial arts, fantasy reincarnation, and popular webtoon translations.",
         tags: ["Webtoons", "Fast Scans", "Mobile Friendly"]
       },
+      {
+        name: "MangaSee",
+        category: "manga",
+        badge: "Manga",
+        badgeClass: "badge-manga",
+        domain: "mangasee123.com",
+        url: "https://mangasee123.com",
+        desc: "High-quality official digital rips and scanlations with single-page or long-strip vertical reading toggles.",
+        tags: ["HQ Digital Scans", "Fast CDN", "Official Rips"]
+      },
+      {
+        name: "Reaper Scans",
+        category: "manga",
+        badge: "Manhwa",
+        badgeClass: "badge-manga",
+        domain: "reaperscans.com",
+        url: "https://reaperscans.com",
+        desc: "Popular scanlation group providing translations for dark fantasy manhwa, system leveling stories, and light novels.",
+        tags: ["Manhwa & Novels", "Fast Updates", "Dark Fantasy"]
+      },
+
+      // Trackers & Tools
       {
         name: "AniList",
         category: "tools",
@@ -607,7 +726,7 @@
         badgeClass: "badge-tools",
         domain: "myanimelist.net",
         url: "https://myanimelist.net",
-        desc: "The web's oldest and largest anime and manga database with community forums, character wikis, voice actor rankings, and reviews.",
+        desc: "The web's oldest anime and manga database with community forums, character wikis, voice actor rankings, and reviews.",
         tags: ["Large Database", "Forums", "Rankings"]
       },
       {
@@ -617,14 +736,26 @@
         badgeClass: "badge-tools",
         domain: "livechart.me",
         url: "https://livechart.me",
-        desc: "Clean seasonal countdown calendar and airing schedule showing countdown clocks and broadcast channels in your local timezone.",
+        desc: "Clean seasonal countdown calendar and airing schedule showing countdown clocks and broadcast channels in your timezone.",
         tags: ["Airing Schedule", "Countdowns", "Timezone Sync"]
       },
       {
+        name: "Kitsu",
+        category: "tools",
+        badge: "Tracker",
+        badgeClass: "badge-tools",
+        domain: "kitsu.app",
+        url: "https://kitsu.app",
+        desc: "Modern social anime tracker with simple clean feed, mobile apps, and reaction reviews.",
+        tags: ["Modern UI", "Community Feed", "Mobile App"]
+      },
+
+      // Hentai
+      {
         name: "Hanime.tv",
-        category: "adult",
-        badge: "18+ Adult",
-        badgeClass: "badge-adult",
+        category: "hentai",
+        badge: "Hentai",
+        badgeClass: "badge-hentai",
         domain: "hanime.tv",
         url: "https://hanime.tv",
         desc: "Curated adult animation streaming hub with high-definition servers, tag-based discovery, and community playlists.",
@@ -632,13 +763,79 @@
       },
       {
         name: "HentaiHaven",
-        category: "adult",
-        badge: "18+ Adult",
-        badgeClass: "badge-adult",
+        category: "hentai",
+        badge: "Hentai",
+        badgeClass: "badge-hentai",
         domain: "hentaihaven.xxx",
         url: "https://hentaihaven.xxx",
         desc: "Legacy adult animation portal hosting retro classics alongside newly aired uncensored releases.",
         tags: ["18+", "Retro & New", "Categories"]
+      },
+      {
+        name: "nHentai",
+        category: "hentai",
+        badge: "Hentai Manga",
+        badgeClass: "badge-hentai",
+        domain: "nhentai.net",
+        url: "https://nhentai.net",
+        desc: "Largest repository for doujinshi and adult manga, searchable with six-digit identification codes and tag index.",
+        tags: ["Doujinshi", "Code Search", "Tag Index"]
+      },
+      {
+        name: "E-Hentai",
+        category: "hentai",
+        badge: "Hentai Manga",
+        badgeClass: "badge-hentai",
+        domain: "e-hentai.org",
+        url: "https://e-hentai.org",
+        desc: "Archival gallery for doujinshi, Western comics, artist CG collections, and translated adult scanlations.",
+        tags: ["Galleries", "Artist CG", "Deep Archive"]
+      },
+
+      // Defunct Archives
+      {
+        name: "HiAnime",
+        category: "archive",
+        badge: "Defunct",
+        badgeClass: "badge-archive",
+        domain: "hianime.to",
+        url: "#",
+        desc: "Widely used multi-server streaming hub featuring intro skipping and synced comments before going offline in 2026.",
+        tags: ["Memorial", "Taken Down", "Former Leader"],
+        isArchived: true
+      },
+      {
+        name: "KissAnime",
+        category: "archive",
+        badge: "Defunct",
+        badgeClass: "badge-archive",
+        domain: "kissanime.ru",
+        url: "#",
+        desc: "Pioneering anime streaming platform that defined the 2010s era with iconic CAPTCHA verifications and Disqus comments.",
+        tags: ["Memorial", "Closed 2020", "Historic"],
+        isArchived: true
+      },
+      {
+        name: "AniWave (9Anime)",
+        category: "archive",
+        badge: "Defunct",
+        badgeClass: "badge-archive",
+        domain: "aniwave.to",
+        url: "#",
+        desc: "Massive streaming platform renowned for its custom purple UI, auto-tracking, and huge library before voluntary shutdown.",
+        tags: ["Memorial", "Closed 2024", "Former Giant"],
+        isArchived: true
+      },
+      {
+        name: "Zoro.to",
+        category: "archive",
+        badge: "Defunct",
+        badgeClass: "badge-archive",
+        domain: "zoro.to",
+        url: "#",
+        desc: "Ad-free anime destination that skyrocketed in popularity throughout 2022 before rebranding and eventual closure.",
+        tags: ["Memorial", "Rebranded", "Closed"],
+        isArchived: true
       }
     ];
 
@@ -670,11 +867,15 @@
 
       grid.innerHTML = filtered.map(site => {
         const firstLetter = site.name.charAt(0).toUpperCase();
+        const isArchived = !!site.isArchived;
+
         return `
-          <div class="site-card">
+          <div class="site-card ${isArchived ? 'is-archived' : ''}">
             <div class="site-card-top">
               <div class="site-brand">
-                <div class="site-icon-box">${firstLetter}</div>
+                <div class="site-icon-box" style="${isArchived ? 'background: rgba(239, 68, 68, 0.1); color: #f87171;' : ''}">
+                  ${firstLetter}
+                </div>
                 <div class="site-name-wrap">
                   <h3>${site.name}</h3>
                   <span class="site-domain">${site.domain}</span>
@@ -689,16 +890,22 @@
               ${site.tags.map(t => `<span class="meta-tag">${t}</span>`).join('')}
             </div>
 
-            <a href="${site.url}" target="_blank" rel="noopener noreferrer" class="site-btn">
-              <span>Visit Site</span>
-              <span class="material-symbols-outlined" style="font-size: 16px;">open_in_new</span>
-            </a>
+            ${isArchived ? `
+              <div class="site-btn btn-archived">
+                <span class="material-symbols-outlined" style="font-size: 16px;">lock</span>
+                <span>Offline / Defunct</span>
+              </div>
+            ` : `
+              <a href="${site.url}" target="_blank" rel="noopener noreferrer" class="site-btn">
+                <span>Visit Site</span>
+                <span class="material-symbols-outlined" style="font-size: 16px;">open_in_new</span>
+              </a>
+            `}
           </div>
         `;
       }).join('');
     }
 
-    // Category Filter Buttons
     document.querySelectorAll(".cat-btn").forEach(btn => {
       btn.addEventListener("click", () => {
         document.querySelectorAll(".cat-btn").forEach(b => b.classList.remove("active"));
@@ -708,7 +915,6 @@
       });
     });
 
-    // Instant Search Input
     document.getElementById("siteSearchInput").addEventListener("input", (e) => {
       searchQuery = e.target.value.trim().toLowerCase();
       renderSites();
