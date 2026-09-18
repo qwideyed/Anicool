@@ -10,7 +10,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="AniCool" />
   <meta property="og:title" content="AniCool - Ad-Free Anime & Manga Discovery" />
-  <meta property="og:description" content="Stream and discover trending anime, read manga and manhwa, explore weekly broadcast schedules with zero ads." />
+  <meta property="og:description" content="Stream and discover trending anime, read manga and manhwa with zero ads." />
   <meta property="og:image" content="favicon.png" />
   <meta name="theme-color" content="#ff2a74" />
 
@@ -51,7 +51,7 @@
         radial-gradient(circle at 85% 20%, rgba(157, 92, 246, 0.1) 0%, transparent 40%);
     }
 
-    /* Outer Wrapper for Header + Outside Buttons */
+    /* Header Nav */
     .header-wrapper {
       position: sticky;
       top: 16px;
@@ -63,7 +63,6 @@
       padding: 0 16px;
     }
 
-    /* Slimmer, Compact Bubble Header */
     .bubble-nav {
       display: flex;
       align-items: center;
@@ -308,7 +307,7 @@
       font-size: 18px;
     }
 
-    /* Community Discord Banner & Notice Ticker */
+    /* Community Discord Banner */
     .discord-community-banner {
       background: linear-gradient(135deg, rgba(88, 101, 242, 0.15), rgba(157, 92, 246, 0.12));
       border: 1px solid rgba(88, 101, 242, 0.35);
@@ -894,8 +893,78 @@
       background: var(--accent-pink);
     }
 
-    /* Airing Schedule Section */
-    .schedule-card {
+    /* Tabbed Switcher Area (TTW - ATFF - AUA) */
+    .switcher-section {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .switcher-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .switcher-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .switcher-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .tab-pills-bar {
+      display: flex;
+      align-items: center;
+      background: var(--bubble-bg);
+      border: 1px solid var(--bubble-border);
+      border-radius: 9999px;
+      padding: 3px;
+      gap: 4px;
+      backdrop-filter: blur(16px);
+    }
+
+    .tab-pill-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-dim);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 6px 16px;
+      border-radius: 9999px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .tab-pill-btn:hover {
+      color: #fff;
+    }
+
+    .tab-pill-btn.active {
+      background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(255, 42, 116, 0.35);
+    }
+
+    /* Unified Grid Display */
+    .tabbed-grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 20px;
+      min-height: 300px;
+    }
+
+    /* Horizontal Top 10 Leaderboard */
+    .top10-horizontal-section {
       background: var(--card-bg);
       border: 1px solid var(--bubble-border);
       border-radius: 26px;
@@ -906,238 +975,98 @@
       backdrop-filter: blur(20px);
     }
 
-    .schedule-header {
+    .top10-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 14px;
+      gap: 12px;
     }
 
-    .schedule-title-block {
+    .top10-title-wrap {
       display: flex;
       align-items: center;
       gap: 10px;
     }
 
-    .schedule-days-bar {
+    .top10-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #fff;
       display: flex;
       align-items: center;
       gap: 8px;
-      overflow-x: auto;
-      padding-bottom: 4px;
     }
 
-    .day-chip {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--bubble-border);
-      color: var(--text-dim);
-      font-size: 0.8rem;
-      font-weight: 600;
-      padding: 6px 14px;
-      border-radius: 9999px;
-      cursor: pointer;
-      font-family: inherit;
-      transition: all 0.2s;
-      white-space: nowrap;
-    }
-
-    .day-chip:hover {
-      color: #fff;
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    .day-chip.active {
-      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-      color: #fff;
-      border-color: transparent;
-      box-shadow: 0 4px 14px rgba(0, 210, 255, 0.35);
-    }
-
-    .schedule-slots-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 12px;
-      max-height: 380px;
-      overflow-y: auto;
-      padding-right: 4px;
-    }
-
-    .schedule-item-row {
+    .top10-scroll-row {
       display: flex;
-      align-items: center;
-      gap: 12px;
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid var(--bubble-border);
-      border-radius: 14px;
-      padding: 8px 12px;
-      text-decoration: none;
-      color: #fff;
-      transition: all 0.2s;
-    }
-
-    .schedule-item-row:hover {
-      background: rgba(255, 255, 255, 0.06);
-      transform: translateX(4px);
-    }
-
-    .schedule-time-pill {
-      background: rgba(0, 210, 255, 0.15);
-      border: 1px solid rgba(0, 210, 255, 0.3);
-      color: var(--accent-blue);
-      font-size: 0.72rem;
-      font-weight: 700;
-      padding: 4px 8px;
-      border-radius: 6px;
-      white-space: nowrap;
-    }
-
-    .schedule-thumb {
-      width: 36px;
-      height: 48px;
-      border-radius: 6px;
-      object-fit: cover;
-      flex-shrink: 0;
-    }
-
-    .schedule-info {
-      flex: 1;
-      overflow: hidden;
-    }
-
-    .schedule-name {
-      font-size: 0.85rem;
-      font-weight: 600;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .schedule-sub {
-      font-size: 0.72rem;
-      color: var(--text-dim);
-    }
-
-    /* Split Two-Column Layout for Trending Grid + Top 10 Leaderboard Sidebar */
-    .two-col-layout {
-      display: grid;
-      grid-template-columns: 1fr 340px;
-      gap: 28px;
-      align-items: flex-start;
-    }
-
-    /* Leaderboard Sidebar */
-    .leaderboard-sidebar {
-      background: var(--card-bg);
-      border: 1px solid var(--bubble-border);
-      border-radius: 26px;
-      padding: 22px;
-      display: flex;
-      flex-direction: column;
       gap: 16px;
-      backdrop-filter: blur(20px);
-      position: sticky;
-      top: 90px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+      scrollbar-width: thin;
     }
 
-    .leaderboard-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
+    .top10-scroll-row::-webkit-scrollbar {
+      height: 6px;
     }
 
-    .leaderboard-title {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+    .top10-scroll-row::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 4px;
     }
 
-    .leaderboard-tabs {
-      display: flex;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--bubble-border);
-      border-radius: 9999px;
-      padding: 2px;
-      gap: 2px;
-    }
-
-    .rank-tab-btn {
-      background: transparent;
-      border: none;
-      color: var(--text-dim);
-      font-size: 0.72rem;
-      font-weight: 600;
-      padding: 4px 10px;
-      border-radius: 9999px;
-      cursor: pointer;
-      font-family: inherit;
-      transition: all 0.2s;
-    }
-
-    .rank-tab-btn.active {
-      background: var(--accent-pink);
-      color: #fff;
-    }
-
-    .leaderboard-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .leaderboard-item {
+    .top10-item-card {
+      flex: 0 0 210px;
       display: flex;
       align-items: center;
       gap: 12px;
-      padding: 8px 10px;
-      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--bubble-border);
+      border-radius: 18px;
+      padding: 10px 12px;
       text-decoration: none;
       color: #fff;
-      background: rgba(255, 255, 255, 0.02);
-      transition: all 0.2s;
+      transition: all 0.25s ease;
     }
 
-    .leaderboard-item:hover {
-      background: rgba(255, 255, 255, 0.07);
-      transform: translateX(3px);
+    .top10-item-card:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--accent-pink);
+      transform: translateY(-3px);
     }
 
-    .rank-num {
-      width: 26px;
-      height: 26px;
+    .top10-rank-badge {
+      width: 28px;
+      height: 28px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.75rem;
+      font-size: 0.8rem;
       font-weight: 800;
       background: rgba(255, 255, 255, 0.08);
       color: var(--text-dim);
       flex-shrink: 0;
     }
 
-    .rank-num.rank-1 { background: #eab308; color: #000; box-shadow: 0 0 10px rgba(234, 179, 8, 0.4); }
-    .rank-num.rank-2 { background: #94a3b8; color: #000; }
-    .rank-num.rank-3 { background: #b45309; color: #fff; }
+    .top10-rank-badge.rank-1 { background: #eab308; color: #000; box-shadow: 0 0 10px rgba(234, 179, 8, 0.4); }
+    .top10-rank-badge.rank-2 { background: #94a3b8; color: #000; }
+    .top10-rank-badge.rank-3 { background: #b45309; color: #fff; }
 
-    .rank-thumb {
-      width: 38px;
-      height: 50px;
+    .top10-thumb {
+      width: 44px;
+      height: 58px;
       border-radius: 8px;
       object-fit: cover;
       flex-shrink: 0;
     }
 
-    .rank-info {
+    .top10-info {
       flex: 1;
       overflow: hidden;
     }
 
-    .rank-title {
+    .top10-name {
       font-size: 0.85rem;
       font-weight: 600;
       white-space: nowrap;
@@ -1145,17 +1074,13 @@
       text-overflow: ellipsis;
     }
 
-    .rank-meta {
+    .top10-sub {
       font-size: 0.72rem;
       color: var(--text-dim);
       display: flex;
       align-items: center;
-      gap: 8px;
-    }
-
-    .rank-score {
-      color: #10b981;
-      font-weight: 600;
+      gap: 6px;
+      margin-top: 2px;
     }
 
     .section-head {
@@ -1402,28 +1327,6 @@
       text-overflow: ellipsis;
     }
 
-    /* Horizontal Carousels */
-    .horizontal-media-carousel {
-      display: flex;
-      gap: 16px;
-      overflow-x: auto;
-      padding-bottom: 12px;
-      scrollbar-width: thin;
-    }
-
-    .horizontal-media-carousel::-webkit-scrollbar {
-      height: 6px;
-    }
-
-    .horizontal-media-carousel::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 4px;
-    }
-
-    .carousel-card-item {
-      flex: 0 0 170px;
-    }
-
     .infinite-scroll-sentinel {
       width: 100%;
       padding: 30px 0;
@@ -1459,15 +1362,6 @@
       100% { background-position: -200% 0; }
     }
 
-    @media (max-width: 1100px) {
-      .two-col-layout {
-        grid-template-columns: 1fr;
-      }
-      .leaderboard-sidebar {
-        position: static;
-      }
-    }
-
     @media (max-width: 990px) {
       .header-wrapper {
         flex-wrap: wrap;
@@ -1489,6 +1383,7 @@
       .hero-title {
         font-size: 1.5rem;
       }
+      .tabbed-grid-container,
       .anime-cards-grid {
         grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
         gap: 16px;
@@ -1538,7 +1433,6 @@
       </nav>
 
       <div class="header-action-group">
-        <!-- Surprise Me / Random Roll Button -->
         <button type="button" class="dice-btn" id="randomRollBtn" title="Surprise Me (Random Anime)">
           <span class="material-symbols-outlined">casino</span>
         </button>
@@ -1550,7 +1444,6 @@
     </header>
 
     <div class="outside-btn-group">
-      <!-- Your Official Discord Invite Link -->
       <a href="https://discord.com/invite/tDny2ubsCx" target="_blank" rel="noopener" class="outside-bubble-btn discord-btn" title="Join our Discord">
         <svg viewBox="0 0 127.14 96.36">
           <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.86,53,48.81,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/>
@@ -1558,7 +1451,6 @@
         <span>Discord</span>
       </a>
 
-      <!-- Donation Button -->
       <a href="donate.html" class="outside-bubble-btn donate-btn" title="Support AniCool">
         <span class="material-symbols-outlined donate-icon">favorite</span>
         <span>Donate</span>
@@ -1598,7 +1490,7 @@
 
   <main class="main-content">
 
-    <!-- Community Discord Banner & Notice -->
+    <!-- Community Discord Banner -->
     <div class="discord-community-banner">
       <div class="discord-banner-left">
         <div class="discord-badge-icon">
@@ -1617,7 +1509,7 @@
       </a>
     </div>
 
-    <!-- Recently Viewed / Continue Browsing Strip -->
+    <!-- Continue Browsing Strip -->
     <div class="history-strip-section" id="historySection">
       <div class="history-header">
         <span class="history-title">
@@ -1664,80 +1556,42 @@
       <div class="carousel-dots" id="carouselDots"></div>
     </div>
 
-    <!-- Daily Airing Schedule Section -->
-    <section class="schedule-card">
-      <div class="schedule-header">
-        <div class="schedule-title-block">
-          <span class="material-symbols-outlined" style="font-size: 24px; color: var(--accent-blue);">calendar_month</span>
-          <div>
-            <h2 style="font-size: 1.15rem; font-weight: 700; color: #fff;">Estimated Airing Schedule</h2>
-            <p style="font-size: 0.75rem; color: var(--text-dim);">Live broadcast countdowns in your local timezone</p>
-          </div>
+    <!-- Tabbed Switcher Area: TTW - ATFF - AUA in ONE unified area -->
+    <section class="switcher-section">
+      <div class="switcher-header">
+        <div class="switcher-title-wrap">
+          <span class="material-symbols-outlined" id="switcherIcon" style="font-size: 26px; color: var(--accent-pink);">local_fire_department</span>
+          <h2 class="switcher-title" id="switcherTitle">Trending This Week</h2>
         </div>
 
-        <div class="schedule-days-bar" id="scheduleDaysBar">
-          <!-- Populated by JavaScript with Mon-Sun -->
+        <div class="tab-pills-bar">
+          <button type="button" class="tab-pill-btn active" onclick="switchCategoryTab('TTW', this)">TTW</button>
+          <button type="button" class="tab-pill-btn" onclick="switchCategoryTab('ATFF', this)">ATFF</button>
+          <button type="button" class="tab-pill-btn" onclick="switchCategoryTab('AUA', this)">AUA</button>
         </div>
       </div>
 
-      <div class="schedule-slots-grid" id="scheduleGrid">
-        <div style="grid-column: 1/-1; text-align: center; color: var(--text-dim); padding: 20px;">Loading schedule...</div>
-      </div>
+      <div class="tabbed-grid-container" id="tabbedMediaGrid"></div>
     </section>
 
-    <!-- Two-Column Section: Trending This Week + Top 10 Leaderboard Sidebar -->
-    <div class="two-col-layout">
-      
-      <!-- Main Trending Grid -->
-      <section>
-        <div class="section-head">
-          <div class="section-title-wrap">
-            <span class="material-symbols-outlined section-icon">local_fire_department</span>
-            <h2 class="section-title">Trending This Week</h2>
-          </div>
-        </div>
-        <div class="anime-cards-grid" id="trendingGrid"></div>
-      </section>
-
-      <!-- Top 10 Leaderboard Sidebar -->
-      <aside class="leaderboard-sidebar">
-        <div class="leaderboard-head">
-          <div class="leaderboard-title">
-            <span class="material-symbols-outlined" style="color: #eab308; font-size: 22px;">trophy</span> Top 10
-          </div>
-          <div class="leaderboard-tabs">
-            <button type="button" class="rank-tab-btn active" onclick="switchLeaderboard('today', this)">Today</button>
-            <button type="button" class="rank-tab-btn" onclick="switchLeaderboard('week', this)">Week</button>
-            <button type="button" class="rank-tab-btn" onclick="switchLeaderboard('all', this)">All Time</button>
-          </div>
+    <!-- Horizontal Top 10 Leaderboard Area -->
+    <section class="top10-horizontal-section">
+      <div class="top10-header">
+        <div class="top10-title-wrap">
+          <span class="material-symbols-outlined" style="color: #eab308; font-size: 26px;">trophy</span>
+          <h2 class="top10-title">Top 10 Rankings</h2>
         </div>
 
-        <div class="leaderboard-list" id="leaderboardList">
-          <div style="text-align: center; color: var(--text-dim); font-size: 0.82rem; padding: 20px;">Loading rankings...</div>
-        </div>
-      </aside>
-
-    </div>
-
-    <!-- Seasonal Quick Pick Carousels -->
-    <section>
-      <div class="section-head">
-        <div class="section-title-wrap">
-          <span class="material-symbols-outlined section-icon" style="color: var(--accent-blue);">upcoming</span>
-          <h2 class="section-title">Anticipated Upcoming Anime</h2>
+        <div class="tab-pills-bar">
+          <button type="button" class="tab-pill-btn active" onclick="switchTop10Range('today', this)">Today</button>
+          <button type="button" class="tab-pill-btn" onclick="switchTop10Range('week', this)">This Week</button>
+          <button type="button" class="tab-pill-btn" onclick="switchTop10Range('all', this)">All Time</button>
         </div>
       </div>
-      <div class="horizontal-media-carousel" id="upcomingCarousel"></div>
-    </section>
 
-    <section>
-      <div class="section-head">
-        <div class="section-title-wrap">
-          <span class="material-symbols-outlined section-icon" style="color: #facc15;">grade</span>
-          <h2 class="section-title">All-Time Fan Favorites</h2>
-        </div>
+      <div class="top10-scroll-row" id="top10ScrollRow">
+        <div style="color: var(--text-dim); padding: 10px;">Loading rankings...</div>
       </div>
-      <div class="horizontal-media-carousel" id="favoritesCarousel"></div>
     </section>
 
     <!-- Infinite Scroll Explore Catalog -->
@@ -1780,6 +1634,10 @@
     let popularPage = 1;
     let hasNextPage = true;
     let isLoadingMore = false;
+
+    // Active Category Tab: 'TTW' (Trending), 'ATFF' (Favorites), 'AUA' (Anticipated)
+    let currentTab = 'TTW';
+    const tabCache = {};
 
     // Search Popup
     openSearchBtn.addEventListener('click', () => {
@@ -1981,7 +1839,7 @@
       }
     }
 
-    // Recently Viewed (LocalStorage)
+    // Recently Viewed
     function saveToHistory(id, title, image) {
       try {
         let history = JSON.parse(localStorage.getItem('ani_history') || '[]');
@@ -2016,171 +1874,6 @@
     function clearHistory() {
       localStorage.removeItem('ani_history');
       document.getElementById('historySection').style.display = 'none';
-    }
-
-    // Daily Airing Schedule
-    const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    let selectedScheduleDay = new Date().getDay();
-
-    function initScheduleDaysBar() {
-      const container = document.getElementById('scheduleDaysBar');
-      const today = new Date().getDay();
-
-      container.innerHTML = DAYS.map((d, idx) => `
-        <button type="button" class="day-chip ${idx === today ? 'active' : ''}" onclick="selectScheduleDay(${idx}, this)">
-          ${d} ${idx === today ? '(Today)' : ''}
-        </button>
-      `).join('');
-
-      fetchScheduleForDay(today);
-    }
-
-    function selectScheduleDay(dayIdx, btn) {
-      document.querySelectorAll('#scheduleDaysBar .day-chip').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      selectedScheduleDay = dayIdx;
-      fetchScheduleForDay(dayIdx);
-    }
-
-    async function fetchScheduleForDay(dayIdx) {
-      const grid = document.getElementById('scheduleGrid');
-      grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: var(--text-dim); padding: 20px;">Fetching broadcasting slots...</div>';
-
-      const now = new Date();
-      const currentDayIdx = now.getDay();
-      const distance = dayIdx - currentDayIdx;
-
-      const targetDate = new Date(now);
-      targetDate.setDate(now.getDate() + distance);
-      targetDate.setHours(0, 0, 0, 0);
-
-      const startUnix = Math.floor(targetDate.getTime() / 1000);
-      const endUnix = startUnix + 86400;
-
-      const query = `
-        query ($start: Int, $end: Int) {
-          Page(page: 1, perPage: 24) {
-            airingSchedules(airingAt_greater: $start, airingAt_lesser: $end, sort: TIME) {
-              id
-              airingAt
-              episode
-              media {
-                id
-                title { english romaji native }
-                coverImage { medium }
-                format
-              }
-            }
-          }
-        }
-      `;
-
-      try {
-        const res = await fetch('https://graphql.anilist.co', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ query, variables: { start: startUnix, end: endUnix } })
-        });
-
-        const json = await res.json();
-        const slots = json?.data?.Page?.airingSchedules || [];
-
-        if (!slots.length) {
-          grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: var(--text-dim); padding: 20px;">No scheduled releases for this day.</div>';
-          return;
-        }
-
-        grid.innerHTML = slots.map(slot => {
-          const item = slot.media;
-          const time = new Date(slot.airingAt * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-          const title = currentLang === 'JP' ? (item.title.native || item.title.romaji) : (item.title.english || item.title.romaji);
-          const thumb = item.coverImage?.medium || '';
-
-          return `
-            <a href="entry.html?id=${item.id}" class="schedule-item-row" onclick="saveToHistory(${item.id}, '${escapeHtml(title)}', '${thumb}')">
-              <span class="schedule-time-pill">${time}</span>
-              <img src="${thumb}" alt="${title}" class="schedule-thumb" loading="lazy" />
-              <div class="schedule-info">
-                <div class="schedule-name" title="${title}">${title}</div>
-                <div class="schedule-sub">Episode ${slot.episode} • ${item.format || 'TV'}</div>
-              </div>
-            </a>
-          `;
-        }).join('');
-      } catch (e) {
-        grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: var(--text-dim); padding: 20px;">Failed to load schedule.</div>';
-      }
-    }
-
-    // Top 10 Leaderboard
-    let currentLeaderboardTab = 'today';
-
-    function switchLeaderboard(tab, btn) {
-      document.querySelectorAll('.rank-tab-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      currentLeaderboardTab = tab;
-      loadLeaderboard(tab);
-    }
-
-    async function loadLeaderboard(tab = 'today') {
-      const list = document.getElementById('leaderboardList');
-      list.innerHTML = '<div style="text-align: center; color: var(--text-dim); font-size: 0.82rem; padding: 20px;">Updating leaderboard...</div>';
-
-      let sortParam = 'TRENDING_DESC';
-      if (tab === 'week') sortParam = 'POPULARITY_DESC';
-      if (tab === 'all') sortParam = 'SCORE_DESC';
-
-      const query = `
-        query ($sort: [MediaSort]) {
-          Page(page: 1, perPage: 10) {
-            media(type: ANIME, sort: $sort, isAdult: false) {
-              id
-              title { english romaji native }
-              coverImage { medium }
-              averageScore
-              episodes
-              format
-            }
-          }
-        }
-      `;
-
-      try {
-        const res = await fetch('https://graphql.anilist.co', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ query, variables: { sort: [sortParam] } })
-        });
-
-        const json = await res.json();
-        const items = json?.data?.Page?.media || [];
-
-        list.innerHTML = items.map((item, idx) => {
-          const rank = idx + 1;
-          const rankClass = rank === 1 ? 'rank-1' : (rank === 2 ? 'rank-2' : (rank === 3 ? 'rank-3' : ''));
-          const title = currentLang === 'JP' ? (item.title.native || item.title.romaji) : (item.title.english || item.title.romaji);
-          const score = item.averageScore ? `${item.averageScore}%` : 'N/A';
-          const count = item.episodes ? `${item.episodes} eps` : (item.format || 'Anime');
-          const thumb = item.coverImage?.medium || '';
-
-          return `
-            <a href="entry.html?id=${item.id}" class="leaderboard-item" onclick="saveToHistory(${item.id}, '${escapeHtml(title)}', '${thumb}')">
-              <span class="rank-num ${rankClass}">${rank}</span>
-              <img src="${thumb}" alt="${title}" class="rank-thumb" loading="lazy" />
-              <div class="rank-info">
-                <div class="rank-title" title="${title}">${title}</div>
-                <div class="rank-meta">
-                  <span class="rank-score">★ ${score}</span>
-                  <span>•</span>
-                  <span>${count}</span>
-                </div>
-              </div>
-            </a>
-          `;
-        }).join('');
-      } catch (e) {
-        list.innerHTML = '<div style="text-align:center; color:var(--text-dim); padding:20px;">Failed to load ranks.</div>';
-      }
     }
 
     // Category Config
@@ -2330,21 +2023,58 @@
       startSpotlightAuto();
     }
 
-    // Seasonal Quick Carousels
-    async function loadSeasonalCarousels() {
-      const upcomingContainer = document.getElementById('upcomingCarousel');
-      const favoritesContainer = document.getElementById('favoritesCarousel');
+    // Unified Tab Switcher: TTW - ATFF - AUA
+    function switchCategoryTab(tab, btn) {
+      document.querySelectorAll('.tab-pills-bar .tab-pill-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentTab = tab;
+
+      const titleEl = document.getElementById('switcherTitle');
+      const iconEl = document.getElementById('switcherIcon');
+
+      if (tab === 'TTW') {
+        titleEl.textContent = "Trending This Week";
+        iconEl.textContent = "local_fire_department";
+        iconEl.style.color = "var(--accent-pink)";
+      } else if (tab === 'ATFF') {
+        titleEl.textContent = "All-Time Fan Favorites";
+        iconEl.textContent = "star";
+        iconEl.style.color = "#facc15";
+      } else if (tab === 'AUA') {
+        titleEl.textContent = "Anticipated Upcoming Anime";
+        iconEl.textContent = "upcoming";
+        iconEl.style.color = "var(--accent-blue)";
+      }
+
+      loadTabContent(tab);
+    }
+
+    async function loadTabContent(tab) {
+      const container = document.getElementById('tabbedMediaGrid');
+      renderSkeletons(container, 12);
+
+      if (tabCache[tab]) {
+        renderGrid(container, tabCache[tab], false);
+        return;
+      }
+
+      let sortFilter = 'TRENDING_DESC';
+      let statusFilter = '';
+
+      if (tab === 'ATFF') {
+        sortFilter = 'FAVOURITES_DESC';
+      } else if (tab === 'AUA') {
+        sortFilter = 'POPULARITY_DESC';
+        statusFilter = ', status: NOT_YET_RELEASED';
+      }
 
       const query = `
         query {
-          upcoming: Page(page: 1, perPage: 12) {
-            media(type: ANIME, status: NOT_YET_RELEASED, sort: POPULARITY_DESC, isAdult: false) {
-              id title { english romaji native } coverImage { large } format
-            }
-          }
-          favorites: Page(page: 1, perPage: 12) {
-            media(type: ANIME, sort: FAVOURITES_DESC, isAdult: false) {
-              id title { english romaji native } coverImage { large } averageScore format
+          Page(page: 1, perPage: 12) {
+            media(type: ANIME, sort: ${sortFilter} ${statusFilter}, isAdult: false) {
+              id type title { english romaji native } coverImage { extraLarge large }
+              description averageScore episodes chapters format genres season seasonYear
+              studios(isMain: true) { nodes { name } }
             }
           }
         }
@@ -2356,107 +2086,96 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ query })
         });
-        const json = await res.json();
-        const upcoming = json?.data?.upcoming?.media || [];
-        const favorites = json?.data?.favorites?.media || [];
-
-        renderCarouselRow(upcomingContainer, upcoming, false);
-        renderCarouselRow(favoritesContainer, favorites, true);
-      } catch (e) {}
-    }
-
-    function renderCarouselRow(container, items, showScore) {
-      container.innerHTML = items.map(item => {
-        const title = currentLang === 'JP' ? (item.title.native || item.title.romaji) : (item.title.english || item.title.romaji);
-        const score = item.averageScore ? `★ ${item.averageScore}%` : (item.format || 'Media');
-        const img = item.coverImage?.large || '';
-
-        return `
-          <div class="carousel-card-item">
-            <a href="entry.html?id=${item.id}" class="anime-card" onclick="saveToHistory(${item.id}, '${escapeHtml(title)}', '${img}')">
-              <div class="card-thumb-wrap">
-                <img src="${img}" alt="${title}" class="card-thumb" loading="lazy" />
-                ${showScore ? `<div class="card-badge-top">${score}</div>` : ''}
-                <div class="card-format-tag">${item.format || 'TV'}</div>
-              </div>
-              <div class="card-info">
-                <h3 class="card-item-title" title="${title}">${title}</h3>
-                <div class="card-item-sub"><span>${showScore ? score : 'Anticipated'}</span></div>
-              </div>
-            </a>
-          </div>
-        `;
-      }).join('');
-    }
-
-    // Main Grids (Trending & Popular)
-    async function loadBodyContent(category = 'ANIME') {
-      activeCategory = category;
-      popularPage = 1;
-      hasNextPage = true;
-
-      const trendingGrid = document.getElementById('trendingGrid');
-      const popularGrid = document.getElementById('popularGrid');
-      
-      renderSkeletons(trendingGrid, 12);
-      renderSkeletons(popularGrid, 12);
-
-      const { mediaType, isAdult, countryOfOrigin } = getCategoryConfig(category);
-
-      let variables = { type: mediaType, isAdult: isAdult, page: 1 };
-      let varDefs = '$type: MediaType, $isAdult: Boolean,$page: Int';
-      let mediaFilters = 'type: $type, isAdult:$isAdult';
-
-      if (countryOfOrigin) {
-        varDefs += ', $country: CountryCode';
-        mediaFilters += ', countryOfOrigin: $country';
-        variables.country = countryOfOrigin;
+        const data = await res.json();
+        const items = data?.data?.Page?.media || [];
+        tabCache[tab] = items;
+        renderGrid(container, items, false);
+      } catch (err) {
+        container.innerHTML = '<p class="search-state-text">Failed to load content.</p>';
       }
+    }
 
-      const bodyQuery = `
-        query (${varDefs}) {
-          trending: Page(page: 1, perPage: 12) {
-            media(${mediaFilters}, sort: TRENDING_DESC) {
-              id type isAdult title { english romaji native } coverImage { extraLarge large }
-              description averageScore episodes chapters format genres season seasonYear
-              studios(isMain: true) { nodes { name } }
-            }
-          }
-          popular: Page(page: $page, perPage: 12) {
-            pageInfo { hasNextPage }
-            media(${mediaFilters}, sort: POPULARITY_DESC) {
-              id type isAdult title { english romaji native } coverImage { extraLarge large }
-              description averageScore episodes chapters format genres season seasonYear
-              studios(isMain: true) { nodes { name } }
+    // Horizontal Top 10 Leaderboard
+    function switchTop10Range(range, btn) {
+      document.querySelectorAll('.top10-header .tab-pill-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      loadTop10Horizontal(range);
+    }
+
+    async function loadTop10Horizontal(range = 'today') {
+      const row = document.getElementById('top10ScrollRow');
+      row.innerHTML = '<div style="color:var(--text-dim); padding:10px;">Updating top 10...</div>';
+
+      let sortParam = 'TRENDING_DESC';
+      if (range === 'week') sortParam = 'POPULARITY_DESC';
+      if (range === 'all') sortParam = 'SCORE_DESC';
+
+      const query = `
+        query ($sort: [MediaSort]) {
+          Page(page: 1, perPage: 10) {
+            media(type: ANIME, sort: $sort, isAdult: false) {
+              id
+              title { english romaji native }
+              coverImage { medium }
+              averageScore
+              episodes
+              format
             }
           }
         }
       `;
 
       try {
-        const response = await fetch('https://graphql.anilist.co', {
+        const res = await fetch('https://graphql.anilist.co', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ query: bodyQuery, variables })
+          body: JSON.stringify({ query, variables: { sort: [sortParam] } })
         });
 
-        const resData = await response.json();
-        const trendingList = resData?.data?.trending?.media || [];
-        const popularList = resData?.data?.popular?.media || [];
-        hasNextPage = resData?.data?.popular?.pageInfo?.hasNextPage ?? false;
+        const json = await res.json();
+        const items = json?.data?.Page?.media || [];
 
-        renderGrid(trendingGrid, trendingList, false);
-        renderGrid(popularGrid, popularList, false);
-      } catch (err) {
-        trendingGrid.innerHTML = '<p class="search-state-text">Failed to load content from AniList.</p>';
+        row.innerHTML = items.map((item, idx) => {
+          const rank = idx + 1;
+          const rankClass = rank === 1 ? 'rank-1' : (rank === 2 ? 'rank-2' : (rank === 3 ? 'rank-3' : ''));
+          const title = currentLang === 'JP' ? (item.title.native || item.title.romaji) : (item.title.english || item.title.romaji);
+          const score = item.averageScore ? `${item.averageScore}%` : 'N/A';
+          const count = item.episodes ? `${item.episodes} eps` : (item.format || 'Anime');
+          const thumb = item.coverImage?.medium || '';
+
+          return `
+            <a href="entry.html?id=${item.id}" class="top10-item-card" onclick="saveToHistory(${item.id}, '${escapeHtml(title)}', '${thumb}')">
+              <span class="top10-rank-badge ${rankClass}">#${rank}</span>
+              <img src="${thumb}" alt="${title}" class="top10-thumb" loading="lazy" />
+              <div class="top10-info">
+                <div class="top10-name" title="${title}">${title}</div>
+                <div class="top10-sub">
+                  <span style="color:#10b981; font-weight:600;">★ ${score}</span>
+                  <span>•</span>
+                  <span>${count}</span>
+                </div>
+              </div>
+            </a>
+          `;
+        }).join('');
+      } catch (e) {
+        row.innerHTML = '<div style="color:var(--text-dim); padding:10px;">Failed to load top 10.</div>';
       }
     }
 
-    async function loadMorePopular() {
-      if (isLoadingMore || !hasNextPage) return;
+    // Infinite Scroll Explore Catalog
+    async function loadExploreCatalog() {
+      popularPage = 1;
+      hasNextPage = true;
+      const popularGrid = document.getElementById('popularGrid');
+      renderSkeletons(popularGrid, 12);
+      fetchCatalogPage(false);
+    }
+
+    async function fetchCatalogPage(append = false) {
+      if (isLoadingMore || (!hasNextPage && append)) return;
       isLoadingMore = true;
 
-      popularPage++;
       const popularGrid = document.getElementById('popularGrid');
       const { mediaType, isAdult, countryOfOrigin } = getCategoryConfig(activeCategory);
 
@@ -2491,18 +2210,18 @@
         });
 
         const resData = await response.json();
-        const moreItems = resData?.data?.Page?.media || [];
+        const items = resData?.data?.Page?.media || [];
         hasNextPage = resData?.data?.Page?.pageInfo?.hasNextPage ?? false;
 
-        if (moreItems.length > 0) {
-          renderGrid(popularGrid, moreItems, true);
-        }
+        renderGrid(popularGrid, items, append);
 
         if (!hasNextPage) {
           document.getElementById('infiniteSentinel').style.display = 'none';
         }
       } catch (err) {
-        console.error(err);
+        if (!append) {
+          popularGrid.innerHTML = '<p class="search-state-text">Failed to load content from AniList.</p>';
+        }
       } finally {
         isLoadingMore = false;
       }
@@ -2598,7 +2317,8 @@
     }
 
     function escapeHtml(text) {
-      return text ? text.replace(/"/g, '&quot;').replace(/'/g, '&#39;') : '';
+      if (!text) return '';
+      return text.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
     }
 
     function refreshTitles() {
@@ -2627,14 +2347,16 @@
     function switchCategory(cat, element) {
       document.querySelectorAll('.category-pill').forEach(btn => btn.classList.remove('active'));
       element.classList.add('active');
+      activeCategory = cat;
       document.getElementById('infiniteSentinel').style.display = 'flex';
       loadSpotlight(cat);
-      loadBodyContent(cat);
+      loadExploreCatalog();
     }
 
     const observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
-        loadMorePopular();
+      if (entries[0].isIntersecting && !isLoadingMore && hasNextPage) {
+        popularPage++;
+        fetchCatalogPage(true);
       }
     }, { rootMargin: '400px' });
 
@@ -2643,10 +2365,9 @@
     window.addEventListener('DOMContentLoaded', () => {
       loadHistoryStrip();
       loadSpotlight('ANIME');
-      initScheduleDaysBar();
-      loadLeaderboard('today');
-      loadSeasonalCarousels();
-      loadBodyContent('ANIME');
+      loadTabContent('TTW');
+      loadTop10Horizontal('today');
+      loadExploreCatalog();
     });
   </script>
 
