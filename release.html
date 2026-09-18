@@ -186,7 +186,7 @@
       gap: 24px;
     }
 
-    /* Seasonal Status Quick Bar */
+    /* Seasonal Info Bar */
     .season-status-bar {
       display: flex;
       align-items: center;
@@ -392,24 +392,34 @@
       gap: 16px;
     }
 
-    /* Kanban Board View (7 Columns side-by-side) */
+    /* Fixed Weekly Kanban Board View (300px Columns with Smooth Horizontal Scroll) */
     .kanban-board-container {
       display: grid;
-      grid-template-columns: repeat(7, minmax(240px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(7, 300px);
+      gap: 18px;
       overflow-x: auto;
-      padding-bottom: 12px;
+      padding-bottom: 18px;
+      scrollbar-width: thin;
+    }
+
+    .kanban-board-container::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .kanban-board-container::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 4px;
     }
 
     .kanban-column {
-      background: rgba(20, 22, 32, 0.5);
+      background: rgba(20, 22, 32, 0.6);
       border: 1px solid var(--bubble-border);
-      border-radius: 20px;
-      padding: 14px;
+      border-radius: 22px;
+      padding: 16px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      min-height: 500px;
+      gap: 14px;
+      min-height: 600px;
     }
 
     .kanban-col-head {
@@ -417,22 +427,26 @@
       align-items: center;
       justify-content: space-between;
       border-bottom: 1px solid var(--bubble-border);
-      padding-bottom: 8px;
+      padding-bottom: 10px;
     }
 
     .kanban-col-title {
-      font-size: 0.9rem;
+      font-size: 0.98rem;
       font-weight: 700;
       color: #fff;
     }
 
     .kanban-col-count {
-      font-size: 0.72rem;
-      color: var(--text-dim);
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: var(--accent-blue);
+      background: rgba(0, 210, 255, 0.1);
+      padding: 2px 8px;
+      border-radius: 9999px;
     }
 
-    /* Schedule Card */
-    .schedule-entry-card {
+    /* Daily Grid Horizontal Card Layout */
+    .schedule-grid-container .schedule-entry-card {
       background: var(--card-bg);
       border: 1px solid var(--bubble-border);
       border-radius: 20px;
@@ -447,13 +461,13 @@
       position: relative;
     }
 
-    .schedule-entry-card:hover {
+    .schedule-grid-container .schedule-entry-card:hover {
       transform: translateY(-2px);
       border-color: rgba(255, 255, 255, 0.2);
       box-shadow: 0 10px 24px rgba(0, 0, 0, 0.5);
     }
 
-    .entry-thumb-box {
+    .schedule-grid-container .entry-thumb-box {
       position: relative;
       width: 58px;
       height: 78px;
@@ -463,13 +477,13 @@
       background: #141624;
     }
 
-    .entry-thumb {
+    .schedule-grid-container .entry-thumb {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
 
-    .entry-meta-col {
+    .schedule-grid-container .entry-meta-col {
       display: flex;
       flex-direction: column;
       gap: 4px;
@@ -477,13 +491,114 @@
       min-width: 0;
     }
 
-    .entry-top-line {
+    .schedule-grid-container .entry-top-line {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 6px;
     }
 
+    .schedule-grid-container .entry-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      line-height: 1.3;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .schedule-grid-container .entry-sub-info {
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Stacked Layout for Weekly Kanban Cards (Prevents Title Truncation) */
+    .kanban-column .schedule-entry-card {
+      background: var(--card-bg);
+      border: 1px solid var(--bubble-border);
+      border-radius: 18px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 10px;
+      text-decoration: none;
+      color: #fff;
+      backdrop-filter: blur(16px);
+      transition: all 0.2s ease;
+    }
+
+    .kanban-column .schedule-entry-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .kanban-column .kanban-card-top {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .kanban-column .entry-thumb-box {
+      width: 48px;
+      height: 66px;
+      border-radius: 8px;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: #141624;
+    }
+
+    .kanban-column .entry-thumb {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .kanban-column .entry-meta-col {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .kanban-column .entry-top-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    .kanban-column .entry-title {
+      font-size: 0.88rem;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 195px;
+    }
+
+    .kanban-column .entry-sub-info {
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .kanban-column .kanban-card-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 8px;
+    }
+
+    /* Common Badges */
     .airing-time-pill {
       display: inline-flex;
       align-items: center;
@@ -530,23 +645,6 @@
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.08);
       color: var(--text-dim);
-    }
-
-    .entry-title {
-      font-size: 0.9rem;
-      font-weight: 600;
-      line-height: 1.3;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .entry-sub-info {
-      font-size: 0.72rem;
-      color: var(--text-dim);
-      display: flex;
-      align-items: center;
-      gap: 6px;
     }
 
     /* Episode Progress Bar */
@@ -872,7 +970,7 @@
       e.stopPropagation();
 
       const startDate = new Date(airUnix * 1000);
-      const endDate = new Date((airUnix + 1800) * 1000); // 30 mins later
+      const endDate = new Date((airUnix + 1800) * 1000);
 
       const formatTime = (d) => d.toISOString().replace(/-|:|\.\d\d\d/g, "");
       const dates = `${formatTime(startDate)}/${formatTime(endDate)}`;
@@ -1010,7 +1108,6 @@
       }
     }
 
-    // Filtering logic helper
     function applySlotFilters(slots) {
       const nowUnix = Math.floor(Date.now() / 1000);
       const favs = getFavorites();
@@ -1045,7 +1142,6 @@
       else renderKanbanBoard();
     }
 
-    // Render Daily View
     function renderDailyGrid() {
       const grid = document.getElementById("scheduleGrid");
       if (!grid) return;
@@ -1057,11 +1153,10 @@
         return;
       }
 
-      grid.innerHTML = filtered.map(slot => createCardHtml(slot)).join("");
+      grid.innerHTML = filtered.map(slot => createCardHtml(slot, false)).join("");
       startCountdownTimers();
     }
 
-    // Render Kanban View
     function renderKanbanBoard() {
       const board = document.getElementById("kanbanBoard");
       if (!board) return;
@@ -1069,7 +1164,7 @@
       board.innerHTML = DAYS_MAP.map((day, dayIdx) => {
         const slotsForDay = applySlotFilters(weekKanbanCache[dayIdx] || []);
         const cardsHtml = slotsForDay.length 
-          ? slotsForDay.map(slot => createCardHtml(slot)).join("")
+          ? slotsForDay.map(slot => createCardHtml(slot, true)).join("")
           : `<p style="font-size: 0.78rem; color: var(--text-dim); padding: 12px 0;">No releases</p>`;
 
         return `
@@ -1086,8 +1181,7 @@
       startCountdownTimers();
     }
 
-    // HTML Generator for a Single Schedule Card
-    function createCardHtml(slot) {
+    function createCardHtml(slot, isKanban = false) {
       const media = slot.media;
       const title = media.title.english || media.title.romaji;
       const timeStr = new Date(slot.airingAt * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
@@ -1102,6 +1196,47 @@
           <div class="progress-bar-wrap" title="${percent}% of season released">
             <div class="progress-bar-fill" style="width: ${percent}%;"></div>
           </div>
+        `;
+      }
+
+      if (isKanban) {
+        return `
+          <a href="entry.html?id=${media.id}" class="schedule-entry-card" data-airing-at="${slot.airingAt}">
+            <div class="kanban-card-top">
+              <div class="entry-thumb-box">
+                <img src="${media.coverImage?.medium || ''}" alt="${title}" class="entry-thumb" loading="lazy" />
+              </div>
+              <div class="entry-meta-col">
+                <div class="entry-top-line">
+                  <span class="airing-time-pill">
+                    <span class="material-symbols-outlined" style="font-size: 13px;">alarm</span>
+                    ${timeStr}
+                  </span>
+                  <span class="countdown-timer-pill timer-upcoming" data-air-time="${slot.airingAt}">--:--:--</span>
+                </div>
+                <h3 class="entry-title" title="${title}">${title}</h3>
+                <div class="entry-sub-info">
+                  <span>Ep ${slot.episode}${totalEps ? ` / ${totalEps}` : ''}</span>
+                  <span>•</span>
+                  <span>${media.format || 'TV'}</span>
+                </div>
+              </div>
+            </div>
+            ${progressHtml}
+            <div class="kanban-card-bottom">
+              <span style="font-size: 0.72rem; color: #10b981; font-weight: 600;">
+                ${media.averageScore ? `★ ${media.averageScore}%` : ''}
+              </span>
+              <div class="card-actions-group">
+                <button type="button" class="action-icon-btn ${isFav ? 'is-fav' : ''}" title="${isFav ? 'Remove from Watchlist' : 'Add to Watchlist'}" onclick="toggleFavorite(${media.id}, event)">
+                  <span class="material-symbols-outlined" style="font-size: 18px;">${isFav ? 'star' : 'star_border'}</span>
+                </button>
+                <button type="button" class="action-icon-btn" title="Add to Google Calendar" onclick="openGoogleCalendar('${escapeHtml(title)}', ${slot.episode}, ${slot.airingAt}, event)">
+                  <span class="material-symbols-outlined" style="font-size: 17px;">event</span>
+                </button>
+              </div>
+            </div>
+          </a>
         `;
       }
 
@@ -1139,7 +1274,6 @@
       `;
     }
 
-    // Live Ticking Countdown Clock Handler
     function startCountdownTimers() {
       clearInterval(countdownInterval);
 
