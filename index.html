@@ -304,7 +304,7 @@
       font-size: 18px;
     }
 
-    /* History / Continue Browsing Strip - Clean Pink Outline Hover, No Upward Animation */
+    /* History / Continue Browsing Strip */
     .history-strip-section {
       display: none;
       flex-direction: column;
@@ -821,7 +821,7 @@
       background: var(--accent-pink);
     }
 
-    /* Bubble Container Frame (Encloses Header, Tabs & Cards) */
+    /* Showcase Bubble Wrapper */
     .showcase-bubble-card {
       background: var(--bubble-bg);
       border: 1px solid var(--bubble-border);
@@ -928,7 +928,6 @@
       font-size: 20px;
     }
 
-    /* Slider Row - Scrollbar Hidden & Smooth Animated Gliding */
     .showcase-slider-wrapper {
       position: relative;
       width: 100%;
@@ -949,10 +948,11 @@
       display: none;
     }
 
-    /* Responsive Fixed Width Card Wrapper */
+    /* Continuous Card Sizing for Edge-to-Edge Display Without Empty Gaps */
     .slider-card-wrap {
-      flex: 0 0 178px;
-      width: 178px;
+      flex: 0 0 calc((100% - (5 * 16px)) / 6.2);
+      min-width: 170px;
+      max-width: 220px;
       position: relative;
     }
 
@@ -1011,7 +1011,7 @@
     /* Explore Cards Grid */
     .anime-cards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(178px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(172px, 1fr));
       gap: 20px;
     }
 
@@ -1281,10 +1281,9 @@
         gap: 16px;
       }
       .slider-card-wrap {
-      flex: 0 0 190px;
-      width: 190px;
-      position: relative;
-    }
+        flex: 0 0 145px;
+        min-width: 145px;
+      }
       .card-hover-bubble {
         display: none;
       }
@@ -1330,7 +1329,7 @@
       </nav>
 
       <div class="header-action-group">
-        <button type="button" class="dice-btn" id="randomRollBtn" title="Surprise Me (Random Anime)">
+        <button type="button" class="dice-btn" id="randomRollBtn" title="Surprise Me (Random Pick)">
           <span class="material-symbols-outlined">casino</span>
         </button>
 
@@ -1508,7 +1507,7 @@
     let isLoadingMore = false;
 
     let currentTab = 'TTW';
-    const tabCache = {};
+    let tabCache = {};
 
     openSearchBtn.addEventListener('click', () => {
       searchModal.classList.add('active');
@@ -1675,13 +1674,24 @@
       btn.style.transform = 'rotate(360deg)';
       setTimeout(() => btn.style.transform = 'none', 400);
 
-      const randomPage = Math.floor(Math.random() * 20) + 1;
+      const { mediaType, isAdult, countryOfOrigin } = getCategoryConfig(activeCategory);
+
+      let variables = { type: mediaType, isAdult: isAdult, page: Math.floor(Math.random() * 10) + 1 };
+      let varDefs = '$type: MediaType, $isAdult: Boolean,$page: Int';
+      let mediaFilters = 'type: $type, isAdult:$isAdult';
+
+      if (countryOfOrigin) {
+        varDefs += ', $country: CountryCode';
+        mediaFilters += ', countryOfOrigin: $country';
+        variables.country = countryOfOrigin;
+      }
+
       const query = `
-        query ($page: Int) {
+        query (${varDefs}) {
           Page(page: $page, perPage: 20) {
-            media(type: ANIME, sort: SCORE_DESC, isAdult: false) {
+            media(${mediaFilters}, sort: SCORE_DESC) {
               id
-              title { english romaji }
+              title { english romaji native }
               coverImage { medium }
             }
           }
@@ -1692,7 +1702,7 @@
         const res = await fetch('https://graphql.anilist.co', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ query, variables: { page: randomPage } })
+          body: JSON.stringify({ query, variables })
         });
         const json = await res.json();
         const items = json?.data?.Page?.media || [];
@@ -1892,7 +1902,7 @@
       const container = document.getElementById('tabbedSliderRow');
       if (!container) return;
       const card = container.querySelector('.slider-card-wrap');
-      const cardWidth = card ? card.offsetWidth : 178;
+      const cardWidth = card ? card.offsetWidth : 180;
       const scrollDistance = (cardWidth + 16) * 3;
       container.scrollBy({ left: direction * scrollDistance, behavior: 'smooth' });
     }
@@ -1914,7 +1924,7 @@
         iconEl.textContent = "star";
         iconEl.style.color = "#facc15";
       } else if (tab === 'AUA') {
-        titleEl.textContent = "Anticipated Upcoming Anime";
+        titleEl.textContent = "Anticipated Upcoming Releases";
         iconEl.textContent = "upcoming";
         iconEl.style.color = "var(--accent-blue)";
       } else if (tab === 'T10R') {
@@ -1929,36 +1939,52 @@
     async function loadTabContent(tab) {
       const container = document.getElementById('tabbedSliderRow');
       container.scrollTo({ left: 0, behavior: 'smooth' });
-      
-      container.innerHTML = Array(16).fill(`
+      container.innerHTML = Array(12).fill(`
         <div class="slider-card-wrap">
           <div class="anime-card skeleton" style="min-height: 290px;"></div>
         </div>
       `).join('');
 
-      if (tabCache[tab]) {
-        renderHorizontalCards(container, tabCache[tab], tab === 'T10R');
+      const cacheKey = `${activeCategory}_${tab}`;
+      if (tabCache[cacheKey]) {
+        renderHorizontalCards(container, tabCache[cacheKey], tab === 'T10R');
         return;
       }
 
+      const { mediaType, isAdult, countryOfOrigin } = getCategoryConfig(activeCategory);
+
       let sortFilter = 'TRENDING_DESC';
-      let statusFilter = '';
-      let perPageCount = 24;
+      let perPageCount = 30; // 30 items fills out horizontal space seamlessly
 
       if (tab === 'ATFF') {
         sortFilter = 'FAVOURITES_DESC';
       } else if (tab === 'AUA') {
         sortFilter = 'POPULARITY_DESC';
-        statusFilter = ', status: NOT_YET_RELEASED';
       } else if (tab === 'T10R') {
         sortFilter = 'SCORE_DESC';
         perPageCount = 10;
       }
 
+      let variables = { type: mediaType, isAdult: isAdult };
+      let varDefs = '$type: MediaType,$isAdult: Boolean';
+      let mediaFilters = `type: $type, isAdult: $isAdult, sort: ${sortFilter}`;
+
+      if (tab === 'AUA') {
+        varDefs += ', $status: MediaStatus';
+        mediaFilters += ', status: $status';
+        variables.status = 'NOT_YET_RELEASED';
+      }
+
+      if (countryOfOrigin) {
+        varDefs += ', $country: CountryCode';
+        mediaFilters += ', countryOfOrigin: $country';
+        variables.country = countryOfOrigin;
+      }
+
       const query = `
-        query {
+        query (${varDefs}) {
           Page(page: 1, perPage: ${perPageCount}) {
-            media(type: ANIME, sort: ${sortFilter} ${statusFilter}, isAdult: false) {
+            media(${mediaFilters}) {
               id type isAdult title { english romaji native } coverImage { extraLarge large }
               description averageScore episodes chapters format genres season seasonYear
               studios(isMain: true) { nodes { name } }
@@ -1971,11 +1997,11 @@
         const res = await fetch('https://graphql.anilist.co', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ query })
+          body: JSON.stringify({ query, variables })
         });
         const data = await res.json();
         const items = data?.data?.Page?.media || [];
-        tabCache[tab] = items;
+        tabCache[cacheKey] = items;
         renderHorizontalCards(container, items, tab === 'T10R');
       } catch (err) {
         container.innerHTML = '<p class="search-state-text">Failed to load content.</p>';
@@ -1983,6 +2009,11 @@
     }
 
     function renderHorizontalCards(container, items, isTop10 = false) {
+      if (!items || !items.length) {
+        container.innerHTML = '<p class="search-state-text" style="padding:20px; width:100%;">No releases found in this category.</p>';
+        return;
+      }
+
       const html = items.map((item, idx) => {
         const title = currentLang === 'JP' 
           ? (item.title.native || item.title.romaji) 
@@ -1993,8 +2024,8 @@
         const image = item.coverImage?.extraLarge || item.coverImage?.large || '';
         const cleanedDesc = item.description ? item.description.replace(/<[^>]*>?/gm, '') : 'No synopsis provided.';
         const tags = (item.genres || []).slice(0, 4).map(g => `<span class="hover-tag">${g}</span>`).join('');
-        const typeLabel = item.isAdult ? '18+' : (item.format || 'TV');
-        const studioName = item.studios?.nodes?.[0]?.name || 'Unknown Studio';
+        const typeLabel = item.isAdult ? '18+' : (item.format || item.type || 'MEDIA');
+        const studioName = item.studios?.nodes?.[0]?.name || (item.type === 'MANGA' ? 'Author/Artist' : 'Unknown Studio');
         const seasonInfo = (item.season && item.seasonYear) ? `${item.season} ${item.seasonYear}` : (item.seasonYear ? `${item.seasonYear}` : 'N/A');
         const epInfo = item.episodes ? `${item.episodes} Episodes` : (item.chapters ? `${item.chapters} Chapters` : 'Ongoing / Unknown');
 
@@ -2053,6 +2084,7 @@
       setupBubbleAlignment(container);
     }
 
+    // Infinite Scroll Explore Catalog
     async function loadExploreCatalog() {
       popularPage = 1;
       hasNextPage = true;
@@ -2236,7 +2268,10 @@
       element.classList.add('active');
       activeCategory = cat;
       document.getElementById('infiniteSentinel').style.display = 'flex';
+      
+      // Update Spotlight, TTW/ATFF/AUA/T10R Showcase, and Explore grid in one click
       loadSpotlight(cat);
+      loadTabContent(currentTab);
       loadExploreCatalog();
     }
 
