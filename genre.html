@@ -26,10 +26,12 @@
       --accent-pink: #ff2a74;
       --accent-purple: #9d5cf6;
       --accent-blue: #00d2ff;
+      --discord-color: #5865F2;
+      --donate-color: #f43f5e;
       --text-main: #f8fafc;
       --text-dim: #94a3b8;
-      
-      /* Anikoto Filter Color Scheme */
+
+      /* Filter Theme */
       --filter-btn-bg: #111b2b;
       --filter-menu-bg: #0d1726;
       --filter-border: #1a273b;
@@ -48,22 +50,26 @@
         radial-gradient(circle at 85% 20%, rgba(157, 92, 246, 0.1) 0%, transparent 40%);
     }
 
+    /* Outer Wrapper for Header + Outside Buttons */
     .header-wrapper {
       position: sticky;
-      top: 20px;
+      top: 16px;
       z-index: 1000;
       display: flex;
+      align-items: center;
       justify-content: center;
-      padding: 0 20px;
+      gap: 10px;
+      padding: 0 16px;
     }
 
+    /* Slim, Clean Nav Bar (No Hub, No Search) */
     .bubble-nav {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      width: 100%;
-      max-width: 1280px;
-      padding: 8px 24px;
+      gap: 24px;
+      width: fit-content;
+      padding: 5px 22px;
       background: var(--bubble-bg);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
@@ -73,7 +79,7 @@
     }
 
     .logo a {
-      font-size: 1.35rem;
+      font-size: 1.25rem;
       font-weight: 700;
       text-decoration: none;
       color: #fff;
@@ -96,169 +102,90 @@
       display: flex;
       list-style: none;
       align-items: center;
-      gap: 12px;
+      gap: 6px;
     }
 
     .nav-link {
       display: flex;
       align-items: center;
-      gap: 6px;
-      padding: 8px 18px;
+      gap: 5px;
+      padding: 6px 14px;
       border-radius: 9999px;
       color: var(--text-dim);
       text-decoration: none;
-      font-size: 0.92rem;
+      font-size: 0.88rem;
       font-weight: 500;
       transition: all 0.25s ease;
-      cursor: pointer;
     }
 
     .nav-link:hover,
     .nav-link.active {
       color: #fff;
       background: rgba(255, 255, 255, 0.08);
-      transform: translateY(-2px);
+      transform: translateY(-1px);
     }
 
-    .search-btn {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      border: 1px solid var(--bubble-border);
-      background: rgba(255, 255, 255, 0.05);
-      color: var(--text-main);
+    /* Outside Companion Buttons (Discord & Donate) */
+    .outside-btn-group {
       display: flex;
       align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.25s ease;
-    }
-
-    .search-btn:hover {
-      background: rgba(255, 255, 255, 0.12);
-      border-color: var(--accent-pink);
-      transform: scale(1.06);
-      box-shadow: 0 0 16px rgba(255, 42, 116, 0.35);
-    }
-
-    /* Search Modal */
-    .search-modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(7, 8, 12, 0.85);
-      backdrop-filter: blur(16px);
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      padding-top: 8vh;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.25s ease;
-      z-index: 2000;
-    }
-
-    .search-modal.active {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .search-container {
-      width: 90%;
-      max-width: 720px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .search-box-popup {
-      background: rgba(22, 24, 34, 0.95);
-      border: 1px solid var(--bubble-border);
-      border-radius: 24px;
-      padding: 12px 20px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .search-box-popup input {
-      flex: 1;
-      background: transparent;
-      border: none;
-      outline: none;
-      color: #fff;
-      font-size: 1.05rem;
-      font-family: inherit;
-    }
-
-    .lang-toggle {
-      display: flex;
-      align-items: center;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 9999px;
-      padding: 2px;
-      gap: 2px;
-    }
-
-    .lang-btn {
-      background: transparent;
-      border: none;
-      color: var(--text-dim);
-      font-size: 0.75rem;
-      font-weight: 600;
-      padding: 4px 10px;
-      border-radius: 9999px;
-      cursor: pointer;
-    }
-
-    .lang-btn.active {
-      background: rgba(255, 255, 255, 0.2);
-      color: #fff;
-    }
-
-    .close-search-btn {
-      background: transparent;
-      border: none;
-      color: var(--text-dim);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-    }
-
-    .search-results {
-      max-height: 440px;
-      overflow-y: auto;
-      background: rgba(20, 22, 32, 0.95);
-      border: 1px solid var(--bubble-border);
-      border-radius: 20px;
-      padding: 10px;
-      display: flex;
-      flex-direction: column;
       gap: 8px;
     }
 
-    .search-item {
-      display: flex;
+    .outside-bubble-btn {
+      display: inline-flex;
       align-items: center;
-      gap: 14px;
-      padding: 10px;
-      border-radius: 14px;
+      gap: 7px;
+      height: 44px;
+      padding: 0 16px;
+      background: var(--bubble-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--bubble-border);
+      border-radius: 9999px;
+      color: var(--text-main);
       text-decoration: none;
+      font-size: 0.84rem;
+      font-weight: 600;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+      transition: all 0.25s ease;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .outside-bubble-btn svg {
+      width: 19px;
+      height: 19px;
+      fill: currentColor;
+    }
+
+    .outside-bubble-btn.discord-btn {
+      color: #cbd5e1;
+    }
+
+    .outside-bubble-btn.discord-btn:hover {
+      background: rgba(88, 101, 242, 0.2);
+      border-color: var(--discord-color);
       color: #fff;
-      background: rgba(255, 255, 255, 0.02);
-      transition: all 0.2s ease;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(88, 101, 242, 0.35);
     }
 
-    .search-item:hover {
-      background: rgba(255, 255, 255, 0.08);
-      transform: translateX(4px);
+    .outside-bubble-btn.donate-btn {
+      color: #cbd5e1;
     }
 
-    .search-thumb {
-      width: 48px;
-      height: 64px;
-      border-radius: 8px;
-      object-fit: cover;
+    .outside-bubble-btn.donate-btn:hover {
+      background: rgba(244, 63, 94, 0.2);
+      border-color: var(--donate-color);
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(244, 63, 94, 0.35);
+    }
+
+    .donate-icon {
+      color: var(--donate-color);
+      font-size: 18px;
     }
 
     /* Main Content */
@@ -285,7 +212,7 @@
       letter-spacing: -0.5px;
     }
 
-    /* 5-Column Filter Bar */
+    /* 5-Column Grid */
     .filter-grid {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
@@ -360,7 +287,7 @@
       margin-left: auto;
     }
 
-    /* Anikoto-Style 4-Column Horizontal Dropdown Menu */
+    /* 4-Column Mega Dropdown Menu */
     .cb-menu {
       position: absolute;
       top: calc(100% + 6px);
@@ -402,7 +329,6 @@
       border-radius: 4px;
     }
 
-    /* Clean Checkbox Item row */
     .cb-item {
       display: flex;
       align-items: center;
@@ -758,6 +684,13 @@
     }
 
     @media (max-width: 720px) {
+      .header-wrapper {
+        flex-wrap: wrap;
+      }
+      .bubble-nav {
+        width: 100%;
+        justify-content: space-between;
+      }
       .filter-grid {
         grid-template-columns: 1fr;
       }
@@ -784,8 +717,9 @@
 </head>
 <body>
 
-  <!-- Floating Nav Header -->
+  <!-- Outer Header Wrapper Containing Nav + Outside Companion Buttons -->
   <div class="header-wrapper">
+
     <header class="bubble-nav">
       <div class="logo">
         <a href="index.html">Ani<span>Cool</span></a>
@@ -804,31 +738,25 @@
           </li>
         </ul>
       </nav>
-
-      <div class="actions">
-        <button type="button" class="search-btn" id="openSearchBtn" aria-label="Open Search">
-          <span class="material-symbols-outlined">search</span>
-        </button>
-      </div>
     </header>
-  </div>
 
-  <!-- Search Modal -->
-  <div class="search-modal" id="searchModal">
-    <div class="search-container">
-      <div class="search-box-popup">
-        <span class="material-symbols-outlined">search</span>
-        <input type="text" id="searchInput" placeholder="Search anime or manga..." autocomplete="off" />
-        <div class="lang-toggle">
-          <button type="button" class="lang-btn active" id="langEn">EN</button>
-          <button type="button" class="lang-btn" id="langJp">JP</button>
-        </div>
-        <button type="button" class="close-search-btn" id="closeSearchBtn">
-          <span class="material-symbols-outlined">close</span>
-        </button>
-      </div>
-      <div class="search-results" id="searchResults" style="display: none;"></div>
+    <!-- Outside Floating Companion Buttons -->
+    <div class="outside-btn-group">
+      <!-- Discord Button -->
+      <a href="https://discord.gg" target="_blank" rel="noopener" class="outside-bubble-btn discord-btn" title="Join our Discord">
+        <svg viewBox="0 0 127.14 96.36">
+          <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.86,53,48.81,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/>
+        </svg>
+        <span>Discord</span>
+      </a>
+
+      <!-- Donation Button -->
+      <a href="donate.html" class="outside-bubble-btn donate-btn" title="Support AniCool">
+        <span class="material-symbols-outlined donate-icon">favorite</span>
+        <span>Donate</span>
+      </a>
     </div>
+
   </div>
 
   <main class="main-content">
@@ -1114,47 +1042,6 @@
     let isLoading = false;
     let currentLang = "EN";
 
-    // Setup Header Search Popup
-    const searchModal = document.getElementById('searchModal');
-    const openSearchBtn = document.getElementById('openSearchBtn');
-    const closeSearchBtn = document.getElementById('closeSearchBtn');
-    const searchInput = document.getElementById('searchInput');
-    const searchResults = document.getElementById('searchResults');
-    const langEn = document.getElementById('langEn');
-    const langJp = document.getElementById('langJp');
-
-    openSearchBtn.addEventListener('click', () => {
-      searchModal.classList.add('active');
-      setTimeout(() => searchInput.focus(), 100);
-    });
-
-    function closeSearch() {
-      searchModal.classList.remove('active');
-      searchInput.value = '';
-      searchResults.style.display = 'none';
-      searchResults.innerHTML = '';
-    }
-
-    closeSearchBtn.addEventListener('click', closeSearch);
-    searchModal.addEventListener('click', (e) => { if (e.target === searchModal) closeSearch(); });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && searchModal.classList.contains('active')) closeSearch();
-    });
-
-    langEn.addEventListener('click', () => {
-      currentLang = 'EN';
-      langEn.classList.add('active');
-      langJp.classList.remove('active');
-      refreshTitles();
-    });
-
-    langJp.addEventListener('click', () => {
-      currentLang = 'JP';
-      langJp.classList.add('active');
-      langEn.classList.remove('active');
-      refreshTitles();
-    });
-
     // Custom Dropdown Open/Close & Multi-Check Logic
     document.querySelectorAll('.cb-dropdown').forEach(dropdown => {
       const btn = dropdown.querySelector('.cb-dropdown-btn');
@@ -1342,7 +1229,6 @@
         variables.search = activeFilters.search;
       }
 
-      // Check for Genres vs Tags
       const standardGenres = [
         "Action", "Adventure", "Comedy", "Drama", "Ecchi", "Fantasy",
         "Horror", "Mahou Shoujo", "Mecha", "Music", "Mystery",
@@ -1544,67 +1430,7 @@
       });
     }
 
-    // Modal Search Query
-    let debounceTimer;
-    searchInput.addEventListener('input', (e) => {
-      clearTimeout(debounceTimer);
-      debounceTimer = setTimeout(async () => {
-        const keyword = e.target.value.trim();
-        if (!keyword) {
-          searchResults.style.display = 'none';
-          return;
-        }
-
-        searchResults.style.display = 'flex';
-        searchResults.innerHTML = '<div style="padding:15px; text-align:center; font-size:0.85rem; color:var(--text-dim);">Searching...</div>';
-
-        const q = `
-          query ($search: String) {
-            Page(page: 1, perPage: 6) {
-              media(search: $search, sort: POPULARITY_DESC) {
-                id
-                title { english romaji native }
-                coverImage { medium }
-                format
-                averageScore
-              }
-            }
-          }
-        `;
-
-        try {
-          const res = await fetch('https://graphql.anilist.co', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ query: q, variables: { search: keyword } })
-          });
-          const data = await res.json();
-          const items = data?.data?.Page?.media || [];
-
-          if (!items.length) {
-            searchResults.innerHTML = '<div style="padding:15px; text-align:center; font-size:0.85rem; color:var(--text-dim);">No results found.</div>';
-            return;
-          }
-
-          searchResults.innerHTML = items.map(it => {
-            const title = currentLang === 'JP' ? (it.title.native || it.title.romaji) : (it.title.english || it.title.romaji);
-            return `
-              <a href="entry.html?id=${it.id}" class="search-item">
-                <img src="${it.coverImage.medium}" alt="${title}" class="search-thumb" />
-                <div>
-                  <div style="font-weight:600; font-size:0.9rem;">${title}</div>
-                  <div style="font-size:0.75rem; color:var(--text-dim); margin-top:2px;">
-                    <span>${it.format || 'ANIME'}</span> • <span style="color:#10b981;">★ ${it.averageScore ? it.averageScore + '%' : 'N/A'}</span>
-                  </div>
-                </div>
-              </a>
-            `;
-          }).join('');
-        } catch(err) {}
-      }, 350);
-    });
-
-    // Infinite Scroll
+    // Infinite Scroll Observer
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting && !isLoading && hasNextPage) {
         currentPage++;
