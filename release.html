@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AniCool - Estimated Airing Schedule</title>
+  <title>AniCool - Airing Schedule & Releases</title>
   <link rel="icon" type="image/png" href="favicon.png" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="AniCool" />
-  <meta property="og:title" content="AniCool - Estimated Airing Schedule" />
+  <meta property="og:title" content="AniCool - Airing Schedule & Releases" />
   <meta property="og:description" content="Track anime episode broadcast schedules and live countdowns in your local timezone with zero ads." />
   <meta property="og:image" content="favicon.png" />
   <meta name="theme-color" content="#ff2a74" />
@@ -176,67 +176,55 @@
       box-shadow: 0 8px 24px rgba(244, 63, 94, 0.35);
     }
 
-    .donate-icon {
-      color: var(--donate-color);
-      font-size: 18px;
-    }
-
     /* Main Container */
     .main-content {
-      max-width: 1380px;
+      max-width: 1480px;
       margin: 0 auto;
       padding: 24px 24px 80px;
       display: flex;
       flex-direction: column;
-      gap: 28px;
+      gap: 24px;
     }
 
-    /* Hero Section */
-    .schedule-hero {
-      text-align: center;
+    /* Seasonal Status Quick Bar */
+    .season-status-bar {
       display: flex;
-      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(20, 22, 32, 0.6);
+      border: 1px solid var(--bubble-border);
+      border-radius: 18px;
+      padding: 10px 20px;
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .season-info-left {
+      display: flex;
       align-items: center;
       gap: 12px;
-      padding: 10px 10px 0;
     }
 
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
+    .season-pill-badge {
       background: rgba(0, 210, 255, 0.12);
       border: 1px solid rgba(0, 210, 255, 0.35);
       color: var(--accent-blue);
-      padding: 4px 14px;
-      border-radius: 9999px;
-      font-size: 0.78rem;
       font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 9999px;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.4px;
     }
 
-    .hero-title {
-      font-size: 2.3rem;
-      font-weight: 800;
-      color: #fff;
-      line-height: 1.2;
+    .tz-indicator {
+      display: flex;
+      align-items: center;
+      gap: 4px;
     }
 
-    .hero-title span {
-      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero-subtext {
-      max-width: 640px;
-      font-size: 0.92rem;
-      color: var(--text-dim);
-      line-height: 1.6;
-    }
-
-    /* Bubble Control Bar (Days & Search) */
+    /* Controls Bubble Card */
     .schedule-control-card {
       background: var(--card-bg);
       border: 1px solid var(--bubble-border);
@@ -247,14 +235,6 @@
       gap: 16px;
       backdrop-filter: blur(24px);
       box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
-    }
-
-    .control-top-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
     }
 
     .days-pill-group {
@@ -309,38 +289,79 @@
       box-shadow: 0 6px 18px rgba(255, 42, 116, 0.4);
     }
 
-    .filter-search-group {
+    .filter-options-row {
       display: flex;
       align-items: center;
-      gap: 10px;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .filters-left-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
       flex-wrap: wrap;
     }
 
-    .status-filter-pills {
+    .pill-filter-bar {
       display: flex;
       background: rgba(255, 255, 255, 0.04);
       border: 1px solid var(--bubble-border);
       border-radius: 9999px;
       padding: 3px;
-      gap: 4px;
+      gap: 3px;
     }
 
-    .status-pill-btn {
+    .pill-filter-btn {
       background: transparent;
       border: none;
       color: var(--text-dim);
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       font-weight: 600;
-      padding: 5px 14px;
+      padding: 5px 12px;
+      border-radius: 9999px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .pill-filter-btn:hover {
+      color: #fff;
+    }
+
+    .pill-filter-btn.active {
+      background: rgba(255, 255, 255, 0.16);
+      color: #fff;
+    }
+
+    .watchlist-toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--bubble-border);
+      color: var(--text-dim);
+      font-size: 0.76rem;
+      font-weight: 600;
+      padding: 6px 14px;
       border-radius: 9999px;
       cursor: pointer;
       font-family: inherit;
       transition: all 0.2s;
     }
 
-    .status-pill-btn.active {
-      background: rgba(255, 255, 255, 0.15);
-      color: #fff;
+    .watchlist-toggle-btn.active {
+      background: rgba(234, 179, 8, 0.18);
+      border-color: #eab308;
+      color: #facc15;
+    }
+
+    .view-toggle-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     .schedule-search-input-box {
@@ -351,7 +372,7 @@
       border: 1px solid var(--bubble-border);
       border-radius: 9999px;
       padding: 6px 14px;
-      width: 220px;
+      width: 200px;
     }
 
     .schedule-search-input-box input {
@@ -364,39 +385,79 @@
       width: 100%;
     }
 
-    /* Release Grid */
+    /* Daily Grid View */
     .schedule-grid-container {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
       gap: 16px;
     }
 
+    /* Kanban Board View (7 Columns side-by-side) */
+    .kanban-board-container {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(240px, 1fr));
+      gap: 16px;
+      overflow-x: auto;
+      padding-bottom: 12px;
+    }
+
+    .kanban-column {
+      background: rgba(20, 22, 32, 0.5);
+      border: 1px solid var(--bubble-border);
+      border-radius: 20px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-height: 500px;
+    }
+
+    .kanban-col-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--bubble-border);
+      padding-bottom: 8px;
+    }
+
+    .kanban-col-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .kanban-col-count {
+      font-size: 0.72rem;
+      color: var(--text-dim);
+    }
+
+    /* Schedule Card */
     .schedule-entry-card {
       background: var(--card-bg);
       border: 1px solid var(--bubble-border);
       border-radius: 20px;
-      padding: 14px 16px;
+      padding: 12px 14px;
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
       text-decoration: none;
       color: #fff;
       backdrop-filter: blur(16px);
-      transition: all 0.25s ease;
+      transition: all 0.2s ease;
       position: relative;
     }
 
     .schedule-entry-card:hover {
-      transform: translateY(-3px);
+      transform: translateY(-2px);
       border-color: rgba(255, 255, 255, 0.2);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.5);
     }
 
     .entry-thumb-box {
       position: relative;
-      width: 60px;
-      height: 80px;
-      border-radius: 12px;
+      width: 58px;
+      height: 78px;
+      border-radius: 10px;
       overflow: hidden;
       flex-shrink: 0;
       background: #141624;
@@ -420,56 +481,118 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 8px;
+      gap: 6px;
     }
 
     .airing-time-pill {
       display: inline-flex;
       align-items: center;
       gap: 4px;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 700;
-      padding: 2px 8px;
+      padding: 2px 7px;
       border-radius: 6px;
       background: rgba(0, 210, 255, 0.15);
       border: 1px solid rgba(0, 210, 255, 0.35);
       color: var(--accent-blue);
+      white-space: nowrap;
     }
 
-    .airing-countdown-pill {
-      font-size: 0.72rem;
-      font-weight: 600;
-      padding: 2px 8px;
+    .countdown-timer-pill {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 2px 7px;
       border-radius: 9999px;
+      white-space: nowrap;
+      font-family: monospace;
     }
 
-    .badge-upcoming {
+    .timer-upcoming {
       background: rgba(16, 185, 129, 0.15);
       border: 1px solid rgba(16, 185, 129, 0.35);
       color: #10b981;
     }
 
-    .badge-aired {
+    .timer-just-aired {
+      background: rgba(234, 179, 8, 0.2);
+      border: 1px solid rgba(234, 179, 8, 0.4);
+      color: #facc15;
+      animation: pulse-glow 1.5s infinite;
+    }
+
+    @keyframes pulse-glow {
+      0% { opacity: 0.8; }
+      50% { opacity: 1; }
+      100% { opacity: 0.8; }
+    }
+
+    .timer-aired {
       background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       color: var(--text-dim);
     }
 
     .entry-title {
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       font-weight: 600;
-      line-height: 1.35;
+      line-height: 1.3;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
     .entry-sub-info {
-      font-size: 0.76rem;
+      font-size: 0.72rem;
       color: var(--text-dim);
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
+    }
+
+    /* Episode Progress Bar */
+    .progress-bar-wrap {
+      width: 100%;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 9999px;
+      overflow: hidden;
+      margin-top: 2px;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-pink), var(--accent-purple));
+      border-radius: 9999px;
+    }
+
+    /* Interactive Action Icons (Favorite & Calendar) */
+    .card-actions-group {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .action-icon-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: transparent;
+      border: none;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .action-icon-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+
+    .action-icon-btn.is-fav {
+      color: #facc15;
     }
 
     .skeleton {
@@ -483,17 +606,14 @@
       100% { background-position: -200% 0; }
     }
 
-    @media (max-width: 860px) {
+    @media (max-width: 960px) {
       .header-wrapper {
         flex-wrap: wrap;
       }
       .bubble-nav {
         width: 100%;
       }
-      .hero-title {
-        font-size: 1.8rem;
-      }
-      .control-top-row {
+      .filter-options-row {
         flex-direction: column;
         align-items: stretch;
       }
@@ -542,7 +662,7 @@
       </a>
 
       <a href="donate.html" class="outside-bubble-btn donate-btn" title="Support AniCool">
-        <span class="material-symbols-outlined donate-icon">favorite</span>
+        <span class="material-symbols-outlined" style="color: var(--donate-color); font-size: 18px;">favorite</span>
         <span>Donate</span>
       </a>
     </div>
@@ -550,42 +670,71 @@
 
   <main class="main-content">
 
-    <!-- Hero Title -->
-    <section class="schedule-hero">
-      <div class="hero-badge">
-        <span class="material-symbols-outlined" style="font-size: 15px;">schedule</span>
-        Live Broadcasts
+    <!-- Seasonal Info Bar -->
+    <div class="season-status-bar">
+      <div class="season-info-left">
+        <span class="season-pill-badge" id="currentSeasonLabel">Fall 2026 Cycle</span>
+        <span id="weeklyEpisodeCount">Calculating broadcast totals...</span>
       </div>
-      <h1 class="hero-title">Weekly <span>Airing</span> Schedule</h1>
-      <p class="hero-subtext">
-        Track episode broadcast times and countdowns synchronized to your local timezone.
-      </p>
-    </section>
+      <div class="tz-indicator">
+        <span class="material-symbols-outlined" style="font-size: 16px;">public</span>
+        <span id="tzLabel">Timezone: Local</span>
+      </div>
+    </div>
 
     <!-- Controls Bubble Card -->
     <section class="schedule-control-card">
-      <div class="days-pill-group" id="daysPillGroup">
-        <!-- Mon - Sun Days populated by JavaScript -->
-      </div>
+      <div class="days-pill-group" id="daysPillGroup"></div>
 
-      <div class="control-top-row">
-        <div class="status-filter-pills">
-          <button type="button" class="status-pill-btn active" onclick="filterStatus('ALL', this)">All Episodes</button>
-          <button type="button" class="status-pill-btn" onclick="filterStatus('UPCOMING', this)">Upcoming</button>
-          <button type="button" class="status-pill-btn" onclick="filterStatus('AIRED', this)">Already Aired</button>
+      <div class="filter-options-row">
+        <div class="filters-left-wrap">
+          <!-- Status Filters -->
+          <div class="pill-filter-bar">
+            <button type="button" class="pill-filter-btn active" onclick="setStatusFilter('ALL', this)">All</button>
+            <button type="button" class="pill-filter-btn" onclick="setStatusFilter('UPCOMING', this)">Upcoming</button>
+            <button type="button" class="pill-filter-btn" onclick="setStatusFilter('AIRED', this)">Aired</button>
+          </div>
+
+          <!-- Format Filters -->
+          <div class="pill-filter-bar">
+            <button type="button" class="pill-filter-btn active" onclick="setFormatFilter('ALL', this)">All Formats</button>
+            <button type="button" class="pill-filter-btn" onclick="setFormatFilter('TV', this)">TV</button>
+            <button type="button" class="pill-filter-btn" onclick="setFormatFilter('MOVIE', this)">Movie</button>
+            <button type="button" class="pill-filter-btn" onclick="setFormatFilter('ONA', this)">ONA / OVA</button>
+          </div>
+
+          <!-- Origin Filters -->
+          <div class="pill-filter-bar">
+            <button type="button" class="pill-filter-btn active" onclick="setCountryFilter('ALL', this)">All Origins</button>
+            <button type="button" class="pill-filter-btn" onclick="setCountryFilter('JP', this)">JP (Anime)</button>
+            <button type="button" class="pill-filter-btn" onclick="setCountryFilter('CN', this)">CN (Donghua)</button>
+          </div>
+
+          <!-- Watchlist Only Pinning -->
+          <button type="button" class="watchlist-toggle-btn" id="watchlistToggleBtn" onclick="toggleWatchlistOnly()">
+            <span class="material-symbols-outlined" style="font-size: 16px;">star</span> Watchlist Only
+          </button>
         </div>
 
-        <div class="schedule-search-input-box">
-          <span class="material-symbols-outlined" style="font-size: 18px; color: #64748b;">search</span>
-          <input type="text" id="scheduleSearch" placeholder="Search series..." autocomplete="off" />
+        <div class="view-toggle-wrap">
+          <!-- View Switcher (Daily Grid vs. Weekly Kanban) -->
+          <div class="pill-filter-bar">
+            <button type="button" class="pill-filter-btn active" id="dailyViewBtn" onclick="switchView('daily')">Daily Grid</button>
+            <button type="button" class="pill-filter-btn" id="kanbanViewBtn" onclick="switchView('kanban')">Weekly Board</button>
+          </div>
+
+          <div class="schedule-search-input-box">
+            <span class="material-symbols-outlined" style="font-size: 17px; color: #64748b;">search</span>
+            <input type="text" id="scheduleSearch" placeholder="Find series..." autocomplete="off" />
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Schedule Grid -->
-    <section class="schedule-grid-container" id="scheduleGrid">
-      <!-- Cards rendered here -->
-    </section>
+    <!-- Main Output View (Daily Grid or Kanban Board) -->
+    <div id="scheduleOutput">
+      <section class="schedule-grid-container" id="scheduleGrid"></section>
+    </div>
 
   </main>
 
@@ -593,10 +742,35 @@
     const DAYS_MAP = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     let selectedDayIndex = new Date().getDay();
     let currentScheduleList = [];
-    let currentStatusFilter = 'ALL';
-    let searchQuery = '';
+    let weekKanbanCache = {};
 
-    // Initialize 7-Day Buttons
+    let currentStatusFilter = 'ALL';
+    let currentFormatFilter = 'ALL';
+    let currentCountryFilter = 'ALL';
+    let isWatchlistOnly = false;
+    let searchQuery = '';
+    let currentView = 'daily';
+
+    let countdownInterval = null;
+
+    // Detect Local Timezone
+    try {
+      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      document.getElementById('tzLabel').textContent = `Timezone: ${tz}`;
+    } catch(e) {}
+
+    // Season Detection
+    function detectSeason() {
+      const month = new Date().getMonth() + 1;
+      const year = new Date().getFullYear();
+      let season = "Winter";
+      if (month >= 3 && month <= 5) season = "Spring";
+      else if (month >= 6 && month <= 8) season = "Summer";
+      else if (month >= 9 && month <= 11) season = "Fall";
+      document.getElementById('currentSeasonLabel').textContent = `${season} ${year} Cycle`;
+    }
+
+    // Initialize 7-Day Day Selector Bar
     function initDaysBar() {
       const container = document.getElementById("daysPillGroup");
       const today = new Date();
@@ -626,19 +800,97 @@
       document.querySelectorAll(".day-pill-btn").forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
       selectedDayIndex = dayIndex;
-      fetchDaySchedule(dayIndex);
+      if (currentView === 'daily') {
+        fetchDaySchedule(dayIndex);
+      }
     }
 
-    function filterStatus(status, btn) {
-      document.querySelectorAll(".status-pill-btn").forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
+    // Filter Handlers
+    function setStatusFilter(status, btn) {
+      btn.parentElement.querySelectorAll('.pill-filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
       currentStatusFilter = status;
-      renderSchedule();
+      renderActiveView();
     }
 
+    function setFormatFilter(format, btn) {
+      btn.parentElement.querySelectorAll('.pill-filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentFormatFilter = format;
+      renderActiveView();
+    }
+
+    function setCountryFilter(country, btn) {
+      btn.parentElement.querySelectorAll('.pill-filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentCountryFilter = country;
+      renderActiveView();
+    }
+
+    function toggleWatchlistOnly() {
+      isWatchlistOnly = !isWatchlistOnly;
+      document.getElementById('watchlistToggleBtn').classList.toggle('active', isWatchlistOnly);
+      renderActiveView();
+    }
+
+    // View Switching (Daily vs Kanban)
+    function switchView(view) {
+      currentView = view;
+      document.getElementById('dailyViewBtn').classList.toggle('active', view === 'daily');
+      document.getElementById('kanbanViewBtn').classList.toggle('active', view === 'kanban');
+
+      if (view === 'daily') {
+        fetchDaySchedule(selectedDayIndex);
+      } else {
+        fetchWeeklyKanban();
+      }
+    }
+
+    // Watchlist Favorite Helpers (LocalStorage)
+    function getFavorites() {
+      try {
+        return JSON.parse(localStorage.getItem('anicool_watchlist') || '[]');
+      } catch(e) { return []; }
+    }
+
+    function toggleFavorite(id, e) {
+      e.preventDefault();
+      e.stopPropagation();
+      let favs = getFavorites();
+      if (favs.includes(id)) {
+        favs = favs.filter(item => item !== id);
+      } else {
+        favs.push(id);
+      }
+      localStorage.setItem('anicool_watchlist', JSON.stringify(favs));
+      renderActiveView();
+    }
+
+    // Google Calendar Event Link Creator
+    function openGoogleCalendar(title, epNum, airUnix, e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const startDate = new Date(airUnix * 1000);
+      const endDate = new Date((airUnix + 1800) * 1000); // 30 mins later
+
+      const formatTime = (d) => d.toISOString().replace(/-|:|\.\d\d\d/g, "");
+      const dates = `${formatTime(startDate)}/${formatTime(endDate)}`;
+
+      const text = encodeURIComponent(`${title} - Episode ${epNum}`);
+      const details = encodeURIComponent(`Streaming episode release for ${title} Episode ${epNum}. Local Airing Time.`);
+      const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${text}&dates=${dates}&details=${details}`;
+
+      window.open(url, '_blank');
+    }
+
+    // Fetch Day Schedule from AniList GraphQL
     async function fetchDaySchedule(dayIndex) {
+      const output = document.getElementById("scheduleOutput");
+      output.innerHTML = `<section class="schedule-grid-container" id="scheduleGrid"></section>`;
       const grid = document.getElementById("scheduleGrid");
-      grid.innerHTML = Array(12).fill(`
+
+      grid.innerHTML = Array(9).fill(`
         <div class="schedule-entry-card skeleton" style="min-height: 104px;"></div>
       `).join("");
 
@@ -658,13 +910,13 @@
               id
               airingAt
               episode
-              timeUntilAiring
               media {
                 id
+                countryOfOrigin
+                episodes
+                format
                 title { english romaji native }
                 coverImage { medium }
-                format
-                genres
                 averageScore
               }
             }
@@ -680,85 +932,259 @@
         });
         const json = await res.json();
         currentScheduleList = json?.data?.Page?.airingSchedules || [];
-        renderSchedule();
+        renderDailyGrid();
       } catch (err) {
         grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-dim); padding: 30px;">Failed to load airing data.</p>`;
       }
     }
 
-    function renderSchedule() {
-      const grid = document.getElementById("scheduleGrid");
-      const nowUnix = Math.floor(Date.now() / 1000);
+    // Weekly Kanban Fetch (All 7 Days)
+    async function fetchWeeklyKanban() {
+      const output = document.getElementById("scheduleOutput");
+      output.innerHTML = `<div class="kanban-board-container" id="kanbanBoard"></div>`;
+      const board = document.getElementById("kanbanBoard");
 
-      const filtered = currentScheduleList.filter(item => {
-        const isUpcoming = item.airingAt > nowUnix;
+      board.innerHTML = DAYS_MAP.map(day => `
+        <div class="kanban-column">
+          <div class="kanban-col-head">
+            <span class="kanban-col-title">${day}</span>
+            <span class="kanban-col-count">Loading...</span>
+          </div>
+          <div class="schedule-entry-card skeleton" style="min-height: 90px;"></div>
+          <div class="schedule-entry-card skeleton" style="min-height: 90px;"></div>
+        </div>
+      `).join('');
+
+      const now = new Date();
+      const currentDay = now.getDay();
+      const sundayDate = new Date();
+      sundayDate.setDate(now.getDate() - currentDay);
+      sundayDate.setHours(0, 0, 0, 0);
+
+      const weekStart = Math.floor(sundayDate.getTime() / 1000);
+      const weekEnd = weekStart + (7 * 86400);
+
+      const query = `
+        query ($start: Int, $end: Int) {
+          Page(page: 1, perPage: 50) {
+            airingSchedules(airingAt_greater: $start, airingAt_lesser: $end, sort: TIME) {
+              id
+              airingAt
+              episode
+              media {
+                id
+                countryOfOrigin
+                episodes
+                format
+                title { english romaji native }
+                coverImage { medium }
+                averageScore
+              }
+            }
+          }
+        }
+      `;
+
+      try {
+        const res = await fetch("https://graphql.anilist.co", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ query, variables: { start: weekStart, end: weekEnd } })
+        });
+        const json = await res.json();
+        const allSlots = json?.data?.Page?.airingSchedules || [];
+
+        document.getElementById('weeklyEpisodeCount').textContent = `${allSlots.length} Total Episodes Airing This Week`;
+
+        weekKanbanCache = {};
+        for (let i = 0; i < 7; i++) weekKanbanCache[i] = [];
+
+        allSlots.forEach(slot => {
+          const slotDay = new Date(slot.airingAt * 1000).getDay();
+          if (weekKanbanCache[slotDay]) weekKanbanCache[slotDay].push(slot);
+        });
+
+        renderKanbanBoard();
+      } catch (e) {
+        board.innerHTML = `<p style="padding: 20px; color: var(--text-dim);">Failed to load weekly calendar.</p>`;
+      }
+    }
+
+    // Filtering logic helper
+    function applySlotFilters(slots) {
+      const nowUnix = Math.floor(Date.now() / 1000);
+      const favs = getFavorites();
+
+      return slots.filter(slot => {
+        const isUpcoming = slot.airingAt > nowUnix;
         if (currentStatusFilter === 'UPCOMING' && !isUpcoming) return false;
         if (currentStatusFilter === 'AIRED' && isUpcoming) return false;
 
+        const fmt = slot.media.format || '';
+        if (currentFormatFilter === 'TV' && fmt !== 'TV' && fmt !== 'TV_SHORT') return false;
+        if (currentFormatFilter === 'MOVIE' && fmt !== 'MOVIE') return false;
+        if (currentFormatFilter === 'ONA' && fmt !== 'ONA' && fmt !== 'OVA') return false;
+
+        const country = slot.media.countryOfOrigin || 'JP';
+        if (currentCountryFilter !== 'ALL' && country !== currentCountryFilter) return false;
+
+        if (isWatchlistOnly && !favs.includes(slot.media.id)) return false;
+
         if (searchQuery) {
-          const t1 = (item.media.title.english || '').toLowerCase();
-          const t2 = (item.media.title.romaji || '').toLowerCase();
+          const t1 = (slot.media.title.english || '').toLowerCase();
+          const t2 = (slot.media.title.romaji || '').toLowerCase();
           if (!t1.includes(searchQuery) && !t2.includes(searchQuery)) return false;
         }
 
         return true;
       });
+    }
+
+    function renderActiveView() {
+      if (currentView === 'daily') renderDailyGrid();
+      else renderKanbanBoard();
+    }
+
+    // Render Daily View
+    function renderDailyGrid() {
+      const grid = document.getElementById("scheduleGrid");
+      if (!grid) return;
+
+      const filtered = applySlotFilters(currentScheduleList);
 
       if (!filtered.length) {
         grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-dim); padding: 40px;">No broadcast entries match this filter.</p>`;
         return;
       }
 
-      grid.innerHTML = filtered.map(slot => {
-        const media = slot.media;
-        const title = media.title.english || media.title.romaji;
-        const timeStr = new Date(slot.airingAt * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        const isUpcoming = slot.airingAt > nowUnix;
+      grid.innerHTML = filtered.map(slot => createCardHtml(slot)).join("");
+      startCountdownTimers();
+    }
 
-        let badgeHtml = '';
-        if (isUpcoming) {
-          const diffSec = slot.airingAt - nowUnix;
-          const hours = Math.floor(diffSec / 3600);
-          const mins = Math.floor((diffSec % 3600) / 60);
-          badgeHtml = `<span class="airing-countdown-pill badge-upcoming">in ${hours}h ${mins}m</span>`;
-        } else {
-          badgeHtml = `<span class="airing-countdown-pill badge-aired">Aired</span>`;
-        }
+    // Render Kanban View
+    function renderKanbanBoard() {
+      const board = document.getElementById("kanbanBoard");
+      if (!board) return;
 
-        const score = media.averageScore ? `★ ${media.averageScore}%` : '';
+      board.innerHTML = DAYS_MAP.map((day, dayIdx) => {
+        const slotsForDay = applySlotFilters(weekKanbanCache[dayIdx] || []);
+        const cardsHtml = slotsForDay.length 
+          ? slotsForDay.map(slot => createCardHtml(slot)).join("")
+          : `<p style="font-size: 0.78rem; color: var(--text-dim); padding: 12px 0;">No releases</p>`;
 
         return `
-          <a href="entry.html?id=${media.id}" class="schedule-entry-card">
-            <div class="entry-thumb-box">
-              <img src="${media.coverImage?.medium || ''}" alt="${title}" class="entry-thumb" loading="lazy" />
+          <div class="kanban-column">
+            <div class="kanban-col-head">
+              <span class="kanban-col-title">${day}</span>
+              <span class="kanban-col-count">${slotsForDay.length} eps</span>
             </div>
-            <div class="entry-meta-col">
-              <div class="entry-top-line">
-                <span class="airing-time-pill">
-                  <span class="material-symbols-outlined" style="font-size: 13px;">alarm</span>
-                  ${timeStr}
-                </span>
-                ${badgeHtml}
-              </div>
-              <h3 class="entry-title" title="${title}">${title}</h3>
-              <div class="entry-sub-info">
-                <span>Ep ${slot.episode}</span>
-                <span>•</span>
-                <span>${media.format || 'TV'}</span>
-                ${score ? `<span>•</span><span style="color:#10b981; font-weight:600;">${score}</span>` : ''}
-              </div>
-            </div>
-          </a>
+            ${cardsHtml}
+          </div>
         `;
-      }).join("");
+      }).join('');
+
+      startCountdownTimers();
+    }
+
+    // HTML Generator for a Single Schedule Card
+    function createCardHtml(slot) {
+      const media = slot.media;
+      const title = media.title.english || media.title.romaji;
+      const timeStr = new Date(slot.airingAt * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      const favs = getFavorites();
+      const isFav = favs.includes(media.id);
+
+      const totalEps = media.episodes || null;
+      let progressHtml = '';
+      if (totalEps) {
+        const percent = Math.min(100, Math.round((slot.episode / totalEps) * 100));
+        progressHtml = `
+          <div class="progress-bar-wrap" title="${percent}% of season released">
+            <div class="progress-bar-fill" style="width: ${percent}%;"></div>
+          </div>
+        `;
+      }
+
+      return `
+        <a href="entry.html?id=${media.id}" class="schedule-entry-card" data-airing-at="${slot.airingAt}">
+          <div class="entry-thumb-box">
+            <img src="${media.coverImage?.medium || ''}" alt="${title}" class="entry-thumb" loading="lazy" />
+          </div>
+          <div class="entry-meta-col">
+            <div class="entry-top-line">
+              <span class="airing-time-pill">
+                <span class="material-symbols-outlined" style="font-size: 13px;">alarm</span>
+                ${timeStr}
+              </span>
+              <span class="countdown-timer-pill timer-upcoming" data-air-time="${slot.airingAt}">--:--:--</span>
+            </div>
+            <h3 class="entry-title" title="${title}">${title}</h3>
+            <div class="entry-sub-info">
+              <span>Ep ${slot.episode}${totalEps ? ` / ${totalEps}` : ''}</span>
+              <span>•</span>
+              <span>${media.format || 'TV'}</span>
+            </div>
+            ${progressHtml}
+          </div>
+
+          <div class="card-actions-group">
+            <button type="button" class="action-icon-btn ${isFav ? 'is-fav' : ''}" title="${isFav ? 'Remove from Watchlist' : 'Add to Watchlist'}" onclick="toggleFavorite(${media.id}, event)">
+              <span class="material-symbols-outlined" style="font-size: 18px;">${isFav ? 'star' : 'star_border'}</span>
+            </button>
+            <button type="button" class="action-icon-btn" title="Add to Google Calendar" onclick="openGoogleCalendar('${escapeHtml(title)}', ${slot.episode}, ${slot.airingAt}, event)">
+              <span class="material-symbols-outlined" style="font-size: 17px;">event</span>
+            </button>
+          </div>
+        </a>
+      `;
+    }
+
+    // Live Ticking Countdown Clock Handler
+    function startCountdownTimers() {
+      clearInterval(countdownInterval);
+
+      function updateTimers() {
+        const now = Math.floor(Date.now() / 1000);
+        document.querySelectorAll('.countdown-timer-pill').forEach(pill => {
+          const airTime = parseInt(pill.dataset.airTime, 10);
+          if (!airTime) return;
+
+          const diff = airTime - now;
+
+          if (diff <= 0 && diff > -3600) {
+            pill.textContent = "JUST AIRED";
+            pill.className = "countdown-timer-pill timer-just-aired";
+          } else if (diff <= -3600) {
+            pill.textContent = "Aired";
+            pill.className = "countdown-timer-pill timer-aired";
+          } else {
+            const h = Math.floor(diff / 3600);
+            const m = Math.floor((diff % 3600) / 60);
+            const s = diff % 60;
+
+            const pad = (n) => n.toString().padStart(2, '0');
+            pill.textContent = `${pad(h)}:${pad(m)}:${pad(s)}`;
+            pill.className = "countdown-timer-pill timer-upcoming";
+          }
+        });
+      }
+
+      updateTimers();
+      countdownInterval = setInterval(updateTimers, 1000);
+    }
+
+    function escapeHtml(text) {
+      if (!text) return '';
+      return text.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
     }
 
     document.getElementById("scheduleSearch").addEventListener("input", (e) => {
       searchQuery = e.target.value.trim().toLowerCase();
-      renderSchedule();
+      renderActiveView();
     });
 
     window.addEventListener("DOMContentLoaded", () => {
+      detectSeason();
       initDaysBar();
       fetchDaySchedule(selectedDayIndex);
     });
