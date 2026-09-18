@@ -134,7 +134,7 @@
       box-shadow: 0 0 16px rgba(255, 42, 116, 0.35);
     }
 
-    /* Modal */
+    /* Search Modal */
     .search-modal {
       position: fixed;
       inset: 0;
@@ -264,35 +264,48 @@
       gap: 24px;
     }
 
-    /* Anikoto-Style Filter Bar Section */
-    .anikoto-filter-section {
+    /* Filter Section */
+    .filter-section {
       display: flex;
       flex-direction: column;
       gap: 16px;
     }
 
+    .filter-header-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
     .filter-main-heading {
-      font-size: 1.8rem;
+      font-size: 1.85rem;
       font-weight: 700;
       color: #fff;
       letter-spacing: -0.5px;
     }
 
-    .filter-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 12px;
+    /* Horizontal Multi-select Dropdowns Bar */
+    .horizontal-filter-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 12px;
+      scrollbar-width: thin;
     }
 
-    .filter-input-wrap,
-    .filter-select-wrap {
-      position: relative;
-      width: 100%;
+    .horizontal-filter-bar::-webkit-scrollbar {
+      height: 4px;
+    }
+
+    .horizontal-filter-bar::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 4px;
     }
 
     .filter-input {
-      width: 100%;
-      height: 42px;
+      flex: 0 0 170px;
+      height: 40px;
       background: #0f141f;
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 8px;
@@ -313,53 +326,123 @@
       color: #556277;
     }
 
-    .filter-select {
-      width: 100%;
-      height: 42px;
+    /* Custom Checkbox Dropdown Widget */
+    .cb-dropdown {
+      position: relative;
+      flex: 0 0 auto;
+    }
+
+    .cb-dropdown-btn {
+      height: 40px;
       background: #0f141f;
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 8px;
-      padding: 0 32px 0 14px;
+      padding: 0 14px;
       color: #cbd5e1;
-      font-size: 0.85rem;
+      font-size: 0.83rem;
       font-family: inherit;
-      outline: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
       cursor: pointer;
-      appearance: none;
-      -webkit-appearance: none;
-      transition: border-color 0.2s, background-color 0.2s;
+      white-space: nowrap;
+      transition: all 0.2s;
     }
 
-    .filter-select:focus,
-    .filter-select:hover {
+    .cb-dropdown-btn:hover {
+      background: #131927;
       border-color: rgba(255, 255, 255, 0.2);
-      background: #121826;
     }
 
-    .filter-select option {
-      background: #0d121c;
+    .cb-dropdown.active .cb-dropdown-btn {
+      border-color: var(--accent-blue);
       color: #fff;
     }
 
-    .select-arrow {
-      position: absolute;
-      right: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      pointer-events: none;
-      color: #556277;
-      font-size: 18px;
+    .cb-dropdown-btn .badge-counter {
+      background: var(--accent-pink);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 1px 6px;
+      border-radius: 9999px;
+      display: none;
     }
 
-    .filter-bottom-bar {
+    .cb-menu {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      min-width: 220px;
+      max-height: 280px;
+      overflow-y: auto;
+      background: #0d121c;
+      border: 1px solid var(--bubble-border);
+      border-radius: 12px;
+      padding: 8px;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.8);
+      z-index: 500;
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .cb-dropdown.active .cb-menu {
+      display: flex;
+    }
+
+    .cb-item {
       display: flex;
       align-items: center;
-      gap: 12px;
-      margin-top: 2px;
+      gap: 10px;
+      padding: 6px 10px;
+      border-radius: 6px;
+      color: var(--text-dim);
+      font-size: 0.82rem;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.15s, color 0.15s;
     }
 
-    .filter-bottom-bar .filter-select-wrap {
-      max-width: 220px;
+    .cb-item:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+    }
+
+    .cb-item input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.03);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+
+    .cb-item input[type="checkbox"]:checked {
+      background: var(--accent-blue);
+      border-color: var(--accent-blue);
+    }
+
+    .cb-item input[type="checkbox"]:checked::after {
+      content: '✓';
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    /* Action bar controls */
+    .filter-actions-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
     }
 
     .anikoto-submit-btn {
@@ -367,13 +450,13 @@
       align-items: center;
       justify-content: center;
       gap: 6px;
-      height: 40px;
+      height: 38px;
       padding: 0 22px;
       background: #0ea5e9;
       color: #fff;
       border: none;
       border-radius: 8px;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       font-weight: 600;
       font-family: inherit;
       cursor: pointer;
@@ -405,23 +488,23 @@
       color: #cbd5e1;
     }
 
-    /* Active Heading Summary */
+    /* Active Summary Header */
     .catalog-summary-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
       border-top: 1px solid rgba(255, 255, 255, 0.05);
-      padding-top: 18px;
+      padding-top: 16px;
     }
 
     .summary-title {
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       font-weight: 700;
       color: #fff;
     }
 
     .summary-subtext {
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       color: var(--text-dim);
     }
 
@@ -633,23 +716,7 @@
       100% { background-position: -200% 0; }
     }
 
-    @media (max-width: 1100px) {
-      .filter-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
-    @media (max-width: 720px) {
-      .filter-grid {
-        grid-template-columns: 1fr;
-      }
-      .filter-bottom-bar {
-        flex-direction: column;
-        align-items: stretch;
-      }
-      .filter-bottom-bar .filter-select-wrap {
-        max-width: 100%;
-      }
+    @media (max-width: 920px) {
       .anime-cards-grid {
         grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
         gap: 16px;
@@ -711,180 +778,160 @@
 
   <main class="main-content">
     
-    <!-- Anikoto-Style Filter Area -->
-    <section class="anikoto-filter-section">
-      <h1 class="filter-main-heading">Filter</h1>
+    <section class="filter-section">
+      <div class="filter-header-wrap">
+        <h1 class="filter-main-heading">Filter</h1>
+      </div>
 
-      <!-- 2 Rows x 5 Columns Grid -->
-      <div class="filter-grid">
-        <!-- Row 1: Search -->
-        <div class="filter-input-wrap">
-          <input type="text" class="filter-input" id="filterKeyword" placeholder="Search..." autocomplete="off" />
+      <!-- Horizontal Multi-select Dropdowns Bar -->
+      <div class="horizontal-filter-bar">
+        <!-- Search Input -->
+        <input type="text" class="filter-input" id="filterKeyword" placeholder="Search..." autocomplete="off" />
+
+        <!-- Category Dropdown (Anime, Manga, Hentai, Read Hentai, Manhwa) -->
+        <div class="cb-dropdown" data-filter="category">
+          <button type="button" class="cb-dropdown-btn">
+            Category <span class="badge-counter">0</span>
+            <span class="material-symbols-outlined" style="font-size: 16px;">expand_more</span>
+          </button>
+          <div class="cb-menu">
+            <label class="cb-item"><input type="checkbox" value="ANIME" checked> Anime</label>
+            <label class="cb-item"><input type="checkbox" value="MANGA"> Manga</label>
+            <label class="cb-item"><input type="checkbox" value="HENTAI"> Hentai (18+ Anime)</label>
+            <label class="cb-item"><input type="checkbox" value="READ_HENTAI"> Read Hentai (18+ Manga)</label>
+            <label class="cb-item"><input type="checkbox" value="MANHWA"> Manhwa (Korean)</label>
+          </div>
         </div>
 
-        <!-- Row 1: Genre -->
-        <div class="filter-select-wrap">
-          <select class="filter-select" id="filterGenre">
-            <option value="">Select genre</option>
-            <option value="Action">Action</option>
-            <option value="Adventure">Adventure</option>
-            <option value="Comedy">Comedy</option>
-            <option value="Drama">Drama</option>
-            <option value="Ecchi">Ecchi</option>
-            <option value="Fantasy">Fantasy</option>
-            <option value="Horror">Horror</option>
-            <option value="Mahou Shoujo">Mahou Shoujo</option>
-            <option value="Mecha">Mecha</option>
-            <option value="Music">Music</option>
-            <option value="Mystery">Mystery</option>
-            <option value="Psychological">Psychological</option>
-            <option value="Romance">Romance</option>
-            <option value="Sci-Fi">Sci-Fi</option>
-            <option value="Slice of Life">Slice of Life</option>
-            <option value="Sports">Sports</option>
-            <option value="Supernatural">Supernatural</option>
-            <option value="Thriller">Thriller</option>
-          </select>
-          <span class="material-symbols-outlined select-arrow">expand_more</span>
+        <!-- Genres Dropdown -->
+        <div class="cb-dropdown" data-filter="genres">
+          <button type="button" class="cb-dropdown-btn">
+            Select genre <span class="badge-counter">0</span>
+            <span class="material-symbols-outlined" style="font-size: 16px;">expand_more</span>
+          </button>
+          <div class="cb-menu">
+            <label class="cb-item"><input type="checkbox" value="Action"> Action</label>
+            <label class="cb-item"><input type="checkbox" value="Adventure"> Adventure</label>
+            <label class="cb-item"><input type="checkbox" value="Comedy"> Comedy</label>
+            <label class="cb-item"><input type="checkbox" value="Drama"> Drama</label>
+            <label class="cb-item"><input type="checkbox" value="Ecchi"> Ecchi</label>
+            <label class="cb-item"><input type="checkbox" value="Fantasy"> Fantasy</label>
+            <label class="cb-item"><input type="checkbox" value="Horror"> Horror</label>
+            <label class="cb-item"><input type="checkbox" value="Mahou Shoujo"> Mahou Shoujo</label>
+            <label class="cb-item"><input type="checkbox" value="Mecha"> Mecha</label>
+            <label class="cb-item"><input type="checkbox" value="Music"> Music</label>
+            <label class="cb-item"><input type="checkbox" value="Mystery"> Mystery</label>
+            <label class="cb-item"><input type="checkbox" value="Psychological"> Psychological</label>
+            <label class="cb-item"><input type="checkbox" value="Romance"> Romance</label>
+            <label class="cb-item"><input type="checkbox" value="Sci-Fi"> Sci-Fi</label>
+            <label class="cb-item"><input type="checkbox" value="Slice of Life"> Slice of Life</label>
+            <label class="cb-item"><input type="checkbox" value="Sports"> Sports</label>
+            <label class="cb-item"><input type="checkbox" value="Supernatural"> Supernatural</label>
+            <label class="cb-item"><input type="checkbox" value="Thriller"> Thriller</label>
+          </div>
         </div>
 
-        <!-- Row 1: Season -->
-        <div class="filter-select-wrap">
-          <select class="filter-select" id="filterSeason">
-            <option value="">Select season</option>
-            <option value="WINTER">Winter</option>
-            <option value="SPRING">Spring</option>
-            <option value="SUMMER">Summer</option>
-            <option value="FALL">Fall</option>
-          </select>
-          <span class="material-symbols-outlined select-arrow">expand_more</span>
+        <!-- Year / Decade Dropdown -->
+        <div class="cb-dropdown" data-filter="years">
+          <button type="button" class="cb-dropdown-btn">
+            Select year <span class="badge-counter">0</span>
+            <span class="material-symbols-outlined" style="font-size: 16px;">expand_more</span>
+          </button>
+          <div class="cb-menu">
+            <label class="cb-item"><input type="checkbox" value="2027"> 2027</label>
+            <label class="cb-item"><input type="checkbox" value="2026"> 2026</label>
+            <label class="cb-item"><input type="checkbox" value="2025"> 2025</label>
+            <label class="cb-item"><input type="checkbox" value="2024"> 2024</label>
+            <label class="cb-item"><input type="checkbox" value="2023"> 2023</label>
+            <label class="cb-item"><input type="checkbox" value="2022"> 2022</label>
+            <label class="cb-item"><input type="checkbox" value="2021"> 2021</label>
+            <label class="cb-item"><input type="checkbox" value="2020"> 2020</label>
+            <label class="cb-item"><input type="checkbox" value="2010"> 2010s</label>
+            <label class="cb-item"><input type="checkbox" value="2000"> 2000s</label>
+            <label class="cb-item"><input type="checkbox" value="1990"> 1990s</label>
+          </div>
         </div>
 
-        <!-- Row 1: Year -->
-        <div class="filter-select-wrap">
-          <select class="filter-select" id="filterYear">
-            <option value="">Select year</option>
-            <option value="2027">2027</option>
-            <option value="2026">2026</option>
-            <option value="2025">2025</option>
-            <option value="2024">2024</option>
-            <option value="2023">2023</option>
-            <option value="2022">2022</option>
-            <option value="2021">2021</option>
-            <option value="2020">2020</option>
-            <option value="2019">2019</option>
-            <option value="2018">2018</option>
-            <option value="2017">2017</option>
-            <option value="2016">2016</option>
-            <option value="2015">2015</option>
-            <option value="2010">2010</option>
-            <option value="2005">2005</option>
-            <option value="2000">2000</option>
-          </select>
-          <span class="material-symbols-outlined select-arrow">expand_more</span>
+        <!-- Season Dropdown -->
+        <div class="cb-dropdown" data-filter="seasons">
+          <button type="button" class="cb-dropdown-btn">
+            Select season <span class="badge-counter">0</span>
+            <span class="material-symbols-outlined" style="font-size: 16px;">expand_more</span>
+          </button>
+          <div class="cb-menu">
+            <label class="cb-item"><input type="checkbox" value="WINTER"> Winter</label>
+            <label class="cb-item"><input type="checkbox" value="SPRING"> Spring</label>
+            <label class="cb-item"><input type="checkbox" value="SUMMER"> Summer</label>
+            <label class="cb-item"><input type="checkbox" value="FALL"> Fall</label>
+          </div>
         </div>
 
-        <!-- Row 1: Type (Anime / Manga) -->
-        <div class="filter-select-wrap">
-          <select class="filter-select" id="filterType">
-            <option value="ANIME">Anime</option>
-            <option value="MANGA">Manga</option>
-          </select>
-          <span class="material-symbols-outlined select-arrow">expand_more</span>
+        <!-- Format Dropdown -->
+        <div class="cb-dropdown" data-filter="formats">
+          <button type="button" class="cb-dropdown-btn">
+            Select format <span class="badge-counter">0</span>
+            <span class="material-symbols-outlined" style="font-size: 16px;">expand_more</span>
+          </button>
+          <div class="cb-menu">
+            <label class="cb-item"><input type="checkbox" value="TV"> TV Series</label>
+            <label class="cb-item"><input type="checkbox" value="MOVIE"> Movie</label>
+            <label class="cb-item"><input type="checkbox" value="TV_SHORT"> TV Short</label>
+            <label class="cb-item"><input type="checkbox" value="OVA"> OVA</label>
+            <label class="cb-item"><input type="checkbox" value="ONA"> ONA</label>
+            <label class="cb-item"><input type="checkbox" value="SPECIAL"> Special</label>
+          </div>
         </div>
 
-        <!-- Row 2: Format -->
-        <div class="filter-select-wrap">
-          <select class="filter-select" id="filterFormat">
-            <option value="">Select format</option>
-            <option value="TV">TV</option>
-            <option value="MOVIE">Movie</option>
-            <option value="OVA">OVA</option>
-            <option value="ONA">ONA</option>
-            <option value="SPECIAL">Special</option>
-            <option value="TV_SHORT">TV Short</option>
-          </select>
-          <span class="material-symbols-outlined select-arrow">expand_more</span>
+        <!-- Status Dropdown -->
+        <div class="cb-dropdown" data-filter="statuses">
+          <button type="button" class="cb-dropdown-btn">
+            Select status <span class="badge-counter">0</span>
+            <span class="material-symbols-outlined" style="font-size: 16px;">expand_more</span>
+          </button>
+          <div class="cb-menu">
+            <label class="cb-item"><input type="checkbox" value="RELEASING"> Currently Releasing</label>
+            <label class="cb-item"><input type="checkbox" value="FINISHED"> Finished</label>
+            <label class="cb-item"><input type="checkbox" value="NOT_YET_RELEASED"> Not Yet Aired</label>
+            <label class="cb-item"><input type="checkbox" value="CANCELLED"> Cancelled</label>
+          </div>
         </div>
 
-        <!-- Row 2: Status -->
-        <div class="filter-select-wrap">
-          <select class="filter-select" id="filterStatus">
-            <option value="">Select status</option>
-            <option value="RELEASING">Currently Airing</option>
-            <option value="FINISHED">Finished</option>
-            <option value="NOT_YET_RELEASED">Not Yet Aired</option>
-            <option value="CANCELLED">Cancelled</option>
-          </select>
-          <span class="material-symbols-outlined select-arrow">expand_more</span>
+        <!-- Exclude Dropdown -->
+        <div class="cb-dropdown" data-filter="excludes">
+          <button type="button" class="cb-dropdown-btn">
+            Exclude genre <span class="badge-counter">0</span>
+            <span class="material-symbols-outlined" style="font-size: 16px;">expand_more</span>
+          </button>
+          <div class="cb-menu">
+            <label class="cb-item"><input type="checkbox" value="Ecchi"> Ecchi</label>
+            <label class="cb-item"><input type="checkbox" value="Horror"> Horror</label>
+            <label class="cb-item"><input type="checkbox" value="Psychological"> Psychological</label>
+            <label class="cb-item"><input type="checkbox" value="Mecha"> Mecha</label>
+            <label class="cb-item"><input type="checkbox" value="Hentai"> Hentai</label>
+          </div>
         </div>
 
-        <!-- Row 2: Country / Language Origin -->
-        <div class="filter-select-wrap">
-          <select class="filter-select" id="filterCountry">
-            <option value="">Select language</option>
-            <option value="JP">Japanese</option>
-            <option value="KR">Korean (Manhwa/Aeni)</option>
-            <option value="CN">Chinese (Manhua/Donghua)</option>
-          </select>
-          <span class="material-symbols-outlined select-arrow">expand_more</span>
-        </div>
-
-        <!-- Row 2: Rating / Score Threshold -->
-        <div class="filter-select-wrap">
-          <select class="filter-select" id="filterRating">
-            <option value="">Select rating</option>
-            <option value="90">90%+ Score</option>
-            <option value="80">80%+ Score</option>
-            <option value="70">70%+ Score</option>
-            <option value="60">60%+ Score</option>
-          </select>
-          <span class="material-symbols-outlined select-arrow">expand_more</span>
-        </div>
-
-        <!-- Row 2: Source -->
-        <div class="filter-select-wrap">
-          <select class="filter-select" id="filterSource">
-            <option value="">Select source</option>
-            <option value="MANGA">Manga</option>
-            <option value="LIGHT_NOVEL">Light Novel</option>
-            <option value="ORIGINAL">Original</option>
-            <option value="VISUAL_NOVEL">Visual Novel</option>
-            <option value="VIDEO_GAME">Video Game</option>
-            <option value="WEB_MANGA">Web Manga</option>
-          </select>
-          <span class="material-symbols-outlined select-arrow">expand_more</span>
+        <!-- Sort Single-choice Dropdown -->
+        <div class="cb-dropdown" data-filter="sort" data-single="true">
+          <button type="button" class="cb-dropdown-btn">
+            Sort: <span id="sortLabel">Most Popular</span>
+            <span class="material-symbols-outlined" style="font-size: 16px;">expand_more</span>
+          </button>
+          <div class="cb-menu">
+            <label class="cb-item"><input type="radio" name="sortGroup" value="POPULARITY_DESC" checked> Most Popular</label>
+            <label class="cb-item"><input type="radio" name="sortGroup" value="TRENDING_DESC"> Trending</label>
+            <label class="cb-item"><input type="radio" name="sortGroup" value="SCORE_DESC"> Top Rated</label>
+            <label class="cb-item"><input type="radio" name="sortGroup" value="START_DATE_DESC"> Recently Added</label>
+            <label class="cb-item"><input type="radio" name="sortGroup" value="FAVOURITES_DESC"> Most Favorited</label>
+          </div>
         </div>
       </div>
 
-      <!-- Row 3: Exclude list, Sort & Action Button -->
-      <div class="filter-bottom-bar">
-        <div class="filter-select-wrap">
-          <select class="filter-select" id="filterExclude">
-            <option value="">Exclude genre</option>
-            <option value="Ecchi">Ecchi</option>
-            <option value="Horror">Horror</option>
-            <option value="Psychological">Psychological</option>
-            <option value="Mecha">Mecha</option>
-          </select>
-          <span class="material-symbols-outlined select-arrow">expand_more</span>
-        </div>
-
-        <div class="filter-select-wrap">
-          <select class="filter-select" id="filterSort">
-            <option value="POPULARITY_DESC">Default (Most Popular)</option>
-            <option value="TRENDING_DESC">Trending</option>
-            <option value="SCORE_DESC">Top Rated</option>
-            <option value="START_DATE_DESC">Recently Added</option>
-            <option value="FAVOURITES_DESC">Most Favorited</option>
-          </select>
-          <span class="material-symbols-outlined select-arrow">expand_more</span>
-        </div>
-
+      <!-- Action Buttons -->
+      <div class="filter-actions-bar">
         <button type="button" class="anikoto-submit-btn" id="applyFilterBtn">
           <span class="material-symbols-outlined" style="font-size: 18px;">filter_alt</span> Filter
         </button>
-
         <button type="button" class="reset-link-btn" id="clearFilterBtn">
           <span class="material-symbols-outlined" style="font-size: 16px;">restart_alt</span> Reset
         </button>
@@ -895,7 +942,7 @@
     <div class="catalog-summary-row">
       <div>
         <h2 class="summary-title" id="summaryTitle">All Releases</h2>
-        <p class="summary-subtext" id="summarySubtext">Showing results sorted by popularity</p>
+        <p class="summary-subtext" id="summarySubtext">Showing matched entries</p>
       </div>
     </div>
 
@@ -913,16 +960,13 @@
   <script>
     let activeFilters = {
       search: "",
-      genre: "",
-      season: "",
-      year: "",
-      type: "ANIME",
-      format: "",
-      status: "",
-      country: "",
-      rating: "",
-      source: "",
-      exclude: "",
+      category: ["ANIME"],
+      genres: [],
+      years: [],
+      seasons: [],
+      formats: [],
+      statuses: [],
+      excludes: [],
       sort: "POPULARITY_DESC"
     };
 
@@ -972,35 +1016,95 @@
       refreshTitles();
     });
 
+    // Custom Dropdowns Logic (Click open/close, multi-check badges)
+    document.querySelectorAll('.cb-dropdown').forEach(dropdown => {
+      const btn = dropdown.querySelector('.cb-dropdown-btn');
+      
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = dropdown.classList.contains('active');
+        document.querySelectorAll('.cb-dropdown').forEach(d => d.classList.remove('active'));
+        if (!isOpen) dropdown.classList.add('active');
+      });
+
+      dropdown.querySelectorAll('input').forEach(input => {
+        input.addEventListener('change', () => {
+          updateDropdownBadge(dropdown);
+        });
+      });
+    });
+
+    window.addEventListener('click', () => {
+      document.querySelectorAll('.cb-dropdown').forEach(d => d.classList.remove('active'));
+    });
+
+    document.querySelectorAll('.cb-menu').forEach(menu => {
+      menu.addEventListener('click', (e) => e.stopPropagation());
+    });
+
+    function updateDropdownBadge(dropdown) {
+      const badge = dropdown.querySelector('.badge-counter');
+      const sortLabel = dropdown.querySelector('#sortLabel');
+      
+      if (dropdown.dataset.single === 'true') {
+        const checkedRadio = dropdown.querySelector('input:checked');
+        if (checkedRadio && sortLabel) {
+          sortLabel.textContent = checkedRadio.parentElement.textContent.trim();
+        }
+        return;
+      }
+
+      const count = dropdown.querySelectorAll('input:checked').length;
+      if (badge) {
+        if (count > 0) {
+          badge.textContent = count;
+          badge.style.display = 'inline-block';
+        } else {
+          badge.style.display = 'none';
+        }
+      }
+    }
+
     // Read Filter Values and Trigger Search
     function readInputs() {
       activeFilters.search = document.getElementById('filterKeyword').value.trim();
-      activeFilters.genre = document.getElementById('filterGenre').value;
-      activeFilters.season = document.getElementById('filterSeason').value;
-      activeFilters.year = document.getElementById('filterYear').value;
-      activeFilters.type = document.getElementById('filterType').value;
-      activeFilters.format = document.getElementById('filterFormat').value;
-      activeFilters.status = document.getElementById('filterStatus').value;
-      activeFilters.country = document.getElementById('filterCountry').value;
-      activeFilters.rating = document.getElementById('filterRating').value;
-      activeFilters.source = document.getElementById('filterSource').value;
-      activeFilters.exclude = document.getElementById('filterExclude').value;
-      activeFilters.sort = document.getElementById('filterSort').value;
+
+      const getChecked = (name) => {
+        const dropdown = document.querySelector(`.cb-dropdown[data-filter="${name}"]`);
+        if (!dropdown) return [];
+        return Array.from(dropdown.querySelectorAll('input:checked')).map(i => i.value);
+      };
+
+      activeFilters.category = getChecked('category');
+      if (activeFilters.category.length === 0) activeFilters.category = ['ANIME'];
+
+      activeFilters.genres = getChecked('genres');
+      activeFilters.years = getChecked('years');
+      activeFilters.seasons = getChecked('seasons');
+      activeFilters.formats = getChecked('formats');
+      activeFilters.statuses = getChecked('statuses');
+      activeFilters.excludes = getChecked('excludes');
+
+      const sortRadio = document.querySelector('.cb-dropdown[data-filter="sort"] input:checked');
+      activeFilters.sort = sortRadio ? sortRadio.value : "POPULARITY_DESC";
     }
 
     function resetFilters() {
       document.getElementById('filterKeyword').value = "";
-      document.getElementById('filterGenre').value = "";
-      document.getElementById('filterSeason').value = "";
-      document.getElementById('filterYear').value = "";
-      document.getElementById('filterType').value = "ANIME";
-      document.getElementById('filterFormat').value = "";
-      document.getElementById('filterStatus').value = "";
-      document.getElementById('filterCountry').value = "";
-      document.getElementById('filterRating').value = "";
-      document.getElementById('filterSource').value = "";
-      document.getElementById('filterExclude').value = "";
-      document.getElementById('filterSort').value = "POPULARITY_DESC";
+      
+      document.querySelectorAll('.cb-dropdown').forEach(d => {
+        d.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+      });
+
+      // Default Category: Anime
+      const animeCb = document.querySelector('.cb-dropdown[data-filter="category"] input[value="ANIME"]');
+      if (animeCb) animeCb.checked = true;
+
+      // Default Sort: Most Popular
+      const popRadio = document.querySelector('.cb-dropdown[data-filter="sort"] input[value="POPULARITY_DESC"]');
+      if (popRadio) popRadio.checked = true;
+
+      document.querySelectorAll('.cb-dropdown').forEach(updateDropdownBadge);
 
       readInputs();
       resetAndFetch();
@@ -1022,15 +1126,14 @@
 
     function updateSummary() {
       const parts = [];
-      if (activeFilters.genre) parts.push(activeFilters.genre);
-      if (activeFilters.season) parts.push(activeFilters.season);
-      if (activeFilters.year) parts.push(activeFilters.year);
-      if (activeFilters.format) parts.push(activeFilters.format);
-      if (activeFilters.status) parts.push(activeFilters.status.replace(/_/g, ' '));
-      if (activeFilters.source) parts.push(activeFilters.source.replace(/_/g, ' '));
+      if (activeFilters.category.length) parts.push(activeFilters.category.join(', '));
+      if (activeFilters.genres.length) parts.push(activeFilters.genres.join(', '));
+      if (activeFilters.years.length) parts.push(activeFilters.years.join(', '));
+      if (activeFilters.seasons.length) parts.push(activeFilters.seasons.join(', '));
+      if (activeFilters.formats.length) parts.push(activeFilters.formats.join(', '));
 
       const title = activeFilters.search ? `Results for "${activeFilters.search}"` : (parts.length ? parts.join(' • ') : "All Releases");
-      document.getElementById('summaryTitle').textContent = `${title} (${activeFilters.type})`;
+      document.getElementById('summaryTitle').textContent = title;
       document.getElementById('summarySubtext').textContent = `Showing matched entries`;
     }
 
@@ -1052,14 +1155,37 @@
       if (isLoading || (!hasNextPage && append)) return;
       isLoading = true;
 
-      let varDefs = '$page: Int, $type: MediaType,$sort: [MediaSort]';
-      let mediaFilters = 'type: $type, sort:$sort, isAdult: false';
+      // Determine category parameters (Anime, Manga, Hentai, Read Hentai, Manhwa)
+      let resolvedType = 'ANIME';
+      let resolvedIsAdult = false;
+      let resolvedCountry = undefined;
+
+      const cats = activeFilters.category;
+      if (cats.includes('MANGA') || cats.includes('READ_HENTAI') || cats.includes('MANHWA')) {
+        resolvedType = 'MANGA';
+      }
+      if (cats.includes('HENTAI') || cats.includes('READ_HENTAI')) {
+        resolvedIsAdult = true;
+      }
+      if (cats.includes('MANHWA')) {
+        resolvedCountry = 'KR';
+      }
+
+      let varDefs = '$page: Int,$type: MediaType, $sort: [MediaSort],$isAdult: Boolean';
+      let mediaFilters = 'type: $type, sort: $sort, isAdult:$isAdult';
 
       const variables = {
         page: currentPage,
-        type: activeFilters.type,
+        type: resolvedType,
+        isAdult: resolvedIsAdult,
         sort: [activeFilters.sort]
       };
+
+      if (resolvedCountry) {
+        varDefs += ', $country: CountryCode';
+        mediaFilters += ', countryOfOrigin: $country';
+        variables.country = resolvedCountry;
+      }
 
       if (activeFilters.search) {
         varDefs += ', $search: String';
@@ -1067,58 +1193,40 @@
         variables.search = activeFilters.search;
       }
 
-      if (activeFilters.genre) {
-        varDefs += ', $genre: String';
-        mediaFilters += ', genre: $genre';
-        variables.genre = activeFilters.genre;
+      if (activeFilters.genres.length > 0) {
+        varDefs += ', $genres: [String]';
+        mediaFilters += ', genre_in: $genres';
+        variables.genres = activeFilters.genres;
       }
 
-      if (activeFilters.season) {
+      if (activeFilters.seasons.length > 0) {
         varDefs += ', $season: MediaSeason';
         mediaFilters += ', season: $season';
-        variables.season = activeFilters.season;
+        variables.season = activeFilters.seasons[0];
       }
 
-      if (activeFilters.year) {
+      if (activeFilters.years.length > 0) {
         varDefs += ', $seasonYear: Int';
         mediaFilters += ', seasonYear: $seasonYear';
-        variables.seasonYear = parseInt(activeFilters.year, 10);
+        variables.seasonYear = parseInt(activeFilters.years[0], 10);
       }
 
-      if (activeFilters.format) {
-        varDefs += ', $format: MediaFormat';
-        mediaFilters += ', format: $format';
-        variables.format = activeFilters.format;
+      if (activeFilters.formats.length > 0) {
+        varDefs += ', $formats: [MediaFormat]';
+        mediaFilters += ', format_in: $formats';
+        variables.formats = activeFilters.formats;
       }
 
-      if (activeFilters.status) {
-        varDefs += ', $status: MediaStatus';
-        mediaFilters += ', status: $status';
-        variables.status = activeFilters.status;
+      if (activeFilters.statuses.length > 0) {
+        varDefs += ', $statuses: [MediaStatus]';
+        mediaFilters += ', status_in: $statuses';
+        variables.statuses = activeFilters.statuses;
       }
 
-      if (activeFilters.country) {
-        varDefs += ', $country: CountryCode';
-        mediaFilters += ', countryOfOrigin: $country';
-        variables.country = activeFilters.country;
-      }
-
-      if (activeFilters.source) {
-        varDefs += ', $source: MediaSource';
-        mediaFilters += ', source: $source';
-        variables.source = activeFilters.source;
-      }
-
-      if (activeFilters.exclude) {
+      if (activeFilters.excludes.length > 0) {
         varDefs += ', $genreNotIn: [String]';
         mediaFilters += ', genre_not_in: $genreNotIn';
-        variables.genreNotIn = [activeFilters.exclude];
-      }
-
-      if (activeFilters.rating) {
-        varDefs += ', $averageScoreGreater: Int';
-        mediaFilters += ', averageScore_greater: $averageScoreGreater';
-        variables.averageScoreGreater = parseInt(activeFilters.rating, 10);
+        variables.genreNotIn = activeFilters.excludes;
       }
 
       const query = `
@@ -1329,6 +1437,7 @@
     observer.observe(document.getElementById('infiniteSentinel'));
 
     window.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.cb-dropdown').forEach(updateDropdownBadge);
       readInputs();
       resetAndFetch();
     });
