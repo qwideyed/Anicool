@@ -6,7 +6,6 @@
   <title>AniCool - Ad-Free Anime & Manga Discovery</title>
   <link rel="icon" type="image/png" href="favicon.png" />
 
-  <!-- Open Graph Meta Tags -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="AniCool" />
   <meta property="og:title" content="AniCool - Ad-Free Anime & Manga Discovery" />
@@ -51,7 +50,6 @@
         radial-gradient(circle at 85% 20%, rgba(157, 92, 246, 0.1) 0%, transparent 40%);
     }
 
-    /* Header Nav */
     .header-wrapper {
       position: sticky;
       top: 16px;
@@ -244,7 +242,6 @@
       box-shadow: 0 0 14px rgba(157, 92, 246, 0.35);
     }
 
-    /* Outside Companion Buttons */
     .outside-btn-group {
       display: flex;
       align-items: center;
@@ -307,7 +304,6 @@
       font-size: 18px;
     }
 
-    /* Community Discord Banner */
     .discord-community-banner {
       background: linear-gradient(135deg, rgba(88, 101, 242, 0.15), rgba(157, 92, 246, 0.12));
       border: 1px solid rgba(88, 101, 242, 0.35);
@@ -380,7 +376,6 @@
       box-shadow: 0 6px 20px rgba(88, 101, 242, 0.4);
     }
 
-    /* Recently Viewed Section */
     .history-strip-section {
       display: none;
       flex-direction: column;
@@ -462,7 +457,6 @@
       text-overflow: ellipsis;
     }
 
-    /* Modal */
     .search-modal {
       position: fixed;
       inset: 0;
@@ -893,7 +887,7 @@
       background: var(--accent-pink);
     }
 
-    /* Tabbed Switcher Area (TTW - ATFF - AUA) */
+    /* Single Tabbed Switcher Area: TTW - ATFF - AUA (Cards stay identical to your design) */
     .switcher-section {
       display: flex;
       flex-direction: column;
@@ -955,15 +949,34 @@
       box-shadow: 0 4px 14px rgba(255, 42, 116, 0.35);
     }
 
-    /* Unified Grid Display */
-    .tabbed-grid-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 20px;
-      min-height: 300px;
+    /* Horizontal Card Slider Row (Restored exact cards from screenshots) */
+    .horizontal-slider-row {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      padding-bottom: 12px;
+      scrollbar-width: thin;
     }
 
-    /* Horizontal Top 10 Leaderboard */
+    .horizontal-slider-row::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .horizontal-slider-row::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 4px;
+    }
+
+    .slider-card-wrap {
+      flex: 0 0 180px;
+      position: relative;
+    }
+
+    .slider-card-wrap:hover {
+      z-index: 100;
+    }
+
+    /* Horizontal Top 10 Leaderboard (Restored Full Card Design, Placed Right Underneath) */
     .top10-horizontal-section {
       background: var(--card-bg);
       border: 1px solid var(--bubble-border);
@@ -998,90 +1011,54 @@
       gap: 8px;
     }
 
-    .top10-scroll-row {
+    .top10-slider-row {
       display: flex;
       gap: 16px;
       overflow-x: auto;
-      padding-bottom: 10px;
+      padding-bottom: 12px;
       scrollbar-width: thin;
     }
 
-    .top10-scroll-row::-webkit-scrollbar {
+    .top10-slider-row::-webkit-scrollbar {
       height: 6px;
     }
 
-    .top10-scroll-row::-webkit-scrollbar-thumb {
+    .top10-slider-row::-webkit-scrollbar-thumb {
       background: rgba(255, 255, 255, 0.15);
       border-radius: 4px;
     }
 
-    .top10-item-card {
-      flex: 0 0 210px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--bubble-border);
-      border-radius: 18px;
-      padding: 10px 12px;
-      text-decoration: none;
-      color: #fff;
-      transition: all 0.25s ease;
+    .top10-card-wrap {
+      flex: 0 0 180px;
+      position: relative;
     }
 
-    .top10-item-card:hover {
-      background: rgba(255, 255, 255, 0.08);
-      border-color: var(--accent-pink);
-      transform: translateY(-3px);
+    .top10-card-wrap:hover {
+      z-index: 100;
     }
 
-    .top10-rank-badge {
-      width: 28px;
-      height: 28px;
+    .top10-rank-overlay {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 3;
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.8rem;
-      font-weight: 800;
-      background: rgba(255, 255, 255, 0.08);
-      color: var(--text-dim);
-      flex-shrink: 0;
-    }
-
-    .top10-rank-badge.rank-1 { background: #eab308; color: #000; box-shadow: 0 0 10px rgba(234, 179, 8, 0.4); }
-    .top10-rank-badge.rank-2 { background: #94a3b8; color: #000; }
-    .top10-rank-badge.rank-3 { background: #b45309; color: #fff; }
-
-    .top10-thumb {
-      width: 44px;
-      height: 58px;
-      border-radius: 8px;
-      object-fit: cover;
-      flex-shrink: 0;
-    }
-
-    .top10-info {
-      flex: 1;
-      overflow: hidden;
-    }
-
-    .top10-name {
       font-size: 0.85rem;
-      font-weight: 600;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      font-weight: 800;
+      background: rgba(15, 17, 24, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
     }
 
-    .top10-sub {
-      font-size: 0.72rem;
-      color: var(--text-dim);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      margin-top: 2px;
-    }
+    .top10-rank-overlay.rank-1 { background: #eab308; color: #000; border-color: #facc15; box-shadow: 0 0 12px rgba(234, 179, 8, 0.6); }
+    .top10-rank-overlay.rank-2 { background: #94a3b8; color: #000; border-color: #cbd5e1; }
+    .top10-rank-overlay.rank-3 { background: #b45309; color: #fff; border-color: #d97706; }
 
     .section-head {
       display: flex;
@@ -1108,7 +1085,7 @@
       letter-spacing: 0.4px;
     }
 
-    /* Cards Grid */
+    /* Standard Cards Grid */
     .anime-cards-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -1236,19 +1213,25 @@
       gap: 10px;
     }
 
-    .card-wrap:hover .card-hover-bubble {
+    .card-wrap:hover .card-hover-bubble,
+    .slider-card-wrap:hover .card-hover-bubble,
+    .top10-card-wrap:hover .card-hover-bubble {
       opacity: 1;
       visibility: visible;
       transform: translateX(0) scale(1);
     }
 
-    .card-wrap.align-left .card-hover-bubble {
+    .card-wrap.align-left .card-hover-bubble,
+    .slider-card-wrap.align-left .card-hover-bubble,
+    .top10-card-wrap.align-left .card-hover-bubble {
       left: auto;
       right: calc(100% + 12px);
       transform: translateX(6px) scale(0.97);
     }
 
-    .card-wrap.align-left:hover .card-hover-bubble {
+    .card-wrap.align-left:hover .card-hover-bubble,
+    .slider-card-wrap.align-left:hover .card-hover-bubble,
+    .top10-card-wrap.align-left:hover .card-hover-bubble {
       transform: translateX(0) scale(1);
     }
 
@@ -1383,7 +1366,6 @@
       .hero-title {
         font-size: 1.5rem;
       }
-      .tabbed-grid-container,
       .anime-cards-grid {
         grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
         gap: 16px;
@@ -1556,7 +1538,7 @@
       <div class="carousel-dots" id="carouselDots"></div>
     </div>
 
-    <!-- Tabbed Switcher Area: TTW - ATFF - AUA in ONE unified area -->
+    <!-- Tabbed Switcher Area: TTW - ATFF - AUA (Restored your exact horizontal card slider format) -->
     <section class="switcher-section">
       <div class="switcher-header">
         <div class="switcher-title-wrap">
@@ -1571,10 +1553,10 @@
         </div>
       </div>
 
-      <div class="tabbed-grid-container" id="tabbedMediaGrid"></div>
+      <div class="horizontal-slider-row" id="tabbedSliderRow"></div>
     </section>
 
-    <!-- Horizontal Top 10 Leaderboard Area -->
+    <!-- Horizontal Top 10 Leaderboard (Placed Directly Underneath, Same Card Visuals) -->
     <section class="top10-horizontal-section">
       <div class="top10-header">
         <div class="top10-title-wrap">
@@ -1589,12 +1571,10 @@
         </div>
       </div>
 
-      <div class="top10-scroll-row" id="top10ScrollRow">
-        <div style="color: var(--text-dim); padding: 10px;">Loading rankings...</div>
-      </div>
+      <div class="top10-slider-row" id="top10SliderRow"></div>
     </section>
 
-    <!-- Infinite Scroll Explore Catalog -->
+    <!-- Explore Catalog -->
     <section>
       <div class="section-head">
         <div class="section-title-wrap">
@@ -1635,11 +1615,10 @@
     let hasNextPage = true;
     let isLoadingMore = false;
 
-    // Active Category Tab: 'TTW' (Trending), 'ATFF' (Favorites), 'AUA' (Anticipated)
     let currentTab = 'TTW';
     const tabCache = {};
+    const top10Cache = {};
 
-    // Search Popup
     openSearchBtn.addEventListener('click', () => {
       searchModal.classList.add('active');
       setTimeout(() => searchInput.focus(), 100);
@@ -1692,7 +1671,6 @@
       });
     });
 
-    // AniList Search
     async function fetchFromAniList(keyword) {
       if (!keyword) {
         searchResults.style.display = 'none';
@@ -1799,7 +1777,6 @@
       }, 350);
     });
 
-    // Surprise Me / Roll Dice
     document.getElementById('randomRollBtn').addEventListener('click', triggerRandomRoll);
 
     async function triggerRandomRoll() {
@@ -1839,7 +1816,6 @@
       }
     }
 
-    // Recently Viewed
     function saveToHistory(id, title, image) {
       try {
         let history = JSON.parse(localStorage.getItem('ani_history') || '[]');
@@ -1876,7 +1852,6 @@
       document.getElementById('historySection').style.display = 'none';
     }
 
-    // Category Config
     function getCategoryConfig(category) {
       let mediaType = 'ANIME';
       let isAdult = false;
@@ -1890,7 +1865,6 @@
       return { mediaType, isAdult, countryOfOrigin };
     }
 
-    // Spotlight Carousel
     async function loadSpotlight(category = 'ANIME') {
       const hero = document.getElementById('heroBanner');
       hero.classList.add('skeleton');
@@ -2023,7 +1997,7 @@
       startSpotlightAuto();
     }
 
-    // Unified Tab Switcher: TTW - ATFF - AUA
+    // Tab Switcher (TTW, ATFF, AUA) using the exact same card aesthetics
     function switchCategoryTab(tab, btn) {
       document.querySelectorAll('.tab-pills-bar .tab-pill-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
@@ -2050,11 +2024,15 @@
     }
 
     async function loadTabContent(tab) {
-      const container = document.getElementById('tabbedMediaGrid');
-      renderSkeletons(container, 12);
+      const container = document.getElementById('tabbedSliderRow');
+      container.innerHTML = Array(12).fill(`
+        <div class="slider-card-wrap">
+          <div class="anime-card skeleton" style="min-height: 280px;"></div>
+        </div>
+      `).join('');
 
       if (tabCache[tab]) {
-        renderGrid(container, tabCache[tab], false);
+        renderHorizontalCards(container, tabCache[tab], false);
         return;
       }
 
@@ -2070,9 +2048,9 @@
 
       const query = `
         query {
-          Page(page: 1, perPage: 12) {
+          Page(page: 1, perPage: 14) {
             media(type: ANIME, sort: ${sortFilter} ${statusFilter}, isAdult: false) {
-              id type title { english romaji native } coverImage { extraLarge large }
+              id type isAdult title { english romaji native } coverImage { extraLarge large }
               description averageScore episodes chapters format genres season seasonYear
               studios(isMain: true) { nodes { name } }
             }
@@ -2089,13 +2067,13 @@
         const data = await res.json();
         const items = data?.data?.Page?.media || [];
         tabCache[tab] = items;
-        renderGrid(container, items, false);
+        renderHorizontalCards(container, items, false);
       } catch (err) {
         container.innerHTML = '<p class="search-state-text">Failed to load content.</p>';
       }
     }
 
-    // Horizontal Top 10 Leaderboard
+    // Top 10 Leaderboard in identical horizontal card format
     function switchTop10Range(range, btn) {
       document.querySelectorAll('.top10-header .tab-pill-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
@@ -2103,8 +2081,17 @@
     }
 
     async function loadTop10Horizontal(range = 'today') {
-      const row = document.getElementById('top10ScrollRow');
-      row.innerHTML = '<div style="color:var(--text-dim); padding:10px;">Updating top 10...</div>';
+      const container = document.getElementById('top10SliderRow');
+      container.innerHTML = Array(10).fill(`
+        <div class="top10-card-wrap">
+          <div class="anime-card skeleton" style="min-height: 280px;"></div>
+        </div>
+      `).join('');
+
+      if (top10Cache[range]) {
+        renderHorizontalCards(container, top10Cache[range], true);
+        return;
+      }
 
       let sortParam = 'TRENDING_DESC';
       if (range === 'week') sortParam = 'POPULARITY_DESC';
@@ -2114,12 +2101,9 @@
         query ($sort: [MediaSort]) {
           Page(page: 1, perPage: 10) {
             media(type: ANIME, sort: $sort, isAdult: false) {
-              id
-              title { english romaji native }
-              coverImage { medium }
-              averageScore
-              episodes
-              format
+              id type isAdult title { english romaji native } coverImage { extraLarge large }
+              description averageScore episodes chapters format genres season seasonYear
+              studios(isMain: true) { nodes { name } }
             }
           }
         }
@@ -2134,33 +2118,84 @@
 
         const json = await res.json();
         const items = json?.data?.Page?.media || [];
+        top10Cache[range] = items;
+        renderHorizontalCards(container, items, true);
+      } catch (e) {
+        container.innerHTML = '<div style="color:var(--text-dim); padding:10px;">Failed to load top 10.</div>';
+      }
+    }
 
-        row.innerHTML = items.map((item, idx) => {
-          const rank = idx + 1;
-          const rankClass = rank === 1 ? 'rank-1' : (rank === 2 ? 'rank-2' : (rank === 3 ? 'rank-3' : ''));
-          const title = currentLang === 'JP' ? (item.title.native || item.title.romaji) : (item.title.english || item.title.romaji);
-          const score = item.averageScore ? `${item.averageScore}%` : 'N/A';
-          const count = item.episodes ? `${item.episodes} eps` : (item.format || 'Anime');
-          const thumb = item.coverImage?.medium || '';
+    function renderHorizontalCards(container, items, isTop10 = false) {
+      const html = items.map((item, idx) => {
+        const title = currentLang === 'JP' 
+          ? (item.title.native || item.title.romaji) 
+          : (item.title.english || item.title.romaji);
 
-          return `
-            <a href="entry.html?id=${item.id}" class="top10-item-card" onclick="saveToHistory(${item.id}, '${escapeHtml(title)}', '${thumb}')">
-              <span class="top10-rank-badge ${rankClass}">#${rank}</span>
-              <img src="${thumb}" alt="${title}" class="top10-thumb" loading="lazy" />
-              <div class="top10-info">
-                <div class="top10-name" title="${title}">${title}</div>
-                <div class="top10-sub">
-                  <span style="color:#10b981; font-weight:600;">★ ${score}</span>
-                  <span>•</span>
+        const score = item.averageScore ? `${item.averageScore}%` : 'N/A';
+        const count = item.episodes ? `${item.episodes} EP` : (item.chapters ? `${item.chapters} CH` : (item.format || 'Media'));
+        const image = item.coverImage?.extraLarge || item.coverImage?.large || '';
+        const cleanedDesc = item.description ? item.description.replace(/<[^>]*>?/gm, '') : 'No synopsis provided.';
+        const tags = (item.genres || []).slice(0, 4).map(g => `<span class="hover-tag">${g}</span>`).join('');
+        const typeLabel = item.isAdult ? '18+' : (item.format || 'TV');
+        const studioName = item.studios?.nodes?.[0]?.name || 'Unknown Studio';
+        const seasonInfo = (item.season && item.seasonYear) ? `${item.season} ${item.seasonYear}` : (item.seasonYear ? `${item.seasonYear}` : 'N/A');
+        const epInfo = item.episodes ? `${item.episodes} Episodes` : (item.chapters ? `${item.chapters} Chapters` : 'Ongoing / Unknown');
+
+        const rank = idx + 1;
+        const rankClass = rank === 1 ? 'rank-1' : (rank === 2 ? 'rank-2' : (rank === 3 ? 'rank-3' : ''));
+
+        return `
+          <div class="${isTop10 ? 'top10-card-wrap' : 'slider-card-wrap'}" data-title-en="${escapeHtml(item.title.english || item.title.romaji)}" data-title-jp="${escapeHtml(item.title.native || item.title.romaji)}">
+            ${isTop10 ? `<div class="top10-rank-overlay ${rankClass}">#${rank}</div>` : ''}
+            <a href="entry.html?id=${item.id}" class="anime-card" onclick="saveToHistory(${item.id}, '${escapeHtml(title)}', '${image}')">
+              <div class="card-thumb-wrap">
+                <img src="${image}" alt="${title}" class="card-thumb" loading="lazy" />
+                <div class="card-badge-top">★ ${score}</div>
+                <div class="card-format-tag">${typeLabel}</div>
+              </div>
+              <div class="card-info">
+                <h3 class="card-item-title" title="${title}">${title}</h3>
+                <div class="card-item-sub">
                   <span>${count}</span>
+                  <span>${typeLabel}</span>
                 </div>
               </div>
             </a>
-          `;
-        }).join('');
-      } catch (e) {
-        row.innerHTML = '<div style="color:var(--text-dim); padding:10px;">Failed to load top 10.</div>';
-      }
+
+            <div class="card-hover-bubble">
+              <div class="hover-bubble-title">${title}</div>
+              <div class="hover-bubble-meta">
+                <span style="color: #10b981; font-weight: 600;">★ ${score}</span>
+                <span>•</span>
+                <span>${typeLabel}</span>
+                <span>•</span>
+                <span>${count}</span>
+              </div>
+              
+              <div class="hover-bubble-details">
+                <div class="hover-detail-row">
+                  <span class="hover-detail-label">Studio / Creator:</span>
+                  <span class="hover-detail-val" title="${studioName}">${studioName}</span>
+                </div>
+                <div class="hover-detail-row">
+                  <span class="hover-detail-label">Episodes:</span>
+                  <span class="hover-detail-val">${epInfo}</span>
+                </div>
+                <div class="hover-detail-row">
+                  <span class="hover-detail-label">Season / Year:</span>
+                  <span class="hover-detail-val">${seasonInfo}</span>
+                </div>
+              </div>
+
+              <div class="hover-bubble-tags">${tags}</div>
+              <div class="hover-bubble-desc">${cleanedDesc}</div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      container.innerHTML = html;
+      setupBubbleAlignment(container);
     }
 
     // Infinite Scroll Explore Catalog
@@ -2299,11 +2334,11 @@
         container.innerHTML = html;
       }
 
-      setupCardBubbleRepositioning(container);
+      setupBubbleAlignment(container);
     }
 
-    function setupCardBubbleRepositioning(container) {
-      container.querySelectorAll('.card-wrap').forEach(wrap => {
+    function setupBubbleAlignment(container) {
+      container.querySelectorAll('.card-wrap, .slider-card-wrap, .top10-card-wrap').forEach(wrap => {
         wrap.addEventListener('mouseenter', () => {
           const rect = wrap.getBoundingClientRect();
           const spaceOnRight = window.innerWidth - rect.right;
@@ -2322,7 +2357,7 @@
     }
 
     function refreshTitles() {
-      document.querySelectorAll('.card-wrap').forEach(wrap => {
+      document.querySelectorAll('.card-wrap, .slider-card-wrap, .top10-card-wrap').forEach(wrap => {
         const titleEl = wrap.querySelector('.card-item-title');
         const bubbleTitleEl = wrap.querySelector('.hover-bubble-title');
         const title = currentLang === 'JP' ? wrap.dataset.titleJp : wrap.dataset.titleEn;
