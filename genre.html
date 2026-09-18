@@ -271,12 +271,6 @@
       gap: 16px;
     }
 
-    .filter-header-wrap {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
     .filter-main-heading {
       font-size: 1.85rem;
       font-weight: 700;
@@ -284,28 +278,16 @@
       letter-spacing: -0.5px;
     }
 
-    /* Horizontal Multi-select Dropdowns Bar */
-    .horizontal-filter-bar {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      overflow-x: auto;
-      padding-bottom: 12px;
-      scrollbar-width: thin;
-    }
-
-    .horizontal-filter-bar::-webkit-scrollbar {
-      height: 4px;
-    }
-
-    .horizontal-filter-bar::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 4px;
+    /* 5-Column Grid */
+    .filter-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
     }
 
     .filter-input {
-      flex: 0 0 170px;
-      height: 40px;
+      width: 100%;
+      height: 42px;
       background: #0f141f;
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 8px;
@@ -326,23 +308,25 @@
       color: #556277;
     }
 
-    /* Custom Checkbox Dropdown Widget */
+    /* Dropdown Trigger Widget */
     .cb-dropdown {
       position: relative;
-      flex: 0 0 auto;
+      width: 100%;
     }
 
     .cb-dropdown-btn {
-      height: 40px;
+      width: 100%;
+      height: 42px;
       background: #0f141f;
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 8px;
       padding: 0 14px;
       color: #cbd5e1;
-      font-size: 0.83rem;
+      font-size: 0.85rem;
       font-family: inherit;
       display: flex;
       align-items: center;
+      justify-content: space-between;
       gap: 8px;
       cursor: pointer;
       white-space: nowrap;
@@ -367,49 +351,60 @@
       padding: 1px 6px;
       border-radius: 9999px;
       display: none;
+      margin-left: auto;
     }
 
+    /* Wide Horizontal Floating Menu */
     .cb-menu {
       position: absolute;
       top: calc(100% + 8px);
       left: 0;
-      min-width: 220px;
-      max-height: 280px;
+      width: 480px;
+      max-height: 290px;
       overflow-y: auto;
       background: #0d121c;
       border: 1px solid var(--bubble-border);
-      border-radius: 12px;
-      padding: 8px;
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.8);
-      z-index: 500;
+      border-radius: 14px;
+      padding: 12px;
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.85);
+      z-index: 600;
       display: none;
-      flex-direction: column;
-      gap: 4px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+
+    .cb-dropdown.align-right .cb-menu {
+      left: auto;
+      right: 0;
     }
 
     .cb-dropdown.active .cb-menu {
-      display: flex;
+      display: grid;
     }
 
     .cb-item {
       display: flex;
       align-items: center;
       gap: 10px;
-      padding: 6px 10px;
-      border-radius: 6px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.04);
       color: var(--text-dim);
       font-size: 0.82rem;
       cursor: pointer;
       user-select: none;
-      transition: background 0.15s, color 0.15s;
+      transition: all 0.15s ease;
     }
 
     .cb-item:hover {
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.06);
       color: #fff;
+      border-color: rgba(255, 255, 255, 0.1);
     }
 
-    .cb-item input[type="checkbox"] {
+    .cb-item input[type="checkbox"],
+    .cb-item input[type="radio"] {
       appearance: none;
       -webkit-appearance: none;
       width: 16px;
@@ -425,7 +420,12 @@
       transition: all 0.2s;
     }
 
-    .cb-item input[type="checkbox"]:checked {
+    .cb-item input[type="radio"] {
+      border-radius: 50%;
+    }
+
+    .cb-item input[type="checkbox"]:checked,
+    .cb-item input[type="radio"]:checked {
       background: var(--accent-blue);
       border-color: var(--accent-blue);
     }
@@ -437,12 +437,24 @@
       font-weight: 700;
     }
 
-    /* Action bar controls */
-    .filter-actions-bar {
+    .cb-item input[type="radio"]:checked::after {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #fff;
+    }
+
+    /* Bottom Filter Bar */
+    .filter-bottom-bar {
       display: flex;
       align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 4px;
+    }
+
+    .filter-bottom-bar .cb-dropdown {
+      width: 220px;
     }
 
     .anikoto-submit-btn {
@@ -450,13 +462,13 @@
       align-items: center;
       justify-content: center;
       gap: 6px;
-      height: 38px;
-      padding: 0 22px;
+      height: 42px;
+      padding: 0 24px;
       background: #0ea5e9;
       color: #fff;
       border: none;
       border-radius: 8px;
-      font-size: 0.88rem;
+      font-size: 0.9rem;
       font-weight: 600;
       font-family: inherit;
       cursor: pointer;
@@ -472,14 +484,14 @@
       background: transparent;
       border: none;
       color: #64748b;
-      font-size: 0.82rem;
+      font-size: 0.84rem;
       font-weight: 600;
       font-family: inherit;
       cursor: pointer;
       display: flex;
       align-items: center;
       gap: 4px;
-      padding: 6px 12px;
+      padding: 8px 14px;
       border-radius: 6px;
       transition: color 0.2s;
     }
@@ -716,7 +728,30 @@
       100% { background-position: -200% 0; }
     }
 
-    @media (max-width: 920px) {
+    @media (max-width: 1100px) {
+      .filter-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .cb-menu {
+        width: 360px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .filter-grid {
+        grid-template-columns: 1fr;
+      }
+      .cb-menu {
+        width: 100%;
+        grid-template-columns: 1fr;
+      }
+      .filter-bottom-bar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .filter-bottom-bar .cb-dropdown {
+        width: 100%;
+      }
       .anime-cards-grid {
         grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
         gap: 16px;
@@ -778,28 +813,29 @@
 
   <main class="main-content">
     
+    <!-- Anikoto-Style 5-Column Grid with Horizontal Dropdown Menus -->
     <section class="filter-section">
       <div class="filter-header-wrap">
         <h1 class="filter-main-heading">Filter</h1>
       </div>
 
-      <!-- Horizontal Multi-select Dropdowns Bar -->
-      <div class="horizontal-filter-bar">
-        <!-- Search Input -->
+      <div class="filter-grid">
+        <!-- Search Field -->
         <input type="text" class="filter-input" id="filterKeyword" placeholder="Search..." autocomplete="off" />
 
-        <!-- Category Dropdown (Anime, Manga, Hentai, Read Hentai, Manhwa) -->
+        <!-- Category Dropdown -->
         <div class="cb-dropdown" data-filter="category">
           <button type="button" class="cb-dropdown-btn">
-            Category <span class="badge-counter">0</span>
+            Select category <span class="badge-counter">0</span>
             <span class="material-symbols-outlined" style="font-size: 16px;">expand_more</span>
           </button>
           <div class="cb-menu">
             <label class="cb-item"><input type="checkbox" value="ANIME" checked> Anime</label>
             <label class="cb-item"><input type="checkbox" value="MANGA"> Manga</label>
-            <label class="cb-item"><input type="checkbox" value="HENTAI"> Hentai (18+ Anime)</label>
-            <label class="cb-item"><input type="checkbox" value="READ_HENTAI"> Read Hentai (18+ Manga)</label>
+            <label class="cb-item"><input type="checkbox" value="HENTAI"> Hentai (18+)</label>
+            <label class="cb-item"><input type="checkbox" value="READ_HENTAI"> Read Hentai (18+)</label>
             <label class="cb-item"><input type="checkbox" value="MANHWA"> Manhwa (Korean)</label>
+            <label class="cb-item"><input type="checkbox" value="MANHUA"> Manhua (Chinese)</label>
           </div>
         </div>
 
@@ -831,8 +867,22 @@
           </div>
         </div>
 
-        <!-- Year / Decade Dropdown -->
-        <div class="cb-dropdown" data-filter="years">
+        <!-- Season Dropdown -->
+        <div class="cb-dropdown" data-filter="seasons">
+          <button type="button" class="cb-dropdown-btn">
+            Select season <span class="badge-counter">0</span>
+            <span class="material-symbols-outlined" style="font-size: 16px;">expand_more</span>
+          </button>
+          <div class="cb-menu">
+            <label class="cb-item"><input type="checkbox" value="WINTER"> Winter</label>
+            <label class="cb-item"><input type="checkbox" value="SPRING"> Spring</label>
+            <label class="cb-item"><input type="checkbox" value="SUMMER"> Summer</label>
+            <label class="cb-item"><input type="checkbox" value="FALL"> Fall</label>
+          </div>
+        </div>
+
+        <!-- Year Dropdown (Aligned Right so it doesn't overflow screen) -->
+        <div class="cb-dropdown align-right" data-filter="years">
           <button type="button" class="cb-dropdown-btn">
             Select year <span class="badge-counter">0</span>
             <span class="material-symbols-outlined" style="font-size: 16px;">expand_more</span>
@@ -849,20 +899,7 @@
             <label class="cb-item"><input type="checkbox" value="2010"> 2010s</label>
             <label class="cb-item"><input type="checkbox" value="2000"> 2000s</label>
             <label class="cb-item"><input type="checkbox" value="1990"> 1990s</label>
-          </div>
-        </div>
-
-        <!-- Season Dropdown -->
-        <div class="cb-dropdown" data-filter="seasons">
-          <button type="button" class="cb-dropdown-btn">
-            Select season <span class="badge-counter">0</span>
-            <span class="material-symbols-outlined" style="font-size: 16px;">expand_more</span>
-          </button>
-          <div class="cb-menu">
-            <label class="cb-item"><input type="checkbox" value="WINTER"> Winter</label>
-            <label class="cb-item"><input type="checkbox" value="SPRING"> Spring</label>
-            <label class="cb-item"><input type="checkbox" value="SUMMER"> Summer</label>
-            <label class="cb-item"><input type="checkbox" value="FALL"> Fall</label>
+            <label class="cb-item"><input type="checkbox" value="1980"> 1980s</label>
           </div>
         </div>
 
@@ -896,10 +933,57 @@
           </div>
         </div>
 
+        <!-- Language / Country Origin Dropdown -->
+        <div class="cb-dropdown" data-filter="countries">
+          <button type="button" class="cb-dropdown-btn">
+            Select language <span class="badge-counter">0</span>
+            <span class="material-symbols-outlined" style="font-size: 16px;">expand_more</span>
+          </button>
+          <div class="cb-menu">
+            <label class="cb-item"><input type="checkbox" value="JP"> Japanese</label>
+            <label class="cb-item"><input type="checkbox" value="KR"> Korean</label>
+            <label class="cb-item"><input type="checkbox" value="CN"> Chinese</label>
+            <label class="cb-item"><input type="checkbox" value="TW"> Taiwanese</label>
+          </div>
+        </div>
+
+        <!-- Rating Dropdown -->
+        <div class="cb-dropdown" data-filter="ratings">
+          <button type="button" class="cb-dropdown-btn">
+            Select rating <span class="badge-counter">0</span>
+            <span class="material-symbols-outlined" style="font-size: 16px;">expand_more</span>
+          </button>
+          <div class="cb-menu">
+            <label class="cb-item"><input type="checkbox" value="90"> 90%+ Score</label>
+            <label class="cb-item"><input type="checkbox" value="80"> 80%+ Score</label>
+            <label class="cb-item"><input type="checkbox" value="70"> 70%+ Score</label>
+            <label class="cb-item"><input type="checkbox" value="60"> 60%+ Score</label>
+          </div>
+        </div>
+
+        <!-- Source Dropdown (Aligned Right) -->
+        <div class="cb-dropdown align-right" data-filter="sources">
+          <button type="button" class="cb-dropdown-btn">
+            Select source <span class="badge-counter">0</span>
+            <span class="material-symbols-outlined" style="font-size: 16px;">expand_more</span>
+          </button>
+          <div class="cb-menu">
+            <label class="cb-item"><input type="checkbox" value="MANGA"> Manga</label>
+            <label class="cb-item"><input type="checkbox" value="LIGHT_NOVEL"> Light Novel</label>
+            <label class="cb-item"><input type="checkbox" value="ORIGINAL"> Original</label>
+            <label class="cb-item"><input type="checkbox" value="VISUAL_NOVEL"> Visual Novel</label>
+            <label class="cb-item"><input type="checkbox" value="VIDEO_GAME"> Video Game</label>
+            <label class="cb-item"><input type="checkbox" value="WEB_MANGA"> Web Manga</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Row: Exclude list, Sort & Action Buttons -->
+      <div class="filter-bottom-bar">
         <!-- Exclude Dropdown -->
         <div class="cb-dropdown" data-filter="excludes">
           <button type="button" class="cb-dropdown-btn">
-            Exclude genre <span class="badge-counter">0</span>
+            Exclude list <span class="badge-counter">0</span>
             <span class="material-symbols-outlined" style="font-size: 16px;">expand_more</span>
           </button>
           <div class="cb-menu">
@@ -911,27 +995,26 @@
           </div>
         </div>
 
-        <!-- Sort Single-choice Dropdown -->
+        <!-- Sort Choice -->
         <div class="cb-dropdown" data-filter="sort" data-single="true">
           <button type="button" class="cb-dropdown-btn">
-            Sort: <span id="sortLabel">Most Popular</span>
+            <span id="sortLabel">Default (Most Popular)</span>
             <span class="material-symbols-outlined" style="font-size: 16px;">expand_more</span>
           </button>
           <div class="cb-menu">
-            <label class="cb-item"><input type="radio" name="sortGroup" value="POPULARITY_DESC" checked> Most Popular</label>
+            <label class="cb-item"><input type="radio" name="sortGroup" value="POPULARITY_DESC" checked> Default (Most Popular)</label>
             <label class="cb-item"><input type="radio" name="sortGroup" value="TRENDING_DESC"> Trending</label>
             <label class="cb-item"><input type="radio" name="sortGroup" value="SCORE_DESC"> Top Rated</label>
             <label class="cb-item"><input type="radio" name="sortGroup" value="START_DATE_DESC"> Recently Added</label>
             <label class="cb-item"><input type="radio" name="sortGroup" value="FAVOURITES_DESC"> Most Favorited</label>
           </div>
         </div>
-      </div>
 
-      <!-- Action Buttons -->
-      <div class="filter-actions-bar">
+        <!-- Filter Submit & Reset -->
         <button type="button" class="anikoto-submit-btn" id="applyFilterBtn">
           <span class="material-symbols-outlined" style="font-size: 18px;">filter_alt</span> Filter
         </button>
+
         <button type="button" class="reset-link-btn" id="clearFilterBtn">
           <span class="material-symbols-outlined" style="font-size: 16px;">restart_alt</span> Reset
         </button>
@@ -966,6 +1049,9 @@
       seasons: [],
       formats: [],
       statuses: [],
+      countries: [],
+      ratings: [],
+      sources: [],
       excludes: [],
       sort: "POPULARITY_DESC"
     };
@@ -1016,7 +1102,7 @@
       refreshTitles();
     });
 
-    // Custom Dropdowns Logic (Click open/close, multi-check badges)
+    // Custom Dropdown Open/Close & Multi-Check Logic
     document.querySelectorAll('.cb-dropdown').forEach(dropdown => {
       const btn = dropdown.querySelector('.cb-dropdown-btn');
       
@@ -1065,7 +1151,7 @@
       }
     }
 
-    // Read Filter Values and Trigger Search
+    // Read Filter Values
     function readInputs() {
       activeFilters.search = document.getElementById('filterKeyword').value.trim();
 
@@ -1083,6 +1169,9 @@
       activeFilters.seasons = getChecked('seasons');
       activeFilters.formats = getChecked('formats');
       activeFilters.statuses = getChecked('statuses');
+      activeFilters.countries = getChecked('countries');
+      activeFilters.ratings = getChecked('ratings');
+      activeFilters.sources = getChecked('sources');
       activeFilters.excludes = getChecked('excludes');
 
       const sortRadio = document.querySelector('.cb-dropdown[data-filter="sort"] input:checked');
@@ -1155,13 +1244,13 @@
       if (isLoading || (!hasNextPage && append)) return;
       isLoading = true;
 
-      // Determine category parameters (Anime, Manga, Hentai, Read Hentai, Manhwa)
+      // Categorical Mapping (Anime, Manga, Hentai, Read Hentai, Manhwa, Manhua)
       let resolvedType = 'ANIME';
       let resolvedIsAdult = false;
       let resolvedCountry = undefined;
 
       const cats = activeFilters.category;
-      if (cats.includes('MANGA') || cats.includes('READ_HENTAI') || cats.includes('MANHWA')) {
+      if (cats.includes('MANGA') || cats.includes('READ_HENTAI') || cats.includes('MANHWA') || cats.includes('MANHUA')) {
         resolvedType = 'MANGA';
       }
       if (cats.includes('HENTAI') || cats.includes('READ_HENTAI')) {
@@ -1169,6 +1258,13 @@
       }
       if (cats.includes('MANHWA')) {
         resolvedCountry = 'KR';
+      }
+      if (cats.includes('MANHUA')) {
+        resolvedCountry = 'CN';
+      }
+
+      if (activeFilters.countries.length > 0) {
+        resolvedCountry = activeFilters.countries[0];
       }
 
       let varDefs = '$page: Int,$type: MediaType, $sort: [MediaSort],$isAdult: Boolean';
@@ -1221,6 +1317,18 @@
         varDefs += ', $statuses: [MediaStatus]';
         mediaFilters += ', status_in: $statuses';
         variables.statuses = activeFilters.statuses;
+      }
+
+      if (activeFilters.sources.length > 0) {
+        varDefs += ', $source: MediaSource';
+        mediaFilters += ', source: $source';
+        variables.source = activeFilters.sources[0];
+      }
+
+      if (activeFilters.ratings.length > 0) {
+        varDefs += ', $scoreGreater: Int';
+        mediaFilters += ', averageScore_greater: $scoreGreater';
+        variables.scoreGreater = parseInt(activeFilters.ratings[0], 10);
       }
 
       if (activeFilters.excludes.length > 0) {
