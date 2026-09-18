@@ -8,7 +8,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
   <style>
@@ -42,9 +42,8 @@
         radial-gradient(circle at 85% 20%, rgba(157, 92, 246, 0.1) 0%, transparent 40%);
     }
 
-    /* Top Navigation Area: Clean Back Button */
     .top-bar-wrapper {
-      max-width: 1080px;
+      max-width: 1180px;
       margin: 0 auto;
       padding: 24px 20px 0;
       display: flex;
@@ -80,17 +79,15 @@
       box-shadow: 0 0 16px rgba(255, 42, 116, 0.35);
     }
 
-    /* Main Container */
     .main-content {
-      max-width: 1080px;
+      max-width: 1180px;
       margin: 0 auto;
       padding: 24px 20px 80px;
       display: flex;
       flex-direction: column;
-      gap: 28px;
+      gap: 32px;
     }
 
-    /* Hero Banner */
     .donate-hero {
       text-align: center;
       display: flex;
@@ -117,7 +114,7 @@
 
     .donate-title {
       font-size: 2.5rem;
-      font-weight: 700;
+      font-weight: 800;
       line-height: 1.2;
       color: #fff;
     }
@@ -129,13 +126,12 @@
     }
 
     .donate-subtext {
-      max-width: 640px;
+      max-width: 680px;
       font-size: 0.95rem;
       color: var(--text-dim);
       line-height: 1.6;
     }
 
-    /* Critical Donor Instruction Alert Box */
     .instruction-alert {
       background: linear-gradient(135deg, rgba(88, 101, 242, 0.12), rgba(255, 42, 116, 0.12));
       border: 1px solid rgba(88, 101, 242, 0.35);
@@ -206,10 +202,9 @@
       font-weight: 600;
     }
 
-    /* Payment Methods Grid */
     .payment-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 20px;
     }
 
@@ -217,13 +212,12 @@
       background: var(--card-bg);
       border: 1px solid var(--bubble-border);
       border-radius: 24px;
-      padding: 26px;
+      padding: 24px;
       display: flex;
       flex-direction: column;
-      gap: 18px;
+      gap: 16px;
       backdrop-filter: blur(20px);
       transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-      position: relative;
     }
 
     .pay-card:hover {
@@ -258,9 +252,9 @@
     }
 
     .pay-icon-circle {
-      width: 46px;
-      height: 46px;
-      border-radius: 14px;
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -288,24 +282,23 @@
     }
 
     .pay-brand-name {
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       font-weight: 700;
       color: #fff;
     }
 
     .pay-tagline {
-      font-size: 0.75rem;
+      font-size: 0.74rem;
       color: var(--text-dim);
     }
 
     .pay-desc {
-      font-size: 0.86rem;
+      font-size: 0.85rem;
       color: #cbd5e1;
-      line-height: 1.6;
+      line-height: 1.5;
       flex: 1;
     }
 
-    /* Chime Handle Box with Copy Button */
     .chime-handle-box {
       background: rgba(255, 255, 255, 0.04);
       border: 1px solid rgba(255, 255, 255, 0.08);
@@ -352,7 +345,7 @@
       padding: 12px 20px;
       border-radius: 12px;
       text-decoration: none;
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       font-weight: 600;
       cursor: pointer;
       border: none;
@@ -388,64 +381,214 @@
       box-shadow: 0 6px 20px rgba(37, 201, 116, 0.4);
     }
 
-    /* Donor Perks Card */
-    .perks-card {
+    .section-header-block {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .section-heading-title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-heading-desc {
+      font-size: 0.88rem;
+      color: var(--text-dim);
+    }
+
+    .tiers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .tier-card {
       background: var(--card-bg);
       border: 1px solid var(--bubble-border);
+      border-radius: 20px;
+      padding: 22px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(16px);
+      transition: all 0.25s ease;
+    }
+
+    .tier-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .tier-card.tier-popular {
+      border-color: rgba(255, 42, 116, 0.4);
+      background: linear-gradient(180deg, rgba(255, 42, 116, 0.08) 0%, rgba(20, 22, 32, 0.6) 100%);
+    }
+
+    .tier-card.tier-legend {
+      border-color: rgba(250, 204, 21, 0.4);
+      background: linear-gradient(180deg, rgba(250, 204, 21, 0.08) 0%, rgba(20, 22, 32, 0.6) 100%);
+    }
+
+    .tier-top {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .tier-name {
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-dim);
+    }
+
+    .tier-price {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .tier-badge-pill {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 9999px;
+      text-transform: uppercase;
+    }
+
+    .badge-pink {
+      background: rgba(255, 42, 116, 0.2);
+      color: var(--accent-pink);
+      border: 1px solid rgba(255, 42, 116, 0.4);
+    }
+
+    .badge-gold {
+      background: rgba(250, 204, 21, 0.2);
+      color: #facc15;
+      border: 1px solid rgba(250, 204, 21, 0.4);
+    }
+
+    .tier-perks-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 0.78rem;
+      color: #cbd5e1;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding-top: 12px;
+      flex: 1;
+    }
+
+    .tier-perks-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      line-height: 1.4;
+    }
+
+    .tier-perks-list li .material-symbols-outlined {
+      font-size: 15px;
+      color: #10b981;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .monthly-banner-card {
+      background: linear-gradient(135deg, rgba(157, 92, 246, 0.15) 0%, rgba(0, 210, 255, 0.12) 100%);
+      border: 1px solid rgba(157, 92, 246, 0.35);
       border-radius: 24px;
       padding: 28px;
       display: flex;
       flex-direction: column;
       gap: 20px;
       backdrop-filter: blur(20px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
     }
 
-    .perks-head {
+    .monthly-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .monthly-title-group {
       display: flex;
       align-items: center;
       gap: 12px;
     }
 
-    .perks-icon {
-      font-size: 26px;
-      color: #facc15;
+    .monthly-icon-wrap {
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      background: rgba(157, 92, 246, 0.2);
+      border: 1px solid rgba(157, 92, 246, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-purple);
     }
 
-    .perks-title {
+    .monthly-title-text h3 {
       font-size: 1.25rem;
       font-weight: 700;
       color: #fff;
     }
 
-    .perks-grid {
+    .monthly-title-text p {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+    }
+
+    .monthly-perks-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 14px;
     }
 
-    .perk-item {
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid var(--bubble-border);
-      border-radius: 16px;
-      padding: 18px;
+    .monthly-perk-item {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 14px;
+      padding: 14px 16px;
       display: flex;
-      flex-direction: column;
-      gap: 6px;
+      align-items: flex-start;
+      gap: 10px;
     }
 
-    .perk-item-head {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.92rem;
+    .monthly-perk-item .material-symbols-outlined {
+      font-size: 20px;
+      color: var(--accent-blue);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .monthly-perk-text h4 {
+      font-size: 0.88rem;
       font-weight: 600;
       color: #fff;
+      margin-bottom: 2px;
     }
 
-    .perk-item-desc {
-      font-size: 0.8rem;
+    .monthly-perk-text p {
+      font-size: 0.76rem;
       color: var(--text-dim);
-      line-height: 1.5;
+      line-height: 1.45;
     }
 
     @media (max-width: 860px) {
@@ -455,12 +598,14 @@
       .instruction-alert {
         flex-direction: column;
       }
+      .tiers-grid {
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- Top Bar: Back to Home Button -->
   <div class="top-bar-wrapper">
     <a href="index.html" class="back-bubble-btn">
       <span class="material-symbols-outlined">arrow_back</span>
@@ -470,7 +615,6 @@
 
   <main class="main-content">
 
-    <!-- Hero Header -->
     <section class="donate-hero">
       <div class="donate-badge">
         <span class="material-symbols-outlined" style="font-size: 16px;">favorite</span>
@@ -478,11 +622,10 @@
       </div>
       <h1 class="donate-title">Help Keep <span>AniCool</span> Free & Fast</h1>
       <p class="donate-subtext">
-        AniCool is a community-first anime and manga catalog completely free of ads. Every donation directly funds fast servers, domain maintenance, and new features.
+        AniCool is built completely free of ads. Every single dollar goes straight toward fast server infrastructure, domain maintenance, and rolling out new features.
       </p>
     </section>
 
-    <!-- CRITICAL DONATION INSTRUCTION NOTICE -->
     <div class="instruction-alert">
       <div class="alert-icon-wrap">
         <span class="material-symbols-outlined" style="font-size: 24px;">verified_user</span>
@@ -490,10 +633,10 @@
       <div class="alert-body">
         <h2 class="alert-title">Important Step for Discord Roles!</h2>
         <p class="alert-text">
-          When sending your donation, please <strong>write your Discord username in the note or message</strong> so we can grant your special donor role in our server.
+          When sending your donation, please <strong>write your Discord username in the note or message</strong> so we can assign your special role.
         </p>
         <p class="alert-text">
-          Please also <strong>take a screenshot (SS) of the donation confirmation screen</strong>. Our team will ask for it to verify your payment and grant your role immediately!
+          Please also <strong>take a screenshot (SS) of your donation confirmation screen</strong>. Our team will ask for it to verify your payment and grant your badge immediately!
         </p>
         <div class="alert-badges-row">
           <span class="req-badge">
@@ -508,10 +651,8 @@
       </div>
     </div>
 
-    <!-- Payment Methods Grid -->
     <section class="payment-grid">
       
-      <!-- PayPal -->
       <div class="pay-card card-paypal">
         <div class="pay-card-head">
           <div class="pay-logo-title">
@@ -535,7 +676,6 @@
         </a>
       </div>
 
-      <!-- Buy Me a Coffee -->
       <div class="pay-card card-bmac">
         <div class="pay-card-head">
           <div class="pay-logo-title">
@@ -544,7 +684,7 @@
             </div>
             <div>
               <h3 class="pay-brand-name">Buy Me a Coffee</h3>
-              <p class="pay-tagline">qwideyedv</p>
+              <p class="pay-tagline">qwideyedv (One-time or Monthly)</p>
             </div>
           </div>
         </div>
@@ -559,7 +699,6 @@
         </a>
       </div>
 
-      <!-- Chime -->
       <div class="pay-card card-chime">
         <div class="pay-card-head">
           <div class="pay-logo-title">
@@ -574,7 +713,7 @@
         </div>
 
         <p class="pay-desc">
-          Send directly via Chime to member without any processing fees. Include your Discord name in the send memo.
+          Send directly via Chime without any processing fees. Include your Discord name in the send memo.
         </p>
 
         <div class="chime-handle-box">
@@ -593,52 +732,130 @@
 
     </section>
 
-    <!-- Discord Perks Breakdown -->
-    <section class="perks-card">
-      <div class="perks-head">
-        <span class="material-symbols-outlined perks-icon">workspace_premium</span>
-        <h2 class="perks-title">What You Get as an AniCool Supporter</h2>
+    <div class="section-header-block">
+      <h2 class="section-heading-title">
+        <span class="material-symbols-outlined" style="color: var(--accent-pink);">workspace_premium</span>
+        Donation Tiers &amp; Discord Perks
+      </h2>
+      <p class="section-heading-desc">
+        Unlock bigger perks and higher status the more you support the website.
+      </p>
+    </div>
+
+    <section class="tiers-grid">
+      
+      <div class="tier-card">
+        <div class="tier-top">
+          <span class="tier-name">Supporter</span>
+          <div class="tier-price">$5</div>
+        </div>
+        <ul class="tier-perks-list">
+          <li><span class="material-symbols-outlined">check_circle</span> Special Supporter Role in Discord</li>
+          <li><span class="material-symbols-outlined">check_circle</span> Standout username color</li>
+          <li><span class="material-symbols-outlined">check_circle</span> Access to private VIP chat</li>
+        </ul>
       </div>
 
-      <div class="perks-grid">
-        <div class="perk-item">
-          <div class="perk-item-head">
-            <span class="material-symbols-outlined" style="color: var(--accent-pink);">forum</span>
-            Talk Directly to the Dev
+      <div class="tier-card">
+        <div class="tier-top">
+          <span class="tier-name">Super Fan</span>
+          <div class="tier-price">$10</div>
+        </div>
+        <ul class="tier-perks-list">
+          <li><span class="material-symbols-outlined">check_circle</span> Everything in $5 tier</li>
+          <li><span class="material-symbols-outlined">check_circle</span> Custom animated icon badge</li>
+          <li><span class="material-symbols-outlined">check_circle</span> Suggest tags &amp; anime entries</li>
+        </ul>
+      </div>
+
+      <div class="tier-card tier-popular">
+        <span class="tier-badge-pill badge-pink">Popular</span>
+        <div class="tier-top">
+          <span class="tier-name" style="color: var(--accent-pink);">Champion</span>
+          <div class="tier-price">$25</div>
+        </div>
+        <ul class="tier-perks-list">
+          <li><span class="material-symbols-outlined">check_circle</span> Everything in $10 tier</li>
+          <li><span class="material-symbols-outlined">check_circle</span> Priority feature suggestions</li>
+          <li><span class="material-symbols-outlined">check_circle</span> <strong>Talk directly to dev</strong> in Discord</li>
+          <li><span class="material-symbols-outlined">check_circle</span> Private dev room access</li>
+        </ul>
+      </div>
+
+      <div class="tier-card">
+        <div class="tier-top">
+          <span class="tier-name">Elite</span>
+          <div class="tier-price">$50</div>
+        </div>
+        <ul class="tier-perks-list">
+          <li><span class="material-symbols-outlined">check_circle</span> Everything in $25 tier</li>
+          <li><span class="material-symbols-outlined">check_circle</span> <strong>Pick upcoming updates first</strong></li>
+          <li><span class="material-symbols-outlined">check_circle</span> Early access to UI redesigns</li>
+          <li><span class="material-symbols-outlined">check_circle</span> High priority feature voting</li>
+        </ul>
+      </div>
+
+      <div class="tier-card tier-legend">
+        <span class="tier-badge-pill badge-gold">Legend</span>
+        <div class="tier-top">
+          <span class="tier-name" style="color: #facc15;">Legend</span>
+          <div class="tier-price">$100</div>
+        </div>
+        <ul class="tier-perks-list">
+          <li><span class="material-symbols-outlined">check_circle</span> Everything in all lower tiers</li>
+          <li><span class="material-symbols-outlined">check_circle</span> Permanent custom VIP Discord role &amp; color</li>
+          <li><span class="material-symbols-outlined">check_circle</span> 1-on-1 calls / chats with dev</li>
+          <li><span class="material-symbols-outlined">check_circle</span> Request custom catalog filters or themes</li>
+          <li><span class="material-symbols-outlined">check_circle</span> Hall of Fame credit on AniCool</li>
+        </ul>
+      </div>
+
+    </section>
+
+    <section class="monthly-banner-card">
+      <div class="monthly-head">
+        <div class="monthly-title-group">
+          <div class="monthly-icon-wrap">
+            <span class="material-symbols-outlined" style="font-size: 26px;">autorenew</span>
           </div>
-          <p class="perk-item-desc">
-            Direct access to chat 1-on-1 with the developer in Discord about ideas, bugs, and site feedback.
-          </p>
+          <div class="monthly-title-text">
+            <h3>Monthly Supporters Club</h3>
+            <p>Subscribe monthly through Buy Me a Coffee to keep servers running non-stop</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="monthly-perks-grid">
+        <div class="monthly-perk-item">
+          <span class="material-symbols-outlined">verified</span>
+          <div class="monthly-perk-text">
+            <h4>Continuous Monthly Patron Role</h4>
+            <p>Special permanent sparkling Discord badge that stays active as long as you're subscribed.</p>
+          </div>
         </div>
 
-        <div class="perk-item">
-          <div class="perk-item-head">
-            <span class="material-symbols-outlined" style="color: #facc15;">how_to_vote</span>
-            Pick Updates First
+        <div class="monthly-perk-item">
+          <span class="material-symbols-outlined">tune</span>
+          <div class="monthly-perk-text">
+            <h4>Ongoing Dev Access</h4>
+            <p>Always have a direct channel to message and chat with the dev about thoughts, issues, and ideas.</p>
           </div>
-          <p class="perk-item-desc">
-            First priority to vote on and choose upcoming features, UI improvements, and new catalogs before anyone else.
-          </p>
         </div>
 
-        <div class="perk-item">
-          <div class="perk-item-head">
-            <span class="material-symbols-outlined" style="color: var(--accent-blue);">shield</span>
-            Special Discord Role
+        <div class="monthly-perk-item">
+          <span class="material-symbols-outlined">flag</span>
+          <div class="monthly-perk-text">
+            <h4>First Pick on New Updates</h4>
+            <p>Every monthly roadmap feature is chosen and reviewed by monthly supporters first.</p>
           </div>
-          <p class="perk-item-desc">
-            A stand-out Donator role and custom color displayed across our official server.
-          </p>
         </div>
 
-        <div class="perk-item">
-          <div class="perk-item-head">
-            <span class="material-symbols-outlined" style="color: #10b981;">lock_open</span>
-            Private Supporter Lounge
+        <div class="monthly-perk-item">
+          <span class="material-symbols-outlined">military_tech</span>
+          <div class="monthly-perk-text">
+            <h4>Sneak Peeks &amp; Betas</h4>
+            <p>Get private test links to test brand-new pages and UI changes days before public launch.</p>
           </div>
-          <p class="perk-item-desc">
-            Access to an exclusive VIP chat room reserved only for supporters and staff.
-          </p>
         </div>
       </div>
     </section>
