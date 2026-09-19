@@ -2,35 +2,70 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>AniCool - Authorizing...</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AniCool - Connecting AniList...</title>
   <style>
     body {
-      background: #0a0b10;
+      background-color: #0a0b10;
       color: #fff;
-      font-family: sans-serif;
+      font-family: 'Poppins', sans-serif, system-ui;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 100vh;
       margin: 0;
+      gap: 16px;
+    }
+    .loader {
+      width: 32px;
+      height: 32px;
+      border: 3px solid rgba(255, 255, 255, 0.1);
+      border-top-color: #ff2a74;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
     }
   </style>
 </head>
 <body>
-  <p>Connecting to AniList, please wait...</p>
+  <div class="loader"></div>
+  <p id="msg">Authorizing with AniList, please wait...</p>
 
   <script>
-    // AniList returns the token in the URL hash: #access_token=XYZ&token_type=Bearer...
     const hash = window.location.hash.substring(1);
     const params = new URLSearchParams(hash);
     const token = params.get('access_token');
 
     if (token) {
       localStorage.setItem('anicool_anilist_token', token);
-      // Return back to watchlist page
-      window.location.href = 'watchlist.html';
+      
+      // Fetch viewer info
+      fetch('https://graphql.anilist.co', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          query: `query { Viewer { id name avatar { medium } } }`
+        })
+      })
+      .then(res => res.json())
+      .then(json => {
+        const user = json?.data?.Viewer;
+        if (user) {
+          localStorage.setItem('anicool_anilist_user', JSON.stringify(user));
+        }
+        window.location.href = 'watchlist.html';
+      })
+      .catch(() => {
+        window.location.href = 'watchlist.html';
+      });
     } else {
-      document.body.innerHTML = '<p>Authorization failed or was denied. <a href="watchlist.html" style="color:#ff2a74;">Return to Watchlist</a></p>';
+      document.getElementById('msg').innerHTML = 'Authorization failed or denied. <a href="watchlist.html" style="color:#ff2a74;">Return to Watchlist</a>';
     }
   </script>
 </body>
