@@ -561,9 +561,7 @@
       text-overflow: ellipsis;
     }
 
-    /* =========================================================
-       EXACT INDEX.HTML CARDS CSS (Directly Transferred)
-       ========================================================= */
+    /* Index.html Card Layout */
     .anime-cards-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(172px, 1fr));
@@ -783,7 +781,7 @@
         <img src="" alt="" class="entry-poster-img" id="posterImg" style="display: none;" />
       </div>
 
-      <!-- Add to Watchlist Action System -->
+      <!-- Add to Watchlist Action System (Includes On Hold, Dropped, etc.) -->
       <div class="watchlist-control-box">
         <button type="button" class="watchlist-btn-main" id="watchlistBtnMain" onclick="toggleWatchlistMenu()">
           <span class="material-symbols-outlined" id="watchlistBtnIcon">bookmark_add</span>
@@ -794,19 +792,27 @@
         <div class="watchlist-dropdown-menu" id="watchlistDropdown">
           <button type="button" class="watchlist-option-btn" onclick="saveStatus('watching')">
             <span class="material-symbols-outlined" style="font-size: 18px; color: var(--accent-pink);">play_circle</span>
-            <span>Watching / Reading</span>
+            <span>Watching & Reading</span>
           </button>
           <button type="button" class="watchlist-option-btn" onclick="saveStatus('planning')">
             <span class="material-symbols-outlined" style="font-size: 18px; color: var(--accent-blue);">schedule</span>
             <span>Plan to Watch</span>
           </button>
+          <button type="button" class="watchlist-option-btn" onclick="saveStatus('on_hold')">
+            <span class="material-symbols-outlined" style="font-size: 18px; color: #f97316;">pause_circle</span>
+            <span>On Hold</span>
+          </button>
           <button type="button" class="watchlist-option-btn" onclick="saveStatus('completed')">
             <span class="material-symbols-outlined" style="font-size: 18px; color: #10b981;">task_alt</span>
             <span>Completed</span>
           </button>
+          <button type="button" class="watchlist-option-btn" onclick="saveStatus('dropped')">
+            <span class="material-symbols-outlined" style="font-size: 18px; color: #ef4444;">cancel</span>
+            <span>Dropped</span>
+          </button>
           <button type="button" class="watchlist-option-btn" onclick="saveStatus('favorites')">
             <span class="material-symbols-outlined" style="font-size: 18px; color: #facc15;">star</span>
-            <span>Favorite (Starred)</span>
+            <span>Favorites (Starred)</span>
           </button>
           <button type="button" class="watchlist-option-btn watchlist-remove-btn" id="watchlistRemoveBtn" style="display: none;" onclick="removeFromWatchlist()">
             <span class="material-symbols-outlined" style="font-size: 18px;">delete</span>
@@ -1213,7 +1219,7 @@
       rawRelations = media.relations?.edges || [];
       renderRelationsGrid(rawRelations);
 
-      // Recommendations / Similar Anime (Rendered as exact index.html cards)
+      // Recommendations / Similar Anime
       const similarGrid = document.getElementById('similarGrid');
       const recNodes = media.recommendations?.nodes || [];
       const recs = recNodes
@@ -1252,7 +1258,7 @@
       }
     }
 
-    // Relations Filtering (All, Episodes, Manga, Prequels/Sequels)
+    // Relations Filtering
     function filterRelations(type, btn) {
       document.querySelectorAll('.filter-pills-wrap .filter-pill-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
@@ -1316,7 +1322,7 @@
       }).join('');
     }
 
-    // Watchlist System (LocalStorage)
+    // Full Watchlist Management System (Matching watchlist.html)
     function toggleWatchlistMenu() {
       document.getElementById('watchlistDropdown').classList.toggle('show');
     }
@@ -1349,10 +1355,12 @@
       if (existing) {
         removeBtn.style.display = 'flex';
         const statusMap = {
-          watching: { label: 'Watching', icon: 'play_circle' },
-          planning: { label: 'Planning', icon: 'schedule' },
+          watching: { label: 'Watching & Reading', icon: 'play_circle' },
+          planning: { label: 'Plan to Watch', icon: 'schedule' },
+          on_hold: { label: 'On Hold', icon: 'pause_circle' },
           completed: { label: 'Completed', icon: 'task_alt' },
-          favorites: { label: 'Favorite', icon: 'star' }
+          dropped: { label: 'Dropped', icon: 'cancel' },
+          favorites: { label: 'Favorite (Starred)', icon: 'star' }
         };
 
         const config = statusMap[existing.status] || { label: 'In Watchlist', icon: 'bookmark' };
@@ -1360,7 +1368,7 @@
         btnIcon.textContent = config.icon;
 
         document.querySelectorAll('.watchlist-option-btn').forEach(btn => {
-          if (btn.getAttribute('onclick')?.includes(existing.status)) {
+          if (btn.getAttribute('onclick')?.includes(`'${existing.status}'`)) {
             btn.classList.add('active');
           }
         });
