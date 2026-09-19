@@ -3,12 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AniCool</title>
+  <title>AniCool - Media Details</title>
   <link rel="icon" type="image/png" href="favicon.png" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="AniCool" />
+  <meta property="og:title" content="AniCool - Media Details" />
+  <meta property="og:description" content="Explore anime, manga synopsis, characters, cast, staff, and add to your watchlist ad-free." />
+  <meta property="og:image" content="favicon.png" />
+  <meta name="theme-color" content="#ff2a74" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
   <style>
@@ -20,7 +27,7 @@
 
     :root {
       --bg-dark: #0a0b10;
-      --bubble-bg: rgba(20, 22, 32, 0.85);
+      --bubble-bg: rgba(20, 22, 32, 0.88);
       --bubble-border: rgba(255, 255, 255, 0.1);
       --card-bg: rgba(255, 255, 255, 0.035);
       --accent-pink: #ff2a74;
@@ -43,7 +50,7 @@
         radial-gradient(circle at 85% 20%, rgba(157, 92, 246, 0.1) 0%, transparent 40%);
     }
 
-    /* Outer Wrapper for Header + Outside Buttons */
+    /* Header Nav */
     .header-wrapper {
       position: sticky;
       top: 16px;
@@ -55,15 +62,14 @@
       padding: 0 16px;
     }
 
-    /* Clean, Snug Bubble Header */
     .bubble-nav {
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 16px;
+      justify-content: space-between;
+      gap: 18px;
       width: fit-content;
       min-width: 0;
-      padding: 5px 22px;
+      padding: 5px 20px;
       background: var(--bubble-bg);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
@@ -110,6 +116,7 @@
       font-size: 0.88rem;
       font-weight: 500;
       transition: all 0.25s ease;
+      cursor: pointer;
     }
 
     .nav-link:hover,
@@ -119,7 +126,7 @@
       transform: translateY(-1px);
     }
 
-    /* Outside Companion Buttons (Discord & Donate) */
+    /* Outside Companion Buttons */
     .outside-btn-group {
       display: flex;
       align-items: center;
@@ -153,20 +160,12 @@
       fill: currentColor;
     }
 
-    .outside-bubble-btn.discord-btn {
-      color: #cbd5e1;
-    }
-
     .outside-bubble-btn.discord-btn:hover {
       background: rgba(88, 101, 242, 0.2);
       border-color: var(--discord-color);
       color: #fff;
       transform: translateY(-2px);
       box-shadow: 0 8px 24px rgba(88, 101, 242, 0.35);
-    }
-
-    .outside-bubble-btn.donate-btn {
-      color: #cbd5e1;
     }
 
     .outside-bubble-btn.donate-btn:hover {
@@ -177,465 +176,357 @@
       box-shadow: 0 8px 24px rgba(244, 63, 94, 0.35);
     }
 
-    .donate-icon {
-      color: var(--donate-color);
-      font-size: 18px;
-    }
-
-    /* Backdrop & Content */
-    .entry-backdrop-container {
+    /* Hero Banner Area */
+    .banner-container {
       position: relative;
       width: 100%;
-      min-height: 460px;
+      height: 360px;
       background-size: cover;
       background-position: center 25%;
       margin-top: -85px;
-      display: flex;
-      align-items: flex-end;
+      z-index: 1;
     }
 
-    .backdrop-overlay {
+    .banner-overlay {
       position: absolute;
       inset: 0;
-      background: 
-        linear-gradient(0deg, var(--bg-dark) 8%, rgba(10, 11, 16, 0.8) 50%, rgba(10, 11, 16, 0.4) 100%),
-        radial-gradient(circle at 50% 30%, transparent 20%, var(--bg-dark) 90%);
+      background: linear-gradient(180deg, rgba(10, 11, 16, 0.2) 0%, rgba(10, 11, 16, 0.8) 60%, var(--bg-dark) 100%);
     }
 
-    .entry-main-wrapper {
+    /* Main Content Layout (Natural Scroll - Non-Sticky) */
+    .entry-main-content {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
       position: relative;
       z-index: 2;
-      max-width: 1360px;
-      margin: 0 auto;
-      padding: 0 30px 80px;
       display: grid;
-      grid-template-columns: 290px 1fr;
-      gap: 40px;
-      align-items: flex-start;
-      margin-top: -140px;
+      grid-template-columns: 280px 1fr;
+      gap: 36px;
+      align-items: start;
     }
 
-    .sidebar-col {
+    /* Left Poster Column - Natural Unstuck Flow */
+    .entry-poster-col {
       display: flex;
       flex-direction: column;
-      gap: 20px;
-      position: sticky;
-      top: 90px;
+      gap: 16px;
+      width: 100%;
+      position: static; /* Fixed: removes any sticky lag */
     }
 
-    .entry-poster-wrap {
+    .entry-poster-box {
       width: 100%;
+      aspect-ratio: 1 / 1.45;
       border-radius: 24px;
       overflow: hidden;
       border: 1px solid var(--bubble-border);
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
       background: #12141f;
-      aspect-ratio: 1 / 1.42;
     }
 
-    .entry-poster {
+    .entry-poster-img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
     }
 
-    .sidebar-stats-card {
-      background: var(--card-bg);
-      border: 1px solid var(--bubble-border);
-      border-radius: 22px;
-      padding: 18px;
+    /* Watchlist Dropdown & Action System */
+    .watchlist-control-box {
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      backdrop-filter: blur(20px);
+      gap: 8px;
+      width: 100%;
+      position: relative;
     }
 
-    .sidebar-stat-item {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      padding-bottom: 8px;
-    }
-
-    .sidebar-stat-item:last-child {
-      border-bottom: none;
-      padding-bottom: 0;
-    }
-
-    .sidebar-stat-label {
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: #71778e;
-      font-weight: 600;
-    }
-
-    .sidebar-stat-value {
-      font-size: 0.88rem;
-      color: #fff;
-      font-weight: 600;
-      word-break: break-word;
-    }
-
-    .content-col {
-      display: flex;
-      flex-direction: column;
-      gap: 32px;
-      padding-top: 40px;
-    }
-
-    .entry-badge-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .entry-pill {
-      background: rgba(255, 42, 116, 0.15);
-      border: 1px solid rgba(255, 42, 116, 0.35);
-      color: var(--accent-pink);
-      padding: 4px 14px;
-      border-radius: 9999px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-    }
-
-    .entry-score-pill {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      background: rgba(16, 185, 129, 0.15);
-      border: 1px solid rgba(16, 185, 129, 0.35);
-      color: #10b981;
-      padding: 4px 12px;
-      border-radius: 9999px;
-      font-size: 0.78rem;
-      font-weight: 600;
-    }
-
-    .entry-tag-pill {
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid var(--bubble-border);
-      color: #cbd5e1;
-      padding: 4px 12px;
-      border-radius: 9999px;
-      font-size: 0.75rem;
-    }
-
-    .entry-title {
-      font-size: 2.5rem;
-      font-weight: 700;
-      line-height: 1.2;
-      color: #fff;
-    }
-
-    .entry-alt-title {
-      font-size: 1.05rem;
-      color: var(--text-dim);
-      font-weight: 400;
-      margin-top: -6px;
-    }
-
-    .entry-action-bar {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin: 8px 0;
-      flex-wrap: wrap;
-    }
-
-    .bubble-btn-secondary {
+    .watchlist-btn-main {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      background: rgba(255, 255, 255, 0.07);
-      border: 1px solid var(--bubble-border);
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 12px 18px;
+      background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
       color: #fff;
-      text-decoration: none;
-      padding: 10px 20px;
+      border: none;
       border-radius: 9999px;
       font-size: 0.9rem;
-      font-weight: 500;
-      backdrop-filter: blur(10px);
-      cursor: default;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(255, 42, 116, 0.35);
+      transition: all 0.25s ease;
+      font-family: inherit;
     }
 
-    .entry-synopsis {
-      font-size: 0.95rem;
-      line-height: 1.7;
-      color: #cbd5e1;
-      background: rgba(20, 22, 32, 0.5);
-      padding: 20px 24px;
+    .watchlist-btn-main:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(255, 42, 116, 0.5);
+    }
+
+    .watchlist-dropdown-menu {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      width: 100%;
+      background: rgba(18, 20, 30, 0.96);
+      border: 1px solid var(--bubble-border);
       border-radius: 20px;
-      border: 1px solid var(--bubble-border);
-    }
-
-    .section-card {
-      background: var(--card-bg);
-      border: 1px solid var(--bubble-border);
-      border-radius: 26px;
-      padding: 26px;
-      display: flex;
+      padding: 8px;
+      display: none;
       flex-direction: column;
-      gap: 20px;
+      gap: 4px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.75);
       backdrop-filter: blur(20px);
+      z-index: 100;
     }
 
-    .section-card-head {
+    .watchlist-dropdown-menu.show {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
     }
 
-    .section-card-title {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .ep-controls {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .ep-pagination {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--bubble-border);
-      border-radius: 9999px;
-      padding: 3px 8px;
-    }
-
-    .ep-page-btn {
+    .watchlist-option-btn {
       background: transparent;
       border: none;
       color: var(--text-dim);
-      font-size: 0.78rem;
-      font-weight: 600;
-      padding: 4px 8px;
-      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 0.84rem;
+      font-weight: 500;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      transition: color 0.2s;
+      transition: all 0.2s;
+      font-family: inherit;
+      text-align: left;
+      width: 100%;
     }
 
-    .ep-page-btn:hover:not(:disabled) {
+    .watchlist-option-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
       color: #fff;
     }
 
-    .ep-page-btn:disabled {
-      opacity: 0.3;
-      cursor: not-allowed;
-    }
-
-    .ep-page-indicator {
-      font-size: 0.75rem;
-      color: #fff;
+    .watchlist-option-btn.active {
+      background: rgba(255, 42, 116, 0.15);
+      color: var(--accent-pink);
       font-weight: 600;
-      padding: 0 4px;
     }
 
-    .ep-search-bubble {
-      display: flex;
-      align-items: center;
-      background: rgba(255, 255, 255, 0.05);
+    .watchlist-remove-btn {
+      color: #ef4444;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 0 0 12px 12px;
+      margin-top: 4px;
+      padding-top: 8px;
+    }
+
+    .watchlist-remove-btn:hover {
+      background: rgba(239, 68, 68, 0.15);
+      color: #f87171;
+    }
+
+    /* Left Metadata Details Bubble */
+    .entry-info-sidebar {
+      background: var(--card-bg);
       border: 1px solid var(--bubble-border);
-      border-radius: 9999px;
-      padding: 6px 14px;
+      border-radius: 24px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      backdrop-filter: blur(20px);
+    }
+
+    .sidebar-info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
       gap: 8px;
     }
 
-    .ep-search-bubble input {
-      background: transparent;
-      border: none;
-      outline: none;
-      color: #fff;
-      font-size: 0.82rem;
-      width: 100px;
+    .sidebar-info-label {
+      color: #7e859b;
+      font-weight: 500;
     }
 
-    .episodes-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-      gap: 10px;
-      max-height: 280px;
-      overflow-y: auto;
-      padding-right: 6px;
-    }
-
-    .episodes-grid::-webkit-scrollbar {
-      width: 5px;
-    }
-
-    .episodes-grid::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 4px;
-    }
-
-    .ep-chip {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--bubble-border);
-      border-radius: 12px;
-      padding: 10px 4px;
-      text-align: center;
-      font-size: 0.82rem;
+    .sidebar-info-val {
+      color: #f8fafc;
       font-weight: 600;
-      color: #cbd5e1;
-      user-select: none;
-      cursor: default;
-    }
-
-    .characters-voice-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 16px;
-    }
-
-    .char-va-card {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--bubble-border);
-      border-radius: 18px;
-      padding: 10px 12px;
-      gap: 12px;
-      overflow: hidden;
-      width: 100%;
-    }
-
-    .char-side {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      min-width: 0;
-    }
-
-    .va-side {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
       text-align: right;
-      gap: 10px;
-      min-width: 0;
     }
 
-    .person-info {
+    /* Right Details Column */
+    .entry-details-col {
       display: flex;
       flex-direction: column;
-      min-width: 0;
-      overflow: hidden;
+      gap: 28px;
     }
 
-    .char-avatar-mini, .va-avatar-mini {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      object-fit: cover;
+    .entry-header-block {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .entry-title-main {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.25;
+    }
+
+    .entry-title-native {
+      font-size: 1.05rem;
+      color: var(--text-dim);
+      font-weight: 500;
+    }
+
+    .entry-pill-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+
+    .entry-pill {
+      background: rgba(255, 255, 255, 0.06);
       border: 1px solid var(--bubble-border);
-      background: #141624;
+      color: #e2e8f0;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 4px 14px;
+      border-radius: 9999px;
+    }
+
+    .entry-pill.score-pill {
+      background: rgba(16, 185, 129, 0.15);
+      border-color: rgba(16, 185, 129, 0.35);
+      color: #10b981;
+    }
+
+    /* Synopsis Bubble */
+    .entry-bubble-section {
+      background: var(--card-bg);
+      border: 1px solid var(--bubble-border);
+      border-radius: 26px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      backdrop-filter: blur(20px);
+    }
+
+    .section-heading {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .entry-synopsis-text {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: #cbd5e1;
+    }
+
+    /* Characters & Cast Row */
+    .characters-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 14px;
+    }
+
+    .character-card {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid var(--bubble-border);
+      border-radius: 16px;
+      padding: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .character-card:hover {
+      background: rgba(255, 255, 255, 0.07);
+      transform: translateY(-2px);
+    }
+
+    .char-thumb {
+      width: 44px;
+      height: 56px;
+      border-radius: 8px;
+      object-fit: cover;
+      background: #1a1c28;
       flex-shrink: 0;
     }
 
-    .person-name {
+    .char-info {
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .char-name {
       font-size: 0.82rem;
       font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
       color: #fff;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
 
-    .person-sub {
-      font-size: 0.7rem;
+    .char-role {
+      font-size: 0.72rem;
       color: var(--text-dim);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
 
-    .relations-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-      gap: 16px;
+    /* Relations List */
+    .relations-scroll-row {
+      display: flex;
+      gap: 14px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      scrollbar-width: thin;
     }
 
     .relation-card {
+      flex: 0 0 140px;
       display: flex;
       flex-direction: column;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--bubble-border);
-      border-radius: 16px;
-      overflow: hidden;
+      gap: 6px;
       text-decoration: none;
       color: #fff;
-      transition: all 0.25s ease;
-    }
-
-    .relation-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(255, 42, 116, 0.4);
-    }
-
-    .relation-thumb-wrap {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 1 / 1.42;
-      background: #12141f;
     }
 
     .relation-thumb {
       width: 100%;
-      height: 100%;
+      aspect-ratio: 1 / 1.42;
+      border-radius: 12px;
       object-fit: cover;
-    }
-
-    .relation-type-tag {
-      position: absolute;
-      top: 8px;
-      left: 8px;
-      background: rgba(10, 11, 16, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 2px 7px;
-      border-radius: 6px;
-      font-size: 0.65rem;
-      font-weight: 600;
-      color: var(--accent-blue);
-      text-transform: uppercase;
-    }
-
-    .relation-info {
-      padding: 10px;
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
+      background: #1a1c28;
+      border: 1px solid var(--bubble-border);
     }
 
     .relation-title {
-      font-size: 0.82rem;
+      font-size: 0.78rem;
       font-weight: 600;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
-    .relation-meta {
-      font-size: 0.72rem;
-      color: var(--text-dim);
+    .relation-tag {
+      font-size: 0.68rem;
+      color: var(--accent-pink);
+      text-transform: uppercase;
+      font-weight: 700;
     }
 
     .skeleton {
@@ -654,33 +545,32 @@
         flex-wrap: wrap;
       }
       .bubble-nav {
-        min-width: 0;
         width: 100%;
-        justify-content: space-between;
       }
-      .entry-main-wrapper {
+      .entry-main-content {
         grid-template-columns: 1fr;
+        gap: 24px;
       }
-      .sidebar-col {
-        position: static;
-        width: 240px;
+      .entry-poster-box {
+        max-width: 240px;
         margin: 0 auto;
       }
-      .content-col {
-        padding-top: 0;
+      .watchlist-control-box {
+        max-width: 240px;
+        margin: 0 auto;
       }
-      .entry-title {
-        font-size: 2rem;
+      .banner-container {
+        height: 240px;
       }
-      .characters-voice-grid {
-        grid-template-columns: 1fr;
+      .entry-title-main {
+        font-size: 1.6rem;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Floating Nav Header with Outside Companion Buttons -->
+  <!-- Header Nav -->
   <div class="header-wrapper">
     <header class="bubble-nav">
       <div class="logo">
@@ -693,6 +583,12 @@
             <a href="index.html" class="nav-link">Home</a>
           </li>
           <li class="nav-item">
+            <a href="release.html" class="nav-link">Release</a>
+          </li>
+          <li class="nav-item">
+            <a href="watchlist.html" class="nav-link">Watchlist</a>
+          </li>
+          <li class="nav-item">
             <a href="genre.html" class="nav-link">Genre</a>
           </li>
           <li class="nav-item">
@@ -702,7 +598,6 @@
       </nav>
     </header>
 
-    <!-- Outside Companion Buttons -->
     <div class="outside-btn-group">
       <a href="https://discord.com/invite/tDny2ubsCx" target="_blank" rel="noopener" class="outside-bubble-btn discord-btn" title="Join our Discord">
         <svg viewBox="0 0 127.14 96.36">
@@ -711,479 +606,380 @@
         <span>Discord</span>
       </a>
 
-      <a href="donations.html" class="outside-bubble-btn donate-btn" title="Support AniCool">
+      <a href="donate.html" class="outside-bubble-btn donate-btn" title="Support AniCool">
         <span class="material-symbols-outlined donate-icon">favorite</span>
         <span>Donate</span>
       </a>
     </div>
   </div>
 
-  <div class="entry-backdrop-container skeleton" id="entryBackdrop">
-    <div class="backdrop-overlay"></div>
+  <!-- Hero Banner -->
+  <div class="banner-container skeleton" id="bannerImg">
+    <div class="banner-overlay"></div>
   </div>
 
-  <main class="entry-main-wrapper">
-    
-    <aside class="sidebar-col">
-      <div class="entry-poster-wrap">
-        <img src="" alt="Poster" class="entry-poster" id="entryPoster" />
+  <!-- Main Content Layout (Natural Scroll) -->
+  <main class="entry-main-content">
+
+    <!-- Left Column: Poster + Add to Watchlist Dropdown + Meta Info -->
+    <aside class="entry-poster-col">
+      <div class="entry-poster-box skeleton" id="posterBox">
+        <img src="" alt="" class="entry-poster-img" id="posterImg" style="display: none;" />
       </div>
 
-      <div class="sidebar-stats-card">
-        <div class="sidebar-stat-item">
-          <span class="sidebar-stat-label">Format</span>
-          <span class="sidebar-stat-value" id="statFormat">--</span>
+      <!-- Add to Watchlist Action System -->
+      <div class="watchlist-control-box">
+        <button type="button" class="watchlist-btn-main" id="watchlistBtnMain" onclick="toggleWatchlistMenu()">
+          <span class="material-symbols-outlined" id="watchlistBtnIcon">bookmark_add</span>
+          <span id="watchlistBtnText">Add to Watchlist</span>
+          <span class="material-symbols-outlined" style="font-size: 16px;">arrow_drop_down</span>
+        </button>
+
+        <div class="watchlist-dropdown-menu" id="watchlistDropdown">
+          <button type="button" class="watchlist-option-btn" onclick="saveStatus('watching')">
+            <span class="material-symbols-outlined" style="font-size: 18px; color: var(--accent-pink);">play_circle</span>
+            <span>Watching / Reading</span>
+          </button>
+          <button type="button" class="watchlist-option-btn" onclick="saveStatus('planning')">
+            <span class="material-symbols-outlined" style="font-size: 18px; color: var(--accent-blue);">schedule</span>
+            <span>Plan to Watch</span>
+          </button>
+          <button type="button" class="watchlist-option-btn" onclick="saveStatus('completed')">
+            <span class="material-symbols-outlined" style="font-size: 18px; color: #10b981;">task_alt</span>
+            <span>Completed</span>
+          </button>
+          <button type="button" class="watchlist-option-btn" onclick="saveStatus('favorites')">
+            <span class="material-symbols-outlined" style="font-size: 18px; color: #facc15;">star</span>
+            <span>Favorite (Starred)</span>
+          </button>
+          <button type="button" class="watchlist-option-btn watchlist-remove-btn" id="watchlistRemoveBtn" style="display: none;" onclick="removeFromWatchlist()">
+            <span class="material-symbols-outlined" style="font-size: 18px;">delete</span>
+            <span>Remove Entry</span>
+          </button>
         </div>
-        <div class="sidebar-stat-item">
-          <span class="sidebar-stat-label">Episodes / Ch</span>
-          <span class="sidebar-stat-value" id="statEpisodes">--</span>
+      </div>
+
+      <!-- Quick Facts Bubble -->
+      <div class="entry-info-sidebar">
+        <div class="sidebar-info-row">
+          <span class="sidebar-info-label">Format</span>
+          <span class="sidebar-info-val" id="metaFormat">--</span>
         </div>
-        <div class="sidebar-stat-item">
-          <span class="sidebar-stat-label">Status</span>
-          <span class="sidebar-stat-value" id="statStatus">--</span>
+        <div class="sidebar-info-row">
+          <span class="sidebar-info-label">Status</span>
+          <span class="sidebar-info-val" id="metaStatus">--</span>
         </div>
-        <div class="sidebar-stat-item">
-          <span class="sidebar-stat-label">Season</span>
-          <span class="sidebar-stat-value" id="statSeason">--</span>
+        <div class="sidebar-info-row">
+          <span class="sidebar-info-label">Episodes / Ch</span>
+          <span class="sidebar-info-val" id="metaCount">--</span>
         </div>
-        <div class="sidebar-stat-item">
-          <span class="sidebar-stat-label">Studio / Producer</span>
-          <span class="sidebar-stat-value" id="statStudio">--</span>
+        <div class="sidebar-info-row">
+          <span class="sidebar-info-label">Season</span>
+          <span class="sidebar-info-val" id="metaSeason">--</span>
         </div>
-        <div class="sidebar-stat-item">
-          <span class="sidebar-stat-label">Source</span>
-          <span class="sidebar-stat-value" id="statSource">--</span>
+        <div class="sidebar-info-row">
+          <span class="sidebar-info-label">Studio</span>
+          <span class="sidebar-info-val" id="metaStudio">--</span>
         </div>
-        <div class="sidebar-stat-item">
-          <span class="sidebar-stat-label">Duration</span>
-          <span class="sidebar-stat-value" id="statDuration">--</span>
-        </div>
-        <div class="sidebar-stat-item">
-          <span class="sidebar-stat-label">Genres</span>
-          <span class="sidebar-stat-value" id="statGenres">--</span>
-        </div>
-        <div class="sidebar-stat-item">
-          <span class="sidebar-stat-label">Popularity</span>
-          <span class="sidebar-stat-value" id="statPopularity">--</span>
+        <div class="sidebar-info-row">
+          <span class="sidebar-info-label">Source</span>
+          <span class="sidebar-info-val" id="metaSource">--</span>
         </div>
       </div>
     </aside>
 
-    <div class="content-col">
-      
-      <div>
-        <div class="entry-badge-row" id="entryBadges">
-          <span class="entry-pill" id="entryPill">Anime</span>
-          <span class="entry-score-pill">★ <span id="entryScore">--</span></span>
-          <span class="entry-tag-pill" id="entryYear">--</span>
+    <!-- Right Column: Title, Synopsis, Characters, Relations -->
+    <section class="entry-details-col">
+      <div class="entry-header-block">
+        <h1 class="entry-title-main" id="entryTitle">Loading Title...</h1>
+        <div class="entry-title-native" id="entryNativeTitle"></div>
+
+        <div class="entry-pill-row" id="genresRow"></div>
+      </div>
+
+      <!-- Synopsis Bubble -->
+      <div class="entry-bubble-section">
+        <div class="section-heading">
+          <span class="material-symbols-outlined" style="color: var(--accent-pink);">description</span>
+          <span>Synopsis</span>
         </div>
-
-        <h1 class="entry-title" id="entryTitle">Loading Media...</h1>
-        <div class="entry-alt-title" id="entryAltTitle">...</div>
-
-        <div class="entry-action-bar">
-          <div class="bubble-btn-secondary" id="catalogBadge">
-            <span class="material-symbols-outlined" style="color: var(--accent-pink);">library_books</span> AniList Catalog Entry
-          </div>
-          <a href="#" target="_blank" rel="noopener" class="bubble-btn-secondary" id="trailerBtn" style="display: none;">
-            <span class="material-symbols-outlined">movie</span> Trailer
-          </a>
-        </div>
-
-        <div class="entry-synopsis" id="entrySynopsis">
-          Connecting to AniList API...
+        <div class="entry-synopsis-text" id="entrySynopsis">
+          Fetching full official synopsis from AniList...
         </div>
       </div>
 
-      <section class="section-card" id="episodesSection">
-        <div class="section-card-head">
-          <div class="section-card-title">
-            <span class="material-symbols-outlined" style="color: var(--accent-pink);">video_library</span>
-            Episodes Catalog (<span id="episodesCountTitle">0</span>)
-          </div>
-          
-          <div class="ep-controls">
-            <div class="ep-pagination" id="epPagination" style="display: none;">
-              <button type="button" class="ep-page-btn" id="epPrevBtn" aria-label="Previous Page">
-                <span class="material-symbols-outlined" style="font-size: 16px;">chevron_left</span>
-              </button>
-              <span class="ep-page-indicator" id="epPageIndicator">1 - 100</span>
-              <button type="button" class="ep-page-btn" id="epNextBtn" aria-label="Next Page">
-                <span class="material-symbols-outlined" style="font-size: 16px;">chevron_right</span>
-              </button>
-            </div>
-
-            <div class="ep-search-bubble">
-              <span class="material-symbols-outlined" style="font-size: 16px;">search</span>
-              <input type="text" id="epSearchInput" placeholder="Find ep..." />
-            </div>
-          </div>
+      <!-- Characters & Voice Actors -->
+      <div class="entry-bubble-section">
+        <div class="section-heading">
+          <span class="material-symbols-outlined" style="color: var(--accent-blue);">group</span>
+          <span>Characters & Cast</span>
         </div>
-        <div class="episodes-grid" id="episodesGrid"></div>
-      </section>
-
-      <section class="section-card">
-        <div class="section-card-head">
-          <div class="section-card-title">
-            <span class="material-symbols-outlined" style="color: var(--accent-purple);">diversity_3</span>
-            Characters & Voice Actors
-          </div>
+        <div class="characters-grid" id="charactersGrid">
+          <div style="color: var(--text-dim); font-size: 0.85rem;">Loading character roster...</div>
         </div>
-        <div class="characters-voice-grid" id="charactersVoiceGrid"></div>
-      </section>
+      </div>
 
-      <section class="section-card">
-        <div class="section-card-head">
-          <div class="section-card-title">
-            <span class="material-symbols-outlined" style="color: var(--accent-blue);">device_hub</span>
-            Relations & Franchises (Seasons, Manga, Prequels)
-          </div>
+      <!-- Related Releases & Sequels -->
+      <div class="entry-bubble-section">
+        <div class="section-heading">
+          <span class="material-symbols-outlined" style="color: #facc15;">hub</span>
+          <span>Relations & Sequels</span>
         </div>
-        <div class="relations-grid" id="relationsGrid"></div>
-      </section>
-
-      <section class="section-card">
-        <div class="section-card-head">
-          <div class="section-card-title">
-            <span class="material-symbols-outlined" style="color: #facc15;">recommend</span>
-            You Might Also Like
-          </div>
+        <div class="relations-scroll-row" id="relationsRow">
+          <div style="color: var(--text-dim); font-size: 0.85rem;">Loading relations...</div>
         </div>
-        <div class="relations-grid" id="recommendationsGrid"></div>
-      </section>
-
-    </div>
+      </div>
+    </section>
 
   </main>
 
   <script>
-    let currentAnimeData = null;
+    // Grab ID from query string (e.g. entry.html?id=151807)
+    const urlParams = new URLSearchParams(window.location.search);
+    const mediaId = parseInt(urlParams.get('id'), 10) || 151807;
 
-    function getQueryParam(param) {
-      const urlParams = new URLSearchParams(window.location.search);
-      return urlParams.get(param);
-    }
+    let currentLoadedMedia = null;
 
-    const currentMediaId = parseInt(getQueryParam('id'), 10) || 151807;
-
-    async function loadEntryDetails(id) {
-      const query = `
-        query ($id: Int) {
-          Media(id: $id) {
-            id
-            type
-            title { english romaji native }
-            coverImage { extraLarge large }
-            bannerImage
-            description
-            averageScore
-            popularity
-            episodes
-            chapters
-            duration
-            status
-            format
-            season
-            seasonYear
-            source
-            genres
-            nextAiringEpisode { episode }
-            trailer { id site }
-            studios(isMain: true) {
-              nodes { name }
-            }
-            characters(sort: ROLE, perPage: 12) {
-              edges {
-                role
-                node {
-                  name { full }
-                  image { medium }
-                }
-                voiceActors(language: JAPANESE, sort: RELEVANCE) {
-                  name { full }
-                  image { medium }
-                  languageV2
-                }
+    // AniList GraphQL Query
+    const query = `
+      query ($id: Int) {
+        Media(id: $id) {
+          id
+          type
+          format
+          status
+          episodes
+          chapters
+          season
+          seasonYear
+          source
+          averageScore
+          bannerImage
+          coverImage { extraLarge large }
+          title { english romaji native }
+          description
+          genres
+          studios(isMain: true) { nodes { name } }
+          characters(sort: ROLE, perPage: 8) {
+            edges {
+              role
+              node {
+                name { full }
+                image { medium }
               }
             }
-            relations {
-              edges {
-                relationType(version: 2)
-                node {
-                  id
-                  type
-                  format
-                  title { english romaji native }
-                  coverImage { large }
-                  status
-                }
-              }
-            }
-            recommendations(sort: RATING_DESC, perPage: 10) {
-              nodes {
-                mediaRecommendation {
-                  id
-                  type
-                  format
-                  title { english romaji native }
-                  coverImage { large }
-                  averageScore
-                }
+          }
+          relations {
+            edges {
+              relationType
+              node {
+                id
+                format
+                title { english romaji }
+                coverImage { large }
               }
             }
           }
         }
-      `;
+      }
+    `;
 
+    async function fetchMediaData() {
       try {
         const response = await fetch('https://graphql.anilist.co', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ query, variables: { id } })
+          body: JSON.stringify({ query, variables: { id: mediaId } })
         });
 
-        const json = await response.json();
-        currentAnimeData = json?.data?.Media;
-        if (currentAnimeData) {
-          renderPageDetails(currentAnimeData);
-        }
+        const data = await response.json();
+        const media = data?.data?.Media;
+        if (!media) return;
+
+        currentLoadedMedia = media;
+        renderMediaPage(media);
+        syncWatchlistButton(media.id);
       } catch (err) {
-        document.getElementById('entryTitle').textContent = 'Failed to load media details.';
+        console.error(err);
       }
     }
 
-    let totalEpisodes = 0;
-    let currentEpPage = 1;
-    const epsPerPage = 100;
+    function renderMediaPage(media) {
+      const title = media.title.english || media.title.romaji;
+      document.title = `${title} - AniCool`;
 
-    function renderPageDetails(media) {
-      const mainTitle = media.title.english || media.title.romaji;
-      document.title = `${mainTitle} - AniCool`;
-
-      const backdrop = document.getElementById('entryBackdrop');
-      const poster = document.getElementById('entryPoster');
-      const score = document.getElementById('entryScore');
-      const year = document.getElementById('entryYear');
-      const pill = document.getElementById('entryPill');
-      const titleEl = document.getElementById('entryTitle');
-      const altTitleEl = document.getElementById('entryAltTitle');
-      const synopsis = document.getElementById('entrySynopsis');
-      const trailerBtn = document.getElementById('trailerBtn');
-
-      backdrop.classList.remove('skeleton');
-      const bgImage = media.bannerImage || media.coverImage.extraLarge;
-      backdrop.style.backgroundImage = `url('${bgImage}')`;
-      poster.src = media.coverImage.extraLarge || media.coverImage.large;
-
-      score.textContent = media.averageScore ? `${media.averageScore}%` : 'N/A';
-      year.textContent = media.seasonYear || (media.season ? media.season : 'Ongoing');
-      pill.textContent = media.type || 'ANIME';
-
-      titleEl.textContent = mainTitle;
-      altTitleEl.textContent = media.title.native || media.title.romaji;
-
-      synopsis.innerHTML = media.description ? media.description : 'No synopsis available.';
-
-      let resolvedEpisodes = media.episodes;
-      if (!resolvedEpisodes && media.nextAiringEpisode?.episode) {
-        resolvedEpisodes = media.nextAiringEpisode.episode - 1;
-      }
-
-      document.getElementById('statFormat').textContent = media.format || 'N/A';
-      document.getElementById('statEpisodes').textContent = resolvedEpisodes ? `${resolvedEpisodes} Episodes` : (media.chapters ? `${media.chapters} Chapters` : 'Ongoing');
-      document.getElementById('statStatus').textContent = media.status ? media.status.replace(/_/g, ' ') : 'N/A';
-      document.getElementById('statSeason').textContent = (media.season && media.seasonYear) ? `${media.season} ${media.seasonYear}` : (media.seasonYear || 'N/A');
-      document.getElementById('statStudio').textContent = media.studios?.nodes?.[0]?.name || (media.type === 'MANGA' ? 'Author / Magazine' : 'Unknown');
-      document.getElementById('statSource').textContent = media.source ? media.source.replace(/_/g, ' ') : 'Original';
-      document.getElementById('statDuration').textContent = media.duration ? `${media.duration} mins/ep` : 'N/A';
-      document.getElementById('statGenres').textContent = (media.genres || []).join(', ') || 'N/A';
-      document.getElementById('statPopularity').textContent = media.popularity ? `#${media.popularity.toLocaleString()}` : 'N/A';
-
-      if (media.trailer && media.trailer.site === 'youtube') {
-        trailerBtn.href = `https://www.youtube.com/watch?v=${media.trailer.id}`;
-        trailerBtn.style.display = 'inline-flex';
-      }
-
-      if (media.type === 'MANGA') {
-        document.getElementById('episodesSection').style.display = 'none';
+      // Banner & Poster
+      const banner = document.getElementById('bannerImg');
+      banner.classList.remove('skeleton');
+      if (media.bannerImage) {
+        banner.style.backgroundImage = `url('${media.bannerImage}')`;
       } else {
-        totalEpisodes = resolvedEpisodes || 1;
-        document.getElementById('episodesCountTitle').textContent = totalEpisodes;
-        setupEpisodesPagination(totalEpisodes);
+        banner.style.backgroundImage = `url('${media.coverImage.extraLarge}')`;
       }
 
-      buildCharactersWithVA(media.characters?.edges || []);
-      buildRelationsList(media.relations?.edges || []);
-      buildRecommendationsList(media.recommendations?.nodes || []);
-    }
+      const posterBox = document.getElementById('posterBox');
+      const posterImg = document.getElementById('posterImg');
+      posterBox.classList.remove('skeleton');
+      posterImg.src = media.coverImage.extraLarge || media.coverImage.large;
+      posterImg.style.display = 'block';
 
-    function setupEpisodesPagination(total) {
-      const paginationWrap = document.getElementById('epPagination');
-      const prevBtn = document.getElementById('epPrevBtn');
-      const nextBtn = document.getElementById('epNextBtn');
-      const epSearch = document.getElementById('epSearchInput');
+      // Titles & Badges
+      document.getElementById('entryTitle').textContent = title;
+      document.getElementById('entryNativeTitle').textContent = media.title.native || '';
 
-      currentEpPage = 1;
-      const totalPages = Math.ceil(total / epsPerPage);
-
-      if (totalPages > 1) {
-        paginationWrap.style.display = 'flex';
-      } else {
-        paginationWrap.style.display = 'none';
+      const genresRow = document.getElementById('genresRow');
+      let badgesHtml = '';
+      if (media.averageScore) {
+        badgesHtml += `<span class="entry-pill score-pill">★ ${media.averageScore}% Score</span>`;
       }
+      (media.genres || []).forEach(g => {
+        badgesHtml += `<span class="entry-pill">${g}</span>`;
+      });
+      genresRow.innerHTML = badgesHtml;
 
-      renderEpisodePage();
+      // Synopsis
+      const cleanedDesc = media.description ? media.description.replace(/<[^>]*>?/gm, '') : 'No synopsis available.';
+      document.getElementById('entrySynopsis').textContent = cleanedDesc;
 
-      prevBtn.onclick = () => {
-        if (currentEpPage > 1) {
-          currentEpPage--;
-          renderEpisodePage();
-        }
-      };
+      // Sidebar Metadata
+      document.getElementById('metaFormat').textContent = media.format || media.type;
+      document.getElementById('metaStatus').textContent = media.status ? media.status.replace(/_/g, ' ') : 'N/A';
+      document.getElementById('metaCount').textContent = media.episodes ? `${media.episodes} Eps` : (media.chapters ? `${media.chapters} Chs` : 'Unknown');
+      document.getElementById('metaSeason').textContent = (media.season && media.seasonYear) ? `${media.season} ${media.seasonYear}` : (media.seasonYear || 'N/A');
+      document.getElementById('metaStudio').textContent = media.studios?.nodes?.[0]?.name || 'N/A';
+      document.getElementById('metaSource').textContent = media.source ? media.source.replace(/_/g, ' ') : 'Original';
 
-      nextBtn.onclick = () => {
-        if (currentEpPage < totalPages) {
-          currentEpPage++;
-          renderEpisodePage();
-        }
-      };
-
-      epSearch.oninput = (e) => {
-        const query = e.target.value.trim().toLowerCase();
-        const grid = document.getElementById('episodesGrid');
-
-        if (!query) {
-          renderEpisodePage();
-          if (totalPages > 1) paginationWrap.style.display = 'flex';
-          return;
-        }
-
-        paginationWrap.style.display = 'none';
-        let matchedHtml = '';
-        for (let i = 1; i <= total; i++) {
-          const label = `EP ${i}`;
-          if (label.toLowerCase().includes(query) || i.toString() === query) {
-            matchedHtml += `<div class="ep-chip">${label}</div>`;
-          }
-        }
-        grid.innerHTML = matchedHtml || '<p style="color:var(--text-dim);font-size:0.8rem;grid-column:1/-1;">No episode found.</p>';
-      };
-    }
-
-    function renderEpisodePage() {
-      const grid = document.getElementById('episodesGrid');
-      const indicator = document.getElementById('epPageIndicator');
-      const prevBtn = document.getElementById('epPrevBtn');
-      const nextBtn = document.getElementById('epNextBtn');
-
-      const start = (currentEpPage - 1) * epsPerPage + 1;
-      const end = Math.min(currentEpPage * epsPerPage, totalEpisodes);
-      const totalPages = Math.ceil(totalEpisodes / epsPerPage);
-
-      indicator.textContent = `${start} - ${end}`;
-      prevBtn.disabled = currentEpPage === 1;
-      nextBtn.disabled = currentEpPage === totalPages;
-
-      let html = '';
-      for (let i = start; i <= end; i++) {
-        html += `<div class="ep-chip">EP ${i}</div>`;
-      }
-      grid.innerHTML = html;
-    }
-
-    function buildCharactersWithVA(charEdges) {
-      const container = document.getElementById('charactersVoiceGrid');
-      if (!charEdges.length) {
-        container.innerHTML = '<p style="color: var(--text-dim); font-size: 0.85rem;">No character and voice actor data available.</p>';
-        return;
-      }
-
-      container.innerHTML = charEdges.map(edge => {
-        const charName = edge.node.name?.full || 'Unknown';
-        const charImg = edge.node.image?.medium || '';
-        const va = edge.voiceActors?.[0];
-        const vaName = va ? va.name?.full : 'N/A';
-        const vaImg = va ? va.image?.medium : '';
-
-        return `
-          <div class="char-va-card">
-            <div class="char-side">
-              <img src="${charImg}" alt="${charName}" class="char-avatar-mini" loading="lazy" />
-              <div class="person-info">
-                <div class="person-name" title="${charName}">${charName}</div>
-                <div class="person-sub">${edge.role || 'Main'}</div>
-              </div>
-            </div>
-            <div class="va-side">
-              <div class="person-info">
-                <div class="person-name" title="${vaName}">${vaName}</div>
-                <div class="person-sub">${va ? 'Japanese' : 'No VA'}</div>
-              </div>
-              ${vaImg ? `<img src="${vaImg}" alt="${vaName}" class="va-avatar-mini" loading="lazy" />` : ''}
+      // Characters
+      const charactersGrid = document.getElementById('charactersGrid');
+      const charEdges = media.characters?.edges || [];
+      if (charEdges.length > 0) {
+        charactersGrid.innerHTML = charEdges.map(edge => `
+          <div class="character-card">
+            <img src="${edge.node.image?.medium || ''}" alt="${edge.node.name.full}" class="char-thumb" loading="lazy" />
+            <div class="char-info">
+              <div class="char-name" title="${edge.node.name.full}">${edge.node.name.full}</div>
+              <div class="char-role">${edge.role}</div>
             </div>
           </div>
-        `;
-      }).join('');
-    }
-
-    function buildRelationsList(relationEdges) {
-      const container = document.getElementById('relationsGrid');
-      if (!relationEdges.length) {
-        container.innerHTML = '<p style="color: var(--text-dim); font-size: 0.85rem;">No related seasons or manga adaptations recorded.</p>';
-        return;
+        `).join('');
+      } else {
+        charactersGrid.innerHTML = '<div style="color:var(--text-dim); font-size:0.85rem;">No character info available.</div>';
       }
 
-      container.innerHTML = relationEdges.map(edge => {
-        const item = edge.node;
-        const title = item.title?.english || item.title?.romaji;
-        const relType = edge.relationType ? edge.relationType.replace(/_/g, ' ') : 'Related';
+      // Relations
+      const relationsRow = document.getElementById('relationsRow');
+      const relEdges = media.relations?.edges || [];
+      if (relEdges.length > 0) {
+        relationsRow.innerHTML = relEdges.map(edge => {
+          const relNode = edge.node;
+          const relTitle = relNode.title.english || relNode.title.romaji;
+          const relType = edge.relationType.replace(/_/g, ' ');
 
-        return `
-          <a href="entry.html?id=${item.id}" class="relation-card">
-            <div class="relation-thumb-wrap">
-              <img src="${item.coverImage?.large || ''}" alt="${title}" class="relation-thumb" loading="lazy" />
-              <div class="relation-type-tag">${relType}</div>
-            </div>
-            <div class="relation-info">
-              <div class="relation-title" title="${title}">${title}</div>
-              <div class="relation-meta">${item.format || 'Media'} • ${item.status || ''}</div>
-            </div>
-          </a>
-        `;
-      }).join('');
-    }
-
-    function buildRecommendationsList(recNodes) {
-      const container = document.getElementById('recommendationsGrid');
-      const validNodes = recNodes.filter(n => n.mediaRecommendation);
-      if (!validNodes.length) {
-        container.innerHTML = '<p style="color: var(--text-dim); font-size: 0.85rem;">No recommendations found.</p>';
-        return;
+          return `
+            <a href="entry.html?id=${relNode.id}" class="relation-card">
+              <img src="${relNode.coverImage?.large || ''}" alt="${relTitle}" class="relation-thumb" loading="lazy" />
+              <div class="relation-tag">${relType}</div>
+              <div class="relation-title" title="${relTitle}">${relTitle}</div>
+            </a>
+          `;
+        }).join('');
+      } else {
+        relationsRow.innerHTML = '<div style="color:var(--text-dim); font-size:0.85rem;">No franchise relations found.</div>';
       }
-
-      container.innerHTML = validNodes.map(n => {
-        const item = n.mediaRecommendation;
-        const title = item.title?.english || item.title?.romaji;
-        const score = item.averageScore ? `★ ${item.averageScore}%` : '';
-
-        return `
-          <a href="entry.html?id=${item.id}" class="relation-card">
-            <div class="relation-thumb-wrap">
-              <img src="${item.coverImage?.large || ''}" alt="${title}" class="relation-thumb" loading="lazy" />
-              <div class="relation-type-tag" style="color: #10b981;">${score || item.format}</div>
-            </div>
-            <div class="relation-info">
-              <div class="relation-title" title="${title}">${title}</div>
-              <div class="relation-meta">${item.format || 'Media'}</div>
-            </div>
-          </a>
-        `;
-      }).join('');
     }
 
-    window.addEventListener('DOMContentLoaded', () => {
-      loadEntryDetails(currentMediaId);
+    // Watchlist System (LocalStorage)
+    function toggleWatchlistMenu() {
+      const menu = document.getElementById('watchlistDropdown');
+      menu.classList.toggle('show');
+    }
+
+    document.addEventListener('click', (e) => {
+      const box = document.querySelector('.watchlist-control-box');
+      if (box && !box.contains(e.target)) {
+        document.getElementById('watchlistDropdown').classList.remove('show');
+      }
     });
+
+    function getStoredWatchlist() {
+      try {
+        return JSON.parse(localStorage.getItem('anicool_watchlist_items') || '{}');
+      } catch (e) {
+        return {};
+      }
+    }
+
+    function syncWatchlistButton(id) {
+      const list = getStoredWatchlist();
+      const existing = list[id];
+
+      const btnText = document.getElementById('watchlistBtnText');
+      const btnIcon = document.getElementById('watchlistBtnIcon');
+      const removeBtn = document.getElementById('watchlistRemoveBtn');
+
+      document.querySelectorAll('.watchlist-option-btn').forEach(b => b.classList.remove('active'));
+
+      if (existing) {
+        removeBtn.style.display = 'flex';
+        const statusMap = {
+          watching: { label: 'Watching', icon: 'play_circle' },
+          planning: { label: 'Planning', icon: 'schedule' },
+          completed: { label: 'Completed', icon: 'task_alt' },
+          favorites: { label: 'Favorite', icon: 'star' }
+        };
+
+        const config = statusMap[existing.status] || { label: 'In Watchlist', icon: 'bookmark' };
+        btnText.textContent = config.label;
+        btnIcon.textContent = config.icon;
+
+        // Highlight selected option
+        document.querySelectorAll('.watchlist-option-btn').forEach(btn => {
+          if (btn.getAttribute('onclick')?.includes(existing.status)) {
+            btn.classList.add('active');
+          }
+        });
+      } else {
+        btnText.textContent = 'Add to Watchlist';
+        btnIcon.textContent = 'bookmark_add';
+        removeBtn.style.display = 'none';
+      }
+    }
+
+    function saveStatus(status) {
+      if (!currentLoadedMedia) return;
+
+      const list = getStoredWatchlist();
+      const title = currentLoadedMedia.title.english || currentLoadedMedia.title.romaji;
+      const image = currentLoadedMedia.coverImage.large || currentLoadedMedia.coverImage.extraLarge;
+
+      list[currentLoadedMedia.id] = {
+        id: currentLoadedMedia.id,
+        title: title,
+        image: image,
+        format: currentLoadedMedia.format || currentLoadedMedia.type,
+        episodes: currentLoadedMedia.episodes || currentLoadedMedia.chapters || '?',
+        score: currentLoadedMedia.averageScore || null,
+        status: status,
+        addedAt: Date.now()
+      };
+
+      localStorage.setItem('anicool_watchlist_items', JSON.stringify(list));
+      syncWatchlistButton(currentLoadedMedia.id);
+      document.getElementById('watchlistDropdown').classList.remove('show');
+    }
+
+    function removeFromWatchlist() {
+      if (!currentLoadedMedia) return;
+
+      const list = getStoredWatchlist();
+      delete list[currentLoadedMedia.id];
+      localStorage.setItem('anicool_watchlist_items', JSON.stringify(list));
+
+      syncWatchlistButton(currentLoadedMedia.id);
+      document.getElementById('watchlistDropdown').classList.remove('show');
+    }
+
+    window.addEventListener('DOMContentLoaded', fetchMediaData);
   </script>
 
 </body>
