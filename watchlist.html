@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AniCool - My Watchlist</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="AniCool" />
+  <meta property="og:title" content="AniCool - My Watchlist" />
+  <meta property="og:description" content="Manage your personal anime and manga collection, tracking, and favorite lists." />
+  <meta name="theme-color" content="#ff2a74" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-dark: #0a0b10;
+      --bubble-bg: rgba(20, 22, 32, 0.88);
+      --bubble-border: rgba(255, 255, 255, 0.1);
+      --card-bg: rgba(255, 255, 255, 0.035);
+      --accent-pink: #ff2a74;
+      --accent-purple: #9d5cf6;
+      --accent-blue: #00d2ff;
+      --discord-color: #5865F2;
+      --donate-color: #f43f5e;
+      --text-main: #f8fafc;
+      --text-dim: #94a3b8;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      min-height: 100vh;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(255, 42, 116, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 85% 20%, rgba(157, 92, 246, 0.1) 0%, transparent 40%);
+    }
+
+    /* Header Nav */
+    .header-wrapper {
+      position: sticky;
+      top: 16px;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 0 16px;
+    }
+
+    .bubble-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      width: fit-content;
+      min-width: 0;
+      padding: 5px 20px;
+      background: var(--bubble-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--bubble-border);
+      border-radius: 9999px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
+    }
+
+    .logo a {
+      font-size: 1.25rem;
+      font-weight: 700;
+      text-decoration: none;
+      color: #fff;
+      display: inline-block;
+      letter-spacing: 0.5px;
+      transition: transform 0.25s ease;
+    }
+
+    .logo a:hover {
+      transform: scale(1.05);
+    }
+
+    .logo span {
+      background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-1px);
+    }
+
+    /* Outside Companion Buttons */
+    .outside-btn-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .outside-bubble-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      height: 44px;
+      padding: 0 16px;
+      background: var(--bubble-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--bubble-border);
+      border-radius: 9999px;
+      color: var(--text-main);
+      text-decoration: none;
+      font-size: 0.84rem;
+      font-weight: 600;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+      transition: all 0.25s ease;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .outside-bubble-btn svg {
+      width: 19px;
+      height: 19px;
+      fill: currentColor;
+    }
+
+    .outside-bubble-btn.discord-btn:hover {
+      background: rgba(88, 101, 242, 0.2);
+      border-color: var(--discord-color);
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(88, 101, 242, 0.35);
+    }
+
+    .outside-bubble-btn.donate-btn:hover {
+      background: rgba(244, 63, 94, 0.2);
+      border-color: var(--donate-color);
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(244, 63, 94, 0.35);
+    }
+
+    /* Main Content */
+    .watchlist-main-content {
+      max-width: 1480px;
+      margin: 0 auto;
+      padding: 40px 30px 90px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    /* Page Header Card */
+    .watchlist-header-card {
+      background: var(--bubble-bg);
+      border: 1px solid var(--bubble-border);
+      border-radius: 28px;
+      padding: 28px 36px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55);
+    }
+
+    .header-title-box {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .header-title-box h1 {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header-title-box p {
+      font-size: 0.88rem;
+      color: var(--text-dim);
+    }
+
+    /* Search Input & Action Utilities */
+    .header-utility-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .watchlist-search-box {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--bubble-border);
+      border-radius: 9999px;
+      padding: 8px 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .watchlist-search-box:focus-within {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--accent-pink);
+      box-shadow: 0 0 14px rgba(255, 42, 116, 0.3);
+    }
+
+    .watchlist-search-box input {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #fff;
+      font-size: 0.85rem;
+      font-family: inherit;
+      width: 170px;
+    }
+
+    .watchlist-search-box input::placeholder {
+      color: var(--text-dim);
+    }
+
+    .tool-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--bubble-border);
+      color: var(--text-dim);
+      height: 38px;
+      padding: 0 14px;
+      border-radius: 9999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .tool-btn:hover {
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    .tool-btn.danger-btn:hover {
+      background: rgba(244, 63, 94, 0.2);
+      border-color: var(--accent-pink);
+      color: #fff;
+    }
+
+    /* Filter Pills Bar */
+    .filter-pills-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      scrollbar-width: none;
+    }
+
+    .filter-pills-bar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .list-tab-pill {
+      background: rgba(20, 22, 32, 0.7);
+      border: 1px solid var(--bubble-border);
+      color: var(--text-dim);
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 8px 18px;
+      border-radius: 9999px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+      backdrop-filter: blur(12px);
+    }
+
+    .list-tab-pill:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-2px);
+    }
+
+    .list-tab-pill.active {
+      background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 6px 18px rgba(255, 42, 116, 0.35);
+    }
+
+    .pill-counter {
+      background: rgba(0, 0, 0, 0.35);
+      padding: 2px 7px;
+      border-radius: 9999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+
+    /* Index-Matching Cards Grid */
+    .anime-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(172px, 1fr));
+      gap: 20px;
+      width: 100%;
+    }
+
+    .card-wrap {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .anime-card {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: #10131e;
+      border: 1px solid var(--bubble-border);
+      border-radius: 18px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: #fff;
+      cursor: pointer;
+      transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.25s ease;
+    }
+
+    .anime-card:hover {
+      transform: translateY(-4px) scale(1.02);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .card-thumb-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 1.42;
+      overflow: hidden;
+      background: #141622;
+      flex-shrink: 0;
+    }
+
+    .card-thumb {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.35s ease;
+    }
+
+    .anime-card:hover .card-thumb {
+      transform: scale(1.05);
+    }
+
+    .card-badge-top {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: rgba(15, 17, 24, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 3px 8px;
+      border-radius: 9999px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: #10b981;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .card-format-tag {
+      position: absolute;
+      bottom: 8px;
+      left: 8px;
+      background: rgba(255, 42, 116, 0.85);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      padding: 2px 7px;
+      border-radius: 6px;
+      font-size: 0.68rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .card-info {
+      padding: 10px 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      flex: 1;
+      justify-content: space-between;
+    }
+
+    .card-item-title {
+      font-size: 0.88rem;
+      font-weight: 600;
+      line-height: 1.3;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: #fff;
+    }
+
+    .card-item-sub {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* Card Quick Actions Overlay */
+    .card-quick-actions {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      z-index: 10;
+      display: flex;
+      gap: 6px;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .card-wrap:hover .card-quick-actions {
+      opacity: 1;
+    }
+
+    .action-icon-btn {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: rgba(15, 17, 24, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .action-icon-btn:hover {
+      background: var(--accent-pink);
+      border-color: var(--accent-pink);
+      transform: scale(1.1);
+    }
+
+    .action-icon-btn.delete-icon:hover {
+      background: #ef4444;
+      border-color: #ef4444;
+    }
+
+    .action-icon-btn span {
+      font-size: 16px;
+    }
+
+    /* Empty State Container */
+    .empty-watchlist-box {
+      grid-column: 1 / -1;
+      background: var(--bubble-bg);
+      border: 1px dashed var(--bubble-border);
+      border-radius: 28px;
+      padding: 60px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      text-align: center;
+    }
+
+    .empty-icon-bubble {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: rgba(255, 42, 116, 0.12);
+      border: 1px solid rgba(255, 42, 116, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-pink);
+    }
+
+    .empty-icon-bubble span {
+      font-size: 34px;
+    }
+
+    .empty-watchlist-box h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .empty-watchlist-box p {
+      font-size: 0.88rem;
+      color: var(--text-dim);
+      max-width: 420px;
+      line-height: 1.5;
+    }
+
+    .empty-browse-btn {
+      margin-top: 4px;
+      background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+      color: #fff;
+      padding: 10px 24px;
+      border-radius: 9999px;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      box-shadow: 0 8px 24px rgba(255, 42, 116, 0.35);
+      transition: all 0.25s ease;
+    }
+
+    .empty-browse-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(255, 42, 116, 0.5);
+    }
+
+    @media (max-width: 960px) {
+      .header-wrapper {
+        flex-wrap: wrap;
+      }
+      .bubble-nav {
+        width: 100%;
+      }
+      .watchlist-header-card {
+        padding: 24px 20px;
+      }
+      .anime-cards-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 16px;
+      }
+      .card-quick-actions {
+        opacity: 1; /* Always visible on mobile */
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Nav -->
+  <div class="header-wrapper">
+    <header class="bubble-nav">
+      <div class="logo">
+        <a href="index.html">Ani<span>Cool</span></a>
+      </div>
+
+      <nav>
+        <ul class="nav-links">
+          <li class="nav-item">
+            <a href="index.html" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="release.html" class="nav-link">Release</a>
+          </li>
+          <li class="nav-item">
+            <a href="watchlist.html" class="nav-link active">Watchlist</a>
+          </li>
+          <li class="nav-item">
+            <a href="genre.html" class="nav-link">Genre</a>
+          </li>
+          <li class="nav-item">
+            <a href="websites.html" class="nav-link">Websites</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="outside-btn-group">
+      <a href="https://discord.com/invite/tDny2ubsCx" target="_blank" rel="noopener" class="outside-bubble-btn discord-btn" title="Join our Discord">
+        <svg viewBox="0 0 127.14 96.36">
+          <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.86,53,48.81,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/>
+        </svg>
+        <span>Discord</span>
+      </a>
+
+      <a href="donate.html" class="outside-bubble-btn donate-btn" title="Support AniCool">
+        <span class="material-symbols-outlined" style="color: var(--donate-color); font-size: 18px;">favorite</span>
+        <span>Donate</span>
+      </a>
+    </div>
+  </div>
+
+  <main class="watchlist-main-content">
+
+    <!-- Top Dashboard Header -->
+    <section class="watchlist-header-card">
+      <div class="header-title-box">
+        <h1>
+          <span class="material-symbols-outlined" style="color: var(--accent-pink); font-size: 32px;">bookmarks</span>
+          <span>My Watchlist</span>
+        </h1>
+        <p>Keep track of what you're watching, plan your queue, and manage your favorites.</p>
+      </div>
+
+      <div class="header-utility-group">
+        <div class="watchlist-search-box">
+          <span class="material-symbols-outlined" style="color: var(--text-dim); font-size: 18px;">search</span>
+          <input type="text" id="watchlistSearchInput" placeholder="Filter saved titles..." oninput="handleSearch(this.value)" />
+        </div>
+
+        <button type="button" class="tool-btn" onclick="exportWatchlist()" title="Download Backup">
+          <span class="material-symbols-outlined" style="font-size: 16px;">download</span>
+          <span>Export</span>
+        </button>
+
+        <button type="button" class="tool-btn danger-btn" onclick="confirmClearWatchlist()" title="Clear All Items">
+          <span class="material-symbols-outlined" style="font-size: 16px;">delete_sweep</span>
+          <span>Clear</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Status Tabs Bar -->
+    <div class="filter-pills-bar">
+      <button type="button" class="list-tab-pill active" onclick="switchTab('all', this)">
+        <span>All Titles</span>
+        <span class="pill-counter" id="count-all">0</span>
+      </button>
+
+      <button type="button" class="list-tab-pill" onclick="switchTab('watching', this)">
+        <span class="material-symbols-outlined" style="font-size: 16px; color: var(--accent-pink);">play_circle</span>
+        <span>Watching / Reading</span>
+        <span class="pill-counter" id="count-watching">0</span>
+      </button>
+
+      <button type="button" class="list-tab-pill" onclick="switchTab('planning', this)">
+        <span class="material-symbols-outlined" style="font-size: 16px; color: var(--accent-blue);">schedule</span>
+        <span>Plan to Watch</span>
+        <span class="pill-counter" id="count-planning">0</span>
+      </button>
+
+      <button type="button" class="list-tab-pill" onclick="switchTab('completed', this)">
+        <span class="material-symbols-outlined" style="font-size: 16px; color: #10b981;">task_alt</span>
+        <span>Completed</span>
+        <span class="pill-counter" id="count-completed">0</span>
+      </button>
+
+      <button type="button" class="list-tab-pill" onclick="switchTab('favorites', this)">
+        <span class="material-symbols-outlined" style="font-size: 16px; color: #facc15;">star</span>
+        <span>Favorites</span>
+        <span class="pill-counter" id="count-favorites">0</span>
+      </button>
+    </div>
+
+    <!-- Watchlist Cards Grid -->
+    <div class="anime-cards-grid" id="watchlistGrid"></div>
+
+  </main>
+
+  <script>
+    let activeFilter = 'all';
+    let searchQuery = '';
+
+    function getWatchlistData() {
+      try {
+        return JSON.parse(localStorage.getItem('anicool_watchlist_items') || '{}');
+      } catch (e) {
+        return {};
+      }
+    }
+
+    function saveWatchlistData(data) {
+      localStorage.setItem('anicool_watchlist_items', JSON.stringify(data));
+    }
+
+    function switchTab(status, btn) {
+      document.querySelectorAll('.filter-pills-bar .list-tab-pill').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeFilter = status;
+      renderWatchlist();
+    }
+
+    function handleSearch(query) {
+      searchQuery = (query || '').toLowerCase().trim();
+      renderWatchlist();
+    }
+
+    function updateCounters() {
+      const data = getWatchlistData();
+      const items = Object.values(data);
+
+      document.getElementById('count-all').textContent = items.length;
+      document.getElementById('count-watching').textContent = items.filter(i => i.status === 'watching').length;
+      document.getElementById('count-planning').textContent = items.filter(i => i.status === 'planning').length;
+      document.getElementById('count-completed').textContent = items.filter(i => i.status === 'completed').length;
+      document.getElementById('count-favorites').textContent = items.filter(i => i.status === 'favorites').length;
+    }
+
+    function deleteItem(id, title, event) {
+      if (event) event.preventDefault();
+      if (!confirm(`Remove "${title}" from your list?`)) return;
+
+      const data = getWatchlistData();
+      delete data[id];
+      saveWatchlistData(data);
+      updateCounters();
+      renderWatchlist();
+    }
+
+    function quickChangeStatus(id, newStatus, event) {
+      if (event) event.preventDefault();
+      const data = getWatchlistData();
+      if (data[id]) {
+        data[id].status = newStatus;
+        saveWatchlistData(data);
+        updateCounters();
+        renderWatchlist();
+      }
+    }
+
+    function confirmClearWatchlist() {
+      const data = getWatchlistData();
+      const count = Object.keys(data).length;
+      if (count === 0) {
+        alert('Your watchlist is already empty.');
+        return;
+      }
+      if (confirm(`Are you sure you want to permanently clear all ${count} saved titles?`)) {
+        localStorage.removeItem('anicool_watchlist_items');
+        updateCounters();
+        renderWatchlist();
+      }
+    }
+
+    function exportWatchlist() {
+      const data = getWatchlistData();
+      const items = Object.values(data);
+      if (items.length === 0) {
+        alert('No titles saved in your watchlist to export.');
+        return;
+      }
+
+      const jsonStr = JSON.stringify(data, null, 2);
+      const blob = new Blob([jsonStr], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `anicool_watchlist_${new Date().toISOString().slice(0, 10)}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function renderWatchlist() {
+      const grid = document.getElementById('watchlistGrid');
+      const data = getWatchlistData();
+      let items = Object.values(data);
+
+      // Status filter
+      if (activeFilter !== 'all') {
+        items = items.filter(item => item.status === activeFilter);
+      }
+
+      // Keyword Search filter
+      if (searchQuery) {
+        items = items.filter(item => (item.title || '').toLowerCase().includes(searchQuery));
+      }
+
+      // Sort by newest added first
+      items.sort((a, b) => (b.addedAt || 0) - (a.addedAt || 0));
+
+      if (items.length === 0) {
+        grid.innerHTML = `
+          <div class="empty-watchlist-box">
+            <div class="empty-icon-bubble">
+              <span class="material-symbols-outlined">bookmark_border</span>
+            </div>
+            <h3>Your list is looking empty</h3>
+            <p>You don't have any titles saved in this category yet. Explore anime, manga, and movies to start building your personal library.</p>
+            <a href="index.html" class="empty-browse-btn">Explore Titles</a>
+          </div>
+        `;
+        return;
+      }
+
+      const statusLabels = {
+        watching: 'Watching',
+        planning: 'Planning',
+        completed: 'Completed',
+        favorites: 'Favorite'
+      };
+
+      grid.innerHTML = items.map(item => {
+        const title = item.title || 'Untitled';
+        const cover = item.image || 'favicon.png';
+        const format = item.format || 'Anime';
+        const score = item.score ? `★ ${item.score}%` : '';
+        const count = item.episodes ? `${item.episodes} Ep` : '';
+        const statusLabel = statusLabels[item.status] || 'Saved';
+
+        return `
+          <div class="card-wrap">
+            <!-- Quick Action Hover Pill -->
+            <div class="card-quick-actions">
+              <button type="button" class="action-icon-btn delete-icon" onclick="deleteItem(${item.id}, '${escapeQuotes(title)}', event)" title="Remove Entry">
+                <span class="material-symbols-outlined">delete</span>
+              </button>
+            </div>
+
+            <a href="entry.html?id=${item.id}" class="anime-card">
+              <div class="card-thumb-wrap">
+                <img src="${cover}" alt="${title}" class="card-thumb" loading="lazy" />
+                ${score ? `<div class="card-badge-top">${score}</div>` : ''}
+                <div class="card-format-tag">${statusLabel}</div>
+              </div>
+              <div class="card-info">
+                <h3 class="card-item-title" title="${title}">${title}</h3>
+                <div class="card-item-sub">
+                  <span>${format}</span>
+                  ${count ? `<span>${count}</span>` : ''}
+                </div>
+              </div>
+            </a>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function escapeQuotes(str) {
+      return (str || '').replace(/'/g, "\\'").replace(/"/g, '&quot;');
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      updateCounters();
+      renderWatchlist();
+    });
+  </script>
+
+</body>
+</html>
