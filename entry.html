@@ -9,7 +9,8 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="AniCool" />
   <meta property="og:title" content="AniCool - Media Details" />
-  <meta property="og:description" content="Stream and discover trending anime, read manga and manhwa with zero ads." />
+  <meta property="og:description" content="Explore anime, manga synopsis, characters, cast, staff, and add to your watchlist ad-free." />
+  <meta property="og:image" content="favicon.png" />
   <meta name="theme-color" content="#ff2a74" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -175,167 +176,61 @@
       box-shadow: 0 8px 24px rgba(244, 63, 94, 0.35);
     }
 
-    /* Banner Area */
+    /* Hero Banner Area */
     .banner-container {
       position: relative;
       width: 100%;
+      height: 360px;
       height: 380px;
       background-size: cover;
       background-position: center 25%;
       margin-top: -85px;
-      z-index: 1;
-    }
-
+@@ -190,29 +190,29 @@
     .banner-overlay {
       position: absolute;
       inset: 0;
+      background: linear-gradient(180deg, rgba(10, 11, 16, 0.2) 0%, rgba(10, 11, 16, 0.8) 60%, var(--bg-dark) 100%);
       background: linear-gradient(180deg, rgba(10, 11, 16, 0.2) 0%, rgba(10, 11, 16, 0.85) 65%, var(--bg-dark) 100%);
     }
 
-    /* Main Content Layout */
+    /* Main Content Layout (Natural Scroll - Non-Sticky) */
+    /* Main Content Layout (Natural Smooth Scroll) */
     .entry-main-content {
+      max-width: 1380px;
       max-width: 1400px;
       margin: 0 auto;
       padding: 0 24px 80px;
       position: relative;
       z-index: 2;
       display: grid;
+      grid-template-columns: 280px 1fr;
       grid-template-columns: 290px 1fr;
       gap: 36px;
       align-items: start;
     }
 
+    /* Left Poster Column - Natural Unstuck Flow */
     /* Left Column */
     .entry-poster-col {
       display: flex;
       flex-direction: column;
       gap: 16px;
       width: 100%;
+      position: static; /* Fixed: removes any sticky lag */
       position: static;
     }
 
     .entry-poster-box {
-      width: 100%;
-      aspect-ratio: 1 / 1.45;
-      border-radius: 24px;
-      overflow: hidden;
-      border: 1px solid var(--bubble-border);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
-      background: #12141f;
-    }
-
-    .entry-poster-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+@@ -232,7 +232,7 @@
       display: block;
     }
 
-    /* Watchlist Action Dropdown */
+    /* Watchlist Dropdown & Action System */
+    /* Watchlist Action */
     .watchlist-control-box {
       display: flex;
       flex-direction: column;
-      gap: 8px;
-      width: 100%;
-      position: relative;
-    }
-
-    .watchlist-btn-main {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      width: 100%;
-      padding: 12px 18px;
-      background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
-      color: #fff;
-      border: none;
-      border-radius: 9999px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: 0 8px 24px rgba(255, 42, 116, 0.35);
-      transition: all 0.25s ease;
-      font-family: inherit;
-    }
-
-    .watchlist-btn-main:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 30px rgba(255, 42, 116, 0.5);
-    }
-
-    .watchlist-dropdown-menu {
-      position: absolute;
-      top: calc(100% + 8px);
-      left: 0;
-      width: 100%;
-      background: rgba(18, 20, 30, 0.96);
-      border: 1px solid var(--bubble-border);
-      border-radius: 20px;
-      padding: 8px;
-      display: none;
-      flex-direction: column;
-      gap: 4px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(20px);
-      z-index: 100;
-    }
-
-    .watchlist-dropdown-menu.show {
-      display: flex;
-    }
-
-    .watchlist-option-btn {
-      background: transparent;
-      border: none;
-      color: var(--text-dim);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 14px;
-      border-radius: 12px;
-      font-size: 0.84rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.2s;
-      font-family: inherit;
-      text-align: left;
-      width: 100%;
-    }
-
-    .watchlist-option-btn:hover {
-      background: rgba(255, 255, 255, 0.08);
-      color: #fff;
-    }
-
-    .watchlist-option-btn.active {
-      background: rgba(255, 42, 116, 0.15);
-      color: var(--accent-pink);
-      font-weight: 600;
-    }
-
-    .watchlist-remove-btn {
-      color: #ef4444;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 0 0 12px 12px;
-      margin-top: 4px;
-      padding-top: 8px;
-    }
-
-    .watchlist-remove-btn:hover {
-      background: rgba(239, 68, 68, 0.15);
-      color: #f87171;
-    }
-
-    /* Left Metadata Details Bubble */
-    .entry-info-sidebar {
-      background: var(--card-bg);
-      border: 1px solid var(--bubble-border);
-      border-radius: 24px;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
+@@ -340,30 +340,44 @@
       backdrop-filter: blur(20px);
     }
 
@@ -353,6 +248,8 @@
     .sidebar-info-row {
       display: flex;
       justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
       align-items: flex-start;
       font-size: 0.8rem;
       gap: 8px;
@@ -376,478 +273,133 @@
     .entry-details-col {
       display: flex;
       flex-direction: column;
+      gap: 28px;
       gap: 24px;
-      min-width: 0;
     }
 
     .entry-header-block {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .entry-title-main {
-      font-size: 2.2rem;
-      font-weight: 800;
-      color: #fff;
-      line-height: 1.25;
-    }
-
-    .entry-title-native {
-      font-size: 1.05rem;
-      color: var(--text-dim);
-      font-weight: 500;
-    }
-
-    .entry-pill-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 4px;
-    }
-
-    .entry-pill {
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid var(--bubble-border);
-      color: #e2e8f0;
-      font-size: 0.78rem;
-      font-weight: 600;
-      padding: 4px 14px;
-      border-radius: 9999px;
-    }
-
-    .entry-pill.score-pill {
-      background: rgba(16, 185, 129, 0.15);
-      border-color: rgba(16, 185, 129, 0.35);
-      color: #10b981;
-    }
-
-    /* Synopsis Bubble */
-    .entry-bubble-section {
-      background: var(--card-bg);
-      border: 1px solid var(--bubble-border);
-      border-radius: 26px;
+@@ -417,7 +431,7 @@
       padding: 24px;
       display: flex;
       flex-direction: column;
-      gap: 16px;
-      backdrop-filter: blur(20px);
-      width: 100%;
-    }
-
-    .section-heading-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
       gap: 12px;
+      gap: 14px;
+      backdrop-filter: blur(20px);
     }
 
-    .section-heading {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .filter-pills-wrap {
-      display: flex;
-      align-items: center;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--bubble-border);
-      border-radius: 9999px;
-      padding: 3px;
-      gap: 3px;
-      flex-wrap: wrap;
-    }
-
-    .filter-pill-btn {
-      background: transparent;
-      border: none;
-      color: var(--text-dim);
-      font-size: 0.75rem;
-      font-weight: 600;
-      padding: 5px 12px;
-      border-radius: 9999px;
-      cursor: pointer;
-      font-family: inherit;
-      transition: all 0.2s;
-    }
-
-    .filter-pill-btn:hover {
-      color: #fff;
-    }
-
-    .filter-pill-btn.active {
-      background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
-      color: #fff;
+@@ -431,7 +445,7 @@
     }
 
     .entry-synopsis-text {
+      font-size: 0.9rem;
       font-size: 0.92rem;
       line-height: 1.7;
       color: #cbd5e1;
     }
+@@ -487,46 +501,75 @@
+      color: var(--text-dim);
+    }
 
-    /* Characters & Japanese Voice Cast Grid */
-    .characters-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    /* Relations List */
+    /* Relations List - Fixed Aspect Ratio & Uniform 150px Width */
+    .relations-scroll-row {
+      display: flex;
       gap: 14px;
-    }
-
-    .char-cast-card {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: rgba(255, 255, 255, 0.025);
-      border: 1px solid var(--bubble-border);
-      border-radius: 16px;
-      padding: 8px 12px;
-      gap: 10px;
-      transition: all 0.2s ease;
-    }
-
-    .char-cast-card:hover {
-      background: rgba(255, 255, 255, 0.06);
-      transform: translateY(-2px);
-    }
-
-    .char-half, .cast-half {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex: 1;
-      min-width: 0;
-    }
-
-    .cast-half {
-      justify-content: flex-end;
-      text-align: right;
-    }
-
-    .person-thumb {
-      width: 44px;
-      height: 56px;
-      border-radius: 8px;
-      object-fit: cover;
-      background: #1a1c28;
-      flex-shrink: 0;
-    }
-
-    .person-info {
-      flex: 1;
-      min-width: 0;
-      overflow: hidden;
-    }
-
-    .person-name {
-      font-size: 0.8rem;
-      font-weight: 600;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      color: #fff;
-    }
-
-    .person-sub {
-      font-size: 0.7rem;
-      color: var(--text-dim);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    /* Index-Style Cards for Relations & Recommendations */
-    .index-style-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
       gap: 16px;
-      width: 100%;
-    }
-
-    .index-card-wrap {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      text-decoration: none;
-      color: #fff;
-      background: transparent;
-      border-radius: 18px;
-      transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .index-card-wrap:hover {
-      transform: translateY(-6px) scale(1.03);
-    }
-
-    .index-card-poster {
-      width: 100%;
-      aspect-ratio: 1 / 1.45;
-      border-radius: 18px;
-      overflow: hidden;
-      position: relative;
-      background: #12141f;
-      border: 1px solid var(--bubble-border);
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.5);
-    }
-
-    .index-card-poster img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.35s ease;
-    }
-
-    .index-card-wrap:hover .index-card-poster img {
-      transform: scale(1.08);
-    }
-
-    .index-card-badge-top {
-      position: absolute;
-      top: 8px;
-      left: 8px;
-      background: rgba(10, 11, 16, 0.82);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      padding: 2px 7px;
-      border-radius: 8px;
-      font-size: 0.68rem;
-      font-weight: 700;
-      color: var(--accent-pink);
-      text-transform: uppercase;
-      letter-spacing: 0.4px;
-    }
-
-    .index-card-badge-score {
-      position: absolute;
-      bottom: 8px;
-      right: 8px;
-      background: rgba(16, 185, 129, 0.88);
-      backdrop-filter: blur(8px);
-      padding: 2px 6px;
-      border-radius: 6px;
-      font-size: 0.68rem;
-      font-weight: 700;
-      color: #fff;
-    }
-
-    .index-card-info {
-      padding: 8px 4px 4px;
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-    }
-
-    .index-card-title {
-      font-size: 0.82rem;
-      font-weight: 600;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      color: #f8fafc;
-      line-height: 1.3;
-    }
-
-    .index-card-sub {
-      font-size: 0.72rem;
-      color: var(--text-dim);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    /* Episode Selector Grid */
-    .episodes-selector-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(105px, 1fr));
-      gap: 12px;
-      width: 100%;
-      max-height: 380px;
-      overflow-y: auto;
-      padding-right: 4px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      padding-bottom: 8px;
       scrollbar-width: thin;
     }
 
-    .episodes-selector-grid::-webkit-scrollbar {
-      width: 5px;
+    .relations-scroll-row::-webkit-scrollbar {
+      height: 6px;
     }
 
-    .episodes-selector-grid::-webkit-scrollbar-thumb {
+    .relations-scroll-row::-webkit-scrollbar-thumb {
       background: rgba(255, 255, 255, 0.15);
       border-radius: 4px;
     }
 
-    .episode-tile-btn {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--bubble-border);
-      border-radius: 14px;
-      padding: 10px 8px;
+    .relation-card {
+      flex: 0 0 140px;
+      flex: 0 0 150px;
+      width: 150px;
+      min-width: 150px;
+      max-width: 150px;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 4px;
-      color: #fff;
+      gap: 6px;
       text-decoration: none;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      font-family: inherit;
-    }
-
-    .episode-tile-btn:hover {
-      background: linear-gradient(135deg, rgba(255, 42, 116, 0.25), rgba(157, 92, 246, 0.25));
-      border-color: var(--accent-pink);
-      transform: translateY(-2px);
-    }
-
-    .episode-num-label {
-      font-size: 0.82rem;
-      font-weight: 700;
       color: #fff;
+      transition: transform 0.2s ease;
     }
 
-    .episode-sub-label {
+    .relation-thumb {
+    .relation-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .relation-thumb-wrap {
+      width: 100%;
+      aspect-ratio: 1 / 1.42;
+      border-radius: 12px;
+      object-fit: cover;
+      background: #1a1c28;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #141624;
+      border: 1px solid var(--bubble-border);
+      flex-shrink: 0;
+    }
+
+    .relation-title {
+      font-size: 0.78rem;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    .relation-thumb {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .relation-tag {
       font-size: 0.68rem;
-      color: var(--text-dim);
+      color: var(--accent-pink);
+      text-transform: uppercase;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .relation-title {
+      font-size: 0.82rem;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: #f1f5f9;
     }
 
     .skeleton {
-      animation: skeleton-pulse 1.5s infinite ease-in-out;
-      background: linear-gradient(90deg, rgba(255, 255, 255, 0.04) 25%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0.04) 75%);
-      background-size: 200% 100%;
-    }
-
-    @keyframes skeleton-pulse {
-      0% { background-position: 200% 0; }
-      100% { background-position: -200% 0; }
-    }
-
-    @media (max-width: 960px) {
-      .header-wrapper {
-        flex-wrap: wrap;
-      }
-      .bubble-nav {
-        width: 100%;
-      }
-      .entry-main-content {
-        grid-template-columns: 1fr;
-        gap: 24px;
-      }
-      .entry-poster-box, .watchlist-control-box {
-        max-width: 240px;
-        margin: 0 auto;
-      }
-      .banner-container {
-        height: 240px;
-      }
-      .entry-title-main {
-        font-size: 1.6rem;
-      }
-      .characters-grid {
-        grid-template-columns: 1fr;
-      }
-      .index-style-grid {
-        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-      }
-    }
-  </style>
-</head>
-<body>
-
-  <!-- Header Nav -->
-  <div class="header-wrapper">
-    <header class="bubble-nav">
-      <div class="logo">
-        <a href="index.html">Ani<span>Cool</span></a>
-      </div>
-
-      <nav>
-        <ul class="nav-links">
-          <li class="nav-item">
-            <a href="index.html" class="nav-link">Home</a>
-          </li>
-          <li class="nav-item">
-            <a href="release.html" class="nav-link">Release</a>
-          </li>
-          <li class="nav-item">
-            <a href="watchlist.html" class="nav-link">Watchlist</a>
-          </li>
-          <li class="nav-item">
-            <a href="genre.html" class="nav-link">Genre</a>
-          </li>
-          <li class="nav-item">
-            <a href="websites.html" class="nav-link">Websites</a>
-          </li>
-        </ul>
-      </nav>
-    </header>
-
-    <div class="outside-btn-group">
-      <a href="https://discord.com/invite/tDny2ubsCx" target="_blank" rel="noopener" class="outside-bubble-btn discord-btn" title="Join our Discord">
-        <svg viewBox="0 0 127.14 96.36">
-          <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.86,53,48.81,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/>
-        </svg>
-        <span>Discord</span>
-      </a>
-
-      <a href="donate.html" class="outside-bubble-btn donate-btn" title="Support AniCool">
-        <span class="material-symbols-outlined donate-icon">favorite</span>
-        <span>Donate</span>
-      </a>
-    </div>
-  </div>
-
-  <!-- Hero Banner -->
-  <div class="banner-container skeleton" id="bannerImg">
+@@ -618,7 +661,7 @@
     <div class="banner-overlay"></div>
   </div>
 
+  <!-- Main Content Layout (Natural Scroll) -->
   <!-- Main Content Layout -->
   <main class="entry-main-content">
 
-    <!-- Left Column -->
-    <aside class="entry-poster-col">
-      <div class="entry-poster-box skeleton" id="posterBox">
-        <img src="" alt="" class="entry-poster-img" id="posterImg" style="display: none;" />
-      </div>
-
-      <!-- Add to Watchlist Action System -->
-      <div class="watchlist-control-box">
-        <button type="button" class="watchlist-btn-main" id="watchlistBtnMain" onclick="toggleWatchlistMenu()">
-          <span class="material-symbols-outlined" id="watchlistBtnIcon">bookmark_add</span>
-          <span id="watchlistBtnText">Add to Watchlist</span>
-          <span class="material-symbols-outlined" style="font-size: 16px;">arrow_drop_down</span>
-        </button>
-
-        <div class="watchlist-dropdown-menu" id="watchlistDropdown">
-          <button type="button" class="watchlist-option-btn" onclick="saveStatus('watching')">
-            <span class="material-symbols-outlined" style="font-size: 18px; color: var(--accent-pink);">play_circle</span>
-            <span>Watching / Reading</span>
-          </button>
-          <button type="button" class="watchlist-option-btn" onclick="saveStatus('planning')">
-            <span class="material-symbols-outlined" style="font-size: 18px; color: var(--accent-blue);">schedule</span>
-            <span>Plan to Watch</span>
-          </button>
-          <button type="button" class="watchlist-option-btn" onclick="saveStatus('completed')">
-            <span class="material-symbols-outlined" style="font-size: 18px; color: #10b981;">task_alt</span>
-            <span>Completed</span>
-          </button>
-          <button type="button" class="watchlist-option-btn" onclick="saveStatus('favorites')">
-            <span class="material-symbols-outlined" style="font-size: 18px; color: #facc15;">star</span>
-            <span>Favorite (Starred)</span>
-          </button>
-          <button type="button" class="watchlist-option-btn watchlist-remove-btn" id="watchlistRemoveBtn" style="display: none;" onclick="removeFromWatchlist()">
-            <span class="material-symbols-outlined" style="font-size: 18px;">delete</span>
-            <span>Remove Entry</span>
-          </button>
+    <!-- Left Column: Poster + Add to Watchlist Dropdown + Meta Info -->
+@@ -659,8 +702,12 @@
         </div>
       </div>
 
+      <!-- Quick Facts Bubble -->
       <!-- Extended Quick Facts Bubble -->
       <div class="entry-info-sidebar">
         <div class="sidebar-section-title">
@@ -857,12 +409,7 @@
         <div class="sidebar-info-row">
           <span class="sidebar-info-label">Format</span>
           <span class="sidebar-info-val" id="metaFormat">--</span>
-        </div>
-        <div class="sidebar-info-row">
-          <span class="sidebar-info-label">Status</span>
-          <span class="sidebar-info-val" id="metaStatus">--</span>
-        </div>
-        <div class="sidebar-info-row">
+@@ -673,18 +720,42 @@
           <span class="sidebar-info-label">Episodes / Ch</span>
           <span class="sidebar-info-val" id="metaCount">--</span>
         </div>
@@ -883,6 +430,10 @@
           <span class="sidebar-info-val" id="metaStudio">--</span>
         </div>
         <div class="sidebar-info-row">
+          <span class="sidebar-info-label">Producers</span>
+          <span class="sidebar-info-val" id="metaProducers">--</span>
+        </div>
+        <div class="sidebar-info-row">
           <span class="sidebar-info-label">Source</span>
           <span class="sidebar-info-val" id="metaSource">--</span>
         </div>
@@ -901,95 +452,31 @@
       </div>
     </aside>
 
-    <!-- Right Column: Details, Cast, Relations, Similar -->
-    <section class="entry-details-col">
-      <div class="entry-header-block">
-        <h1 class="entry-title-main" id="entryTitle">Loading Title...</h1>
-        <div class="entry-title-native" id="entryNativeTitle"></div>
-
-        <div class="entry-pill-row" id="genresRow"></div>
-      </div>
-
-      <!-- Synopsis Bubble -->
-      <div class="entry-bubble-section">
-        <div class="section-heading">
-          <span class="material-symbols-outlined" style="color: var(--accent-pink);">description</span>
+@@ -704,7 +775,7 @@
           <span>Synopsis</span>
         </div>
         <div class="entry-synopsis-text" id="entrySynopsis">
+          Fetching full official synopsis from AniList...
           Fetching official synopsis from AniList...
         </div>
       </div>
 
-      <!-- Characters & Japanese Voice Cast -->
-      <div class="entry-bubble-section">
-        <div class="section-heading">
-          <span class="material-symbols-outlined" style="color: var(--accent-blue);">group</span>
-          <span>Characters & Japanese Voice Actors</span>
-        </div>
-        <div class="characters-grid" id="charactersGrid">
-          <div style="color: var(--text-dim); font-size: 0.85rem;">Loading character & cast roster...</div>
-        </div>
-      </div>
-
-      <!-- Relations & Franchise -->
-      <div class="entry-bubble-section">
-        <div class="section-heading-row">
-          <div class="section-heading">
-            <span class="material-symbols-outlined" style="color: #facc15;">hub</span>
-            <span>Relations & Franchise</span>
-          </div>
-
-          <div class="filter-pills-wrap">
-            <button type="button" class="filter-pill-btn active" onclick="filterRelations('ALL', this)">All</button>
-            <button type="button" class="filter-pill-btn" onclick="filterRelations('EPISODES', this)">Episodes</button>
-            <button type="button" class="filter-pill-btn" onclick="filterRelations('MANGA', this)">Manga</button>
-            <button type="button" class="filter-pill-btn" onclick="filterRelations('PREQUEL_SEQUEL', this)">Prequels / Sequels</button>
-          </div>
-        </div>
-
-        <div id="relationsContainer">
-          <div class="index-style-grid" id="relationsGrid">
-            <div style="color: var(--text-dim); font-size: 0.85rem;">Loading relations...</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Similar Anime (12 Cards) -->
-      <div class="entry-bubble-section">
-        <div class="section-heading">
-          <span class="material-symbols-outlined" style="color: var(--accent-pink);">auto_awesome</span>
-          <span>Similar Anime You Might Like</span>
-        </div>
-
-        <div class="index-style-grid" id="similarGrid">
-          <div style="color: var(--text-dim); font-size: 0.85rem;">Loading recommendations...</div>
-        </div>
-      </div>
-    </section>
-
+@@ -734,13 +805,12 @@
   </main>
 
   <script>
-    let mediaId = 21;
-    try {
-      const urlParams = new URLSearchParams(window.location.search);
-      const parsedId = parseInt(urlParams.get('id'), 10);
-      if (!isNaN(parsedId) && parsedId > 0) {
-        mediaId = parsedId;
-      }
-    } catch(e) {}
+    // Grab ID from query string (e.g. entry.html?id=151807)
+    const urlParams = new URLSearchParams(window.location.search);
+    const mediaId = parseInt(urlParams.get('id'), 10) || 151807;
 
     let currentLoadedMedia = null;
-    let rawRelations = [];
 
-    // The single, 100% compliant GraphQL query
-    const singleVerifiedQuery = `
+    // AniList GraphQL Query
+    // AniList GraphQL Query with extended parameters
+    const query = `
       query ($id: Int) {
         Media(id: $id) {
-          id
-          type
-          format
+@@ -750,16 +820,27 @@
           status
           episodes
           chapters
@@ -1008,94 +495,27 @@
           title { english romaji native }
           description
           genres
+          studios(isMain: true) { nodes { name } }
           studios {
             edges {
               isMain
               node { name }
             }
           }
-          characterPreview: characters(sort: ROLE, perPage: 8) {
+          characters(sort: ROLE, perPage: 8) {
             edges {
               role
-              node {
-                name { full }
-                image { medium }
-              }
-              voiceActorRoles(language: JAPANESE, sort: RELEVANCE) {
-                voiceActor {
-                  name { full }
-                  image { medium }
-                }
-              }
-            }
-          }
-          relations {
-            edges {
-              relationType
-              node {
+@@ -776,7 +857,7 @@
                 id
-                type
                 format
                 title { english romaji }
                 coverImage { large }
-                episodes
-                chapters
-                averageScore
+                coverImage { large extraLarge }
               }
             }
           }
-          recommendations(sort: RATING_DESC, perPage: 12) {
-            nodes {
-              mediaRecommendation {
-                id
-                type
-                format
-                averageScore
-                title { english romaji }
-                coverImage { large }
-              }
-            }
-          }
-        }
+@@ -804,6 +885,14 @@
       }
-    `;
-
-    async function fetchMediaData() {
-      try {
-        const response = await fetch('https://graphql.anilist.co', {
-          method: 'POST',
-          headers: { 
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          body: JSON.stringify({ query: singleVerifiedQuery, variables: { id: mediaId } })
-        });
-
-        const json = await response.json();
-        const media = json?.data?.Media;
-
-        if (!media) {
-          showErrorState('Entry Not Found', 'Could not locate this title on AniList.');
-          return;
-        }
-
-        currentLoadedMedia = media;
-        renderMediaPage(media);
-        syncWatchlistButton(media.id);
-      } catch (err) {
-        console.error("Fetch Error:", err);
-        showErrorState('Unable to Load Details', 'Could not retrieve data from AniList. Please check your connection and refresh.');
-      }
-    }
-
-    function showErrorState(title, message) {
-      document.getElementById('bannerImg').classList.remove('skeleton');
-      document.getElementById('posterBox').classList.remove('skeleton');
-      document.getElementById('entryTitle').textContent = title;
-      document.getElementById('entrySynopsis').textContent = message;
-      document.getElementById('charactersGrid').innerHTML = '<div style="color:var(--text-dim); font-size:0.85rem;">Unavailable</div>';
-      document.getElementById('relationsContainer').innerHTML = '<div style="color:var(--text-dim); font-size:0.85rem;">Unavailable</div>';
-      document.getElementById('similarGrid').innerHTML = '<div style="color:var(--text-dim); font-size:0.85rem;">Unavailable</div>';
     }
 
     function formatDate(d) {
@@ -1107,57 +527,41 @@
     }
 
     function renderMediaPage(media) {
-      const title = media.title?.english || media.title?.romaji || 'Unknown Title';
+      const title = media.title.english || media.title.romaji;
       document.title = `${title} - AniCool`;
-
-      // Banner & Poster
-      const banner = document.getElementById('bannerImg');
-      banner.classList.remove('skeleton');
-      const bannerUrl = media.bannerImage || media.coverImage?.extraLarge || media.coverImage?.large;
-      if (bannerUrl) {
-        banner.style.backgroundImage = `url('${bannerUrl}')`;
+@@ -814,7 +903,7 @@
+      if (media.bannerImage) {
+        banner.style.backgroundImage = `url('${media.bannerImage}')`;
+      } else {
+        banner.style.backgroundImage = `url('${media.coverImage.extraLarge}')`;
+        banner.style.backgroundImage = `url('${media.coverImage.extraLarge || media.coverImage.large}')`;
       }
 
       const posterBox = document.getElementById('posterBox');
-      const posterImg = document.getElementById('posterImg');
-      posterBox.classList.remove('skeleton');
-      const posterUrl = media.coverImage?.extraLarge || media.coverImage?.large;
-      if (posterUrl) {
-        posterImg.src = posterUrl;
-        posterImg.style.display = 'block';
-      }
-
-      // Titles & Badges
-      document.getElementById('entryTitle').textContent = title;
-      document.getElementById('entryNativeTitle').textContent = media.title?.native || '';
-
-      const genresRow = document.getElementById('genresRow');
-      let badgesHtml = '';
-      if (media.averageScore) {
-        badgesHtml += `<span class="entry-pill score-pill">★ ${media.averageScore}% Score</span>`;
-      }
-      (media.genres || []).forEach(g => {
-        badgesHtml += `<span class="entry-pill">${g}</span>`;
-      });
-      genresRow.innerHTML = badgesHtml;
-
-      // Synopsis
-      document.getElementById('entrySynopsis').textContent = media.description ? media.description.replace(/<[^>]*>?/gm, '') : 'No synopsis available.';
+@@ -842,13 +931,31 @@
+      document.getElementById('entrySynopsis').textContent = cleanedDesc;
 
       // Sidebar Metadata
+      document.getElementById('metaFormat').textContent = media.format || media.type;
       document.getElementById('metaFormat').textContent = media.format || media.type || 'N/A';
       document.getElementById('metaStatus').textContent = media.status ? media.status.replace(/_/g, ' ') : 'N/A';
+      document.getElementById('metaCount').textContent = media.episodes ? `${media.episodes} Eps` : (media.chapters ? `${media.chapters} Chs` : 'Unknown');
       document.getElementById('metaCount').textContent = media.episodes ? `${media.episodes} Eps` : (media.chapters ? `${media.chapters} Chs` : 'Ongoing / Unknown');
       document.getElementById('metaDuration').textContent = media.duration ? `${media.duration} mins / ep` : 'N/A';
       document.getElementById('metaSeason').textContent = (media.season && media.seasonYear) ? `${media.season} ${media.seasonYear}` : (media.seasonYear || 'N/A');
+      document.getElementById('metaStudio').textContent = media.studios?.nodes?.[0]?.name || 'N/A';
 
       const startStr = formatDate(media.startDate);
       const endStr = formatDate(media.endDate);
       document.getElementById('metaAired').textContent = startStr ? (endStr ? `${startStr} to ${endStr}` : `${startStr} (Ongoing)`) : 'N/A';
 
+      // Studios & Producers
       const studioEdges = media.studios?.edges || [];
-      const mainStudio = studioEdges.find(e => e.isMain)?.node?.name || studioEdges[0]?.node?.name || 'N/A';
+      const mainStudio = studioEdges.find(e => e.isMain)?.node?.name || (studioEdges[0]?.node?.name) || 'N/A';
+      const producers = studioEdges.filter(e => !e.isMain).map(e => e.node.name).slice(0, 3).join(', ') || 'N/A';
+
       document.getElementById('metaStudio').textContent = mainStudio;
+      document.getElementById('metaProducers').textContent = producers;
       document.getElementById('metaSource').textContent = media.source ? media.source.replace(/_/g, ' ') : 'Original';
 
       const countryNames = { JP: 'Japan', KR: 'South Korea', CN: 'China', TW: 'Taiwan' };
@@ -1166,210 +570,39 @@
       document.getElementById('metaScore').textContent = media.meanScore ? `${media.meanScore}%` : (media.averageScore ? `${media.averageScore}%` : 'N/A');
       document.getElementById('metaPopularity').textContent = media.popularity ? `#${media.popularity.toLocaleString()}` : 'N/A';
 
-      // Characters & Real Japanese Voice Actors
+      // Characters
       const charactersGrid = document.getElementById('charactersGrid');
-      const charEdges = media.characterPreview?.edges || [];
-      if (charEdges.length > 0) {
-        charactersGrid.innerHTML = charEdges.map(edge => {
-          const char = edge?.node;
-          const va = edge?.voiceActorRoles?.[0]?.voiceActor;
-
-          return `
-            <div class="char-cast-card">
-              <div class="char-half">
-                <img src="${char?.image?.medium || ''}" alt="${char?.name?.full || ''}" class="person-thumb" loading="lazy" />
-                <div class="person-info">
-                  <div class="person-name" title="${char?.name?.full || ''}">${char?.name?.full || 'Unknown'}</div>
-                  <div class="person-sub">${edge?.role || 'Character'}</div>
-                </div>
-              </div>
-
-              ${va ? `
-                <div class="cast-half">
-                  <div class="person-info">
-                    <div class="person-name" title="${va?.name?.full \vert{}\vert{} ''}">${va?.name?.full || 'Unknown'}</div>
-                    <div class="person-sub">Japanese VA</div>
-                  </div>
-                  <img src="${va?.image?.medium \vert{}\vert{} ''}" alt="${va?.name?.full || ''}" class="person-thumb" loading="lazy" />
-                </div>
-              ` : `
-                <div class="cast-half">
-                  <div class="person-sub" style="color: #64748b;">Japanese VA</div>
-                </div>
-              `}
-            </div>
-          `;
-        }).join('');
-      } else {
-        charactersGrid.innerHTML = '<div style="color:var(--text-dim); font-size:0.85rem;">No character info found.</div>';
+      const charEdges = media.characters?.edges || [];
+@@ -866,18 +973,21 @@
+        charactersGrid.innerHTML = '<div style="color:var(--text-dim); font-size:0.85rem;">No character info available.</div>';
       }
 
       // Relations
-      rawRelations = media.relations?.edges || [];
-      renderRelationsGrid(rawRelations);
-
-      // Recommendations / Similar Anime (12 Cards)
-      const similarGrid = document.getElementById('similarGrid');
-      const recNodes = media.recommendations?.nodes || [];
-      const recs = recNodes
-        .map(n => n?.mediaRecommendation)
-        .filter(m => m && m.id)
-        .slice(0, 12);
-
-      if (recs.length > 0) {
-        similarGrid.innerHTML = recs.map(rec => {
-          const recTitle = rec?.title?.english || rec?.title?.romaji || 'Unknown';
-          const scoreStr = rec?.averageScore ? `★ ${rec.averageScore}%` : '';
+      // Relations - Fixed Uniform Width & Aspect Ratio Container
+      const relationsRow = document.getElementById('relationsRow');
+      const relEdges = media.relations?.edges || [];
+      if (relEdges.length > 0) {
+        relationsRow.innerHTML = relEdges.map(edge => {
+          const relNode = edge.node;
+          const relTitle = relNode.title.english || relNode.title.romaji;
+          const relType = edge.relationType.replace(/_/g, ' ');
+          const relType = edge.relationType ? edge.relationType.replace(/_/g, ' ') : 'Related';
+          const thumb = relNode.coverImage?.large || relNode.coverImage?.extraLarge || '';
 
           return `
-            <a href="entry.html?id=${rec.id}" class="index-card-wrap">
-              <div class="index-card-poster">
-                <img src="${rec?.coverImage?.large || ''}" alt="${recTitle}" loading="lazy" />
-                <span class="index-card-badge-top">${rec?.format || rec?.type || 'TV'}</span>
-                ${scoreStr ? `<span class="index-card-badge-score">${scoreStr}</span>` : ''}
+            <a href="entry.html?id=${relNode.id}" class="relation-card">
+              <img src="${relNode.coverImage?.large || ''}" alt="${relTitle}" class="relation-thumb" loading="lazy" />
+              <div class="relation-thumb-wrap">
+                <img src="${thumb}" alt="${relTitle}" class="relation-thumb" loading="lazy" />
               </div>
-              <div class="index-card-info">
-                <div class="index-card-title" title="${recTitle}">${recTitle}</div>
-                <div class="index-card-sub">
-                  <span>${rec?.format || 'Anime'}</span>
-                </div>
-              </div>
+              <div class="relation-tag">${relType}</div>
+              <div class="relation-title" title="${relTitle}">${relTitle}</div>
             </a>
-          `;
-        }).join('');
-      } else {
-        similarGrid.innerHTML = '<div style="color:var(--text-dim); font-size:0.85rem;">No recommendations available for this title.</div>';
-      }
-    }
-
-    // Relations Filtering & Actual Episode List Switcher
-    function filterRelations(type, btn) {
-      document.querySelectorAll('.filter-pills-wrap .filter-pill-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      if (type === 'EPISODES') {
-        renderEpisodesList();
-        return;
-      }
-
-      if (type === 'ALL') {
-        renderRelationsGrid(rawRelations);
-        return;
-      }
-
-      const filtered = rawRelations.filter(edge => {
-        const relType = (edge?.relationType || '').toUpperCase();
-        const nodeType = (edge?.node?.type || '').toUpperCase();
-
-        if (type === 'MANGA') {
-          return nodeType === 'MANGA' || relType === 'ADAPTATION';
-        } else if (type === 'PREQUEL_SEQUEL') {
-          return relType === 'PREQUEL' || relType === 'SEQUEL';
-        }
-        return true;
-      });
-
-      renderRelationsGrid(filtered);
-    }
-
-    function renderRelationsGrid(edges) {
-      const container = document.getElementById('relationsContainer');
-      if (!edges || edges.length === 0) {
-        container.innerHTML = '<div style="color:var(--text-dim); font-size:0.85rem; padding: 12px 0;">No relations found in this category.</div>';
-        return;
-      }
-
-      container.innerHTML = `
-        <div class="index-style-grid">
-          ${edges.map(edge => {
-            const node = edge?.node;
-            const relTitle = node?.title?.english || node?.title?.romaji || 'Unknown';
-            const relType = edge?.relationType ? edge.relationType.replace(/_/g, ' ') : 'Related';
-            const count = node?.episodes ? `${node.episodes} Ep` : (node?.chapters ? `${node.chapters} Ch` : (node?.format || ''));
-            const scoreStr = node?.averageScore ? `★ ${node.averageScore}%` : '';
-
-            return `
-              <a href="entry.html?id=${node.id}" class="index-card-wrap">
-                <div class="index-card-poster">
-                  <img src="${node?.coverImage?.large \vert{}\vert{} ''}" alt="${relTitle}" loading="lazy" />
-                  <span class="index-card-badge-top">${relType}</span>${scoreStr ? `<span class="index-card-badge-score">${scoreStr}</span>` : ''}
-                </div>
-                <div class="index-card-info">
-                  <div class="index-card-title" title="${relTitle}">${relTitle}</div>
-                  <div class="index-card-sub">
-                    <span>${count}</span>
-                    <span>•</span>
-                    <span>${node?.format || node?.type || 'Media'}</span>
-                  </div>
-                </div>
-              </a>
-            `;
-          }).join('')}
-        </div>
-      `;
-    }
-
-    function renderEpisodesList() {
-      const container = document.getElementById('relationsContainer');
-      const totalEps = currentLoadedMedia?.episodes || 24;
-
-      let html = `<div class="episodes-selector-grid">`;
-      for (let ep = 1; ep <= totalEps; ep++) {
-        html += `
-          <button type="button" class="episode-tile-btn" onclick="alert('Episode ${ep} streaming server connection initialized.')" title="Watch Episode ${ep}">
-            <span class="material-symbols-outlined" style="font-size: 20px; color: var(--accent-pink);">play_circle</span>
-            <span class="episode-num-label">Ep ${ep}</span>
-            <span class="episode-sub-label">Sub / Dub</span>
-          </button>
-        `;
-      }
-      html += `</div>`;
-      container.innerHTML = html;
-    }
-
-    // Watchlist System (LocalStorage)
-    function toggleWatchlistMenu() {
-      document.getElementById('watchlistDropdown').classList.toggle('show');
-    }
-
-    document.addEventListener('click', (e) => {
-      const box = document.querySelector('.watchlist-control-box');
-      if (box && !box.contains(e.target)) {
-        document.getElementById('watchlistDropdown').classList.remove('show');
-      }
-    });
-
-    function getStoredWatchlist() {
-      try {
-        return JSON.parse(localStorage.getItem('anicool_watchlist_items') || '{}');
-      } catch (e) {
-        return {};
-      }
-    }
-
-    function syncWatchlistButton(id) {
-      const list = getStoredWatchlist();
-      const existing = list[id];
-
-      const btnText = document.getElementById('watchlistBtnText');
-      const btnIcon = document.getElementById('watchlistBtnIcon');
-      const removeBtn = document.getElementById('watchlistRemoveBtn');
-
-      document.querySelectorAll('.watchlist-option-btn').forEach(b => b.classList.remove('active'));
-
-      if (existing) {
-        removeBtn.style.display = 'flex';
-        const statusMap = {
-          watching: { label: 'Watching', icon: 'play_circle' },
-          planning: { label: 'Planning', icon: 'schedule' },
-          completed: { label: 'Completed', icon: 'task_alt' },
-          favorites: { label: 'Favorite', icon: 'star' }
-        };
-
-        const config = statusMap[existing.status] || { label: 'In Watchlist', icon: 'bookmark' };
+@@ -932,55 +1042,54 @@
         btnText.textContent = config.label;
         btnIcon.textContent = config.icon;
 
+        // Highlight selected option
         document.querySelectorAll('.watchlist-option-btn').forEach(btn => {
           if (btn.getAttribute('onclick')?.includes(existing.status)) {
             btn.classList.add('active');
@@ -1386,8 +619,8 @@
       if (!currentLoadedMedia) return;
 
       const list = getStoredWatchlist();
-      const title = currentLoadedMedia.title?.english || currentLoadedMedia.title?.romaji || 'Unknown Title';
-      const image = currentLoadedMedia.coverImage?.large || currentLoadedMedia.coverImage?.extraLarge;
+      const title = currentLoadedMedia.title.english || currentLoadedMedia.title.romaji;
+      const image = currentLoadedMedia.coverImage.large || currentLoadedMedia.coverImage.extraLarge;
 
       list[currentLoadedMedia.id] = {
         id: currentLoadedMedia.id,
