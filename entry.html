@@ -954,7 +954,7 @@
     let currentLoadedMedia = null;
     let rawRelations = [];
 
-    // Validated AniList query preserving isAdult and genres
+    // Validated query preserving isAdult and genres
     const primaryQuery = `
       query ($id: Int) {
         Media(id: $id) {
@@ -1152,6 +1152,11 @@
       return `${m}${day}${d.year}`;
     }
 
+    function escapeHtml(text) {
+      if (!text) return '';
+      return text.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+
     function renderMediaPage(media) {
       const title = media.title?.english || media.title?.romaji || 'Unknown Title';
       document.title = `${title} - AniCool`;
@@ -1319,7 +1324,50 @@
       }).join('');
     }
 
-    // Watchlist System: Handles isAdult, genres, and all statuses
+    // Two-Way Sync to AniList
+    async function pushToAniList(mediaId, status) {
+      const token = localStorage.getItem('anicool_anilist_token');
+      if (!token) return;
+
+      const statusMap = {
+        watching: 'CURRENT',
+        planning: 'PLANNING',
+        completed: 'COMPLETED',
+        dropped: 'DROPPED',
+        on_hold: 'PAUSED',
+        favorites: 'COMPLETED'
+      };
+
+      const mutation = `
+        mutation ($mediaId: Int, $status: MediaListStatus) {
+          SaveMediaListEntry(mediaId: $mediaId, status: $status) {
+            id
+            status
+          }
+        }
+      `;
+
+      try {
+        await fetch('https://graphql.anilist.co', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({
+            query: mutation,
+            variables: {
+              mediaId: mediaId,
+              status: statusMap[status] || 'CURRENT'
+            }
+          })
+        });
+      } catch (err) {
+        console.warn('AniList live write failed:', err);
+      }
+    }
+
+    // Watchlist System
     function toggleWatchlistMenu() {
       document.getElementById('watchlistDropdown').classList.toggle('show');
     }
@@ -1401,17 +1449,57 @@
       localStorage.setItem('anicool_watchlist_items', JSON.stringify(list));
       syncWatchlistButton(currentLoadedMedia.id);
       document.getElementById('watchlistDropdown').classList.remove('show');
+
+      // Live write-back to AniList
+      pushToAniList(currentLoadedMedia.id, status);
     }
 
-    function removeFromWatchlist() {
+    async function removeFromWatchlist() {
       if (!currentLoadedMedia) return;
 
       const list = getStoredWatchlist();
-      delete list[currentLoadedMedia.id];
+      const mediaId = currentLoadedMedia.id;
+      delete list[mediaId];
       localStorage.setItem('anicool_watchlist_items', JSON.stringify(list));
 
-      syncWatchlistButton(currentLoadedMedia.id);
+      syncWatchlistButton(mediaId);
       document.getElementById('watchlistDropdown').classList.remove('show');
+
+      // Delete from AniList account if connected
+      const token = localStorage.getItem('anicool_anilist_token');
+      if (token) {
+        try {
+          const checkRes = await fetch('https://graphql.anilist.co', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+              query: `query ($mediaId: Int) { Media(id: $mediaId) { mediaListEntry { id } } }`,
+              variables: { mediaId }
+            })
+          });
+          const checkJson = await checkRes.json();
+          const listEntryId = checkJson?.data?.Media?.mediaListEntry?.id;
+
+          if (listEntryId) {
+            await fetch('https://graphql.anilist.co', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+              },
+              body: JSON.stringify({
+                query: `mutation ($id: Int) { DeleteMediaListEntry(id: $id) { deleted } }`,
+                variables: { id: listEntryId }
+              })
+            });
+          }
+        } catch (err) {
+          console.warn('AniList removal failed:', err);
+        }
+      }
     }
 
     window.addEventListener('DOMContentLoaded', fetchMediaData);
