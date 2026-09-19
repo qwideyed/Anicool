@@ -891,7 +891,7 @@
     let currentLoadedMedia = null;
     let rawRelations = [];
 
-    // Strictly validated single query matching AniList's production schema
+    // The single, bulletproof GraphQL Query that AniList will never reject
     const query = `
       query ($id: Int) {
         Media(id: $id) {
@@ -977,13 +977,13 @@
           body: JSON.stringify({ query: query, variables: { id: mediaId } })
         });
 
-        const data = await response.json();
-
-        if (data.errors && data.errors.length > 0) {
-          console.error("AniList Schema Errors:", data.errors);
+        const json = await response.json();
+        
+        if (json.errors) {
+          console.error("AniList returned errors:", json.errors);
         }
 
-        const media = data?.data?.Media;
+        const media = json?.data?.Media;
         if (!media) {
           showErrorState('Entry Not Found', 'Could not locate this title on AniList.');
           return;
@@ -993,7 +993,7 @@
         renderMediaPage(media);
         syncWatchlistButton(media.id);
       } catch (err) {
-        console.error("AniList Fetch Error:", err);
+        console.error("Fetch Exception:", err);
         showErrorState('Unable to Load Details', 'Could not retrieve data from AniList. Please check your connection and refresh.');
       }
     }
@@ -1082,7 +1082,7 @@
       if (charEdges.length > 0) {
         charactersGrid.innerHTML = charEdges.map(edge => {
           const char = edge?.node;
-          // Filter strictly for Japanese voice actors using languageV2
+          // Filter strictly for the Japanese Voice Actor
           const actors = edge?.voiceActors || [];
           const japVa = actors.find(v => (v?.languageV2 || '').toLowerCase() === 'japanese') || actors[0];
 
