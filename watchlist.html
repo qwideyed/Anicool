@@ -9,7 +9,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="AniCool" />
   <meta property="og:title" content="AniCool - My Watchlist" />
-  <meta property="og:description" content="Manage your personal anime and manga collection, tracking, and favorite lists." />
+  <meta property="og:description" content="Manage your personal anime, manga, and manhwa collections." />
   <meta name="theme-color" content="#ff2a74" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -182,115 +182,111 @@
       padding: 40px 30px 90px;
       display: flex;
       flex-direction: column;
-      gap: 32px;
+      gap: 28px;
     }
 
-    /* Page Header Card */
-    .watchlist-header-card {
+    /* Top Action Bar (Search, Import, Export) */
+    .top-action-bar {
       background: var(--bubble-bg);
       border: 1px solid var(--bubble-border);
       border-radius: 28px;
-      padding: 28px 36px;
+      padding: 16px 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 20px;
+      gap: 16px;
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
     }
 
-    .header-title-box {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .header-title-box h1 {
-      font-size: 1.75rem;
-      font-weight: 800;
-      color: #fff;
+    .search-input-wrap {
+      flex: 1;
+      min-width: 260px;
+      max-width: 500px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--bubble-border);
+      border-radius: 9999px;
+      padding: 9px 18px;
       display: flex;
       align-items: center;
       gap: 10px;
-    }
-
-    .header-title-box p {
-      font-size: 0.88rem;
-      color: var(--text-dim);
-    }
-
-    /* Search Input & Action Utilities */
-    .header-utility-group {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .watchlist-search-box {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--bubble-border);
-      border-radius: 9999px;
-      padding: 8px 18px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
       transition: all 0.2s ease;
     }
 
-    .watchlist-search-box:focus-within {
+    .search-input-wrap:focus-within {
       background: rgba(255, 255, 255, 0.08);
       border-color: var(--accent-pink);
-      box-shadow: 0 0 14px rgba(255, 42, 116, 0.3);
+      box-shadow: 0 0 16px rgba(255, 42, 116, 0.3);
     }
 
-    .watchlist-search-box input {
+    .search-input-wrap input {
+      width: 100%;
       background: transparent;
       border: none;
       outline: none;
       color: #fff;
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       font-family: inherit;
-      width: 170px;
     }
 
-    .watchlist-search-box input::placeholder {
+    .search-input-wrap input::placeholder {
       color: var(--text-dim);
     }
 
-    .tool-btn {
+    .utility-actions-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .util-btn {
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid var(--bubble-border);
-      color: var(--text-dim);
-      height: 38px;
-      padding: 0 14px;
+      color: var(--text-main);
+      height: 40px;
+      padding: 0 16px;
       border-radius: 9999px;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      font-size: 0.8rem;
+      gap: 7px;
+      font-size: 0.82rem;
       font-weight: 600;
       font-family: inherit;
       cursor: pointer;
       transition: all 0.2s ease;
+      text-decoration: none;
     }
 
-    .tool-btn:hover {
+    .util-btn:hover {
       background: rgba(255, 255, 255, 0.12);
-      color: #fff;
       transform: translateY(-2px);
     }
 
-    .tool-btn.danger-btn:hover {
+    .util-btn.danger-btn:hover {
       background: rgba(244, 63, 94, 0.2);
       border-color: var(--accent-pink);
-      color: #fff;
     }
 
-    /* Filter Pills Bar */
-    .filter-pills-bar {
+    /* Filter Bar Area */
+    .filter-section {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .filter-label {
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      padding-left: 6px;
+    }
+
+    .pills-scroll-row {
       display: flex;
       align-items: center;
       gap: 8px;
@@ -299,50 +295,50 @@
       scrollbar-width: none;
     }
 
-    .filter-pills-bar::-webkit-scrollbar {
+    .pills-scroll-row::-webkit-scrollbar {
       display: none;
     }
 
-    .list-tab-pill {
-      background: rgba(20, 22, 32, 0.7);
+    .tab-pill {
+      background: rgba(20, 22, 32, 0.75);
       border: 1px solid var(--bubble-border);
       color: var(--text-dim);
       font-size: 0.82rem;
       font-weight: 600;
-      padding: 8px 18px;
+      padding: 7px 16px;
       border-radius: 9999px;
       cursor: pointer;
       font-family: inherit;
-      transition: all 0.25s ease;
-      display: flex;
+      transition: all 0.2s ease;
+      display: inline-flex;
       align-items: center;
       gap: 8px;
       white-space: nowrap;
       backdrop-filter: blur(12px);
     }
 
-    .list-tab-pill:hover {
+    .tab-pill:hover {
       color: #fff;
       background: rgba(255, 255, 255, 0.08);
       transform: translateY(-2px);
     }
 
-    .list-tab-pill.active {
+    .tab-pill.active {
       background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
       color: #fff;
       border-color: transparent;
-      box-shadow: 0 6px 18px rgba(255, 42, 116, 0.35);
+      box-shadow: 0 4px 16px rgba(255, 42, 116, 0.35);
     }
 
-    .pill-counter {
+    .badge-counter {
       background: rgba(0, 0, 0, 0.35);
       padding: 2px 7px;
       border-radius: 9999px;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       font-weight: 700;
     }
 
-    /* Index-Matching Cards Grid */
+    /* Index.html Card Aesthetic */
     .anime-cards-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(172px, 1fr));
@@ -354,6 +350,10 @@
       position: relative;
       width: 100%;
       height: 100%;
+    }
+
+    .card-wrap:hover {
+      z-index: 100;
     }
 
     .anime-card {
@@ -455,29 +455,30 @@
       color: var(--text-dim);
       display: flex;
       justify-content: space-between;
+      align-items: center;
     }
 
-    /* Card Quick Actions Overlay */
-    .card-quick-actions {
+    /* Quick Card Action Controls */
+    .card-hover-controls {
       position: absolute;
       top: 8px;
       left: 8px;
       z-index: 10;
       display: flex;
-      gap: 6px;
+      gap: 5px;
       opacity: 0;
       transition: opacity 0.2s ease;
     }
 
-    .card-wrap:hover .card-quick-actions {
+    .card-wrap:hover .card-hover-controls {
       opacity: 1;
     }
 
-    .action-icon-btn {
-      width: 30px;
-      height: 30px;
+    .ctrl-icon-btn {
+      width: 28px;
+      height: 28px;
       border-radius: 50%;
-      background: rgba(15, 17, 24, 0.85);
+      background: rgba(15, 17, 24, 0.9);
       border: 1px solid rgba(255, 255, 255, 0.2);
       backdrop-filter: blur(8px);
       color: #fff;
@@ -488,23 +489,36 @@
       transition: all 0.2s ease;
     }
 
-    .action-icon-btn:hover {
+    .ctrl-icon-btn:hover {
       background: var(--accent-pink);
       border-color: var(--accent-pink);
       transform: scale(1.1);
     }
 
-    .action-icon-btn.delete-icon:hover {
+    .ctrl-icon-btn.danger-btn:hover {
       background: #ef4444;
       border-color: #ef4444;
     }
 
-    .action-icon-btn span {
-      font-size: 16px;
+    .ctrl-icon-btn span {
+      font-size: 15px;
     }
 
-    /* Empty State Container */
-    .empty-watchlist-box {
+    /* Status Selector Dropdown */
+    .status-select-bubble {
+      background: rgba(15, 17, 24, 0.95);
+      border: 1px solid var(--bubble-border);
+      border-radius: 8px;
+      color: #fff;
+      font-size: 0.7rem;
+      font-family: inherit;
+      padding: 3px 6px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    /* Empty State */
+    .empty-box {
       grid-column: 1 / -1;
       background: var(--bubble-bg);
       border: 1px dashed var(--bubble-border);
@@ -518,9 +532,9 @@
       text-align: center;
     }
 
-    .empty-icon-bubble {
-      width: 70px;
-      height: 70px;
+    .empty-box-icon {
+      width: 68px;
+      height: 68px;
       border-radius: 50%;
       background: rgba(255, 42, 116, 0.12);
       border: 1px solid rgba(255, 42, 116, 0.3);
@@ -530,25 +544,24 @@
       color: var(--accent-pink);
     }
 
-    .empty-icon-bubble span {
-      font-size: 34px;
+    .empty-box-icon span {
+      font-size: 32px;
     }
 
-    .empty-watchlist-box h3 {
+    .empty-box h3 {
       font-size: 1.25rem;
       font-weight: 700;
       color: #fff;
     }
 
-    .empty-watchlist-box p {
+    .empty-box p {
       font-size: 0.88rem;
       color: var(--text-dim);
       max-width: 420px;
       line-height: 1.5;
     }
 
-    .empty-browse-btn {
-      margin-top: 4px;
+    .browse-link-btn {
       background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
       color: #fff;
       padding: 10px 24px;
@@ -560,7 +573,7 @@
       transition: all 0.25s ease;
     }
 
-    .empty-browse-btn:hover {
+    .browse-link-btn:hover {
       transform: translateY(-2px);
       box-shadow: 0 12px 30px rgba(255, 42, 116, 0.5);
     }
@@ -572,15 +585,18 @@
       .bubble-nav {
         width: 100%;
       }
-      .watchlist-header-card {
-        padding: 24px 20px;
+      .top-action-bar {
+        padding: 18px 16px;
+      }
+      .search-input-wrap {
+        min-width: 100%;
       }
       .anime-cards-grid {
         grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
         gap: 16px;
       }
-      .card-quick-actions {
-        opacity: 1; /* Always visible on mobile */
+      .card-hover-controls {
+        opacity: 1;
       }
     }
   </style>
@@ -632,76 +648,109 @@
 
   <main class="watchlist-main-content">
 
-    <!-- Top Dashboard Header -->
-    <section class="watchlist-header-card">
-      <div class="header-title-box">
-        <h1>
-          <span class="material-symbols-outlined" style="color: var(--accent-pink); font-size: 32px;">bookmarks</span>
-          <span>My Watchlist</span>
-        </h1>
-        <p>Keep track of what you're watching, plan your queue, and manage your favorites.</p>
+    <!-- Top Action Bar: Search, Import, Export -->
+    <div class="top-action-bar">
+      <div class="search-input-wrap">
+        <span class="material-symbols-outlined" style="color: var(--accent-pink); font-size: 20px;">search</span>
+        <input type="text" id="watchlistSearch" placeholder="Search your personal library..." oninput="handleSearch(this.value)" />
       </div>
 
-      <div class="header-utility-group">
-        <div class="watchlist-search-box">
-          <span class="material-symbols-outlined" style="color: var(--text-dim); font-size: 18px;">search</span>
-          <input type="text" id="watchlistSearchInput" placeholder="Filter saved titles..." oninput="handleSearch(this.value)" />
-        </div>
+      <div class="utility-actions-wrap">
+        <label class="util-btn" title="Upload JSON Backup">
+          <span class="material-symbols-outlined" style="font-size: 18px; color: var(--accent-blue);">upload_file</span>
+          <span>Import</span>
+          <input type="file" id="importFileInput" accept=".json" style="display: none;" onchange="importWatchlist(event)" />
+        </label>
 
-        <button type="button" class="tool-btn" onclick="exportWatchlist()" title="Download Backup">
-          <span class="material-symbols-outlined" style="font-size: 16px;">download</span>
+        <button type="button" class="util-btn" onclick="exportWatchlist()" title="Download JSON Backup">
+          <span class="material-symbols-outlined" style="font-size: 18px; color: var(--accent-pink);">download</span>
           <span>Export</span>
         </button>
 
-        <button type="button" class="tool-btn danger-btn" onclick="confirmClearWatchlist()" title="Clear All Items">
-          <span class="material-symbols-outlined" style="font-size: 16px;">delete_sweep</span>
-          <span>Clear</span>
+        <button type="button" class="util-btn danger-btn" onclick="clearAllWatchlist()" title="Clear Library">
+          <span class="material-symbols-outlined" style="font-size: 18px;">delete_sweep</span>
+          <span>Clear All</span>
         </button>
       </div>
-    </section>
-
-    <!-- Status Tabs Bar -->
-    <div class="filter-pills-bar">
-      <button type="button" class="list-tab-pill active" onclick="switchTab('all', this)">
-        <span>All Titles</span>
-        <span class="pill-counter" id="count-all">0</span>
-      </button>
-
-      <button type="button" class="list-tab-pill" onclick="switchTab('watching', this)">
-        <span class="material-symbols-outlined" style="font-size: 16px; color: var(--accent-pink);">play_circle</span>
-        <span>Watching / Reading</span>
-        <span class="pill-counter" id="count-watching">0</span>
-      </button>
-
-      <button type="button" class="list-tab-pill" onclick="switchTab('planning', this)">
-        <span class="material-symbols-outlined" style="font-size: 16px; color: var(--accent-blue);">schedule</span>
-        <span>Plan to Watch</span>
-        <span class="pill-counter" id="count-planning">0</span>
-      </button>
-
-      <button type="button" class="list-tab-pill" onclick="switchTab('completed', this)">
-        <span class="material-symbols-outlined" style="font-size: 16px; color: #10b981;">task_alt</span>
-        <span>Completed</span>
-        <span class="pill-counter" id="count-completed">0</span>
-      </button>
-
-      <button type="button" class="list-tab-pill" onclick="switchTab('favorites', this)">
-        <span class="material-symbols-outlined" style="font-size: 16px; color: #facc15;">star</span>
-        <span>Favorites</span>
-        <span class="pill-counter" id="count-favorites">0</span>
-      </button>
     </div>
 
-    <!-- Watchlist Cards Grid -->
+    <!-- Filter 1: Media Types (Anime, Manga, Hentai, Manhwa, etc.) -->
+    <div class="filter-section">
+      <div class="filter-label">Library Type</div>
+      <div class="pills-scroll-row" id="mediumPillsRow">
+        <button type="button" class="tab-pill active" onclick="switchMedium('ALL', this)">
+          <span>All Media</span>
+        </button>
+        <button type="button" class="tab-pill" onclick="switchMedium('ANIME', this)">
+          <span>Anime List</span>
+        </button>
+        <button type="button" class="tab-pill" onclick="switchMedium('MANGA', this)">
+          <span>Manga List</span>
+        </button>
+        <button type="button" class="tab-pill" onclick="switchMedium('HENTAI', this)">
+          <span>Hentai List</span>
+        </button>
+        <button type="button" class="tab-pill" onclick="switchMedium('READ_HENTAI', this)">
+          <span>Read Hentai List</span>
+        </button>
+        <button type="button" class="tab-pill" onclick="switchMedium('MANHWA', this)">
+          <span>Manhwa List</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Filter 2: Tracking Status (Watching, Planning, On Hold, Completed, Dropped, Favorites) -->
+    <div class="filter-section">
+      <div class="filter-label">Tracking Status</div>
+      <div class="pills-scroll-row" id="statusPillsRow">
+        <button type="button" class="tab-pill active" onclick="switchStatus('ALL', this)">
+          <span>All Statuses</span>
+          <span class="badge-counter" id="badge-all">0</span>
+        </button>
+        <button type="button" class="tab-pill" onclick="switchStatus('watching', this)">
+          <span class="material-symbols-outlined" style="font-size: 16px; color: var(--accent-pink);">play_circle</span>
+          <span>Watching & Reading</span>
+          <span class="badge-counter" id="badge-watching">0</span>
+        </button>
+        <button type="button" class="tab-pill" onclick="switchStatus('planning', this)">
+          <span class="material-symbols-outlined" style="font-size: 16px; color: var(--accent-blue);">schedule</span>
+          <span>Plan to Watch</span>
+          <span class="badge-counter" id="badge-planning">0</span>
+        </button>
+        <button type="button" class="tab-pill" onclick="switchStatus('on_hold', this)">
+          <span class="material-symbols-outlined" style="font-size: 16px; color: #f97316;">pause_circle</span>
+          <span>On Hold</span>
+          <span class="badge-counter" id="badge-on_hold">0</span>
+        </button>
+        <button type="button" class="tab-pill" onclick="switchStatus('completed', this)">
+          <span class="material-symbols-outlined" style="font-size: 16px; color: #10b981;">task_alt</span>
+          <span>Completed</span>
+          <span class="badge-counter" id="badge-completed">0</span>
+        </button>
+        <button type="button" class="tab-pill" onclick="switchStatus('dropped', this)">
+          <span class="material-symbols-outlined" style="font-size: 16px; color: #ef4444;">cancel</span>
+          <span>Dropped</span>
+          <span class="badge-counter" id="badge-dropped">0</span>
+        </button>
+        <button type="button" class="tab-pill" onclick="switchStatus('favorites', this)">
+          <span class="material-symbols-outlined" style="font-size: 16px; color: #facc15;">star</span>
+          <span>Favorites</span>
+          <span class="badge-counter" id="badge-favorites">0</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Cards Output Grid -->
     <div class="anime-cards-grid" id="watchlistGrid"></div>
 
   </main>
 
   <script>
-    let activeFilter = 'all';
-    let searchQuery = '';
+    let activeMedium = 'ALL';
+    let activeStatus = 'ALL';
+    let searchKeyword = '';
 
-    function getWatchlistData() {
+    function getStoredData() {
       try {
         return JSON.parse(localStorage.getItem('anicool_watchlist_items') || '{}');
       } catch (e) {
@@ -709,63 +758,72 @@
       }
     }
 
-    function saveWatchlistData(data) {
+    function saveStoredData(data) {
       localStorage.setItem('anicool_watchlist_items', JSON.stringify(data));
     }
 
-    function switchTab(status, btn) {
-      document.querySelectorAll('.filter-pills-bar .list-tab-pill').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      activeFilter = status;
+    function handleSearch(val) {
+      searchKeyword = (val || '').toLowerCase().trim();
       renderWatchlist();
     }
 
-    function handleSearch(query) {
-      searchQuery = (query || '').toLowerCase().trim();
+    function switchMedium(medium, btn) {
+      document.querySelectorAll('#mediumPillsRow .tab-pill').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeMedium = medium;
+      renderWatchlist();
+    }
+
+    function switchStatus(status, btn) {
+      document.querySelectorAll('#statusPillsRow .tab-pill').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeStatus = status;
       renderWatchlist();
     }
 
     function updateCounters() {
-      const data = getWatchlistData();
+      const data = getStoredData();
       const items = Object.values(data);
 
-      document.getElementById('count-all').textContent = items.length;
-      document.getElementById('count-watching').textContent = items.filter(i => i.status === 'watching').length;
-      document.getElementById('count-planning').textContent = items.filter(i => i.status === 'planning').length;
-      document.getElementById('count-completed').textContent = items.filter(i => i.status === 'completed').length;
-      document.getElementById('count-favorites').textContent = items.filter(i => i.status === 'favorites').length;
+      document.getElementById('badge-all').textContent = items.length;
+      document.getElementById('badge-watching').textContent = items.filter(i => i.status === 'watching').length;
+      document.getElementById('badge-planning').textContent = items.filter(i => i.status === 'planning').length;
+      document.getElementById('badge-on_hold').textContent = items.filter(i => i.status === 'on_hold').length;
+      document.getElementById('badge-completed').textContent = items.filter(i => i.status === 'completed').length;
+      document.getElementById('badge-dropped').textContent = items.filter(i => i.status === 'dropped').length;
+      document.getElementById('badge-favorites').textContent = items.filter(i => i.status === 'favorites').length;
     }
 
-    function deleteItem(id, title, event) {
-      if (event) event.preventDefault();
-      if (!confirm(`Remove "${title}" from your list?`)) return;
-
-      const data = getWatchlistData();
-      delete data[id];
-      saveWatchlistData(data);
-      updateCounters();
-      renderWatchlist();
-    }
-
-    function quickChangeStatus(id, newStatus, event) {
-      if (event) event.preventDefault();
-      const data = getWatchlistData();
+    function changeItemStatus(id, newStatus, e) {
+      e.stopPropagation();
+      const data = getStoredData();
       if (data[id]) {
         data[id].status = newStatus;
-        saveWatchlistData(data);
+        saveStoredData(data);
         updateCounters();
         renderWatchlist();
       }
     }
 
-    function confirmClearWatchlist() {
-      const data = getWatchlistData();
+    function deleteItem(id, title, e) {
+      e.stopPropagation();
+      if (!confirm(`Remove "${title}" from your library?`)) return;
+
+      const data = getStoredData();
+      delete data[id];
+      saveStoredData(data);
+      updateCounters();
+      renderWatchlist();
+    }
+
+    function clearAllWatchlist() {
+      const data = getStoredData();
       const count = Object.keys(data).length;
       if (count === 0) {
-        alert('Your watchlist is already empty.');
+        alert('Your library is already empty.');
         return;
       }
-      if (confirm(`Are you sure you want to permanently clear all ${count} saved titles?`)) {
+      if (confirm(`Permanently remove all ${count} saved items from your library?`)) {
         localStorage.removeItem('anicool_watchlist_items');
         updateCounters();
         renderWatchlist();
@@ -773,75 +831,112 @@
     }
 
     function exportWatchlist() {
-      const data = getWatchlistData();
-      const items = Object.values(data);
-      if (items.length === 0) {
-        alert('No titles saved in your watchlist to export.');
+      const data = getStoredData();
+      if (Object.keys(data).length === 0) {
+        alert('Your watchlist is empty. Add some titles before exporting.');
         return;
       }
-
       const jsonStr = JSON.stringify(data, null, 2);
       const blob = new Blob([jsonStr], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `anicool_watchlist_${new Date().toISOString().slice(0, 10)}.json`;
+      a.download = `anicool_backup_${new Date().toISOString().slice(0, 10)}.json`;
       a.click();
       URL.revokeObjectURL(url);
     }
 
+    function importWatchlist(event) {
+      const file = event.target.files?.[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const imported = JSON.parse(e.target.result);
+          if (typeof imported !== 'object' || imported === null) throw new Error();
+
+          const current = getStoredData();
+          const merged = { ...current, ...imported };
+          saveStoredData(merged);
+          updateCounters();
+          renderWatchlist();
+          alert('Watchlist successfully imported!');
+        } catch (err) {
+          alert('Invalid backup file. Please select a valid AniCool JSON backup.');
+        }
+      };
+      reader.readAsText(file);
+      event.target.value = '';
+    }
+
     function renderWatchlist() {
       const grid = document.getElementById('watchlistGrid');
-      const data = getWatchlistData();
+      const data = getStoredData();
       let items = Object.values(data);
 
-      // Status filter
-      if (activeFilter !== 'all') {
-        items = items.filter(item => item.status === activeFilter);
+      // 1. Status Filter
+      if (activeStatus !== 'ALL') {
+        items = items.filter(i => i.status === activeStatus);
       }
 
-      // Keyword Search filter
-      if (searchQuery) {
-        items = items.filter(item => (item.title || '').toLowerCase().includes(searchQuery));
+      // 2. Medium Filter
+      if (activeMedium !== 'ALL') {
+        items = items.filter(i => {
+          const format = (i.format || '').toUpperCase();
+          if (activeMedium === 'ANIME') return format === 'TV' || format === 'MOVIE' || format === 'OVA' || format === 'ONA' || format === 'SPECIAL';
+          if (activeMedium === 'MANGA') return format === 'MANGA' || format === 'ONE_SHOT' || format === 'NOVEL';
+          if (activeMedium === 'HENTAI') return i.isAdult || format.includes('HENTAI');
+          if (activeMedium === 'READ_HENTAI') return (i.isAdult && format === 'MANGA') || format.includes('DOUJIN');
+          if (activeMedium === 'MANHWA') return format === 'MANHWA';
+          return true;
+        });
       }
 
-      // Sort by newest added first
+      // 3. Search Filter
+      if (searchKeyword) {
+        items = items.filter(i => (i.title || '').toLowerCase().includes(searchKeyword));
+      }
+
+      // Sort newest added first
       items.sort((a, b) => (b.addedAt || 0) - (a.addedAt || 0));
 
       if (items.length === 0) {
         grid.innerHTML = `
-          <div class="empty-watchlist-box">
-            <div class="empty-icon-bubble">
-              <span class="material-symbols-outlined">bookmark_border</span>
+          <div class="empty-box">
+            <div class="empty-box-icon">
+              <span class="material-symbols-outlined">bookmarks</span>
             </div>
-            <h3>Your list is looking empty</h3>
-            <p>You don't have any titles saved in this category yet. Explore anime, manga, and movies to start building your personal library.</p>
-            <a href="index.html" class="empty-browse-btn">Explore Titles</a>
+            <h3>No Titles Found</h3>
+            <p>No saved titles match your current filters or search term.</p>
+            <a href="index.html" class="browse-link-btn">Explore Titles</a>
           </div>
         `;
         return;
       }
 
-      const statusLabels = {
+      const statusBadgeText = {
         watching: 'Watching',
         planning: 'Planning',
+        on_hold: 'On Hold',
         completed: 'Completed',
+        dropped: 'Dropped',
         favorites: 'Favorite'
       };
 
       grid.innerHTML = items.map(item => {
         const title = item.title || 'Untitled';
         const cover = item.image || 'favicon.png';
-        const format = item.format || 'Anime';
+        const format = item.format || 'ANIME';
         const score = item.score ? `★ ${item.score}%` : '';
         const count = item.episodes ? `${item.episodes} Ep` : '';
-        const statusLabel = statusLabels[item.status] || 'Saved';
+        const currentStatus = item.status || 'watching';
+        const displayStatus = statusBadgeText[currentStatus] || 'Saved';
 
         return `
           <div class="card-wrap">
-            <!-- Quick Action Hover Pill -->
-            <div class="card-quick-actions">
-              <button type="button" class="action-icon-btn delete-icon" onclick="deleteItem(${item.id}, '${escapeQuotes(title)}', event)" title="Remove Entry">
+            <div class="card-hover-controls">
+              <button type="button" class="ctrl-icon-btn danger-btn" onclick="deleteItem(${item.id}, '${escapeQuotes(title)}', event)" title="Delete from Library">
                 <span class="material-symbols-outlined">delete</span>
               </button>
             </div>
@@ -850,13 +945,20 @@
               <div class="card-thumb-wrap">
                 <img src="${cover}" alt="${title}" class="card-thumb" loading="lazy" />
                 ${score ? `<div class="card-badge-top">${score}</div>` : ''}
-                <div class="card-format-tag">${statusLabel}</div>
+                <div class="card-format-tag">${displayStatus}</div>
               </div>
               <div class="card-info">
                 <h3 class="card-item-title" title="${title}">${title}</h3>
                 <div class="card-item-sub">
                   <span>${format}</span>
-                  ${count ? `<span>${count}</span>` : ''}
+                  <select class="status-select-bubble" onclick="event.stopPropagation()" onchange="changeItemStatus(${item.id}, this.value, event)" title="Change Status">
+                    <option value="watching" ${currentStatus === 'watching' ? 'selected' : ''}>Watching</option>
+                    <option value="planning" ${currentStatus === 'planning' ? 'selected' : ''}>Plan</option>
+                    <option value="on_hold" ${currentStatus === 'on_hold' ? 'selected' : ''}>Hold</option>
+                    <option value="completed" ${currentStatus === 'completed' ? 'selected' : ''}>Done</option>
+                    <option value="dropped" ${currentStatus === 'dropped' ? 'selected' : ''}>Drop</option>
+                    <option value="favorites" ${currentStatus === 'favorites' ? 'selected' : ''}>Star</option>
+                  </select>
                 </div>
               </div>
             </a>
