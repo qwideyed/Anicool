@@ -9,8 +9,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="AniCool" />
   <meta property="og:title" content="AniCool - Media Details" />
-  <meta property="og:description" content="Explore anime, manga synopsis, characters, cast, staff, and add to your watchlist ad-free." />
-  <meta property="og:image" content="favicon.png" />
+  <meta property="og:description" content="Stream and discover trending anime, read manga and manhwa with zero ads." />
   <meta name="theme-color" content="#ff2a74" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -721,7 +720,7 @@
   <!-- Main Content Layout -->
   <main class="entry-main-content">
 
-    <!-- Left Column: Poster + Watchlist + Meta -->
+    <!-- Left Column -->
     <aside class="entry-poster-col">
       <div class="entry-poster-box skeleton" id="posterBox">
         <img src="" alt="" class="entry-poster-img" id="posterImg" style="display: none;" />
@@ -892,7 +891,7 @@
     let currentLoadedMedia = null;
     let rawRelations = [];
 
-    // Safe, production-tested AniList GraphQL Query
+    // Compact, low-complexity GraphQL query
     const query = `
       query ($id: Int) {
         Media(id: $id) {
@@ -920,7 +919,7 @@
           studios(isMain: true) {
             nodes { name }
           }
-          characters(sort: ROLE, perPage: 12) {
+          characters(sort: ROLE, perPage: 8) {
             edges {
               role
               node {
@@ -930,7 +929,7 @@
               voiceActors {
                 name { full }
                 image { medium }
-                language: languageV2
+                languageV2
               }
             }
           }
@@ -942,13 +941,13 @@
                 type
                 format
                 title { english romaji }
-                coverImage { large extraLarge }
+                coverImage { large }
                 episodes
                 chapters
               }
             }
           }
-          recommendations(sort: RATING_DESC, perPage: 12) {
+          recommendations(sort: RATING_DESC, perPage: 8) {
             nodes {
               mediaRecommendation {
                 id
@@ -956,7 +955,7 @@
                 format
                 averageScore
                 title { english romaji }
-                coverImage { large extraLarge }
+                coverImage { large }
               }
             }
           }
@@ -976,7 +975,7 @@
         });
 
         if (!response.ok) {
-          throw new Error(`AniList returned HTTP ${response.status}`);
+          throw new Error(`AniList returned status ${response.status}`);
         }
 
         const data = await response.json();
@@ -990,8 +989,8 @@
         renderMediaPage(media);
         syncWatchlistButton(media.id);
       } catch (err) {
-        console.error("AniList Fetch Error:", err);
-        showErrorState('Unable to Load Details', 'Could not retrieve data from AniList. Please refresh the page.');
+        console.error("AniList Error:", err);
+        showErrorState('Unable to Load Details', 'Could not connect to AniList. Please check your connection and refresh.');
       }
     }
 
@@ -1072,15 +1071,15 @@
       document.getElementById('metaScore').textContent = media.meanScore ? `${media.meanScore}%` : (media.averageScore ? `${media.averageScore}%` : 'N/A');
       document.getElementById('metaPopularity').textContent = media.popularity ? `#${media.popularity.toLocaleString()}` : 'N/A';
 
-      // Characters & STRICT Japanese Voice Actors (English VAs excluded)
+      // Characters & STRICT Japanese Voice Actors
       const charactersGrid = document.getElementById('charactersGrid');
       const charEdges = media.characters?.edges || [];
       if (charEdges.length > 0) {
         charactersGrid.innerHTML = charEdges.map(edge => {
-          const char = edge.node;
-          // Look strictly for the Japanese voice actor
-          const actors = edge.voiceActors || [];
-          const japVa = actors.find(v => (v.language || '').toLowerCase().includes('japanese'));
+          const char = edge?.node;
+          // Filter strictly for the Japanese voice actor
+          const actors = edge?.voiceActors || [];
+          const japVa = actors.find(v => (v?.languageV2 || '').toLowerCase() === 'japanese') || actors[0];
 
           return `
             <div class="char-cast-card">
@@ -1088,28 +1087,28 @@
                 <img src="${char?.image?.medium || ''}" alt="${char?.name?.full || ''}" class="person-thumb" loading="lazy" />
                 <div class="person-info">
                   <div class="person-name" title="${char?.name?.full || ''}">${char?.name?.full || 'Unknown'}</div>
-                  <div class="person-sub">${edge.role || 'Character'}</div>
+                  <div class="person-sub">${edge?.role || 'Character'}</div>
                 </div>
               </div>
 
               ${japVa ? `
                 <div class="cast-half">
                   <div class="person-info">
-                    <div class="person-name" title="${japVa.name?.full \vert{}\vert{} ''}">${japVa.name?.full || 'Unknown'}</div>
+                    <div class="person-name" title="${japVa?.name?.full \vert{}\vert{} ''}">${japVa?.name?.full || 'Unknown'}</div>
                     <div class="person-sub">Japanese VA</div>
                   </div>
-                  <img src="${japVa.image?.medium \vert{}\vert{} ''}" alt="${japVa.name?.full || ''}" class="person-thumb" loading="lazy" />
+                  <img src="${japVa?.image?.medium \vert{}\vert{} ''}" alt="${japVa?.name?.full || ''}" class="person-thumb" loading="lazy" />
                 </div>
               ` : `
                 <div class="cast-half">
-                  <div class="person-sub" style="color: #64748b;">No JP VA</div>
+                  <div class="person-sub" style="color: #64748b;">No VA listed</div>
                 </div>
               `}
             </div>
           `;
         }).join('');
       } else {
-        charactersGrid.innerHTML = '<div style="color:var(--text-dim); font-size:0.85rem;">No character or voice cast info found.</div>';
+        charactersGrid.innerHTML = '<div style="color:var(--text-dim); font-size:0.85rem;">No character info found.</div>';
       }
 
       // Store relations & render vertical grid
@@ -1120,20 +1119,20 @@
       const similarGrid = document.getElementById('similarGrid');
       const recNodes = media.recommendations?.nodes || [];
       const recs = recNodes
-        .map(n => n.mediaRecommendation)
+        .map(n => n?.mediaRecommendation)
         .filter(m => m && m.id);
 
       if (recs.length > 0) {
         similarGrid.innerHTML = recs.map(rec => {
-          const recTitle = rec.title?.english || rec.title?.romaji || 'Unknown';
-          const scoreStr = rec.averageScore ? `★ ${rec.averageScore}%` : (rec.format || 'Anime');
+          const recTitle = rec?.title?.english || rec?.title?.romaji || 'Unknown';
+          const scoreStr = rec?.averageScore ? `★ ${rec.averageScore}%` : (rec?.format || 'Anime');
 
           return `
             <a href="entry.html?id=${rec.id}" class="vertical-anime-card">
               <div class="vertical-thumb-box">
-                <img src="${rec.coverImage?.large || rec.coverImage?.extraLarge || ''}" alt="${recTitle}" class="vertical-thumb-img" loading="lazy" />
+                <img src="${rec?.coverImage?.large || ''}" alt="${recTitle}" class="vertical-thumb-img" loading="lazy" />
               </div>
-              <span class="vertical-tag">${rec.format || rec.type || 'MEDIA'}</span>
+              <span class="vertical-tag">${rec?.format || rec?.type || 'MEDIA'}</span>
               <div class="vertical-title" title="${recTitle}">${recTitle}</div>
               <div class="vertical-sub">
                 <span style="color: #10b981; font-weight: 600;">${scoreStr}</span>
@@ -1157,9 +1156,9 @@
       }
 
       const filtered = rawRelations.filter(edge => {
-        const relType = edge.relationType || '';
-        const nodeType = edge.node?.type || '';
-        const nodeFormat = edge.node?.format || '';
+        const relType = edge?.relationType || '';
+        const nodeType = edge?.node?.type || '';
+        const nodeFormat = edge?.node?.format || '';
 
         if (type === 'MANGA') {
           return nodeType === 'MANGA' || relType === 'ADAPTATION';
@@ -1182,15 +1181,15 @@
       }
 
       grid.innerHTML = edges.map(edge => {
-        const node = edge.node;
+        const node = edge?.node;
         const relTitle = node?.title?.english || node?.title?.romaji || 'Unknown';
-        const relType = edge.relationType ? edge.relationType.replace(/_/g, ' ') : 'Related';
+        const relType = edge?.relationType ? edge.relationType.replace(/_/g, ' ') : 'Related';
         const count = node?.episodes ? `${node.episodes} Ep` : (node?.chapters ? `${node.chapters} Ch` : (node?.format || ''));
 
         return `
           <a href="entry.html?id=${node.id}" class="vertical-anime-card">
             <div class="vertical-thumb-box">
-              <img src="${node?.coverImage?.large || node?.coverImage?.extraLarge || ''}" alt="${relTitle}" class="vertical-thumb-img" loading="lazy" />
+              <img src="${node?.coverImage?.large || ''}" alt="${relTitle}" class="vertical-thumb-img" loading="lazy" />
             </div>
             <span class="vertical-tag">${relType}</span>
             <div class="vertical-title" title="${relTitle}">${relTitle}</div>
