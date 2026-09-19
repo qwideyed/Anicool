@@ -333,6 +333,10 @@
       height: 100%;
     }
 
+    .card-wrap:hover {
+      z-index: 100;
+    }
+
     .anime-card {
       position: relative;
       width: 100%;
@@ -580,7 +584,7 @@
       </a>
 
       <a href="donate.html" class="outside-bubble-btn donate-btn" title="Support AniCool">
-        <span class="material-symbols-outlined" style="color: var(--donate-color); font-size: 18px;">favorite</span>
+        <span class="material-symbols-outlined donate-icon">favorite</span>
         <span>Donate</span>
       </a>
     </div>
@@ -787,7 +791,7 @@
       const data = getStoredData();
       let items = Object.values(data);
 
-      // 1. Status Filter (Favorites are also included under completed)
+      // 1. Status Filter (Favorites are automatically included under Completed)
       if (activeStatus !== 'ALL') {
         if (activeStatus === 'completed') {
           items = items.filter(i => i.status === 'completed' || i.status === 'favorites');
@@ -796,15 +800,19 @@
         }
       }
 
-      // 2. Medium Filter
+      // 2. Strict Medium Filter (separates Hentai from Anime/Manga)
       if (activeMedium !== 'ALL') {
         items = items.filter(i => {
           const format = (i.format || '').toUpperCase();
-          if (activeMedium === 'ANIME') return format === 'TV' || format === 'MOVIE' || format === 'OVA' || format === 'ONA' || format === 'SPECIAL';
-          if (activeMedium === 'MANGA') return format === 'MANGA' || format === 'ONE_SHOT' || format === 'NOVEL';
-          if (activeMedium === 'HENTAI') return i.isAdult || format.includes('HENTAI');
-          if (activeMedium === 'READ_HENTAI') return (i.isAdult && format === 'MANGA') || format.includes('DOUJIN');
-          if (activeMedium === 'MANHWA') return format === 'MANHWA';
+          const type = (i.type || '').toUpperCase();
+          const isAdult = Boolean(i.isAdult) || (Array.isArray(i.genres) && i.genres.includes('Hentai'));
+          const isManhwa = format === 'MANHWA' || i.countryOfOrigin === 'KR';
+
+          if (activeMedium === 'HENTAI') return isAdult && type === 'ANIME';
+          if (activeMedium === 'READ_HENTAI') return isAdult && type === 'MANGA';
+          if (activeMedium === 'MANHWA') return isManhwa && !isAdult;
+          if (activeMedium === 'MANGA') return type === 'MANGA' && !isAdult && !isManhwa;
+          if (activeMedium === 'ANIME') return type === 'ANIME' && !isAdult;
           return true;
         });
       }
