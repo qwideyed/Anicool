@@ -891,8 +891,8 @@
     let currentLoadedMedia = null;
     let rawRelations = [];
 
-    // The single, bulletproof GraphQL Query that AniList will never reject
-    const query = `
+    // Safe, validated primary GraphQL Query
+    const primaryQuery = `
       query ($id: Int) {
         Media(id: $id) {
           id
@@ -926,13 +926,9 @@
             edges {
               role
               node {
+                id
                 name { full }
                 image { medium }
-              }
-              voiceActors {
-                name { full }
-                image { medium }
-                languageV2
               }
             }
           }
@@ -974,16 +970,12 @@
             'Content-Type': 'application/json',
             'Accept': 'application/json'
           },
-          body: JSON.stringify({ query: query, variables: { id: mediaId } })
+          body: JSON.stringify({ query: primaryQuery, variables: { id: mediaId } })
         });
 
         const json = await response.json();
-        
-        if (json.errors) {
-          console.error("AniList returned errors:", json.errors);
-        }
-
         const media = json?.data?.Media;
+
         if (!media) {
           showErrorState('Entry Not Found', 'Could not locate this title on AniList.');
           return;
@@ -992,10 +984,92 @@
         currentLoadedMedia = media;
         renderMediaPage(media);
         syncWatchlistButton(media.id);
+
+        // Fetch Japanese VAs for the loaded characters
+        fetchJapaneseCast(media.characters?.edges || []);
       } catch (err) {
-        console.error("Fetch Exception:", err);
+        console.error("Fetch Error:", err);
         showErrorState('Unable to Load Details', 'Could not retrieve data from AniList. Please check your connection and refresh.');
       }
+    }
+
+    async function fetchJapaneseCast(characterEdges) {
+      if (!characterEdges.length) {
+        document.getElementById('charactersGrid').innerHTML = '<div style="color:var(--text-dim); font-size:0.85rem;">No character info found.</div>';
+        return;
+      }
+
+      // Render character cards immediately with placeholder VAs so page isn't delayed
+      renderCharactersBase(characterEdges);
+
+      // Query character media connection for their Japanese voice actors safely
+      const charIds = characterEdges.map(e => e.node.id);
+      const castQuery = `
+        query ($ids: [Int], $mediaId: Int) {
+          Page(page: 1, perPage: 8) {
+            characters(id_in: $ids) {
+              id
+              media(mediaId: $mediaId) {
+                edges {
+                  voiceActors(language: JAPANESE) {
+                    name { full }
+                    image { medium }
+                  }
+                }
+              }
+            }
+          }
+        }
+      `;
+
+      try {
+        const res = await fetch('https://graphql.anilist.co', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ query: castQuery, variables: { ids: charIds, mediaId: mediaId } })
+        });
+        const castData = await res.json();
+        const chars = castData?.data?.Page?.characters || [];
+
+        chars.forEach(c => {
+          const va = c.media?.edges?.[0]?.voiceActors?.[0];
+          if (va) {
+            const vaBox = document.getElementById(`va-box-${c.id}`);
+            if (vaBox) {
+              vaBox.innerHTML = `
+                <div class="person-info">
+                  <div class="person-name" title="${va.name.full}">${va.name.full}</div>
+                  <div class="person-sub">Japanese VA</div>
+                </div>
+                <img src="${va.image?.medium || ''}" alt="${va.name.full}" class="person-thumb" loading="lazy" />
+              `;
+            }
+          }
+        });
+      } catch (e) {
+        console.warn("Could not load VA portraits:", e);
+      }
+    }
+
+    function renderCharactersBase(charEdges) {
+      const grid = document.getElementById('charactersGrid');
+      grid.innerHTML = charEdges.map(edge => {
+        const char = edge.node;
+        return `
+          <div class="char-cast-card">
+            <div class="char-half">
+              <img src="${char.image?.medium || ''}" alt="${char.name.full}" class="person-thumb" loading="lazy" />
+              <div class="person-info">
+                <div class="person-name" title="${char.name.full}">${char.name.full}</div>
+                <div class="person-sub">${edge.role || 'Character'}</div>
+              </div>
+            </div>
+            <div class="cast-half" id="va-box-${char.id}">
+              <div class="person-sub" style="color: #64748b;">Japanese VA</div>
+            </div>
+          </div>
+        `;
+      }).join('');
     }
 
     function showErrorState(title, message) {
@@ -1076,47 +1150,7 @@
       document.getElementById('metaScore').textContent = media.meanScore ? `${media.meanScore}%` : (media.averageScore ? `${media.averageScore}%` : 'N/A');
       document.getElementById('metaPopularity').textContent = media.popularity ? `#${media.popularity.toLocaleString()}` : 'N/A';
 
-      // Characters & Real Japanese Voice Actors
-      const charactersGrid = document.getElementById('charactersGrid');
-      const charEdges = media.characters?.edges || [];
-      if (charEdges.length > 0) {
-        charactersGrid.innerHTML = charEdges.map(edge => {
-          const char = edge?.node;
-          // Filter strictly for the Japanese Voice Actor
-          const actors = edge?.voiceActors || [];
-          const japVa = actors.find(v => (v?.languageV2 || '').toLowerCase() === 'japanese') || actors[0];
-
-          return `
-            <div class="char-cast-card">
-              <div class="char-half">
-                <img src="${char?.image?.medium || ''}" alt="${char?.name?.full || ''}" class="person-thumb" loading="lazy" />
-                <div class="person-info">
-                  <div class="person-name" title="${char?.name?.full || ''}">${char?.name?.full || 'Unknown'}</div>
-                  <div class="person-sub">${edge?.role || 'Character'}</div>
-                </div>
-              </div>
-
-              ${japVa ? `
-                <div class="cast-half">
-                  <div class="person-info">
-                    <div class="person-name" title="${japVa?.name?.full \vert{}\vert{} ''}">${japVa?.name?.full || 'Unknown'}</div>
-                    <div class="person-sub">Japanese VA</div>
-                  </div>
-                  <img src="${japVa?.image?.medium \vert{}\vert{} ''}" alt="${japVa?.name?.full || ''}" class="person-thumb" loading="lazy" />
-                </div>
-              ` : `
-                <div class="cast-half">
-                  <div class="person-sub" style="color: #64748b;">No JP VA</div>
-                </div>
-              `}
-            </div>
-          `;
-        }).join('');
-      } else {
-        charactersGrid.innerHTML = '<div style="color:var(--text-dim); font-size:0.85rem;">No character info found.</div>';
-      }
-
-      // Store relations & render vertical grid
+      // Relations
       rawRelations = media.relations?.edges || [];
       renderRelationsGrid(rawRelations);
 
