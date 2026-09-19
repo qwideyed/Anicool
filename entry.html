@@ -176,7 +176,7 @@
       box-shadow: 0 8px 24px rgba(244, 63, 94, 0.35);
     }
 
-    /* Banner Area */
+    /* Hero Banner Area */
     .banner-container {
       position: relative;
       width: 100%;
@@ -378,7 +378,7 @@
       display: flex;
       flex-direction: column;
       gap: 24px;
-      min-width: 0; /* Critical: prevents overflow blowout */
+      min-width: 0;
     }
 
     .entry-header-block {
@@ -435,7 +435,14 @@
       gap: 14px;
       backdrop-filter: blur(20px);
       width: 100%;
-      overflow: hidden;
+    }
+
+    .section-heading-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
     }
 
     .section-heading {
@@ -447,36 +454,83 @@
       gap: 8px;
     }
 
+    .filter-pills-wrap {
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--bubble-border);
+      border-radius: 9999px;
+      padding: 3px;
+      gap: 3px;
+      flex-wrap: wrap;
+    }
+
+    .filter-pill-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-dim);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 9999px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s;
+    }
+
+    .filter-pill-btn:hover {
+      color: #fff;
+    }
+
+    .filter-pill-btn.active {
+      background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+      color: #fff;
+    }
+
     .entry-synopsis-text {
       font-size: 0.92rem;
       line-height: 1.7;
       color: #cbd5e1;
     }
 
-    /* Characters & Cast Row */
+    /* Characters & Real Life Cast Dual-Card Layout */
     .characters-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
       gap: 14px;
     }
 
-    .character-card {
+    .char-cast-card {
       display: flex;
       align-items: center;
-      gap: 10px;
+      justify-content: space-between;
       background: rgba(255, 255, 255, 0.025);
       border: 1px solid var(--bubble-border);
       border-radius: 16px;
-      padding: 8px;
+      padding: 8px 10px;
+      gap: 10px;
       transition: all 0.2s ease;
     }
 
-    .character-card:hover {
-      background: rgba(255, 255, 255, 0.07);
+    .char-cast-card:hover {
+      background: rgba(255, 255, 255, 0.06);
       transform: translateY(-2px);
     }
 
-    .char-thumb {
+    .char-half, .cast-half {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .cast-half {
+      justify-content: flex-end;
+      text-align: right;
+    }
+
+    .person-thumb {
       width: 44px;
       height: 56px;
       border-radius: 8px;
@@ -485,13 +539,14 @@
       flex-shrink: 0;
     }
 
-    .char-info {
+    .person-info {
       flex: 1;
+      min-width: 0;
       overflow: hidden;
     }
 
-    .char-name {
-      font-size: 0.82rem;
+    .person-name {
+      font-size: 0.8rem;
       font-weight: 600;
       white-space: nowrap;
       overflow: hidden;
@@ -499,35 +554,23 @@
       color: #fff;
     }
 
-    .char-role {
-      font-size: 0.72rem;
+    .person-sub {
+      font-size: 0.7rem;
       color: var(--text-dim);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    /* Strict Fixed Relations Sizing - Cannot Expand */
-    .relations-scroll-row {
-      display: flex;
-      gap: 16px;
-      overflow-x: auto;
-      padding: 4px 2px 12px 2px;
-      scrollbar-width: thin;
+    /* Vertical Cards Grid Layout for Relations & Similar Anime */
+    .vertical-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+      gap: 18px;
       width: 100%;
     }
 
-    .relations-scroll-row::-webkit-scrollbar {
-      height: 6px;
-    }
-
-    .relations-scroll-row::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 4px;
-    }
-
-    .relation-card {
-      flex: 0 0 140px !important;
-      width: 140px !important;
-      min-width: 140px !important;
-      max-width: 140px !important;
+    .vertical-anime-card {
       display: flex;
       flex-direction: column;
       gap: 6px;
@@ -536,32 +579,28 @@
       transition: transform 0.2s ease;
     }
 
-    .relation-card:hover {
-      transform: translateY(-3px);
+    .vertical-anime-card:hover {
+      transform: translateY(-4px);
     }
 
-    .relation-thumb-box {
-      width: 140px !important;
-      height: 198px !important;
+    .vertical-thumb-box {
+      width: 100%;
+      aspect-ratio: 1 / 1.42;
       border-radius: 14px;
       overflow: hidden;
       background: #141624;
       border: 1px solid var(--bubble-border);
-      flex-shrink: 0;
       position: relative;
     }
 
-    .relation-thumb-img {
-      width: 100% !important;
-      height: 100% !important;
-      min-width: 100% !important;
-      max-width: 100% !important;
-      object-fit: cover !important;
-      object-position: center !important;
+    .vertical-thumb-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
       display: block;
     }
 
-    .relation-tag {
+    .vertical-tag {
       font-size: 0.68rem;
       color: var(--accent-pink);
       text-transform: uppercase;
@@ -569,18 +608,23 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      display: block;
     }
 
-    .relation-title {
+    .vertical-title {
       font-size: 0.82rem;
       font-weight: 600;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
       color: #f1f5f9;
-      display: block;
-      width: 100%;
+    }
+
+    .vertical-sub {
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
     .skeleton {
@@ -605,11 +649,7 @@
         grid-template-columns: 1fr;
         gap: 24px;
       }
-      .entry-poster-box {
-        max-width: 240px;
-        margin: 0 auto;
-      }
-      .watchlist-control-box {
+      .entry-poster-box, .watchlist-control-box {
         max-width: 240px;
         margin: 0 auto;
       }
@@ -618,6 +658,12 @@
       }
       .entry-title-main {
         font-size: 1.6rem;
+      }
+      .characters-grid {
+        grid-template-columns: 1fr;
+      }
+      .vertical-cards-grid {
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
       }
     }
   </style>
@@ -770,7 +816,7 @@
       </div>
     </aside>
 
-    <!-- Right Column: Title, Synopsis, Characters, Relations -->
+    <!-- Right Column: Details, Cast, Relations, Similar -->
     <section class="entry-details-col">
       <div class="entry-header-block">
         <h1 class="entry-title-main" id="entryTitle">Loading Title...</h1>
@@ -790,25 +836,47 @@
         </div>
       </div>
 
-      <!-- Characters & Voice Actors -->
+      <!-- Characters & Voice Cast (Characters on Left, Real-Life VA on Right) -->
       <div class="entry-bubble-section">
         <div class="section-heading">
           <span class="material-symbols-outlined" style="color: var(--accent-blue);">group</span>
-          <span>Characters & Cast</span>
+          <span>Characters & Voice Actors</span>
         </div>
         <div class="characters-grid" id="charactersGrid">
-          <div style="color: var(--text-dim); font-size: 0.85rem;">Loading character roster...</div>
+          <div style="color: var(--text-dim); font-size: 0.85rem;">Loading character & cast roster...</div>
         </div>
       </div>
 
-      <!-- Related Releases & Sequels -->
+      <!-- Relations & Sequels (Vertical Grid + Filter Pills) -->
+      <div class="entry-bubble-section">
+        <div class="section-heading-row">
+          <div class="section-heading">
+            <span class="material-symbols-outlined" style="color: #facc15;">hub</span>
+            <span>Relations & Franchise</span>
+          </div>
+
+          <div class="filter-pills-wrap">
+            <button type="button" class="filter-pill-btn active" onclick="filterRelations('ALL', this)">All</button>
+            <button type="button" class="filter-pill-btn" onclick="filterRelations('EPISODES', this)">Episodes</button>
+            <button type="button" class="filter-pill-btn" onclick="filterRelations('MANGA', this)">Manga</button>
+            <button type="button" class="filter-pill-btn" onclick="filterRelations('PREQUEL_SEQUEL', this)">Prequels / Sequels</button>
+          </div>
+        </div>
+
+        <div class="vertical-cards-grid" id="relationsGrid">
+          <div style="color: var(--text-dim); font-size: 0.85rem;">Loading relations...</div>
+        </div>
+      </div>
+
+      <!-- Similar / Recommendations (Vertical Grid) -->
       <div class="entry-bubble-section">
         <div class="section-heading">
-          <span class="material-symbols-outlined" style="color: #facc15;">hub</span>
-          <span>Relations & Sequels</span>
+          <span class="material-symbols-outlined" style="color: var(--accent-pink);">auto_awesome</span>
+          <span>Similar Anime You Might Like</span>
         </div>
-        <div class="relations-scroll-row" id="relationsRow">
-          <div style="color: var(--text-dim); font-size: 0.85rem;">Loading relations...</div>
+
+        <div class="vertical-cards-grid" id="similarGrid">
+          <div style="color: var(--text-dim); font-size: 0.85rem;">Loading recommendations...</div>
         </div>
       </div>
     </section>
@@ -820,7 +888,9 @@
     const mediaId = parseInt(urlParams.get('id'), 10) || 151807;
 
     let currentLoadedMedia = null;
+    let rawRelations = [];
 
+    // AniList GraphQL Query with voice actors & recommendations
     const query = `
       query ($id: Int) {
         Media(id: $id) {
@@ -851,12 +921,17 @@
               node { name }
             }
           }
-          characters(sort: ROLE, perPage: 8) {
+          characters(sort: ROLE, perPage: 12) {
             edges {
               role
               node {
                 name { full }
                 image { medium }
+              }
+              voiceActors(language: JAPANESE, sort: RELEVANCE) {
+                name { full }
+                image { medium }
+                languageV2
               }
             }
           }
@@ -865,7 +940,23 @@
               relationType
               node {
                 id
+                type
                 format
+                status
+                title { english romaji }
+                coverImage { large extraLarge }
+                episodes
+                chapters
+              }
+            }
+          }
+          recommendations(sort: RATING_DESC, perPage: 12) {
+            nodes {
+              mediaRecommendation {
+                id
+                type
+                format
+                averageScore
                 title { english romaji }
                 coverImage { large extraLarge }
               }
@@ -907,13 +998,10 @@
       const title = media.title.english || media.title.romaji;
       document.title = `${title} - AniCool`;
 
+      // Banner & Poster
       const banner = document.getElementById('bannerImg');
       banner.classList.remove('skeleton');
-      if (media.bannerImage) {
-        banner.style.backgroundImage = `url('${media.bannerImage}')`;
-      } else {
-        banner.style.backgroundImage = `url('${media.coverImage.extraLarge}')`;
-      }
+      banner.style.backgroundImage = `url('${media.bannerImage || media.coverImage.extraLarge || media.coverImage.large}')`;
 
       const posterBox = document.getElementById('posterBox');
       const posterImg = document.getElementById('posterImg');
@@ -921,6 +1009,7 @@
       posterImg.src = media.coverImage.extraLarge || media.coverImage.large;
       posterImg.style.display = 'block';
 
+      // Titles & Badges
       document.getElementById('entryTitle').textContent = title;
       document.getElementById('entryNativeTitle').textContent = media.title.native || '';
 
@@ -934,9 +1023,10 @@
       });
       genresRow.innerHTML = badgesHtml;
 
-      const cleanedDesc = media.description ? media.description.replace(/<[^>]*>?/gm, '') : 'No synopsis available.';
-      document.getElementById('entrySynopsis').textContent = cleanedDesc;
+      // Synopsis
+      document.getElementById('entrySynopsis').textContent = media.description ? media.description.replace(/<[^>]*>?/gm, '') : 'No synopsis available.';
 
+      // Sidebar Metadata
       document.getElementById('metaFormat').textContent = media.format || media.type || 'N/A';
       document.getElementById('metaStatus').textContent = media.status ? media.status.replace(/_/g, ' ') : 'N/A';
       document.getElementById('metaCount').textContent = media.episodes ? `${media.episodes} Eps` : (media.chapters ? `${media.chapters} Chs` : 'Ongoing / Unknown');
@@ -948,11 +1038,8 @@
       document.getElementById('metaAired').textContent = startStr ? (endStr ? `${startStr} to ${endStr}` : `${startStr} (Ongoing)`) : 'N/A';
 
       const studioEdges = media.studios?.edges || [];
-      const mainStudio = studioEdges.find(e => e.isMain)?.node?.name || (studioEdges[0]?.node?.name) || 'N/A';
-      const producers = studioEdges.filter(e => !e.isMain).map(e => e.node.name).slice(0, 3).join(', ') || 'N/A';
-
-      document.getElementById('metaStudio').textContent = mainStudio;
-      document.getElementById('metaProducers').textContent = producers;
+      document.getElementById('metaStudio').textContent = studioEdges.find(e => e.isMain)?.node?.name || studioEdges[0]?.node?.name || 'N/A';
+      document.getElementById('metaProducers').textContent = studioEdges.filter(e => !e.isMain).map(e => e.node.name).slice(0, 3).join(', ') || 'N/A';
       document.getElementById('metaSource').textContent = media.source ? media.source.replace(/_/g, ' ') : 'Original';
 
       const countryNames = { JP: 'Japan', KR: 'South Korea', CN: 'China', TW: 'Taiwan' };
@@ -961,52 +1048,140 @@
       document.getElementById('metaScore').textContent = media.meanScore ? `${media.meanScore}%` : (media.averageScore ? `${media.averageScore}%` : 'N/A');
       document.getElementById('metaPopularity').textContent = media.popularity ? `#${media.popularity.toLocaleString()}` : 'N/A';
 
-      // Characters
+      // Characters & Real Life Japanese Voice Actors
       const charactersGrid = document.getElementById('charactersGrid');
       const charEdges = media.characters?.edges || [];
       if (charEdges.length > 0) {
-        charactersGrid.innerHTML = charEdges.map(edge => `
-          <div class="character-card">
-            <img src="${edge.node.image?.medium || ''}" alt="${edge.node.name.full}" class="char-thumb" loading="lazy" />
-            <div class="char-info">
-              <div class="char-name" title="${edge.node.name.full}">${edge.node.name.full}</div>
-              <div class="char-role">${edge.role}</div>
-            </div>
-          </div>
-        `).join('');
-      } else {
-        charactersGrid.innerHTML = '<div style="color:var(--text-dim); font-size:0.85rem;">No character info available.</div>';
-      }
-
-      // Relations - Hard pixel dimensions so images cannot break free
-      const relationsRow = document.getElementById('relationsRow');
-      const relEdges = media.relations?.edges || [];
-      if (relEdges.length > 0) {
-        relationsRow.innerHTML = relEdges.map(edge => {
-          const relNode = edge.node;
-          const relTitle = relNode.title.english || relNode.title.romaji;
-          const relType = edge.relationType ? edge.relationType.replace(/_/g, ' ') : 'Related';
-          const thumb = relNode.coverImage?.large || relNode.coverImage?.extraLarge || '';
+        charactersGrid.innerHTML = charEdges.map(edge => {
+          const char = edge.node;
+          const va = edge.voiceActors?.[0]; // Japanese VA
 
           return `
-            <a href="entry.html?id=${relNode.id}" class="relation-card">
-              <div class="relation-thumb-box">
-                <img src="${thumb}" alt="${relTitle}" class="relation-thumb-img" loading="lazy" />
+            <div class="char-cast-card">
+              <!-- Character on Left -->
+              <div class="char-half">
+                <img src="${char.image?.medium || ''}" alt="${char.name.full}" class="person-thumb" loading="lazy" />
+                <div class="person-info">
+                  <div class="person-name" title="${char.name.full}">${char.name.full}</div>
+                  <div class="person-sub">${edge.role}</div>
+                </div>
               </div>
-              <span class="relation-tag">${relType}</span>
-              <span class="relation-title" title="${relTitle}">${relTitle}</span>
+
+              <!-- Real Life VA on Right -->
+              ${va ? `
+                <div class="cast-half">
+                  <div class="person-info">
+                    <div class="person-name" title="${va.name.full}">${va.name.full}</div>
+                    <div class="person-sub">${va.languageV2 || 'Japanese'} VA</div>
+                  </div>
+                  <img src="${va.image?.medium \vert{}\vert{} ''}" alt="${va.name.full}" class="person-thumb" loading="lazy" />
+                </div>
+              ` : `
+                <div class="cast-half">
+                  <div class="person-sub">No VA listed</div>
+                </div>
+              `}
+            </div>
+          `;
+        }).join('');
+      } else {
+        charactersGrid.innerHTML = '<div style="color:var(--text-dim); font-size:0.85rem;">No character or voice cast info found.</div>';
+      }
+
+      // Store relations & render vertical grid
+      rawRelations = media.relations?.edges || [];
+      renderRelationsGrid(rawRelations);
+
+      // Recommendations / Similar Anime (Vertical Grid)
+      const similarGrid = document.getElementById('similarGrid');
+      const recs = (media.recommendations?.nodes || [])
+        .map(n => n.mediaRecommendation)
+        .filter(m => m && m.id);
+
+      if (recs.length > 0) {
+        similarGrid.innerHTML = recs.map(rec => {
+          const recTitle = rec.title.english || rec.title.romaji;
+          const scoreStr = rec.averageScore ? `★ ${rec.averageScore}%` : (rec.format || 'Anime');
+
+          return `
+            <a href="entry.html?id=${rec.id}" class="vertical-anime-card">
+              <div class="vertical-thumb-box">
+                <img src="${rec.coverImage?.large || rec.coverImage?.extraLarge || ''}" alt="${recTitle}" class="vertical-thumb-img" loading="lazy" />
+              </div>
+              <span class="vertical-tag">${rec.format || rec.type}</span>
+              <div class="vertical-title" title="${recTitle}">${recTitle}</div>
+              <div class="vertical-sub">
+                <span style="color: #10b981; font-weight: 600;">${scoreStr}</span>
+              </div>
             </a>
           `;
         }).join('');
       } else {
-        relationsRow.innerHTML = '<div style="color:var(--text-dim); font-size:0.85rem;">No franchise relations found.</div>';
+        similarGrid.innerHTML = '<div style="color:var(--text-dim); font-size:0.85rem;">No recommendations available for this title.</div>';
       }
+    }
+
+    // Relations Filtering (Episodes, Manga, Prequels/Sequels)
+    function filterRelations(type, btn) {
+      document.querySelectorAll('.filter-pills-wrap .filter-pill-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      if (type === 'ALL') {
+        renderRelationsGrid(rawRelations);
+        return;
+      }
+
+      const filtered = rawRelations.filter(edge => {
+        const relType = edge.relationType || '';
+        const nodeType = edge.node?.type || '';
+        const nodeFormat = edge.node?.format || '';
+
+        if (type === 'MANGA') {
+          return nodeType === 'MANGA' || relType === 'ADAPTATION';
+        } else if (type === 'PREQUEL_SEQUEL') {
+          return relType === 'PREQUEL' || relType === 'SEQUEL';
+        } else if (type === 'EPISODES') {
+          return nodeFormat === 'TV' || nodeFormat === 'OVA' || nodeFormat === 'ONA' || nodeFormat === 'SPECIAL' || relType === 'SIDE_STORY' || relType === 'SPIN_OFF';
+        }
+        return true;
+      });
+
+      renderRelationsGrid(filtered);
+    }
+
+    function renderRelationsGrid(edges) {
+      const grid = document.getElementById('relationsGrid');
+      if (!edges || edges.length === 0) {
+        grid.innerHTML = '<div style="color:var(--text-dim); font-size:0.85rem; padding: 8px 0;">No relations match this category.</div>';
+        return;
+      }
+
+      grid.innerHTML = edges.map(edge => {
+        const node = edge.node;
+        const relTitle = node.title.english || node.title.romaji;
+        const relType = edge.relationType ? edge.relationType.replace(/_/g, ' ') : 'Related';
+        const count = node.episodes ? `${node.episodes} Ep` : (node.chapters ? `${node.chapters} Ch` : (node.format || ''));
+
+        return `
+          <a href="entry.html?id=${node.id}" class="vertical-anime-card">
+            <div class="vertical-thumb-box">
+              <img src="${node.coverImage?.large || node.coverImage?.extraLarge || ''}" alt="${relTitle}" class="vertical-thumb-img" loading="lazy" />
+            </div>
+            <span class="vertical-tag">${relType}</span>
+            <div class="vertical-title" title="${relTitle}">${relTitle}</div>
+            <div class="vertical-sub">
+              <span>${count}</span>
+              <span>•</span>
+              <span>${node.format || node.type}</span>
+            </div>
+          </a>
+        `;
+      }).join('');
     }
 
     // Watchlist System (LocalStorage)
     function toggleWatchlistMenu() {
-      const menu = document.getElementById('watchlistDropdown');
-      menu.classList.toggle('show');
+      document.getElementById('watchlistDropdown').classList.toggle('show');
     }
 
     document.addEventListener('click', (e) => {
