@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AniCool - Authorizing...</title>
+  <style>
+    body {
+      background: #0a0b10;
+      color: #fff;
+      font-family: sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <p>Connecting to AniList, please wait...</p>
+
+  <script>
+    // AniList returns the token in the URL hash: #access_token=XYZ&token_type=Bearer...
+    const hash = window.location.hash.substring(1);
+    const params = new URLSearchParams(hash);
+    const token = params.get('access_token');
+
+    if (token) {
+      localStorage.setItem('anicool_anilist_token', token);
+      // Return back to watchlist page
+      window.location.href = 'watchlist.html';
+    } else {
+      document.body.innerHTML = '<p>Authorization failed or was denied. <a href="watchlist.html" style="color:#ff2a74;">Return to Watchlist</a></p>';
+    }
+  </script>
+</body>
+</html>
