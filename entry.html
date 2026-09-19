@@ -492,7 +492,7 @@
       color: #cbd5e1;
     }
 
-    /* Characters & Japanese Voice Cast Grid */
+    /* Characters & Cast Row */
     .characters-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
@@ -561,61 +561,57 @@
       text-overflow: ellipsis;
     }
 
-    /* Index.html Card Aesthetic */
-    .index-card-row {
-      display: flex;
-      gap: 16px;
-      overflow-x: auto;
-      padding: 6px 2px 14px;
-      scrollbar-width: thin;
+    /* =========================================================
+       EXACT INDEX.HTML CARDS CSS (Directly Transferred)
+       ========================================================= */
+    .anime-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(172px, 1fr));
+      gap: 20px;
       width: 100%;
     }
 
-    .index-card-row::-webkit-scrollbar {
-      height: 6px;
+    .card-wrap {
+      position: relative;
+      width: 100%;
+      height: 100%;
     }
 
-    .index-card-row::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 4px;
+    .card-wrap:hover {
+      z-index: 100;
     }
 
-    .anime-card-box {
-      flex: 0 0 150px;
-      width: 150px;
-      min-width: 150px;
-      max-width: 150px;
-      background: rgba(255, 255, 255, 0.035);
+    .anime-card {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: #10131e;
       border: 1px solid var(--bubble-border);
       border-radius: 18px;
-      padding: 10px;
+      overflow: hidden;
       display: flex;
       flex-direction: column;
-      gap: 8px;
       text-decoration: none;
       color: #fff;
-      transition: all 0.25s ease;
-      backdrop-filter: blur(10px);
+      cursor: pointer;
+      transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    .anime-card-box:hover {
-      transform: translateY(-5px);
-      border-color: rgba(255, 255, 255, 0.22);
-      background: rgba(255, 255, 255, 0.07);
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.55);
+    .anime-card:hover {
+      transform: translateY(-4px) scale(1.02);
+      border-color: rgba(255, 255, 255, 0.2);
     }
 
-    .anime-card-poster {
+    .card-thumb-wrap {
+      position: relative;
       width: 100%;
       aspect-ratio: 1 / 1.42;
-      border-radius: 12px;
       overflow: hidden;
-      position: relative;
-      background: #141624;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: #141622;
+      flex-shrink: 0;
     }
 
-    .anime-card-poster img {
+    .card-thumb {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -623,38 +619,67 @@
       transition: transform 0.35s ease;
     }
 
-    .anime-card-box:hover .anime-card-poster img {
-      transform: scale(1.06);
+    .anime-card:hover .card-thumb {
+      transform: scale(1.05);
     }
 
-    .anime-card-tag {
+    .card-badge-top {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: rgba(15, 17, 24, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 3px 8px;
+      border-radius: 9999px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: #10b981;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .card-format-tag {
+      position: absolute;
+      bottom: 8px;
+      left: 8px;
+      background: rgba(255, 42, 116, 0.85);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      padding: 2px 7px;
+      border-radius: 6px;
       font-size: 0.68rem;
-      color: var(--accent-pink);
+      font-weight: 600;
       text-transform: uppercase;
-      font-weight: 700;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
       letter-spacing: 0.3px;
     }
 
-    .anime-card-title {
-      font-size: 0.82rem;
+    .card-info {
+      padding: 10px 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      flex: 1;
+      justify-content: space-between;
+    }
+
+    .card-item-title {
+      font-size: 0.88rem;
       font-weight: 600;
+      line-height: 1.3;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      color: #f1f5f9;
-      line-height: 1.3;
+      color: #fff;
     }
 
-    .anime-card-sub {
-      font-size: 0.72rem;
+    .card-item-sub {
+      font-size: 0.75rem;
       color: var(--text-dim);
       display: flex;
-      align-items: center;
-      gap: 6px;
-      margin-top: -2px;
+      justify-content: space-between;
     }
 
     .skeleton {
@@ -691,6 +716,10 @@
       }
       .characters-grid {
         grid-template-columns: 1fr;
+      }
+      .anime-cards-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 16px;
       }
     }
   </style>
@@ -870,7 +899,7 @@
         </div>
       </div>
 
-      <!-- Relations & Franchise -->
+      <!-- Relations & Franchise (Matches Index Cards Grid) -->
       <div class="entry-bubble-section">
         <div class="section-heading-row">
           <div class="section-heading">
@@ -886,19 +915,19 @@
           </div>
         </div>
 
-        <div class="index-card-row" id="relationsGrid">
+        <div class="anime-cards-grid" id="relationsGrid">
           <div style="color: var(--text-dim); font-size: 0.85rem;">Loading relations...</div>
         </div>
       </div>
 
-      <!-- Similar Anime (Index Card Style) -->
+      <!-- Similar Anime (Matches Index Cards Grid: 12 Cards) -->
       <div class="entry-bubble-section">
         <div class="section-heading">
           <span class="material-symbols-outlined" style="color: var(--accent-pink);">auto_awesome</span>
           <span>Similar Anime You Might Like</span>
         </div>
 
-        <div class="index-card-row" id="similarGrid">
+        <div class="anime-cards-grid" id="similarGrid">
           <div style="color: var(--text-dim); font-size: 0.85rem;">Loading recommendations...</div>
         </div>
       </div>
@@ -1115,6 +1144,11 @@
       return `${m}${day}${d.year}`;
     }
 
+    function escapeHtml(text) {
+      if (!text) return '';
+      return text.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+
     function renderMediaPage(media) {
       const title = media.title?.english || media.title?.romaji || 'Unknown Title';
       document.title = `${title} - AniCool`;
@@ -1179,7 +1213,7 @@
       rawRelations = media.relations?.edges || [];
       renderRelationsGrid(rawRelations);
 
-      // Recommendations / Similar Anime (Matching Index Card Style)
+      // Recommendations / Similar Anime (Rendered as exact index.html cards)
       const similarGrid = document.getElementById('similarGrid');
       const recNodes = media.recommendations?.nodes || [];
       const recs = recNodes
@@ -1190,19 +1224,27 @@
       if (recs.length > 0) {
         similarGrid.innerHTML = recs.map(rec => {
           const recTitle = rec?.title?.english || rec?.title?.romaji || 'Unknown';
-          const scoreStr = rec?.averageScore ? `★ ${rec.averageScore}%` : '';
+          const score = rec?.averageScore ? `${rec.averageScore}%` : 'N/A';
+          const image = rec?.coverImage?.large || '';
+          const formatTag = rec?.format || rec?.type || 'TV';
 
           return `
-            <a href="entry.html?id=${rec.id}" class="anime-card-box">
-              <div class="anime-card-poster">
-                <img src="${rec?.coverImage?.large || ''}" alt="${recTitle}" loading="lazy" />
-              </div>
-              <span class="anime-card-tag">${rec?.format || rec?.type || 'ANIME'}</span>
-              <div class="anime-card-title" title="${recTitle}">${recTitle}</div>
-              <div class="anime-card-sub">
-                ${scoreStr ? `<span style="color: #10b981; font-weight: 600;">${scoreStr}</span>` : `<span>${rec?.format || 'Anime'}</span>`}
-              </div>
-            </a>
+            <div class="card-wrap">
+              <a href="entry.html?id=${rec.id}" class="anime-card">
+                <div class="card-thumb-wrap">
+                  <img src="${image}" alt="${recTitle}" class="card-thumb" loading="lazy" />
+                  <div class="card-badge-top">★ ${score}</div>
+                  <div class="card-format-tag">${formatTag}</div>
+                </div>
+                <div class="card-info">
+                  <h3 class="card-item-title" title="${recTitle}">${recTitle}</h3>
+                  <div class="card-item-sub">
+                    <span>${formatTag}</span>
+                    <span style="color: #10b981;">★ ${score}</span>
+                  </div>
+                </div>
+              </a>
+            </div>
           `;
         }).join('');
       } else {
@@ -1210,7 +1252,7 @@
       }
     }
 
-    // Relations Filtering
+    // Relations Filtering (All, Episodes, Manga, Prequels/Sequels)
     function filterRelations(type, btn) {
       document.querySelectorAll('.filter-pills-wrap .filter-pill-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
@@ -1249,21 +1291,27 @@
         const node = edge?.node;
         const relTitle = node?.title?.english || node?.title?.romaji || 'Unknown';
         const relType = edge?.relationType ? edge.relationType.replace(/_/g, ' ') : 'Related';
-        const count = node?.episodes ? `${node.episodes} Ep` : (node?.chapters ? `${node.chapters} Ch` : (node?.format || ''));
-        const scoreStr = node?.averageScore ? `★ ${node.averageScore}%` : '';
+        const score = node?.averageScore ? `${node.averageScore}%` : 'N/A';
+        const count = node?.episodes ? `${node.episodes} EP` : (node?.chapters ? `${node.chapters} CH` : (node?.format || 'Media'));
+        const image = node?.coverImage?.large || '';
 
         return `
-          <a href="entry.html?id=${node.id}" class="anime-card-box">
-            <div class="anime-card-poster">
-              <img src="${node?.coverImage?.large || ''}" alt="${relTitle}" loading="lazy" />
-            </div>
-            <span class="anime-card-tag">${relType}</span>
-            <div class="anime-card-title" title="${relTitle}">${relTitle}</div>
-            <div class="anime-card-sub">
-              <span>${count}</span>
-              ${scoreStr ? `<span>•</span><span style="color: #10b981; font-weight: 600;">${scoreStr}</span>` : ''}
-            </div>
-          </a>
+          <div class="card-wrap">
+            <a href="entry.html?id=${node.id}" class="anime-card">
+              <div class="card-thumb-wrap">
+                <img src="${image}" alt="${relTitle}" class="card-thumb" loading="lazy" />
+                <div class="card-badge-top">★ ${score}</div>
+                <div class="card-format-tag">${relType}</div>
+              </div>
+              <div class="card-info">
+                <h3 class="card-item-title" title="${relTitle}">${relTitle}</h3>
+                <div class="card-item-sub">
+                  <span>${count}</span>
+                  <span>${node?.format || node?.type || 'Media'}</span>
+                </div>
+              </div>
+            </a>
+          </div>
         `;
       }).join('');
     }
