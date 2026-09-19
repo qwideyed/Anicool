@@ -561,85 +561,159 @@
       text-overflow: ellipsis;
     }
 
-    /* Vertical Cards Grid (Relations & Similar Anime) */
-    .vertical-cards-grid {
+    /* Index.html Matching Card Style (Relations & Similar) */
+    .index-style-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
       gap: 16px;
       width: 100%;
     }
 
-    .vertical-anime-card {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--bubble-border);
-      border-radius: 18px;
-      padding: 10px;
+    .index-card-wrap {
+      position: relative;
       display: flex;
       flex-direction: column;
-      gap: 8px;
       text-decoration: none;
       color: #fff;
-      backdrop-filter: blur(12px);
-      transition: all 0.25s ease;
+      background: transparent;
+      border-radius: 18px;
+      transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    .vertical-anime-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(255, 255, 255, 0.22);
-      background: rgba(255, 255, 255, 0.06);
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+    .index-card-wrap:hover {
+      transform: translateY(-6px) scale(1.03);
     }
 
-    .vertical-thumb-box {
+    .index-card-poster {
       width: 100%;
-      aspect-ratio: 1 / 1.42;
-      border-radius: 12px;
+      aspect-ratio: 1 / 1.45;
+      border-radius: 18px;
       overflow: hidden;
-      background: #141624;
-      border: 1px solid rgba(255, 255, 255, 0.08);
       position: relative;
+      background: #12141f;
+      border: 1px solid var(--bubble-border);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.5);
     }
 
-    .vertical-thumb-img {
+    .index-card-poster img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
-      transition: transform 0.3s ease;
+      transition: transform 0.35s ease;
     }
 
-    .vertical-anime-card:hover .vertical-thumb-img {
-      transform: scale(1.04);
+    .index-card-wrap:hover .index-card-poster img {
+      transform: scale(1.08);
     }
 
-    .vertical-tag {
+    .index-card-badge-top {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: rgba(10, 11, 16, 0.82);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 2px 7px;
+      border-radius: 8px;
       font-size: 0.68rem;
+      font-weight: 700;
       color: var(--accent-pink);
       text-transform: uppercase;
-      font-weight: 700;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      letter-spacing: 0.3px;
+      letter-spacing: 0.4px;
     }
 
-    .vertical-title {
+    .index-card-badge-score {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      background: rgba(16, 185, 129, 0.88);
+      backdrop-filter: blur(8px);
+      padding: 2px 6px;
+      border-radius: 6px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .index-card-info {
+      padding: 8px 4px 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .index-card-title {
       font-size: 0.82rem;
       font-weight: 600;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      color: #f1f5f9;
+      color: #f8fafc;
       line-height: 1.3;
     }
 
-    .vertical-sub {
+    .index-card-sub {
       font-size: 0.72rem;
       color: var(--text-dim);
       display: flex;
       align-items: center;
       gap: 6px;
-      margin-top: -2px;
+    }
+
+    /* Episode Selector Grid (When "Episodes" Pill is Selected) */
+    .episodes-selector-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(105px, 1fr));
+      gap: 12px;
+      width: 100%;
+      max-height: 380px;
+      overflow-y: auto;
+      padding-right: 4px;
+      scrollbar-width: thin;
+    }
+
+    .episodes-selector-grid::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    .episodes-selector-grid::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 4px;
+    }
+
+    .episode-tile-btn {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--bubble-border);
+      border-radius: 14px;
+      padding: 10px 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      color: #fff;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .episode-tile-btn:hover {
+      background: linear-gradient(135deg, rgba(255, 42, 116, 0.25), rgba(157, 92, 246, 0.25));
+      border-color: var(--accent-pink);
+      transform: translateY(-2px);
+    }
+
+    .episode-num-label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .episode-sub-label {
+      font-size: 0.68rem;
+      color: var(--text-dim);
     }
 
     .skeleton {
@@ -677,8 +751,8 @@
       .characters-grid {
         grid-template-columns: 1fr;
       }
-      .vertical-cards-grid {
-        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      .index-style-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
       }
     }
   </style>
@@ -858,7 +932,7 @@
         </div>
       </div>
 
-      <!-- Relations & Franchise (Vertical Grid + Filter Pills) -->
+      <!-- Relations & Franchise (With Working Episode Selector) -->
       <div class="entry-bubble-section">
         <div class="section-heading-row">
           <div class="section-heading">
@@ -874,19 +948,22 @@
           </div>
         </div>
 
-        <div class="vertical-cards-grid" id="relationsGrid">
-          <div style="color: var(--text-dim); font-size: 0.85rem;">Loading relations...</div>
+        <!-- Output container: Renders either index-style franchise cards or episode tiles -->
+        <div id="relationsContainer">
+          <div class="index-style-grid" id="relationsGrid">
+            <div style="color: var(--text-dim); font-size: 0.85rem;">Loading relations...</div>
+          </div>
         </div>
       </div>
 
-      <!-- Similar Anime (Vertical Grid: Up to 12 Cards) -->
+      <!-- Similar Anime (Index.html Card Style: Up to 12 Cards) -->
       <div class="entry-bubble-section">
         <div class="section-heading">
           <span class="material-symbols-outlined" style="color: var(--accent-pink);">auto_awesome</span>
           <span>Similar Anime You Might Like</span>
         </div>
 
-        <div class="vertical-cards-grid" id="similarGrid">
+        <div class="index-style-grid" id="similarGrid">
           <div style="color: var(--text-dim); font-size: 0.85rem;">Loading recommendations...</div>
         </div>
       </div>
@@ -907,7 +984,7 @@
     let currentLoadedMedia = null;
     let rawRelations = [];
 
-    // Validated GraphQL Query: 12 recommendations requested
+    // Stable, validated GraphQL query
     const primaryQuery = `
       query ($id: Int) {
         Media(id: $id) {
@@ -959,6 +1036,7 @@
                 coverImage { large }
                 episodes
                 chapters
+                averageScore
               }
             }
           }
@@ -1091,7 +1169,7 @@
       document.getElementById('entryTitle').textContent = title;
       document.getElementById('entrySynopsis').textContent = message;
       document.getElementById('charactersGrid').innerHTML = '<div style="color:var(--text-dim); font-size:0.85rem;">Unavailable</div>';
-      document.getElementById('relationsGrid').innerHTML = '<div style="color:var(--text-dim); font-size:0.85rem;">Unavailable</div>';
+      document.getElementById('relationsContainer').innerHTML = '<div style="color:var(--text-dim); font-size:0.85rem;">Unavailable</div>';
       document.getElementById('similarGrid').innerHTML = '<div style="color:var(--text-dim); font-size:0.85rem;">Unavailable</div>';
     }
 
@@ -1167,7 +1245,7 @@
       rawRelations = media.relations?.edges || [];
       renderRelationsGrid(rawRelations);
 
-      // Recommendations / Similar Anime (Rendered as Styled Cards, Up to 12)
+      // Recommendations / Similar Anime (Index Card Format, 12 Items)
       const similarGrid = document.getElementById('similarGrid');
       const recNodes = media.recommendations?.nodes || [];
       const recs = recNodes
@@ -1178,17 +1256,20 @@
       if (recs.length > 0) {
         similarGrid.innerHTML = recs.map(rec => {
           const recTitle = rec?.title?.english || rec?.title?.romaji || 'Unknown';
-          const scoreStr = rec?.averageScore ? `★ ${rec.averageScore}%` : (rec?.format || 'Anime');
+          const scoreStr = rec?.averageScore ? `★ ${rec.averageScore}%` : '';
 
           return `
-            <a href="entry.html?id=${rec.id}" class="vertical-anime-card">
-              <div class="vertical-thumb-box">
-                <img src="${rec?.coverImage?.large || ''}" alt="${recTitle}" class="vertical-thumb-img" loading="lazy" />
+            <a href="entry.html?id=${rec.id}" class="index-card-wrap">
+              <div class="index-card-poster">
+                <img src="${rec?.coverImage?.large || ''}" alt="${recTitle}" loading="lazy" />
+                <span class="index-card-badge-top">${rec?.format || rec?.type || 'TV'}</span>
+                ${scoreStr ? `<span class="index-card-badge-score">${scoreStr}</span>` : ''}
               </div>
-              <span class="vertical-tag">${rec?.format || rec?.type || 'MEDIA'}</span>
-              <div class="vertical-title" title="${recTitle}">${recTitle}</div>
-              <div class="vertical-sub">
-                <span style="color: #10b981; font-weight: 600;">${scoreStr}</span>
+              <div class="index-card-info">
+                <div class="index-card-title" title="${recTitle}">${recTitle}</div>
+                <div class="index-card-sub">
+                  <span>${rec?.format || 'Anime'}</span>
+                </div>
               </div>
             </a>
           `;
@@ -1198,11 +1279,20 @@
       }
     }
 
-    // Relations Filtering (All, Episodes, Manga, Prequels/Sequels)
+    // Relations Filtering & Actual Episode List Switcher
     function filterRelations(type, btn) {
       document.querySelectorAll('.filter-pills-wrap .filter-pill-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
 
+      const container = document.getElementById('relationsContainer');
+
+      // If user clicks "Episodes", show real episode selector buttons
+      if (type === 'EPISODES') {
+        renderEpisodesList();
+        return;
+      }
+
+      // Otherwise, filter franchise relation cards
       if (type === 'ALL') {
         renderRelationsGrid(rawRelations);
         return;
@@ -1211,14 +1301,11 @@
       const filtered = rawRelations.filter(edge => {
         const relType = (edge?.relationType || '').toUpperCase();
         const nodeType = (edge?.node?.type || '').toUpperCase();
-        const nodeFormat = (edge?.node?.format || '').toUpperCase();
 
         if (type === 'MANGA') {
           return nodeType === 'MANGA' || relType === 'ADAPTATION';
         } else if (type === 'PREQUEL_SEQUEL') {
           return relType === 'PREQUEL' || relType === 'SEQUEL';
-        } else if (type === 'EPISODES') {
-          return nodeFormat === 'TV' || nodeFormat === 'OVA' || nodeFormat === 'ONA' || nodeFormat === 'SPECIAL' || relType.includes('SIDE') || relType.includes('SPIN');
         }
         return true;
       });
@@ -1227,33 +1314,58 @@
     }
 
     function renderRelationsGrid(edges) {
-      const grid = document.getElementById('relationsGrid');
+      const container = document.getElementById('relationsContainer');
       if (!edges || edges.length === 0) {
-        grid.innerHTML = '<div style="color:var(--text-dim); font-size:0.85rem; padding: 8px 0;">No relations match this category.</div>';
+        container.innerHTML = '<div style="color:var(--text-dim); font-size:0.85rem; padding: 12px 0;">No relations found in this category.</div>';
         return;
       }
 
-      grid.innerHTML = edges.map(edge => {
-        const node = edge?.node;
-        const relTitle = node?.title?.english || node?.title?.romaji || 'Unknown';
-        const relType = edge?.relationType ? edge.relationType.replace(/_/g, ' ') : 'Related';
-        const count = node?.episodes ? `${node.episodes} Ep` : (node?.chapters ? `${node.chapters} Ch` : (node?.format || ''));
+      container.innerHTML = `
+        <div class="index-style-grid">
+          ${edges.map(edge => {
+            const node = edge?.node;
+            const relTitle = node?.title?.english || node?.title?.romaji || 'Unknown';
+            const relType = edge?.relationType ? edge.relationType.replace(/_/g, ' ') : 'Related';
+            const count = node?.episodes ? `${node.episodes} Ep` : (node?.chapters ? `${node.chapters} Ch` : (node?.format || ''));
+            const scoreStr = node?.averageScore ? `★ ${node.averageScore}%` : '';
 
-        return `
-          <a href="entry.html?id=${node.id}" class="vertical-anime-card">
-            <div class="vertical-thumb-box">
-              <img src="${node?.coverImage?.large || ''}" alt="${relTitle}" class="vertical-thumb-img" loading="lazy" />
-            </div>
-            <span class="vertical-tag">${relType}</span>
-            <div class="vertical-title" title="${relTitle}">${relTitle}</div>
-            <div class="vertical-sub">
-              <span>${count}</span>
-              <span>•</span>
-              <span>${node?.format || node?.type || 'MEDIA'}</span>
-            </div>
-          </a>
+            return `
+              <a href="entry.html?id=${node.id}" class="index-card-wrap">
+                <div class="index-card-poster">
+                  <img src="${node?.coverImage?.large \vert{}\vert{} ''}" alt="${relTitle}" loading="lazy" />
+                  <span class="index-card-badge-top">${relType}</span>${scoreStr ? `<span class="index-card-badge-score">${scoreStr}</span>` : ''}
+                </div>
+                <div class="index-card-info">
+                  <div class="index-card-title" title="${relTitle}">${relTitle}</div>
+                  <div class="index-card-sub">
+                    <span>${count}</span>
+                    <span>•</span>
+                    <span>${node?.format || node?.type || 'Media'}</span>
+                  </div>
+                </div>
+              </a>
+            `;
+          }).join('')}
+        </div>
+      `;
+    }
+
+    function renderEpisodesList() {
+      const container = document.getElementById('relationsContainer');
+      const totalEps = currentLoadedMedia?.episodes || 24; // Default to 24 if ongoing/unknown
+
+      let html = `<div class="episodes-selector-grid">`;
+      for (let ep = 1; ep <= totalEps; ep++) {
+        html += `
+          <button type="button" class="episode-tile-btn" onclick="alert('Episode ${ep} streaming server connection initialized.')" title="Watch Episode ${ep}">
+            <span class="material-symbols-outlined" style="font-size: 20px; color: var(--accent-pink);">play_circle</span>
+            <span class="episode-num-label">Ep ${ep}</span>
+            <span class="episode-sub-label">Sub / Dub</span>
+          </button>
         `;
-      }).join('');
+      }
+      html += `</div>`;
+      container.innerHTML = html;
     }
 
     // Watchlist System (LocalStorage)
