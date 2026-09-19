@@ -175,7 +175,7 @@
       gap: 28px;
     }
 
-    /* Top Action Bar */
+    /* Top Action Bar (Search, Import, Export, AniList Auth) */
     .top-action-bar {
       background: var(--bubble-bg);
       border: 1px solid var(--bubble-border);
@@ -262,6 +262,41 @@
     .util-btn.anilist-btn:hover {
       background: rgba(0, 210, 255, 0.22);
       color: #fff;
+    }
+
+    .anilist-user-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(0, 210, 255, 0.3);
+      padding: 4px 12px 4px 6px;
+      border-radius: 9999px;
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .anilist-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .logout-mini-btn {
+      background: transparent;
+      border: none;
+      color: #64748b;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding: 2px;
+      transition: color 0.2s;
+    }
+
+    .logout-mini-btn:hover {
+      color: #ef4444;
     }
 
     /* Filter Bar Area */
@@ -478,97 +513,6 @@
       font-size: 15px;
     }
 
-    /* Modal Styling */
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(7, 8, 12, 0.85);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 2000;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.25s ease;
-      padding: 16px;
-    }
-
-    .modal-overlay.active {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .sync-modal-box {
-      background: rgba(18, 20, 30, 0.98);
-      border: 1px solid var(--bubble-border);
-      border-radius: 28px;
-      padding: 30px;
-      width: 100%;
-      max-width: 460px;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .sync-modal-box h2 {
-      font-size: 1.3rem;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .sync-modal-box p {
-      font-size: 0.84rem;
-      color: var(--text-dim);
-      line-height: 1.5;
-    }
-
-    .sync-input-field {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--bubble-border);
-      border-radius: 14px;
-      padding: 12px 16px;
-      color: #fff;
-      font-size: 0.95rem;
-      font-family: inherit;
-      outline: none;
-    }
-
-    .sync-input-field:focus {
-      border-color: var(--accent-blue);
-    }
-
-    .sync-btn-group {
-      display: flex;
-      gap: 10px;
-      justify-content: flex-end;
-      margin-top: 6px;
-    }
-
-    .sync-btn {
-      padding: 10px 20px;
-      border-radius: 9999px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      cursor: pointer;
-      border: none;
-      font-family: inherit;
-    }
-
-    .sync-btn.primary {
-      background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
-      color: #fff;
-    }
-
-    .sync-btn.cancel {
-      background: rgba(255, 255, 255, 0.08);
-      color: var(--text-dim);
-    }
-
     /* Empty State */
     .empty-box {
       grid-column: 1 / -1;
@@ -686,7 +630,7 @@
       </a>
 
       <a href="donate.html" class="outside-bubble-btn donate-btn" title="Support AniCool">
-        <span class="material-symbols-outlined" style="color: var(--donate-color); font-size: 18px;">favorite</span>
+        <span class="material-symbols-outlined donate-icon">favorite</span>
         <span>Donate</span>
       </a>
     </div>
@@ -694,29 +638,15 @@
 
   <main class="watchlist-main-content">
 
-    <!-- Top Action Bar -->
+    <!-- Top Action Bar: Search, Import, Export, AniList Auth -->
     <div class="top-action-bar">
       <div class="search-input-wrap">
         <span class="material-symbols-outlined" style="color: var(--accent-pink); font-size: 20px;">search</span>
         <input type="text" id="watchlistSearch" placeholder="Search your personal library..." oninput="handleSearch(this.value)" />
       </div>
 
-      <div class="utility-actions-wrap">
-        <button type="button" class="util-btn anilist-btn" onclick="openSyncModal()" title="Import from AniList username">
-          <span class="material-symbols-outlined" style="font-size: 18px;">sync</span>
-          <span>Sync AniList</span>
-        </button>
-
-        <label class="util-btn" title="Upload JSON Backup">
-          <span class="material-symbols-outlined" style="font-size: 18px; color: var(--accent-blue);">upload_file</span>
-          <span>Import</span>
-          <input type="file" id="importFileInput" accept=".json" style="display: none;" onchange="importWatchlist(event)" />
-        </label>
-
-        <button type="button" class="util-btn" onclick="exportWatchlist()" title="Download JSON Backup">
-          <span class="material-symbols-outlined" style="font-size: 18px; color: var(--accent-pink);">download</span>
-          <span>Export</span>
-        </button>
+      <div class="utility-actions-wrap" id="authUtilityBox">
+        <!-- Injected via JavaScript based on login state -->
       </div>
     </div>
 
@@ -791,25 +721,9 @@
 
   </main>
 
-  <!-- AniList Username Sync Modal -->
-  <div class="modal-overlay" id="syncModal">
-    <div class="sync-modal-box">
-      <h2>
-        <span class="material-symbols-outlined" style="color: #38bdf8;">sync_alt</span>
-        <span>Sync from AniList</span>
-      </h2>
-      <p>Enter your public AniList username to automatically pull your anime and manga lists directly into your library.</p>
-      
-      <input type="text" id="anilistUsernameInput" class="sync-input-field" placeholder="e.g. your_username" />
-
-      <div class="sync-btn-group">
-        <button type="button" class="sync-btn cancel" onclick="closeSyncModal()">Cancel</button>
-        <button type="button" class="sync-btn primary" id="syncActionBtn" onclick="executeAniListSync()">Sync Library</button>
-      </div>
-    </div>
-  </div>
-
   <script>
+    const ANILIST_CLIENT_ID = '51511';
+
     let activeMedium = 'ALL';
     let activeStatus = 'ALL';
     let searchKeyword = '';
@@ -858,7 +772,75 @@
       document.getElementById('badge-favorites').textContent = items.filter(i => i.status === 'favorites').length;
     }
 
-    function deleteItem(id, title, e) {
+    /* Auth & 2-Way Sync Engine */
+    function loginWithAniList() {
+      const authUrl = `https://anilist.co/api/v2/oauth/authorize?client_id=${ANILIST_CLIENT_ID}&response_type=token`;
+      window.location.href = authUrl;
+    }
+
+    function logoutAniList() {
+      localStorage.removeItem('anicool_anilist_token');
+      localStorage.removeItem('anicool_anilist_user');
+      renderAuthBar();
+    }
+
+    function renderAuthBar() {
+      const box = document.getElementById('authUtilityBox');
+      const token = localStorage.getItem('anicool_anilist_token');
+      let user = null;
+      try {
+        user = JSON.parse(localStorage.getItem('anicool_anilist_user') || 'null');
+      } catch (e) {}
+
+      if (token && user) {
+        box.innerHTML = `
+          <div class="anilist-user-badge">
+            <img src="${user.avatar?.medium || 'favicon.png'}" alt="${user.name}" class="anilist-avatar" />
+            <span>${user.name}</span>
+            <button type="button" class="logout-mini-btn" onclick="logoutAniList()" title="Log out from AniList">
+              <span class="material-symbols-outlined" style="font-size: 16px;">logout</span>
+            </button>
+          </div>
+
+          <button type="button" class="util-btn anilist-btn" id="syncBtn" onclick="syncWithAniList()" title="Sync both ways with AniList">
+            <span class="material-symbols-outlined" style="font-size: 18px;">sync</span>
+            <span>Sync</span>
+          </button>
+
+          <label class="util-btn" title="Upload JSON Backup">
+            <span class="material-symbols-outlined" style="font-size: 18px; color: var(--accent-blue);">upload_file</span>
+            <span>Import</span>
+            <input type="file" id="importFileInput" accept=".json" style="display: none;" onchange="importWatchlist(event)" />
+          </label>
+
+          <button type="button" class="util-btn" onclick="exportWatchlist()" title="Download JSON Backup">
+            <span class="material-symbols-outlined" style="font-size: 18px; color: var(--accent-pink);">download</span>
+            <span>Export</span>
+          </button>
+        `;
+      } else {
+        box.innerHTML = `
+          <button type="button" class="util-btn anilist-btn" onclick="loginWithAniList()" title="Connect your AniList Account">
+            <span class="material-symbols-outlined" style="font-size: 18px;">account_circle</span>
+            <span>Connect AniList</span>
+          </button>
+
+          <label class="util-btn" title="Upload JSON Backup">
+            <span class="material-symbols-outlined" style="font-size: 18px; color: var(--accent-blue);">upload_file</span>
+            <span>Import</span>
+            <input type="file" id="importFileInput" accept=".json" style="display: none;" onchange="importWatchlist(event)" />
+          </label>
+
+          <button type="button" class="util-btn" onclick="exportWatchlist()" title="Download JSON Backup">
+            <span class="material-symbols-outlined" style="font-size: 18px; color: var(--accent-pink);">download</span>
+            <span>Export</span>
+          </button>
+        `;
+      }
+    }
+
+    /* Live write-back to AniList when an item is deleted */
+    async function deleteItem(id, title, e) {
       e.stopPropagation();
       e.preventDefault();
       if (!confirm(`Remove "${title}" from your library?`)) return;
@@ -868,6 +850,167 @@
       saveStoredData(data);
       updateCounters();
       renderWatchlist();
+
+      // Write-back: delete/remove from actual AniList account if logged in
+      const token = localStorage.getItem('anicool_anilist_token');
+      if (token) {
+        try {
+          // Get the mediaList entry id to delete it
+          const checkRes = await fetch('https://graphql.anilist.co', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+              query: `query ($mediaId: Int) { Media(id: $mediaId) { mediaListEntry { id } } }`,
+              variables: { mediaId: id }
+            })
+          });
+          const checkJson = await checkRes.json();
+          const listEntryId = checkJson?.data?.Media?.mediaListEntry?.id;
+
+          if (listEntryId) {
+            await fetch('https://graphql.anilist.co', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+              },
+              body: JSON.stringify({
+                query: `mutation ($id: Int) { DeleteMediaListEntry(id: $id) { deleted } }`,
+                variables: { id: listEntryId }
+              })
+            });
+          }
+        } catch (err) {
+          console.warn('Could not delete from AniList:', err);
+        }
+      }
+    }
+
+    /* Sync pulls latest from AniList and merges */
+    async function syncWithAniList() {
+      const token = localStorage.getItem('anicool_anilist_token');
+      let user = null;
+      try {
+        user = JSON.parse(localStorage.getItem('anicool_anilist_user') || 'null');
+      } catch (e) {}
+
+      if (!token || !user) {
+        loginWithAniList();
+        return;
+      }
+
+      const syncBtn = document.getElementById('syncBtn');
+      if (syncBtn) {
+        syncBtn.innerHTML = `<span class="material-symbols-outlined" style="font-size:18px; animation: spin 1s infinite linear;">sync</span><span>Syncing...</span>`;
+      }
+
+      const query = `
+        query ($userId: Int) {
+          anime: MediaListCollection(userId: $userId, type: ANIME) {
+            lists {
+              entries {
+                status
+                score(format: POINT_100)
+                media {
+                  id
+                  type
+                  format
+                  isAdult
+                  genres
+                  countryOfOrigin
+                  episodes
+                  title { english romaji native }
+                  coverImage { large }
+                }
+              }
+            }
+          }
+          manga: MediaListCollection(userId: $userId, type: MANGA) {
+            lists {
+              entries {
+                status
+                score(format: POINT_100)
+                media {
+                  id
+                  type
+                  format
+                  isAdult
+                  genres
+                  countryOfOrigin
+                  chapters
+                  title { english romaji native }
+                  coverImage { large }
+                }
+              }
+            }
+          }
+        }
+      `;
+
+      try {
+        const res = await fetch('https://graphql.anilist.co', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({ query, variables: { userId: user.id } })
+        });
+
+        const json = await res.json();
+        if (json.errors) throw new Error(json.errors[0]?.message || 'Sync failed');
+
+        const currentData = getStoredData();
+        const statusMap = {
+          CURRENT: 'watching',
+          PLANNING: 'planning',
+          COMPLETED: 'completed',
+          DROPPED: 'dropped',
+          PAUSED: 'on_hold',
+          REPEATING: 'watching'
+        };
+
+        let count = 0;
+        const processLists = (collection) => {
+          (collection?.lists || []).forEach(list => {
+            (list.entries || []).forEach(entry => {
+              const m = entry.media;
+              if (!m) return;
+
+              currentData[m.id] = {
+                id: m.id,
+                title: m.title?.english || m.title?.romaji || 'Unknown Title',
+                image: m.coverImage?.large || '',
+                type: m.type || 'ANIME',
+                format: m.format || m.type,
+                isAdult: Boolean(m.isAdult),
+                genres: m.genres || [],
+                countryOfOrigin: m.countryOfOrigin || '',
+                episodes: m.episodes || m.chapters || '?',
+                score: entry.score || null,
+                status: statusMap[entry.status] || 'watching',
+                addedAt: Date.now()
+              };
+              count++;
+            });
+          });
+        };
+
+        processLists(json.data?.anime);
+        processLists(json.data?.manga);
+
+        saveStoredData(currentData);
+        updateCounters();
+        renderWatchlist();
+        alert(`Synced ${count} titles with AniList!`);
+      } catch (err) {
+        alert(`Sync error: ${err.message}`);
+      } finally {
+        renderAuthBar();
+      }
     }
 
     function exportWatchlist() {
@@ -910,140 +1053,12 @@
       event.target.value = '';
     }
 
-    /* Modal Controls */
-    function openSyncModal() {
-      document.getElementById('syncModal').classList.add('active');
-      setTimeout(() => document.getElementById('anilistUsernameInput').focus(), 100);
-    }
-
-    function closeSyncModal() {
-      document.getElementById('syncModal').classList.remove('active');
-    }
-
-    /* Sync directly from AniList's GraphQL API */
-    async function executeAniListSync() {
-      const username = document.getElementById('anilistUsernameInput').value.trim();
-      if (!username) {
-        alert('Please enter your AniList username.');
-        return;
-      }
-
-      const syncBtn = document.getElementById('syncActionBtn');
-      syncBtn.textContent = 'Syncing...';
-      syncBtn.disabled = true;
-
-      const query = `
-        query ($username: String) {
-          anime: MediaListCollection(userName: $username, type: ANIME) {
-            lists {
-              entries {
-                status
-                score(format: POINT_100)
-                media {
-                  id
-                  type
-                  format
-                  isAdult
-                  genres
-                  countryOfOrigin
-                  episodes
-                  title { english romaji native }
-                  coverImage { large }
-                }
-              }
-            }
-          }
-          manga: MediaListCollection(userName: $username, type: MANGA) {
-            lists {
-              entries {
-                status
-                score(format: POINT_100)
-                media {
-                  id
-                  type
-                  format
-                  isAdult
-                  genres
-                  countryOfOrigin
-                  chapters
-                  title { english romaji native }
-                  coverImage { large }
-                }
-              }
-            }
-          }
-        }
-      `;
-
-      try {
-        const res = await fetch('https://graphql.anilist.co', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ query, variables: { username } })
-        });
-
-        const json = await res.json();
-        if (json.errors) throw new Error(json.errors[0]?.message || 'User not found');
-
-        const currentData = getStoredData();
-        let importedCount = 0;
-
-        const statusMap = {
-          CURRENT: 'watching',
-          PLANNING: 'planning',
-          COMPLETED: 'completed',
-          DROPPED: 'dropped',
-          PAUSED: 'on_hold',
-          REPEATING: 'watching'
-        };
-
-        const processList = (collection) => {
-          (collection?.lists || []).forEach(listGroup => {
-            (listGroup.entries || []).forEach(entry => {
-              const m = entry.media;
-              if (!m) return;
-
-              currentData[m.id] = {
-                id: m.id,
-                title: m.title?.english || m.title?.romaji || 'Unknown Title',
-                image: m.coverImage?.large || '',
-                type: m.type || 'ANIME',
-                format: m.format || m.type,
-                isAdult: Boolean(m.isAdult),
-                genres: m.genres || [],
-                countryOfOrigin: m.countryOfOrigin || '',
-                episodes: m.episodes || m.chapters || '?',
-                score: entry.score || null,
-                status: statusMap[entry.status] || 'watching',
-                addedAt: Date.now()
-              };
-              importedCount++;
-            });
-          });
-        };
-
-        processList(json.data?.anime);
-        processList(json.data?.manga);
-
-        saveStoredData(currentData);
-        updateCounters();
-        renderWatchlist();
-        closeSyncModal();
-        alert(`Successfully synced ${importedCount} titles from AniList!`);
-      } catch (err) {
-        alert(`Sync failed: ${err.message}`);
-      } finally {
-        syncBtn.textContent = 'Sync Library';
-        syncBtn.disabled = false;
-      }
-    }
-
     function renderWatchlist() {
       const grid = document.getElementById('watchlistGrid');
       const data = getStoredData();
       let items = Object.values(data);
 
-      // 1. Status Filter (Favorites are automatically included under Completed)
+      // 1. Status Filter
       if (activeStatus !== 'ALL') {
         if (activeStatus === 'completed') {
           items = items.filter(i => i.status === 'completed' || i.status === 'favorites');
@@ -1052,7 +1067,7 @@
         }
       }
 
-      // 2. Strict Medium Filter (separates Hentai from Anime/Manga)
+      // 2. Strict Medium Filter
       if (activeMedium !== 'ALL') {
         items = items.filter(i => {
           const format = (i.format || '').toUpperCase();
@@ -1074,7 +1089,6 @@
         items = items.filter(i => (i.title || '').toLowerCase().includes(searchKeyword));
       }
 
-      // Sort newest added first
       items.sort((a, b) => (b.addedAt || 0) - (a.addedAt || 0));
 
       if (items.length === 0) {
@@ -1141,6 +1155,7 @@
     }
 
     window.addEventListener('DOMContentLoaded', () => {
+      renderAuthBar();
       updateCounters();
       renderWatchlist();
     });
