@@ -891,7 +891,7 @@
     let currentLoadedMedia = null;
     let rawRelations = [];
 
-    // Verified single AniList GraphQL Query with exact schema types
+    // Strictly validated single query matching AniList's production schema
     const query = `
       query ($id: Int) {
         Media(id: $id) {
@@ -929,9 +929,10 @@
                 name { full }
                 image { medium }
               }
-              voiceActors(language: JAPANESE) {
+              voiceActors {
                 name { full }
                 image { medium }
+                languageV2
               }
             }
           }
@@ -977,9 +978,9 @@
         });
 
         const data = await response.json();
-        
-        if (data.errors) {
-          console.error("AniList GraphQL Error:", data.errors);
+
+        if (data.errors && data.errors.length > 0) {
+          console.error("AniList Schema Errors:", data.errors);
         }
 
         const media = data?.data?.Media;
@@ -1081,7 +1082,9 @@
       if (charEdges.length > 0) {
         charactersGrid.innerHTML = charEdges.map(edge => {
           const char = edge?.node;
-          const va = edge?.voiceActors?.[0]; // Japanese VA
+          // Filter strictly for Japanese voice actors using languageV2
+          const actors = edge?.voiceActors || [];
+          const japVa = actors.find(v => (v?.languageV2 || '').toLowerCase() === 'japanese') || actors[0];
 
           return `
             <div class="char-cast-card">
@@ -1093,13 +1096,13 @@
                 </div>
               </div>
 
-              ${va ? `
+              ${japVa ? `
                 <div class="cast-half">
                   <div class="person-info">
-                    <div class="person-name" title="${va?.name?.full \vert{}\vert{} ''}">${va?.name?.full || 'Unknown'}</div>
+                    <div class="person-name" title="${japVa?.name?.full \vert{}\vert{} ''}">${japVa?.name?.full || 'Unknown'}</div>
                     <div class="person-sub">Japanese VA</div>
                   </div>
-                  <img src="${va?.image?.medium \vert{}\vert{} ''}" alt="${va?.name?.full || ''}" class="person-thumb" loading="lazy" />
+                  <img src="${japVa?.image?.medium \vert{}\vert{} ''}" alt="${japVa?.name?.full || ''}" class="person-thumb" loading="lazy" />
                 </div>
               ` : `
                 <div class="cast-half">
@@ -1117,7 +1120,7 @@
       rawRelations = media.relations?.edges || [];
       renderRelationsGrid(rawRelations);
 
-      // Recommendations / Similar Anime (Vertical Grid)
+      // Recommendations / Similar Anime
       const similarGrid = document.getElementById('similarGrid');
       const recNodes = media.recommendations?.nodes || [];
       const recs = recNodes
