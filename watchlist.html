@@ -84,11 +84,6 @@
       color: #fff;
       display: inline-block;
       letter-spacing: 0.5px;
-      transition: transform 0.25s ease;
-    }
-
-    .logo a:hover {
-      transform: scale(1.05);
     }
 
     .logo span {
@@ -114,7 +109,6 @@
       text-decoration: none;
       font-size: 0.88rem;
       font-weight: 500;
-      transition: all 0.25s ease;
       cursor: pointer;
     }
 
@@ -122,7 +116,6 @@
     .nav-link.active {
       color: #fff;
       background: rgba(255, 255, 255, 0.08);
-      transform: translateY(-1px);
     }
 
     /* Outside Companion Buttons */
@@ -148,7 +141,6 @@
       font-size: 0.84rem;
       font-weight: 600;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
-      transition: all 0.25s ease;
       cursor: pointer;
       white-space: nowrap;
     }
@@ -163,7 +155,6 @@
       background: rgba(88, 101, 242, 0.2);
       border-color: var(--discord-color);
       color: #fff;
-      transform: translateY(-2px);
       box-shadow: 0 8px 24px rgba(88, 101, 242, 0.35);
     }
 
@@ -171,7 +162,6 @@
       background: rgba(244, 63, 94, 0.2);
       border-color: var(--donate-color);
       color: #fff;
-      transform: translateY(-2px);
       box-shadow: 0 8px 24px rgba(244, 63, 94, 0.35);
     }
 
@@ -212,7 +202,6 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      transition: all 0.2s ease;
     }
 
     .search-input-wrap:focus-within {
@@ -256,18 +245,12 @@
       font-weight: 600;
       font-family: inherit;
       cursor: pointer;
-      transition: all 0.2s ease;
       text-decoration: none;
     }
 
     .util-btn:hover {
       background: rgba(255, 255, 255, 0.12);
-      transform: translateY(-2px);
-    }
-
-    .util-btn.danger-btn:hover {
-      background: rgba(244, 63, 94, 0.2);
-      border-color: var(--accent-pink);
+      color: #fff;
     }
 
     /* Filter Bar Area */
@@ -309,7 +292,6 @@
       border-radius: 9999px;
       cursor: pointer;
       font-family: inherit;
-      transition: all 0.2s ease;
       display: inline-flex;
       align-items: center;
       gap: 8px;
@@ -320,7 +302,6 @@
     .tab-pill:hover {
       color: #fff;
       background: rgba(255, 255, 255, 0.08);
-      transform: translateY(-2px);
     }
 
     .tab-pill.active {
@@ -338,7 +319,7 @@
       font-weight: 700;
     }
 
-    /* Index.html Card Aesthetic */
+    /* Exact Index Card Grid Layout */
     .anime-cards-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(172px, 1fr));
@@ -350,10 +331,6 @@
       position: relative;
       width: 100%;
       height: 100%;
-    }
-
-    .card-wrap:hover {
-      z-index: 100;
     }
 
     .anime-card {
@@ -369,12 +346,6 @@
       text-decoration: none;
       color: #fff;
       cursor: pointer;
-      transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.25s ease;
-    }
-
-    .anime-card:hover {
-      transform: translateY(-4px) scale(1.02);
-      border-color: rgba(255, 255, 255, 0.2);
     }
 
     .card-thumb-wrap {
@@ -391,11 +362,6 @@
       height: 100%;
       object-fit: cover;
       display: block;
-      transition: transform 0.35s ease;
-    }
-
-    .anime-card:hover .card-thumb {
-      transform: scale(1.05);
     }
 
     .card-badge-top {
@@ -486,13 +452,6 @@
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .ctrl-icon-btn:hover {
-      background: var(--accent-pink);
-      border-color: var(--accent-pink);
-      transform: scale(1.1);
     }
 
     .ctrl-icon-btn.danger-btn:hover {
@@ -502,19 +461,6 @@
 
     .ctrl-icon-btn span {
       font-size: 15px;
-    }
-
-    /* Status Selector Dropdown */
-    .status-select-bubble {
-      background: rgba(15, 17, 24, 0.95);
-      border: 1px solid var(--bubble-border);
-      border-radius: 8px;
-      color: #fff;
-      font-size: 0.7rem;
-      font-family: inherit;
-      padding: 3px 6px;
-      outline: none;
-      cursor: pointer;
     }
 
     /* Empty State */
@@ -570,12 +516,6 @@
       font-size: 0.88rem;
       font-weight: 600;
       box-shadow: 0 8px 24px rgba(255, 42, 116, 0.35);
-      transition: all 0.25s ease;
-    }
-
-    .browse-link-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 30px rgba(255, 42, 116, 0.5);
     }
 
     @media (max-width: 960px) {
@@ -666,15 +606,10 @@
           <span class="material-symbols-outlined" style="font-size: 18px; color: var(--accent-pink);">download</span>
           <span>Export</span>
         </button>
-
-        <button type="button" class="util-btn danger-btn" onclick="clearAllWatchlist()" title="Clear Library">
-          <span class="material-symbols-outlined" style="font-size: 18px;">delete_sweep</span>
-          <span>Clear All</span>
-        </button>
       </div>
     </div>
 
-    <!-- Filter 1: Media Types (Anime, Manga, Hentai, Manhwa, etc.) -->
+    <!-- Filter 1: Media Types -->
     <div class="filter-section">
       <div class="filter-label">Library Type</div>
       <div class="pills-scroll-row" id="mediumPillsRow">
@@ -699,7 +634,7 @@
       </div>
     </div>
 
-    <!-- Filter 2: Tracking Status (Watching, Planning, On Hold, Completed, Dropped, Favorites) -->
+    <!-- Filter 2: Tracking Status -->
     <div class="filter-section">
       <div class="filter-label">Tracking Status</div>
       <div class="pills-scroll-row" id="statusPillsRow">
@@ -789,24 +724,15 @@
       document.getElementById('badge-watching').textContent = items.filter(i => i.status === 'watching').length;
       document.getElementById('badge-planning').textContent = items.filter(i => i.status === 'planning').length;
       document.getElementById('badge-on_hold').textContent = items.filter(i => i.status === 'on_hold').length;
-      document.getElementById('badge-completed').textContent = items.filter(i => i.status === 'completed').length;
+      // Completed includes both completed and favorites
+      document.getElementById('badge-completed').textContent = items.filter(i => i.status === 'completed' || i.status === 'favorites').length;
       document.getElementById('badge-dropped').textContent = items.filter(i => i.status === 'dropped').length;
       document.getElementById('badge-favorites').textContent = items.filter(i => i.status === 'favorites').length;
     }
 
-    function changeItemStatus(id, newStatus, e) {
-      e.stopPropagation();
-      const data = getStoredData();
-      if (data[id]) {
-        data[id].status = newStatus;
-        saveStoredData(data);
-        updateCounters();
-        renderWatchlist();
-      }
-    }
-
     function deleteItem(id, title, e) {
       e.stopPropagation();
+      e.preventDefault();
       if (!confirm(`Remove "${title}" from your library?`)) return;
 
       const data = getStoredData();
@@ -814,20 +740,6 @@
       saveStoredData(data);
       updateCounters();
       renderWatchlist();
-    }
-
-    function clearAllWatchlist() {
-      const data = getStoredData();
-      const count = Object.keys(data).length;
-      if (count === 0) {
-        alert('Your library is already empty.');
-        return;
-      }
-      if (confirm(`Permanently remove all ${count} saved items from your library?`)) {
-        localStorage.removeItem('anicool_watchlist_items');
-        updateCounters();
-        renderWatchlist();
-      }
     }
 
     function exportWatchlist() {
@@ -875,9 +787,13 @@
       const data = getStoredData();
       let items = Object.values(data);
 
-      // 1. Status Filter
+      // 1. Status Filter (Favorites are also included under completed)
       if (activeStatus !== 'ALL') {
-        items = items.filter(i => i.status === activeStatus);
+        if (activeStatus === 'completed') {
+          items = items.filter(i => i.status === 'completed' || i.status === 'favorites');
+        } else {
+          items = items.filter(i => i.status === activeStatus);
+        }
       }
 
       // 2. Medium Filter
@@ -951,14 +867,7 @@
                 <h3 class="card-item-title" title="${title}">${title}</h3>
                 <div class="card-item-sub">
                   <span>${format}</span>
-                  <select class="status-select-bubble" onclick="event.stopPropagation()" onchange="changeItemStatus(${item.id}, this.value, event)" title="Change Status">
-                    <option value="watching" ${currentStatus === 'watching' ? 'selected' : ''}>Watching</option>
-                    <option value="planning" ${currentStatus === 'planning' ? 'selected' : ''}>Plan</option>
-                    <option value="on_hold" ${currentStatus === 'on_hold' ? 'selected' : ''}>Hold</option>
-                    <option value="completed" ${currentStatus === 'completed' ? 'selected' : ''}>Done</option>
-                    <option value="dropped" ${currentStatus === 'dropped' ? 'selected' : ''}>Drop</option>
-                    <option value="favorites" ${currentStatus === 'favorites' ? 'selected' : ''}>Star</option>
-                  </select>
+                  ${count ? `<span>${count}</span>` : ''}
                 </div>
               </div>
             </a>
