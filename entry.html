@@ -180,7 +180,7 @@
     .banner-container {
       position: relative;
       width: 100%;
-      height: 360px;
+      height: 380px;
       background-size: cover;
       background-position: center 25%;
       margin-top: -85px;
@@ -190,29 +190,29 @@
     .banner-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(10, 11, 16, 0.2) 0%, rgba(10, 11, 16, 0.8) 60%, var(--bg-dark) 100%);
+      background: linear-gradient(180deg, rgba(10, 11, 16, 0.2) 0%, rgba(10, 11, 16, 0.85) 65%, var(--bg-dark) 100%);
     }
 
-    /* Main Content Layout (Natural Scroll - Non-Sticky) */
+    /* Main Content Layout (Natural Smooth Scroll) */
     .entry-main-content {
-      max-width: 1380px;
+      max-width: 1400px;
       margin: 0 auto;
       padding: 0 24px 80px;
       position: relative;
       z-index: 2;
       display: grid;
-      grid-template-columns: 280px 1fr;
+      grid-template-columns: 290px 1fr;
       gap: 36px;
       align-items: start;
     }
 
-    /* Left Poster Column - Natural Unstuck Flow */
+    /* Left Column */
     .entry-poster-col {
       display: flex;
       flex-direction: column;
       gap: 16px;
       width: 100%;
-      position: static; /* Fixed: removes any sticky lag */
+      position: static;
     }
 
     .entry-poster-box {
@@ -232,7 +232,7 @@
       display: block;
     }
 
-    /* Watchlist Dropdown & Action System */
+    /* Watchlist Action */
     .watchlist-control-box {
       display: flex;
       flex-direction: column;
@@ -340,30 +340,44 @@
       backdrop-filter: blur(20px);
     }
 
+    .sidebar-section-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
     .sidebar-info-row {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      font-size: 0.82rem;
+      align-items: flex-start;
+      font-size: 0.8rem;
       gap: 8px;
+      line-height: 1.4;
     }
 
     .sidebar-info-label {
       color: #7e859b;
       font-weight: 500;
+      flex-shrink: 0;
     }
 
     .sidebar-info-val {
       color: #f8fafc;
       font-weight: 600;
       text-align: right;
+      word-break: break-word;
     }
 
     /* Right Details Column */
     .entry-details-col {
       display: flex;
       flex-direction: column;
-      gap: 28px;
+      gap: 24px;
     }
 
     .entry-header-block {
@@ -417,7 +431,7 @@
       padding: 24px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 14px;
       backdrop-filter: blur(20px);
     }
 
@@ -431,7 +445,7 @@
     }
 
     .entry-synopsis-text {
-      font-size: 0.9rem;
+      font-size: 0.92rem;
       line-height: 1.7;
       color: #cbd5e1;
     }
@@ -487,39 +501,56 @@
       color: var(--text-dim);
     }
 
-    /* Relations List */
+    /* Relations List - Fixed Aspect Ratio & Uniform 150px Width */
     .relations-scroll-row {
       display: flex;
-      gap: 14px;
+      gap: 16px;
       overflow-x: auto;
-      padding-bottom: 6px;
+      padding-bottom: 8px;
       scrollbar-width: thin;
     }
 
+    .relations-scroll-row::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .relations-scroll-row::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 4px;
+    }
+
     .relation-card {
-      flex: 0 0 140px;
+      flex: 0 0 150px;
+      width: 150px;
+      min-width: 150px;
+      max-width: 150px;
       display: flex;
       flex-direction: column;
       gap: 6px;
       text-decoration: none;
       color: #fff;
+      transition: transform 0.2s ease;
+    }
+
+    .relation-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .relation-thumb-wrap {
+      width: 100%;
+      aspect-ratio: 1 / 1.42;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #141624;
+      border: 1px solid var(--bubble-border);
+      flex-shrink: 0;
     }
 
     .relation-thumb {
       width: 100%;
-      aspect-ratio: 1 / 1.42;
-      border-radius: 12px;
+      height: 100%;
       object-fit: cover;
-      background: #1a1c28;
-      border: 1px solid var(--bubble-border);
-    }
-
-    .relation-title {
-      font-size: 0.78rem;
-      font-weight: 600;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      display: block;
     }
 
     .relation-tag {
@@ -527,6 +558,18 @@
       color: var(--accent-pink);
       text-transform: uppercase;
       font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .relation-title {
+      font-size: 0.82rem;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: #f1f5f9;
     }
 
     .skeleton {
@@ -618,7 +661,7 @@
     <div class="banner-overlay"></div>
   </div>
 
-  <!-- Main Content Layout (Natural Scroll) -->
+  <!-- Main Content Layout -->
   <main class="entry-main-content">
 
     <!-- Left Column: Poster + Add to Watchlist Dropdown + Meta Info -->
@@ -659,8 +702,12 @@
         </div>
       </div>
 
-      <!-- Quick Facts Bubble -->
+      <!-- Extended Quick Facts Bubble -->
       <div class="entry-info-sidebar">
+        <div class="sidebar-section-title">
+          <span class="material-symbols-outlined" style="font-size: 16px; color: var(--accent-pink);">info</span> Information
+        </div>
+
         <div class="sidebar-info-row">
           <span class="sidebar-info-label">Format</span>
           <span class="sidebar-info-val" id="metaFormat">--</span>
@@ -674,16 +721,40 @@
           <span class="sidebar-info-val" id="metaCount">--</span>
         </div>
         <div class="sidebar-info-row">
+          <span class="sidebar-info-label">Duration</span>
+          <span class="sidebar-info-val" id="metaDuration">--</span>
+        </div>
+        <div class="sidebar-info-row">
           <span class="sidebar-info-label">Season</span>
           <span class="sidebar-info-val" id="metaSeason">--</span>
+        </div>
+        <div class="sidebar-info-row">
+          <span class="sidebar-info-label">Aired</span>
+          <span class="sidebar-info-val" id="metaAired">--</span>
         </div>
         <div class="sidebar-info-row">
           <span class="sidebar-info-label">Studio</span>
           <span class="sidebar-info-val" id="metaStudio">--</span>
         </div>
         <div class="sidebar-info-row">
+          <span class="sidebar-info-label">Producers</span>
+          <span class="sidebar-info-val" id="metaProducers">--</span>
+        </div>
+        <div class="sidebar-info-row">
           <span class="sidebar-info-label">Source</span>
           <span class="sidebar-info-val" id="metaSource">--</span>
+        </div>
+        <div class="sidebar-info-row">
+          <span class="sidebar-info-label">Country</span>
+          <span class="sidebar-info-val" id="metaCountry">--</span>
+        </div>
+        <div class="sidebar-info-row">
+          <span class="sidebar-info-label">Community Score</span>
+          <span class="sidebar-info-val" id="metaScore" style="color: #10b981;">--</span>
+        </div>
+        <div class="sidebar-info-row">
+          <span class="sidebar-info-label">Popularity</span>
+          <span class="sidebar-info-val" id="metaPopularity">--</span>
         </div>
       </div>
     </aside>
@@ -704,7 +775,7 @@
           <span>Synopsis</span>
         </div>
         <div class="entry-synopsis-text" id="entrySynopsis">
-          Fetching full official synopsis from AniList...
+          Fetching official synopsis from AniList...
         </div>
       </div>
 
@@ -734,13 +805,12 @@
   </main>
 
   <script>
-    // Grab ID from query string (e.g. entry.html?id=151807)
     const urlParams = new URLSearchParams(window.location.search);
     const mediaId = parseInt(urlParams.get('id'), 10) || 151807;
 
     let currentLoadedMedia = null;
 
-    // AniList GraphQL Query
+    // AniList GraphQL Query with extended parameters
     const query = `
       query ($id: Int) {
         Media(id: $id) {
@@ -750,16 +820,27 @@
           status
           episodes
           chapters
+          duration
           season
           seasonYear
           source
           averageScore
+          meanScore
+          popularity
+          countryOfOrigin
           bannerImage
+          startDate { year month day }
+          endDate { year month day }
           coverImage { extraLarge large }
           title { english romaji native }
           description
           genres
-          studios(isMain: true) { nodes { name } }
+          studios {
+            edges {
+              isMain
+              node { name }
+            }
+          }
           characters(sort: ROLE, perPage: 8) {
             edges {
               role
@@ -776,7 +857,7 @@
                 id
                 format
                 title { english romaji }
-                coverImage { large }
+                coverImage { large extraLarge }
               }
             }
           }
@@ -804,6 +885,14 @@
       }
     }
 
+    function formatDate(d) {
+      if (!d || !d.year) return '';
+      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      const m = d.month ? `${months[d.month - 1]} ` : '';
+      const day = d.day ? `${d.day}, ` : '';
+      return `${m}${day}${d.year}`;
+    }
+
     function renderMediaPage(media) {
       const title = media.title.english || media.title.romaji;
       document.title = `${title} - AniCool`;
@@ -814,7 +903,7 @@
       if (media.bannerImage) {
         banner.style.backgroundImage = `url('${media.bannerImage}')`;
       } else {
-        banner.style.backgroundImage = `url('${media.coverImage.extraLarge}')`;
+        banner.style.backgroundImage = `url('${media.coverImage.extraLarge || media.coverImage.large}')`;
       }
 
       const posterBox = document.getElementById('posterBox');
@@ -842,12 +931,30 @@
       document.getElementById('entrySynopsis').textContent = cleanedDesc;
 
       // Sidebar Metadata
-      document.getElementById('metaFormat').textContent = media.format || media.type;
+      document.getElementById('metaFormat').textContent = media.format || media.type || 'N/A';
       document.getElementById('metaStatus').textContent = media.status ? media.status.replace(/_/g, ' ') : 'N/A';
-      document.getElementById('metaCount').textContent = media.episodes ? `${media.episodes} Eps` : (media.chapters ? `${media.chapters} Chs` : 'Unknown');
+      document.getElementById('metaCount').textContent = media.episodes ? `${media.episodes} Eps` : (media.chapters ? `${media.chapters} Chs` : 'Ongoing / Unknown');
+      document.getElementById('metaDuration').textContent = media.duration ? `${media.duration} mins / ep` : 'N/A';
       document.getElementById('metaSeason').textContent = (media.season && media.seasonYear) ? `${media.season} ${media.seasonYear}` : (media.seasonYear || 'N/A');
-      document.getElementById('metaStudio').textContent = media.studios?.nodes?.[0]?.name || 'N/A';
+
+      const startStr = formatDate(media.startDate);
+      const endStr = formatDate(media.endDate);
+      document.getElementById('metaAired').textContent = startStr ? (endStr ? `${startStr} to ${endStr}` : `${startStr} (Ongoing)`) : 'N/A';
+
+      // Studios & Producers
+      const studioEdges = media.studios?.edges || [];
+      const mainStudio = studioEdges.find(e => e.isMain)?.node?.name || (studioEdges[0]?.node?.name) || 'N/A';
+      const producers = studioEdges.filter(e => !e.isMain).map(e => e.node.name).slice(0, 3).join(', ') || 'N/A';
+
+      document.getElementById('metaStudio').textContent = mainStudio;
+      document.getElementById('metaProducers').textContent = producers;
       document.getElementById('metaSource').textContent = media.source ? media.source.replace(/_/g, ' ') : 'Original';
+
+      const countryNames = { JP: 'Japan', KR: 'South Korea', CN: 'China', TW: 'Taiwan' };
+      document.getElementById('metaCountry').textContent = countryNames[media.countryOfOrigin] || media.countryOfOrigin || 'Japan';
+
+      document.getElementById('metaScore').textContent = media.meanScore ? `${media.meanScore}%` : (media.averageScore ? `${media.averageScore}%` : 'N/A');
+      document.getElementById('metaPopularity').textContent = media.popularity ? `#${media.popularity.toLocaleString()}` : 'N/A';
 
       // Characters
       const charactersGrid = document.getElementById('charactersGrid');
@@ -866,18 +973,21 @@
         charactersGrid.innerHTML = '<div style="color:var(--text-dim); font-size:0.85rem;">No character info available.</div>';
       }
 
-      // Relations
+      // Relations - Fixed Uniform Width & Aspect Ratio Container
       const relationsRow = document.getElementById('relationsRow');
       const relEdges = media.relations?.edges || [];
       if (relEdges.length > 0) {
         relationsRow.innerHTML = relEdges.map(edge => {
           const relNode = edge.node;
           const relTitle = relNode.title.english || relNode.title.romaji;
-          const relType = edge.relationType.replace(/_/g, ' ');
+          const relType = edge.relationType ? edge.relationType.replace(/_/g, ' ') : 'Related';
+          const thumb = relNode.coverImage?.large || relNode.coverImage?.extraLarge || '';
 
           return `
             <a href="entry.html?id=${relNode.id}" class="relation-card">
-              <img src="${relNode.coverImage?.large || ''}" alt="${relTitle}" class="relation-thumb" loading="lazy" />
+              <div class="relation-thumb-wrap">
+                <img src="${thumb}" alt="${relTitle}" class="relation-thumb" loading="lazy" />
+              </div>
               <div class="relation-tag">${relType}</div>
               <div class="relation-title" title="${relTitle}">${relTitle}</div>
             </a>
@@ -932,7 +1042,6 @@
         btnText.textContent = config.label;
         btnIcon.textContent = config.icon;
 
-        // Highlight selected option
         document.querySelectorAll('.watchlist-option-btn').forEach(btn => {
           if (btn.getAttribute('onclick')?.includes(existing.status)) {
             btn.classList.add('active');
