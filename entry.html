@@ -431,7 +431,7 @@
       padding: 24px;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 16px;
       backdrop-filter: blur(20px);
       width: 100%;
     }
@@ -561,34 +561,42 @@
       text-overflow: ellipsis;
     }
 
-    /* Vertical Cards Grid Layout for Relations & Similar Anime */
+    /* Vertical Cards Grid (Relations & Similar Anime) */
     .vertical-cards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
       gap: 16px;
       width: 100%;
     }
 
     .vertical-anime-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--bubble-border);
+      border-radius: 18px;
+      padding: 10px;
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 8px;
       text-decoration: none;
       color: #fff;
-      transition: transform 0.2s ease;
+      backdrop-filter: blur(12px);
+      transition: all 0.25s ease;
     }
 
     .vertical-anime-card:hover {
       transform: translateY(-4px);
+      border-color: rgba(255, 255, 255, 0.22);
+      background: rgba(255, 255, 255, 0.06);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
     }
 
     .vertical-thumb-box {
       width: 100%;
       aspect-ratio: 1 / 1.42;
-      border-radius: 14px;
+      border-radius: 12px;
       overflow: hidden;
       background: #141624;
-      border: 1px solid var(--bubble-border);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       position: relative;
     }
 
@@ -597,6 +605,11 @@
       height: 100%;
       object-fit: cover;
       display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .vertical-anime-card:hover .vertical-thumb-img {
+      transform: scale(1.04);
     }
 
     .vertical-tag {
@@ -607,6 +620,7 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      letter-spacing: 0.3px;
     }
 
     .vertical-title {
@@ -616,6 +630,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
       color: #f1f5f9;
+      line-height: 1.3;
     }
 
     .vertical-sub {
@@ -624,6 +639,7 @@
       display: flex;
       align-items: center;
       gap: 6px;
+      margin-top: -2px;
     }
 
     .skeleton {
@@ -863,7 +879,7 @@
         </div>
       </div>
 
-      <!-- Similar Anime (Vertical Grid) -->
+      <!-- Similar Anime (Vertical Grid: Up to 12 Cards) -->
       <div class="entry-bubble-section">
         <div class="section-heading">
           <span class="material-symbols-outlined" style="color: var(--accent-pink);">auto_awesome</span>
@@ -891,7 +907,7 @@
     let currentLoadedMedia = null;
     let rawRelations = [];
 
-    // Safe, validated primary GraphQL Query
+    // Validated GraphQL Query: 12 recommendations requested
     const primaryQuery = `
       query ($id: Int) {
         Media(id: $id) {
@@ -946,7 +962,7 @@
               }
             }
           }
-          recommendations(sort: RATING_DESC, perPage: 8) {
+          recommendations(sort: RATING_DESC, perPage: 12) {
             nodes {
               mediaRecommendation {
                 id
@@ -985,7 +1001,6 @@
         renderMediaPage(media);
         syncWatchlistButton(media.id);
 
-        // Fetch Japanese VAs for the loaded characters
         fetchJapaneseCast(media.characters?.edges || []);
       } catch (err) {
         console.error("Fetch Error:", err);
@@ -999,10 +1014,8 @@
         return;
       }
 
-      // Render character cards immediately with placeholder VAs so page isn't delayed
       renderCharactersBase(characterEdges);
 
-      // Query character media connection for their Japanese voice actors safely
       const charIds = characterEdges.map(e => e.node.id);
       const castQuery = `
         query ($ids: [Int], $mediaId: Int) {
@@ -1154,12 +1167,13 @@
       rawRelations = media.relations?.edges || [];
       renderRelationsGrid(rawRelations);
 
-      // Recommendations / Similar Anime
+      // Recommendations / Similar Anime (Rendered as Styled Cards, Up to 12)
       const similarGrid = document.getElementById('similarGrid');
       const recNodes = media.recommendations?.nodes || [];
       const recs = recNodes
         .map(n => n?.mediaRecommendation)
-        .filter(m => m && m.id);
+        .filter(m => m && m.id)
+        .slice(0, 12);
 
       if (recs.length > 0) {
         similarGrid.innerHTML = recs.map(rec => {
