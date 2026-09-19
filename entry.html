@@ -176,7 +176,7 @@
       box-shadow: 0 8px 24px rgba(244, 63, 94, 0.35);
     }
 
-    /* Hero Banner Area */
+    /* Banner Area */
     .banner-container {
       position: relative;
       width: 100%;
@@ -193,7 +193,7 @@
       background: linear-gradient(180deg, rgba(10, 11, 16, 0.2) 0%, rgba(10, 11, 16, 0.85) 65%, var(--bg-dark) 100%);
     }
 
-    /* Main Content Layout (Natural Smooth Scroll) */
+    /* Main Content Layout */
     .entry-main-content {
       max-width: 1400px;
       margin: 0 auto;
@@ -232,7 +232,7 @@
       display: block;
     }
 
-    /* Watchlist Action */
+    /* Watchlist Action Dropdown */
     .watchlist-control-box {
       display: flex;
       flex-direction: column;
@@ -378,6 +378,7 @@
       display: flex;
       flex-direction: column;
       gap: 24px;
+      min-width: 0; /* Critical: prevents overflow blowout */
     }
 
     .entry-header-block {
@@ -433,6 +434,8 @@
       flex-direction: column;
       gap: 14px;
       backdrop-filter: blur(20px);
+      width: 100%;
+      overflow: hidden;
     }
 
     .section-heading {
@@ -501,13 +504,14 @@
       color: var(--text-dim);
     }
 
-    /* Relations List - Fixed Aspect Ratio & Uniform 150px Width */
+    /* Strict Fixed Relations Sizing - Cannot Expand */
     .relations-scroll-row {
       display: flex;
       gap: 16px;
       overflow-x: auto;
-      padding-bottom: 8px;
+      padding: 4px 2px 12px 2px;
       scrollbar-width: thin;
+      width: 100%;
     }
 
     .relations-scroll-row::-webkit-scrollbar {
@@ -520,10 +524,10 @@
     }
 
     .relation-card {
-      flex: 0 0 150px;
-      width: 150px;
-      min-width: 150px;
-      max-width: 150px;
+      flex: 0 0 140px !important;
+      width: 140px !important;
+      min-width: 140px !important;
+      max-width: 140px !important;
       display: flex;
       flex-direction: column;
       gap: 6px;
@@ -536,20 +540,24 @@
       transform: translateY(-3px);
     }
 
-    .relation-thumb-wrap {
-      width: 100%;
-      aspect-ratio: 1 / 1.42;
+    .relation-thumb-box {
+      width: 140px !important;
+      height: 198px !important;
       border-radius: 14px;
       overflow: hidden;
       background: #141624;
       border: 1px solid var(--bubble-border);
       flex-shrink: 0;
+      position: relative;
     }
 
-    .relation-thumb {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    .relation-thumb-img {
+      width: 100% !important;
+      height: 100% !important;
+      min-width: 100% !important;
+      max-width: 100% !important;
+      object-fit: cover !important;
+      object-position: center !important;
       display: block;
     }
 
@@ -561,6 +569,7 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      display: block;
     }
 
     .relation-title {
@@ -570,6 +579,8 @@
       overflow: hidden;
       text-overflow: ellipsis;
       color: #f1f5f9;
+      display: block;
+      width: 100%;
     }
 
     .skeleton {
@@ -810,7 +821,6 @@
 
     let currentLoadedMedia = null;
 
-    // AniList GraphQL Query with extended parameters
     const query = `
       query ($id: Int) {
         Media(id: $id) {
@@ -897,13 +907,12 @@
       const title = media.title.english || media.title.romaji;
       document.title = `${title} - AniCool`;
 
-      // Banner & Poster
       const banner = document.getElementById('bannerImg');
       banner.classList.remove('skeleton');
       if (media.bannerImage) {
         banner.style.backgroundImage = `url('${media.bannerImage}')`;
       } else {
-        banner.style.backgroundImage = `url('${media.coverImage.extraLarge || media.coverImage.large}')`;
+        banner.style.backgroundImage = `url('${media.coverImage.extraLarge}')`;
       }
 
       const posterBox = document.getElementById('posterBox');
@@ -912,7 +921,6 @@
       posterImg.src = media.coverImage.extraLarge || media.coverImage.large;
       posterImg.style.display = 'block';
 
-      // Titles & Badges
       document.getElementById('entryTitle').textContent = title;
       document.getElementById('entryNativeTitle').textContent = media.title.native || '';
 
@@ -926,11 +934,9 @@
       });
       genresRow.innerHTML = badgesHtml;
 
-      // Synopsis
       const cleanedDesc = media.description ? media.description.replace(/<[^>]*>?/gm, '') : 'No synopsis available.';
       document.getElementById('entrySynopsis').textContent = cleanedDesc;
 
-      // Sidebar Metadata
       document.getElementById('metaFormat').textContent = media.format || media.type || 'N/A';
       document.getElementById('metaStatus').textContent = media.status ? media.status.replace(/_/g, ' ') : 'N/A';
       document.getElementById('metaCount').textContent = media.episodes ? `${media.episodes} Eps` : (media.chapters ? `${media.chapters} Chs` : 'Ongoing / Unknown');
@@ -941,7 +947,6 @@
       const endStr = formatDate(media.endDate);
       document.getElementById('metaAired').textContent = startStr ? (endStr ? `${startStr} to ${endStr}` : `${startStr} (Ongoing)`) : 'N/A';
 
-      // Studios & Producers
       const studioEdges = media.studios?.edges || [];
       const mainStudio = studioEdges.find(e => e.isMain)?.node?.name || (studioEdges[0]?.node?.name) || 'N/A';
       const producers = studioEdges.filter(e => !e.isMain).map(e => e.node.name).slice(0, 3).join(', ') || 'N/A';
@@ -973,7 +978,7 @@
         charactersGrid.innerHTML = '<div style="color:var(--text-dim); font-size:0.85rem;">No character info available.</div>';
       }
 
-      // Relations - Fixed Uniform Width & Aspect Ratio Container
+      // Relations - Hard pixel dimensions so images cannot break free
       const relationsRow = document.getElementById('relationsRow');
       const relEdges = media.relations?.edges || [];
       if (relEdges.length > 0) {
@@ -985,11 +990,11 @@
 
           return `
             <a href="entry.html?id=${relNode.id}" class="relation-card">
-              <div class="relation-thumb-wrap">
-                <img src="${thumb}" alt="${relTitle}" class="relation-thumb" loading="lazy" />
+              <div class="relation-thumb-box">
+                <img src="${thumb}" alt="${relTitle}" class="relation-thumb-img" loading="lazy" />
               </div>
-              <div class="relation-tag">${relType}</div>
-              <div class="relation-title" title="${relTitle}">${relTitle}</div>
+              <span class="relation-tag">${relType}</span>
+              <span class="relation-title" title="${relTitle}">${relTitle}</span>
             </a>
           `;
         }).join('');
