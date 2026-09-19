@@ -781,7 +781,7 @@
         <img src="" alt="" class="entry-poster-img" id="posterImg" style="display: none;" />
       </div>
 
-      <!-- Add to Watchlist Action System (Includes On Hold, Dropped, etc.) -->
+      <!-- Add to Watchlist Action System -->
       <div class="watchlist-control-box">
         <button type="button" class="watchlist-btn-main" id="watchlistBtnMain" onclick="toggleWatchlistMenu()">
           <span class="material-symbols-outlined" id="watchlistBtnIcon">bookmark_add</span>
@@ -954,6 +954,7 @@
     let currentLoadedMedia = null;
     let rawRelations = [];
 
+    // Validated AniList query preserving isAdult and genres
     const primaryQuery = `
       query ($id: Int) {
         Media(id: $id) {
@@ -961,6 +962,8 @@
           type
           format
           status
+          isAdult
+          genres
           episodes
           chapters
           duration
@@ -977,7 +980,6 @@
           coverImage { extraLarge large }
           title { english romaji native }
           description
-          genres
           studios {
             edges {
               isMain
@@ -1150,11 +1152,6 @@
       return `${m}${day}${d.year}`;
     }
 
-    function escapeHtml(text) {
-      if (!text) return '';
-      return text.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-    }
-
     function renderMediaPage(media) {
       const title = media.title?.english || media.title?.romaji || 'Unknown Title';
       document.title = `${title} - AniCool`;
@@ -1322,7 +1319,7 @@
       }).join('');
     }
 
-    // Full Watchlist Management System (Matching watchlist.html)
+    // Watchlist System: Handles isAdult, genres, and all statuses
     function toggleWatchlistMenu() {
       document.getElementById('watchlistDropdown').classList.toggle('show');
     }
@@ -1360,7 +1357,7 @@
           on_hold: { label: 'On Hold', icon: 'pause_circle' },
           completed: { label: 'Completed', icon: 'task_alt' },
           dropped: { label: 'Dropped', icon: 'cancel' },
-          favorites: { label: 'Favorite (Starred)', icon: 'star' }
+          favorites: { label: 'Favorites (Starred)', icon: 'star' }
         };
 
         const config = statusMap[existing.status] || { label: 'In Watchlist', icon: 'bookmark' };
@@ -1390,7 +1387,11 @@
         id: currentLoadedMedia.id,
         title: title,
         image: image,
+        type: currentLoadedMedia.type || 'ANIME',
         format: currentLoadedMedia.format || currentLoadedMedia.type,
+        isAdult: Boolean(currentLoadedMedia.isAdult),
+        genres: currentLoadedMedia.genres || [],
+        countryOfOrigin: currentLoadedMedia.countryOfOrigin || '',
         episodes: currentLoadedMedia.episodes || currentLoadedMedia.chapters || '?',
         score: currentLoadedMedia.averageScore || null,
         status: status,
