@@ -155,6 +155,12 @@
       fill: currentColor;
     }
 
+    .outside-bubble-btn.github-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.35);
+      color: #fff;
+    }
+
     .outside-bubble-btn.discord-btn:hover {
       background: rgba(88, 101, 242, 0.2);
       border-color: var(--discord-color);
@@ -394,7 +400,7 @@
       line-height: 1.6;
     }
 
-    /* Contact Action Bar */
+    /* Contact & Link Action Bar */
     .contact-box {
       margin-top: 8px;
       background: rgba(255, 255, 255, 0.03);
@@ -426,6 +432,16 @@
       text-decoration: none;
     }
 
+    .contact-btn.secondary-btn {
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid var(--bubble-border);
+      color: #fff;
+    }
+
+    .contact-btn.secondary-btn:hover {
+      background: rgba(255, 255, 255, 0.14);
+    }
+
     @media (max-width: 990px) {
       .header-wrapper {
         flex-wrap: wrap;
@@ -438,7 +454,7 @@
         padding: 24px 16px 80px;
       }
       .policy-sidebar {
-        display: none; /* Hide sticky sidebar on mobile */
+        display: none;
       }
       .policy-hero-card {
         padding: 26px 20px;
@@ -483,6 +499,13 @@
     </header>
 
     <div class="outside-btn-group">
+      <a href="https://github.com/qwideyed/Anicool" target="_blank" rel="noopener" class="outside-bubble-btn github-btn" title="View Source on GitHub">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+        </svg>
+        <span>GitHub</span>
+      </a>
+
       <a href="https://discord.com/invite/tDny2ubsCx" target="_blank" rel="noopener" class="outside-bubble-btn discord-btn" title="Join our Discord">
         <svg viewBox="0 0 127.14 96.36">
           <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.86,53,48.81,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/>
@@ -490,7 +513,7 @@
         <span>Discord</span>
       </a>
 
-      <a href="donations.html" class="outside-bubble-btn donate-btn" title="Support AniCool">
+      <a href="donate.html" class="outside-bubble-btn donate-btn" title="Support AniCool">
         <span class="material-symbols-outlined donate-icon">favorite</span>
         <span>Donate</span>
       </a>
@@ -506,13 +529,14 @@
       </div>
       <ul class="toc-link-list">
         <li><a href="#no-ads" class="toc-link"><span class="material-symbols-outlined">verified</span> 1. Ad-Free Manifesto</a></li>
-        <li><a href="#data-privacy" class="toc-link"><span class="material-symbols-outlined">lock</span> 2. Local Data Privacy</a></li>
-        <li><a href="#anilist-api" class="toc-link"><span class="material-symbols-outlined">sync_alt</span> 3. AniList API Services</a></li>
-        <li><a href="#dmca-notice" class="toc-link"><span class="material-symbols-outlined">gavel</span> 4. DMCA & Copyright</a></li>
-        <li><a href="#acceptable-use" class="toc-link"><span class="material-symbols-outlined">rule</span> 5. Acceptable Use</a></li>
-        <li><a href="#discord-rules" class="toc-link"><span class="material-symbols-outlined">forum</span> 6. Community Code</a></li>
-        <li><a href="#liability" class="toc-link"><span class="material-symbols-outlined">warning</span> 7. Disclaimer of Liability</a></li>
-        <li><a href="#revisions" class="toc-link"><span class="material-symbols-outlined">history</span> 8. Policy Revisions</a></li>
+        <li><a href="#open-source" class="toc-link"><span class="material-symbols-outlined">code</span> 2. Open Source</a></li>
+        <li><a href="#data-privacy" class="toc-link"><span class="material-symbols-outlined">lock</span> 3. Local Data Privacy</a></li>
+        <li><a href="#anilist-api" class="toc-link"><span class="material-symbols-outlined">sync_alt</span> 4. AniList API Services</a></li>
+        <li><a href="#dmca-notice" class="toc-link"><span class="material-symbols-outlined">gavel</span> 5. DMCA & Copyright</a></li>
+        <li><a href="#acceptable-use" class="toc-link"><span class="material-symbols-outlined">rule</span> 6. Acceptable Use</a></li>
+        <li><a href="#discord-rules" class="toc-link"><span class="material-symbols-outlined">forum</span> 7. Community Code</a></li>
+        <li><a href="#liability" class="toc-link"><span class="material-symbols-outlined">warning</span> 8. Disclaimer of Liability</a></li>
+        <li><a href="#revisions" class="toc-link"><span class="material-symbols-outlined">history</span> 9. Policy Revisions</a></li>
       </ul>
     </aside>
 
@@ -562,11 +586,29 @@
         </ul>
       </section>
 
-      <!-- 2. Local Storage & Zero-Log Architecture -->
+      <!-- 2. Open Source & Public Repository -->
+      <section class="policy-section-card" id="open-source">
+        <div class="section-title">
+          <span class="material-symbols-outlined">code</span>
+          <span>2. Open Source & Public Codebase</span>
+        </div>
+        <p class="policy-text">
+          AniCool is fully open-source and developed transparently in the public domain. The entire frontend architecture, stylesheet designs, and client-side logic are available for code review, inspection, and community pull requests on GitHub.
+        </p>
+        <div class="contact-box">
+          <span>Inspect the complete source code or contribute directly to the repository:</span>
+          <a href="https://github.com/qwideyed/Anicool" target="_blank" rel="noopener" class="contact-btn secondary-btn">
+            <span class="material-symbols-outlined" style="font-size: 18px;">terminal</span>
+            <span>GitHub Repository</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- 3. Local Storage & Zero-Log Architecture -->
       <section class="policy-section-card" id="data-privacy">
         <div class="section-title">
           <span class="material-symbols-outlined">database</span>
-          <span>2. Local Storage & Zero-Log Architecture</span>
+          <span>3. Local Storage & Zero-Log Architecture</span>
         </div>
         <p class="policy-text">
           AniCool runs entirely as a static client-side web application hosted via GitHub Pages. We deliberately avoid maintaining proprietary database servers that log or retain personal user profiles.
@@ -594,11 +636,11 @@
         </ul>
       </section>
 
-      <!-- 3. AniList Integration & Third-Party APIs -->
+      <!-- 4. AniList Integration & Third-Party APIs -->
       <section class="policy-section-card" id="anilist-api">
         <div class="section-title">
           <span class="material-symbols-outlined">api</span>
-          <span>3. Third-Party API Architecture (AniList)</span>
+          <span>4. Third-Party API Architecture (AniList)</span>
         </div>
         <p class="policy-text">
           AniCool interfaces dynamically with public endpoints provided by the <strong>AniList GraphQL API</strong> (v2) to fetch poster art, episode counts, character casts, studio credits, and airing countdown schedules:
@@ -619,11 +661,11 @@
         </ul>
       </section>
 
-      <!-- 4. DMCA & Copyright Guidelines -->
+      <!-- 5. DMCA & Copyright Guidelines -->
       <section class="policy-section-card" id="dmca-notice">
         <div class="section-title">
           <span class="material-symbols-outlined">gavel</span>
-          <span>4. DMCA & Copyright Disclaimer</span>
+          <span>5. DMCA & Copyright Disclaimer</span>
         </div>
         <p class="policy-text">
           AniCool respects intellectual property rights and complies with the provisions of the Digital Millennium Copyright Act (DMCA):
@@ -650,11 +692,11 @@
         </div>
       </section>
 
-      <!-- 5. Acceptable Use Policy -->
+      <!-- 6. Acceptable Use Policy -->
       <section class="policy-section-card" id="acceptable-use">
         <div class="section-title">
           <span class="material-symbols-outlined">rule</span>
-          <span>5. Acceptable Platform Use</span>
+          <span>6. Acceptable Platform Use</span>
         </div>
         <p class="policy-text">
           By utilizing AniCool, you agree not to misuse or disrupt the platform or its connected infrastructure. Users must not:
@@ -675,11 +717,11 @@
         </ul>
       </section>
 
-      <!-- 6. Community Code of Conduct -->
+      <!-- 7. Community Code of Conduct -->
       <section class="policy-section-card" id="discord-rules">
         <div class="section-title">
           <span class="material-symbols-outlined">forum</span>
-          <span>6. Community Hub & Discord Conduct</span>
+          <span>7. Community Hub & Discord Conduct</span>
         </div>
         <p class="policy-text">
           The AniCool official Discord guild is a welcoming place for anime enthusiasts, manga readers, and developers. All members are expected to follow basic community etiquette:
@@ -706,22 +748,22 @@
         </div>
       </section>
 
-      <!-- 7. Disclaimer of Warranties & Liability -->
+      <!-- 8. Disclaimer of Warranties & Liability -->
       <section class="policy-section-card" id="liability">
         <div class="section-title">
           <span class="material-symbols-outlined">warning</span>
-          <span>7. Disclaimer of Warranties & Limitation of Liability</span>
+          <span>8. Disclaimer of Warranties & Limitation of Liability</span>
         </div>
         <p class="policy-text">
           AniCool is provided on an <strong>"as is"</strong> and <strong>"as available"</strong> basis without warranties of any kind, whether express or implied. The project maintainers do not guarantee that third-party API feeds (such as AniList) will be uninterrupted, error-free, or perpetually available. Under no circumstances shall AniCool or its developers be held liable for local data loss resulting from browser cache clearing or third-party service downtime.
         </p>
       </section>
 
-      <!-- 8. Modifications & Revisions -->
+      <!-- 9. Modifications & Revisions -->
       <section class="policy-section-card" id="revisions">
         <div class="section-title">
           <span class="material-symbols-outlined">history</span>
-          <span>8. Policy Revisions & Updates</span>
+          <span>9. Policy Revisions & Updates</span>
         </div>
         <p class="policy-text">
           We may amend or expand these policies as new features, external providers, or tracking options roll out. The latest revisions will always be reflected directly on this page with an updated timestamp.
