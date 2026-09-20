@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AniCool - Privacy & Policy</title>
+  <title>AniCool - Privacy & Policy Center</title>
   <link rel="icon" type="image/png" href="favicon.png" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="AniCool" />
-  <meta property="og:title" content="AniCool - Privacy & Policy" />
-  <meta property="og:description" content="Read our privacy policy, terms, DMCA disclaimer, and ad-free principles." />
+  <meta property="og:title" content="AniCool - Privacy, Terms & Policy Center" />
+  <meta property="og:description" content="Official policies, zero-ad commitments, local data security, AniList API integrations, and DMCA guidelines." />
   <meta name="theme-color" content="#ff2a74" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -36,6 +36,10 @@
       --donate-color: #f43f5e;
       --text-main: #f8fafc;
       --text-dim: #94a3b8;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
@@ -165,28 +169,102 @@
       box-shadow: 0 8px 24px rgba(244, 63, 94, 0.35);
     }
 
-    /* Policy Main Container */
-    .policy-container {
-      max-width: 960px;
+    /* Policy Center Main Grid Layout */
+    .policy-wrapper {
+      max-width: 1320px;
       margin: 0 auto;
-      padding: 40px 24px 90px;
+      padding: 40px 24px 100px;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 36px;
+      align-items: start;
+    }
+
+    /* Sticky Table of Contents Sidebar */
+    .policy-sidebar {
+      position: sticky;
+      top: 96px;
+      background: var(--card-bg);
+      border: 1px solid var(--bubble-border);
+      border-radius: 24px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    .sidebar-heading {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .toc-link-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      list-style: none;
+    }
+
+    .toc-link {
+      color: var(--text-dim);
+      font-size: 0.84rem;
+      font-weight: 500;
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 12px;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .toc-link:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .toc-link span.material-symbols-outlined {
+      font-size: 16px;
+      color: var(--accent-pink);
+    }
+
+    /* Main Policy Body */
+    .policy-body {
       display: flex;
       flex-direction: column;
       gap: 24px;
+      min-width: 0;
     }
 
-    /* Top Hero Card */
+    /* Top Hero Banner */
     .policy-hero-card {
       background: var(--bubble-bg);
       border: 1px solid var(--bubble-border);
       border-radius: 28px;
-      padding: 32px 36px;
+      padding: 36px 40px;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
       box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+    }
+
+    .badge-pill-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
     }
 
     .policy-badge {
@@ -202,37 +280,51 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      width: fit-content;
+    }
+
+    .policy-version-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--bubble-border);
+      color: var(--text-dim);
+      padding: 4px 12px;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
     }
 
     .policy-hero-card h1 {
-      font-size: 2rem;
+      font-size: 2.2rem;
       font-weight: 800;
       color: #fff;
       letter-spacing: -0.3px;
+      line-height: 1.25;
     }
 
     .policy-hero-card p {
-      font-size: 0.92rem;
+      font-size: 0.94rem;
       color: var(--text-dim);
-      line-height: 1.6;
+      line-height: 1.65;
     }
 
-    /* Policy Section Blocks */
+    /* Standard Policy Section Box */
     .policy-section-card {
+      scroll-margin-top: 100px;
       background: var(--card-bg);
       border: 1px solid var(--bubble-border);
       border-radius: 24px;
-      padding: 28px 32px;
+      padding: 30px 34px;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 16px;
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
     }
 
     .section-title {
-      font-size: 1.15rem;
+      font-size: 1.2rem;
       font-weight: 700;
       color: #fff;
       display: flex;
@@ -241,13 +333,13 @@
     }
 
     .section-title .material-symbols-outlined {
-      font-size: 22px;
+      font-size: 24px;
       color: var(--accent-pink);
     }
 
     .policy-text {
-      font-size: 0.9rem;
-      line-height: 1.7;
+      font-size: 0.92rem;
+      line-height: 1.75;
       color: #cbd5e1;
     }
 
@@ -255,16 +347,16 @@
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      padding-left: 4px;
+      gap: 12px;
+      padding-left: 2px;
     }
 
     .policy-list li {
       display: flex;
       align-items: flex-start;
       gap: 10px;
-      font-size: 0.88rem;
-      line-height: 1.55;
+      font-size: 0.9rem;
+      line-height: 1.6;
       color: #cbd5e1;
     }
 
@@ -272,15 +364,43 @@
       color: var(--accent-blue);
       font-size: 18px;
       flex-shrink: 0;
-      margin-top: 2px;
+      margin-top: 3px;
     }
 
-    .contact-box {
-      margin-top: 4px;
-      background: rgba(255, 255, 255, 0.03);
+    /* Sub-callout Card Boxes */
+    .callout-box {
+      background: rgba(255, 255, 255, 0.025);
       border: 1px solid var(--bubble-border);
+      border-left: 4px solid var(--accent-pink);
       border-radius: 16px;
       padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .callout-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .callout-text {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      line-height: 1.6;
+    }
+
+    /* Contact Action Bar */
+    .contact-box {
+      margin-top: 8px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--bubble-border);
+      border-radius: 18px;
+      padding: 18px 22px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -296,28 +416,35 @@
     .contact-btn {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
       background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
       color: #fff;
-      padding: 8px 18px;
+      padding: 10px 20px;
       border-radius: 9999px;
-      font-size: 0.84rem;
+      font-size: 0.85rem;
       font-weight: 600;
       text-decoration: none;
     }
 
-    @media (max-width: 960px) {
+    @media (max-width: 990px) {
       .header-wrapper {
         flex-wrap: wrap;
       }
       .bubble-nav {
         width: 100%;
       }
+      .policy-wrapper {
+        grid-template-columns: 1fr;
+        padding: 24px 16px 80px;
+      }
+      .policy-sidebar {
+        display: none; /* Hide sticky sidebar on mobile */
+      }
       .policy-hero-card {
-        padding: 24px 20px;
+        padding: 26px 20px;
       }
       .policy-section-card {
-        padding: 20px;
+        padding: 22px 18px;
       }
     }
   </style>
@@ -364,83 +491,244 @@
       </a>
 
       <a href="donate.html" class="outside-bubble-btn donate-btn" title="Support AniCool">
-        <span class="material-symbols-outlined" style="color: var(--donate-color); font-size: 18px;">favorite</span>
+        <span class="material-symbols-outlined donate-icon">favorite</span>
         <span>Donate</span>
       </a>
     </div>
   </div>
 
-  <main class="policy-container">
+  <main class="policy-wrapper">
 
-    <!-- Hero Card -->
-    <section class="policy-hero-card">
-      <div class="policy-badge">
-        <span class="material-symbols-outlined" style="font-size: 14px;">verified_user</span>
-        <span>Transparency & Legal</span>
+    <!-- Sticky Navigation Column -->
+    <aside class="policy-sidebar">
+      <div class="sidebar-heading">
+        <span class="material-symbols-outlined" style="font-size: 16px;">toc</span> Table of Contents
       </div>
-      <h1>Privacy Policy & Terms</h1>
-      <p>AniCool is committed to an open, ad-free, and tracker-free anime and manga discovery platform. Here is how we handle data, user privacy, and third-party content.</p>
-    </section>
-
-    <!-- 1. Zero Tracking & No Ads -->
-    <section class="policy-section-card">
-      <div class="section-title">
-        <span class="material-symbols-outlined">shield</span>
-        <span>1. Zero-Ad & No Tracking Guarantee</span>
-      </div>
-      <p class="policy-text">
-        AniCool does not serve third-party advertisements, popup windows, paywalls, or commercial tracker scripts. We do not sell, license, or monetize any user activity, habits, or browsing behavior.
-      </p>
-    </section>
-
-    <!-- 2. Local Storage & Account Privacy -->
-    <section class="policy-section-card">
-      <div class="section-title">
-        <span class="material-symbols-outlined">database</span>
-        <span>2. Local Data & Storage</span>
-      </div>
-      <p class="policy-text">
-        AniCool is built on client-side web technologies and does not operate centralized database servers storing your personal lists:
-      </p>
-      <ul class="policy-list">
-        <li>
-          <span class="material-symbols-outlined bullet-icon">check_circle</span>
-          <span><strong>Watchlist & History:</strong> Saved entries, favorites, and watch progression are stored locally on your device in your web browser's <code>localStorage</code>.</span>
-        </li>
-        <li>
-          <span class="material-symbols-outlined bullet-icon">check_circle</span>
-          <span><strong>AniList Synchronization:</strong> When connecting your AniList account, your authentication token is stored only in your local browser storage to communicate directly with the official AniList GraphQL API.</span>
-        </li>
+      <ul class="toc-link-list">
+        <li><a href="#no-ads" class="toc-link"><span class="material-symbols-outlined">verified</span> 1. Ad-Free Manifesto</a></li>
+        <li><a href="#data-privacy" class="toc-link"><span class="material-symbols-outlined">lock</span> 2. Local Data Privacy</a></li>
+        <li><a href="#anilist-api" class="toc-link"><span class="material-symbols-outlined">sync_alt</span> 3. AniList API Services</a></li>
+        <li><a href="#dmca-notice" class="toc-link"><span class="material-symbols-outlined">gavel</span> 4. DMCA & Copyright</a></li>
+        <li><a href="#acceptable-use" class="toc-link"><span class="material-symbols-outlined">rule</span> 5. Acceptable Use</a></li>
+        <li><a href="#discord-rules" class="toc-link"><span class="material-symbols-outlined">forum</span> 6. Community Code</a></li>
+        <li><a href="#liability" class="toc-link"><span class="material-symbols-outlined">warning</span> 7. Disclaimer of Liability</a></li>
+        <li><a href="#revisions" class="toc-link"><span class="material-symbols-outlined">history</span> 8. Policy Revisions</a></li>
       </ul>
-    </section>
+    </aside>
 
-    <!-- 3. Third-Party APIs & Data Sources -->
-    <section class="policy-section-card">
-      <div class="section-title">
-        <span class="material-symbols-outlined">api</span>
-        <span>3. Third-Party Content & APIs</span>
-      </div>
-      <p class="policy-text">
-        Media catalog information, metadata, voice actors, posters, and release schedules displayed across AniCool are dynamically requested from public endpoints provided by the <strong>AniList API</strong>. AniCool is an independent open-web client and is not affiliated with or endorsed by AniList.co.
-      </p>
-    </section>
+    <!-- Main Content Articles -->
+    <div class="policy-body">
 
-    <!-- 4. DMCA & Copyright Disclaimer -->
-    <section class="policy-section-card">
-      <div class="section-title">
-        <span class="material-symbols-outlined">gavel</span>
-        <span>4. DMCA & Copyright Disclaimer</span>
-      </div>
-      <p class="policy-text">
-        AniCool does not host, upload, or store video files, copyrighted anime episodes, or comic media files on any server. All titles, posters, synopses, and imagery belong to their respective copyright holders and publishers. AniCool functions solely as an informational index and personal discovery tool.
-      </p>
-      <div class="contact-box">
-        <span>Have questions or copyright notices? Reach out via our community hub.</span>
-        <a href="https://discord.com/invite/tDny2ubsCx" target="_blank" rel="noopener" class="contact-btn">
-          <span>Contact on Discord</span>
-        </a>
-      </div>
-    </section>
+      <!-- Header Overview Card -->
+      <section class="policy-hero-card">
+        <div class="badge-pill-row">
+          <div class="policy-badge">
+            <span class="material-symbols-outlined" style="font-size: 14px;">verified_user</span>
+            <span>AniCool Transparency</span>
+          </div>
+          <div class="policy-version-pill">
+            <span class="material-symbols-outlined" style="font-size: 14px;">update</span>
+            <span>Updated: September 2026</span>
+          </div>
+        </div>
+        <h1>Terms, Privacy & Policy Center</h1>
+        <p>
+          AniCool was founded on a simple premise: a clean, responsive anime and manga discovery portal with zero advertisements, zero invasive scripts, and complete respect for user privacy. Here is the full legal and technical explanation of how the platform operates.
+        </p>
+      </section>
+
+      <!-- 1. Zero-Ad Commitment -->
+      <section class="policy-section-card" id="no-ads">
+        <div class="section-title">
+          <span class="material-symbols-outlined">block</span>
+          <span>1. The Zero-Advertisement Guarantee</span>
+        </div>
+        <p class="policy-text">
+          Many streaming catalogs and wiki aggregators degrade user experience with intrusive video popunders, redirects, malicious ad-networks, and paywalls. AniCool explicitly rejects this model:
+        </p>
+        <ul class="policy-list">
+          <li>
+            <span class="material-symbols-outlined bullet-icon">check_circle</span>
+            <span><strong>Zero Commercial Advertisements:</strong> We will never place banner ads, video interludes, sponsored popups, or interstitial redirects across any page of this site.</span>
+          </li>
+          <li>
+            <span class="material-symbols-outlined bullet-icon">check_circle</span>
+            <span><strong>Zero Data Monetization:</strong> We do not track, profile, package, rent, or sell your reading habits, viewing queues, or browsing actions to any advertising broker or analytics firm.</span>
+          </li>
+          <li>
+            <span class="material-symbols-outlined bullet-icon">check_circle</span>
+            <span><strong>Community Sustained:</strong> The domain, development, and hosting costs are supported independently through direct voluntary donations from patrons.</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- 2. Local Storage & Zero-Log Architecture -->
+      <section class="policy-section-card" id="data-privacy">
+        <div class="section-title">
+          <span class="material-symbols-outlined">database</span>
+          <span>2. Local Storage & Zero-Log Architecture</span>
+        </div>
+        <p class="policy-text">
+          AniCool runs entirely as a static client-side web application hosted via GitHub Pages. We deliberately avoid maintaining proprietary database servers that log or retain personal user profiles.
+        </p>
+        
+        <div class="callout-box">
+          <div class="callout-title">
+            <span class="material-symbols-outlined" style="font-size: 17px; color: var(--accent-pink);">info</span>
+            <span>Where is my watchlist saved?</span>
+          </div>
+          <div class="callout-text">
+            Your saved anime, manga lists, favorites, and history entries live exclusively inside your browser's local <code>window.localStorage</code> memory on your own physical computer or phone.
+          </div>
+        </div>
+
+        <ul class="policy-list">
+          <li>
+            <span class="material-symbols-outlined bullet-icon">check_circle</span>
+            <span><strong>Browser Isolation:</strong> Because your library is stored locally, clearing your browser cache or site data will remove your local watchlist unless you export a JSON backup beforehand.</span>
+          </li>
+          <li>
+            <span class="material-symbols-outlined bullet-icon">check_circle</span>
+            <span><strong>Zero Tracking Cookies:</strong> AniCool does not plant persistent tracking cookies, fingerprinting canvases, or cross-site tracking beacons onto your machine.</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- 3. AniList Integration & Third-Party APIs -->
+      <section class="policy-section-card" id="anilist-api">
+        <div class="section-title">
+          <span class="material-symbols-outlined">api</span>
+          <span>3. Third-Party API Architecture (AniList)</span>
+        </div>
+        <p class="policy-text">
+          AniCool interfaces dynamically with public endpoints provided by the <strong>AniList GraphQL API</strong> (v2) to fetch poster art, episode counts, character casts, studio credits, and airing countdown schedules:
+        </p>
+        <ul class="policy-list">
+          <li>
+            <span class="material-symbols-outlined bullet-icon">check_circle</span>
+            <span><strong>OAuth2 Authorization:</strong> When you connect your AniList account, authentication is completed via AniList's official OAuth2 Implicit Grant protocol. Your secret token is held solely in your local browser storage.</span>
+          </li>
+          <li>
+            <span class="material-symbols-outlined bullet-icon">check_circle</span>
+            <span><strong>Independent Project:</strong> AniCool is an open community dashboard and is not officially associated with, sponsored by, or operated by AniList.co.</span>
+          </li>
+          <li>
+            <span class="material-symbols-outlined bullet-icon">check_circle</span>
+            <span><strong>API Compliance:</strong> All read and write operations conform to standard AniList rate limits and terms of service.</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- 4. DMCA & Copyright Guidelines -->
+      <section class="policy-section-card" id="dmca-notice">
+        <div class="section-title">
+          <span class="material-symbols-outlined">gavel</span>
+          <span>4. DMCA & Copyright Disclaimer</span>
+        </div>
+        <p class="policy-text">
+          AniCool respects intellectual property rights and complies with the provisions of the Digital Millennium Copyright Act (DMCA):
+        </p>
+        <ul class="policy-list">
+          <li>
+            <span class="material-symbols-outlined bullet-icon">check_circle</span>
+            <span><strong>No Hosted Video or Comic Files:</strong> AniCool does not operate video streaming servers, file storage lockers, or manga scanlation hosts. We do not copy, upload, convert, or encode copyrighted media.</span>
+          </li>
+          <li>
+            <span class="material-symbols-outlined bullet-icon">check_circle</span>
+            <span><strong>Informational Index:</strong> All titles, character likenesses, descriptions, cover posters, and trademarks displayed belong to their respective copyright holders, Japanese production committees, studios, and authorized publishers.</span>
+          </li>
+        </ul>
+
+        <div class="callout-box">
+          <div class="callout-title">
+            <span class="material-symbols-outlined" style="font-size: 17px; color: var(--accent-pink);">mail</span>
+            <span>Filing a Notice</span>
+          </div>
+          <div class="callout-text">
+            If you are a copyright owner and believe metadata or indexing on AniCool infringes your rights, please provide formal identification of the work and contact our administrative team through our Discord community portal.
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. Acceptable Use Policy -->
+      <section class="policy-section-card" id="acceptable-use">
+        <div class="section-title">
+          <span class="material-symbols-outlined">rule</span>
+          <span>5. Acceptable Platform Use</span>
+        </div>
+        <p class="policy-text">
+          By utilizing AniCool, you agree not to misuse or disrupt the platform or its connected infrastructure. Users must not:
+        </p>
+        <ul class="policy-list">
+          <li>
+            <span class="material-symbols-outlined bullet-icon">close</span>
+            <span>Attempt to flood or DDoS the platform or overwhelm the public AniList GraphQL endpoints through automated query spam.</span>
+          </li>
+          <li>
+            <span class="material-symbols-outlined bullet-icon">close</span>
+            <span>Attempt to bypass adult content filters to expose non-consenting users to NSFW media.</span>
+          </li>
+          <li>
+            <span class="material-symbols-outlined bullet-icon">close</span>
+            <span>Reverse-engineer or re-bundle the project to inject ad-ware, mining scripts, or telemetry loggers.</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- 6. Community Code of Conduct -->
+      <section class="policy-section-card" id="discord-rules">
+        <div class="section-title">
+          <span class="material-symbols-outlined">forum</span>
+          <span>6. Community Hub & Discord Conduct</span>
+        </div>
+        <p class="policy-text">
+          The AniCool official Discord guild is a welcoming place for anime enthusiasts, manga readers, and developers. All members are expected to follow basic community etiquette:
+        </p>
+        <ul class="policy-list">
+          <li>
+            <span class="material-symbols-outlined bullet-icon">favorite</span>
+            <span><strong>Mutual Respect:</strong> Zero tolerance for hate speech, targeted harassment, racism, threats, or discriminatory behavior.</span>
+          </li>
+          <li>
+            <span class="material-symbols-outlined bullet-icon">visibility_off</span>
+            <span><strong>Spoiler Tags:</strong> Always mark plot twists, series endings, and upcoming manga events with spoiler tags to respect other viewers.</span>
+          </li>
+          <li>
+            <span class="material-symbols-outlined bullet-icon">warning</span>
+            <span><strong>NSFW Boundaries:</strong> Explicit 18+ content must strictly stay contained inside designated age-restricted channels.</span>
+          </li>
+        </ul>
+        <div class="contact-box">
+          <span>Join the community server for updates, suggestions, and feedback:</span>
+          <a href="https://discord.com/invite/tDny2ubsCx" target="_blank" rel="noopener" class="contact-btn">
+            <span>Join Official Discord</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- 7. Disclaimer of Warranties & Liability -->
+      <section class="policy-section-card" id="liability">
+        <div class="section-title">
+          <span class="material-symbols-outlined">warning</span>
+          <span>7. Disclaimer of Warranties & Limitation of Liability</span>
+        </div>
+        <p class="policy-text">
+          AniCool is provided on an <strong>"as is"</strong> and <strong>"as available"</strong> basis without warranties of any kind, whether express or implied. The project maintainers do not guarantee that third-party API feeds (such as AniList) will be uninterrupted, error-free, or perpetually available. Under no circumstances shall AniCool or its developers be held liable for local data loss resulting from browser cache clearing or third-party service downtime.
+        </p>
+      </section>
+
+      <!-- 8. Modifications & Revisions -->
+      <section class="policy-section-card" id="revisions">
+        <div class="section-title">
+          <span class="material-symbols-outlined">history</span>
+          <span>8. Policy Revisions & Updates</span>
+        </div>
+        <p class="policy-text">
+          We may amend or expand these policies as new features, external providers, or tracking options roll out. The latest revisions will always be reflected directly on this page with an updated timestamp.
+        </p>
+      </section>
+
+    </div>
 
   </main>
 
